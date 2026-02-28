@@ -20,39 +20,62 @@
 
 ```
 n8n-wechat-workflows/
-├── workflows/                    # n8n 工作流文件
-│   ├── 01_内容生成.n8n          # 内容生成工作流
-│   ├── 02_图片生成.n8n          # 图片生成工作流
-│   ├── 03_排版.n8n             # 排版工作流
-│   ├── 04_标题内容处理.n8n      # 标题内容处理
-│   ├── 05_排版图片生成.n8n     # 排版图片生成
-│   ├── 06_排版图片内容处理.n8n  # 排版图片内容处理
-│   └── 07_上传至微信草稿.n8n   # 上传至微信草稿
-├── docs/                        # 文档
-│   ├── README.md                # 技术文档
-│   └── en/
-│       └── README.md            # English Documentation
-├── workflows-backup/            # 备份的工作流（可选）
-├── additional-workflows/       # 附加工作流
+├── workflows/                    # 核心公众号自动化工作流 (7个)
+│   ├── 01_内容生成.n8n          # 内容生成 - DeepSeek AI 生成文章
+│   ├── 02_图片生成.n8n          # 图片生成 - 通义万相生成配图
+│   ├── 03_排版.n8n             # 排版 - 微信公众号格式排版
+│   ├── 04_标题内容处理.n8n      # 标题处理 - 标题优化和变体生成
+│   ├── 05_排版图片生成.n8n     # 排版配图 - 为排版内容生成配图
+│   ├── 06_排版图片内容处理.n8n  # 排版图片处理 - 图片格式转换
+│   └── 07_上传至微信草稿.n8n   # 发布 - 上传至微信草稿箱
+│
+├── additional-workflows/        # 附加工作流 (11个)
 │   ├── information-collection/ # 信息采集
-│   │   ├── 每日信息获取.n8n
-│   │   ├── n8n信息聚合器.n8n
-│   │   └── 多平台数据监控(雷达)工作流.n8n
+│   │   ├── 每日信息获取.n8n   # 每日热点信息获取 (小红书/抖音/知乎/微博)
+│   │   ├── n8n信息聚合器.n8n  # 多平台信息聚合
+│   │   └── 多平台数据监控.n8n  # 数据监控雷达
+│   │
 │   ├── content-processing/     # 内容处理
-│   │   ├── 提示词.n8n
-│   │   └── 文章去AI味.n8n
+│   │   ├── 提示词.n8n         # 提示词管理和优化
+│   │   └── 文章去AI味.n8n     # AI 味去除/文章润色
+│   │
 │   ├── utilities/              # 实用工具
-│   │   ├── AI_Agent_Tool工作流.n8n
-│   │   ├── 海报生成器.n8n
-│   │   └── Web_Content_Summarization_and_Multi-Platform_Distribution.n8n
-│   └── misc/                   # 其他
-│       ├── MBTI_Webhook.n8n
-│       ├── My_workflow_2.n8n
-│       └── text.n8n
+│   │   ├── AI_Agent_Tool.n8n  # AI Agent 工具集
+│   │   ├── 海报生成器.n8n     # 海报/封面图生成
+│   │   └── 多平台分发.n8n     # 内容多平台分发
+│   │
+│   └── misc/                  # 其他/测试
+│       ├── MBTI_Webhook.n8n    # MBTI 测试 Webhook
+│       ├── My_workflow_2.n8n   # 测试工作流
+│       └── text.n8n           # 文本处理测试
+│
+├── archives/                   # 归档 (旧版本/备用)
+│   └── legacy-versions/        # 历史版本
+│       ├── 01_初始内容生成.n8n
+│       ├── 02_初始内容处理.n8n
+│       └── 03_标题文章生成.n8n
+│
+├── docs/                      # 文档
+│   ├── README.md              # 技术文档
+│   └── en/
+│       └── README.md          # English Documentation
+│
 ├── .gitignore
-├── README.md                    # 本文件
-└── LICENSE                      # MIT 许可证
+├── README.md                  # 本文件
+└── LICENSE                    # MIT 许可证
 ```
+
+## 📊 工作流状态
+
+| 类别 | 总数 | 活跃 |
+|-----|------|------|
+| 核心公众号工作流 | 7 | 7 |
+| 信息采集 | 3 | 1 |
+| 内容处理 | 2 | 1 |
+| 实用工具 | 3 | 0 |
+| 其他/测试 | 3 | 0 |
+| 归档 | 3 | 3 |
+| **总计** | **21** | **12** |
 
 ## 🔄 工作流架构
 
