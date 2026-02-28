@@ -4,7 +4,7 @@
 
 一套基于 n8n 的微信公众号内容自动化生成 pipeline，实现从内容生成、图片生成到排版发布的全流程自动化。
 
-![工作流数量](https://img.shields.io/badge/工作流数量-7+-green)
+![工作流数量](https://img.shields.io/badge/工作流数量-21-green)
 ![n8n 版本](https://img.shields.io/badge/n8n-1.0+-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
@@ -33,6 +33,22 @@ n8n-wechat-workflows/
 │   └── en/
 │       └── README.md            # English Documentation
 ├── workflows-backup/            # 备份的工作流（可选）
+├── additional-workflows/       # 附加工作流
+│   ├── information-collection/ # 信息采集
+│   │   ├── 每日信息获取.n8n
+│   │   ├── n8n信息聚合器.n8n
+│   │   └── 多平台数据监控(雷达)工作流.n8n
+│   ├── content-processing/     # 内容处理
+│   │   ├── 提示词.n8n
+│   │   └── 文章去AI味.n8n
+│   ├── utilities/              # 实用工具
+│   │   ├── AI_Agent_Tool工作流.n8n
+│   │   ├── 海报生成器.n8n
+│   │   └── Web_Content_Summarization_and_Multi-Platform_Distribution.n8n
+│   └── misc/                   # 其他
+│       ├── MBTI_Webhook.n8n
+│       ├── My_workflow_2.n8n
+│       └── text.n8n
 ├── .gitignore
 ├── README.md                    # 本文件
 └── LICENSE                      # MIT 许可证
