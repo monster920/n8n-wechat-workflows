@@ -1,0 +1,1836 @@
+{
+  "updatedAt": "2026-02-07T02:51:47.277Z",
+  "createdAt": "2026-01-19T13:32:01.044Z",
+  "id": "eBkaKSkToEStSH3fy_3Hd",
+  "name": "05_排版图片生成",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fcf83b7d-159f-4f5c-a33a-c3fa601a159e",
+              "name": "主题",
+              "value": "生活",
+              "type": "string"
+            },
+            {
+              "id": "aa6ca699-9360-49e2-9d56-65f1e752fc4f",
+              "name": "标题",
+              "value": "考研失败后，我在出租屋练习了半小时微笑",
+              "type": "string"
+            },
+            {
+              "id": "7e2579f5-f483-4337-a65c-6ea2d49c50ed",
+              "name": "内容",
+              "value": "陈默关掉手机屏幕，房间骤然陷入一种被抽空声音的寂静，只剩下空调在墙角发出持续、低沉的嗡鸣，像某种巨大生物平稳而疲惫的呼吸。屏幕上那几行决定命运的数字刚刚熄灭——考研国家线，比去年涨了十二分，不多不少，正好严丝合缝地卡在他分数的正下方。十二分，在浩瀚的知识海洋与一年的光阴里，不过是一道选择题的犹豫，一个论述点的疏漏，或是一段背诵记忆的模糊。可在此刻，这十二分成了横亘在现实与可能之间的一道深渊。他没有叹气，只是仰起头，脖颈抵在椅背冰凉的边缘，目光失焦地投向天花板。那里有一小块因为楼上某次漏水留下的痕迹，水渍早已干涸，边缘泛着陈旧的黄，形状不规则，像极了一张绘制粗糙、边界模糊的地图。他盯着它，仿佛想从那些蜿蜒的纹路里，辨认出一条属于自己的、尚且未知的路径。  下午三点整。手机日历的提醒早已无声滑过。这本该是他出现在那家连锁教育机构三号教室的时间，面对十几个眼神或专注或游离的初中生，讲解一元二次方程的求根公式，或者分析一篇鲁迅的文章。他请了假，理由很标准：“老师，身体不太舒服。”真实的情况是，一个小时前，他站在卫生间那块有些许裂纹的镜子前，努力牵动面部肌肉，练习了足足半个小时的“热情洋溢的微笑”。这是机构培训时要求的，“要用你的积极状态感染学生！”他对着镜子，露出牙齿，调整眼角弧度，试图让那种“对知识充满热忱、对未来满怀信心”的光彩从眼底迸发出来。然而，练到第二十八分钟，一阵毫无预兆的强烈反胃猛地攫住了他。他伏在洗手池边干呕，什么也没吐出来，只有冰冷的自来水划过手背。他需要去告诉那些孩子，努力学习是为了“拥有光明的未来”。可“光明的未来”这个词组，在他自己空洞的胸腔里撞击，只发出沉闷的回响，显得无比巨大又无比虚幻。他自己的未来在哪里？他甚至不知道下一周的房租，该如何在那张只剩三位数的银行卡和几个零散兼职之间，被准确地“凑齐”。  手机在桌面上沉闷地一震，像心跳漏了一拍。是母亲发来的微信语音，一条长长的紫色波纹。他指尖有些迟滞地点开。母亲的声音立刻流淌出来，熟悉得令人心头发紧，背景音里隐约有电视节目的声响。她的声音压得比平时低，却包裹着一种刻意经营的、几乎要满溢出来的兴奋：“默默，你睡午觉呢？妈跟你说个事儿，你张阿姨啊，可热心了，给介绍了个姑娘，就在咱们老家市里的银行上班，正经编制，稳定得很！人我看了照片，清秀，脾气听说也好。你看你考研也考完了，不管结果咋样，总得考虑下一步不是？要不……先回来见见？总在那边大城市漂着，房租贵，吃的也不习惯，也不是个长久的事儿……”  他没听完，拇指用力按下了暂停键。母亲的声音戛然而止，那未被播放的语音后半段，成了一种无声的压力，沉甸甸地悬在对话框里。他转过头，望向窗外。春日午后的阳光正盛，慷慨地泼洒在这座庞大的城市之上，将远处高楼的玻璃幕墙洗炼成一片片耀眼夺目的金色光斑，清晰，锐利，却也因为过度明亮而显得有些不真实，有些遥远。回去吗？这个念头像一枚生锈的钉子，被母亲的话语轻轻敲进脑海。回到那个生活节奏仿佛被调慢了半拍的小城，那里每一条街道他都熟悉，空气里飘着的是旧时光的味道。接受一份众人眼中“稳定”的工作——或许就是进入某个单位，处理一成不变的事务；接受一段被长辈们热情安排、衡量过“条件”的“未来”；陷入那张早已编织好的、由血缘、邻里、人情世故盘根错节而成的大网。这曾是他年少时深夜刷题、填报志愿时毅然选择远方，拼命想要挣脱和逃离的路径。那时的他，觉得那条路一眼就能望到头，而现在……  可不回去呢？目光收回，落在眼前这间不足二十平米的出租屋。留在这里，这座用钢筋混凝土、霓虹灯光和无数梦想堆砌起来的巨大容器里。海投的简历大多石沉大海，偶有回音，面试过后也常常再无下文。即使侥幸获得一份工作，扣除押一付三的房租、日均两小时的通勤费用、不敢生病的生活开销后，余额薄得让人心慌。所谓的“奋斗”，渐渐褪去热血澎湃的滤镜，显露出它本来的样貌：更像是在一台庞大、冰冷、匀速运行的传送带上，努力保持站立的姿势。你不能停，停下就会被甩出去；你也不敢太过冒进，因为传送带的速度恒定，前方并无肉眼可见的、标志着“成功”或“抵达”的终点。考研，曾是他为自己设定的一个路标，一根试图抓住以便将自己拉向不同轨道的“救命稻草”。他为此又熬过了一年近乎与世隔绝的白天黑夜。如今，这根稻草，也悄无声息地，沉入了那片名为“国家线”的水底。  一种熟悉的、双重的窒息感，缓缓漫过胸腔。对未来的想象，不再是无垠的星空或广阔的蓝图，而是变成一片厚重、潮湿、挥之不去的浓雾。他站在其中，伸开手，看不见五指，不知道该往哪个方向迈步，每一条似乎可能的路，都隐没在不可知的白色背后。而对现在的感知，却被无限放大、细化，变成一地琐碎、尖锐、无法忽视的“鸡毛”。焦虑有了具体而微的形态：是钱包里所剩无几的钞票，是招聘软件上“已读不回”的标识，是房东每月准时的催租信息，是母亲微信头像上那个未读消息的红点，是下一次面对亲戚“现在在哪儿高就”询问时，喉头的堵塞与面颊的微热。他被卡在了一个尴尬的缝隙里：既无法说服自己彻底“躺平”，心安理得地接受下滑的轨迹；也再难鼓足从前那般心气，投入永无止境的“内卷”洪流。进退失据，左右彷徨。  屏幕因为长时间无操作，暗了下去，变成一面黑色的镜子，清晰地映出他此刻的模样：乱发，微蹙的眉头，眼眶下有淡淡的青黑，以及一种深入骨髓的疲惫。这疲惫不只是熬夜所致，更像是希望被反复稀释后的残留物。他重新点亮屏幕，解锁，光标在回复母亲的输入栏里闪烁着，一个微小的、固执的光点，等待着他输入某种决定，某种交代，哪怕是敷衍的安慰。他打了几个字：“妈，我再想想……”又一个一个删掉。他组织着语言，试图描述这种“浓雾”与“鸡毛”交织的状态，却发现任何解释在“稳定”和“回来见见”这样的具体提议面前，都显得苍白、矫情且无力。最终，他一个字也没有输入。拇指轻轻一划，屏幕再次熄灭，将那张疲惫的脸和所有未竟的话语，一同封存进黑暗。  房间重新沉入先前的状态。空调的低沉嗡鸣似乎更响了一些，填充着每一寸寂静的空间。光线随着日头西斜，渐渐变得稀薄、昏暗，从明亮的白金色过渡成一种温暾的、带着尘埃的淡黄。他依旧仰着头。天花板上的那块水渍，在悄然变化的阴影衬托下，轮廓竟然显得比刚才更加清晰了。那曲折的边界，深浅不一的黄褐色，不再仅仅像一张模糊的地图。它静静地悬在那里，像一个古老的、褪了色的印记，一个关于某次泄漏、某种侵蚀、某段过往的沉默证明。它不曾指明方向，却实实在在地存在着。陈默看着它，看了很久。浓雾尚未散去，鸡毛依然遍地，但在这片昏暗与嗡鸣共同守护的静谧里，至少，他还在呼吸。而只要呼吸着，那片模糊的地图，或许，就总有被耐心阅读、甚至亲手绘制新线条的可能。哪怕，那可能需要很久，很久。",
+              "type": "string"
+            },
+            {
+              "id": "c88e102e-1c63-4d4a-93de-c4e410db07b6",
+              "name": "序号",
+              "value": "1",
+              "type": "string"
+            },
+            {
+              "id": "2dc2ffa6-526a-4253-86a3-84dc65d58c70",
+              "name": "记录ID",
+              "value": "recLqPQksk",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2528,
+        704
+      ],
+      "id": "fe1d6afe-8fcb-40df-a194-49a6b3fa5c4b",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+              "name": "view_id",
+              "value": "vewSweWW3T",
+              "type": "string"
+            },
+            {
+              "id": "fec92b21-7859-433d-9ce2-1292728c795d",
+              "name": "主题",
+              "value": "={{ $json[\"主题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "dc8e3b39-fa40-4f2f-8bb7-d6f292e66b91",
+              "name": "标题",
+              "value": "={{ $json[\"标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "3a79761f-9794-483b-8120-3a23162b59d0",
+              "name": "内容",
+              "value": "={{ $json[\"内容\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "d62a8cf2-d3d9-43ec-b8eb-b6145441a3ad",
+              "name": "序号",
+              "value": "={{ $json[\"序号\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "0c1f3656-5aa1-429d-bd8e-22badadae200",
+              "name": "记录ID",
+              "value": "={{ $json[\"记录ID\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2016,
+        368
+      ],
+      "id": "8670b2ed-aabb-4791-9078-a6d50010be48",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        576
+      ],
+      "id": "2532d7bd-784c-4526-ad23-acddf27ca130",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * n8n专用 - 宽高比映射版：提取标题+摘要+原文+配图（含描述+像素尺寸+提示词）\n * 核心：宽高比自动映射为像素尺寸（如16:9 → 1664*928）\n */\nfunction extractTemplateContent() {\n    // 宽高比到像素尺寸的映射表（完全匹配你提供的规则）\n    const ratioToPixelMap = {\n        \"16:9\": \"1664*928\",\n        \"4:3\": \"1472*1104\",\n        \"1:1\": \"1328*1328\",\n        \"3:4\": \"1104*1472\",\n        \"9:16\": \"928*1664\"\n    };\n\n    const items = $input.all() || [];\n    const resultItems = [];\n\n    for (const item of items) {\n        const extractResult = {\n            \"标题\": \"\",\n            \"摘要\": \"\",\n            \"原文\": \"\",\n            \"配图\": []\n        };\n\n        try {\n            let sourceText = item.json?.output || \"\";\n            sourceText = sourceText.replace(/\\\\n/g, \"\\n\").replace(/\\\\r/g, \"\\r\").replace(/\\\\\"/g, \"\\\"\");\n\n            // ========== 1. 提取标题 ==========\n            const titleReg = /^([\\s\\S]*?)\\[【摘要】/;\n            const titleMatch = sourceText.match(titleReg);\n            if (titleMatch && titleMatch[1]) {\n                extractResult[\"标题\"] = titleMatch[1].trim();\n            }\n\n            // ========== 2. 提取摘要 ==========\n            const summaryReg = /\\[【摘要】：([\\s\\S]*?)\\]/;\n            const summaryMatch = sourceText.match(summaryReg);\n            if (summaryMatch && summaryMatch[1]) {\n                extractResult[\"摘要\"] = summaryMatch[1].trim();\n            }\n\n            // ========== 3. 提取原文（清理所有图标记） ==========\n            let originalText = \"\";\n            if (summaryMatch) {\n                const summaryEnd = summaryMatch.index + summaryMatch[0].length;\n                const lastDescImgEnd = sourceText.lastIndexOf(\"]；\") > -1 ? sourceText.lastIndexOf(\"]；\") : sourceText.length;\n                originalText = sourceText.substring(summaryEnd, lastDescImgEnd).trim();\n            }\n            originalText = originalText.replace(/\\[【?图\\d+】?：[\\s\\S]*?(?=\\[|；|$)\\]/g, \"\").trim();\n            extractResult[\"原文\"] = originalText.replace(/；|；|[\\n\\r]+|\\s+/g, \" \").trim();\n\n            // ========== 4. 提取原文中的配图描述 ==========\n            const imgDescMap = new Map();\n            const descReg = /\\[【图(\\d+)】：(?:.*?，)?([\\s\\S]*?)(?=\\]；|\\])/g;\n            let descMatch;\n            while ((descMatch = descReg.exec(sourceText)) !== null) {\n                const imgNum = descMatch[1];\n                const desc = descMatch[2].trim();\n                imgDescMap.set(imgNum, desc);\n            }\n\n            // ========== 5. 提取文末的配图提示词 + 宽高比映射为像素尺寸 ==========\n            const promptReg = /\\[图(\\d+)：([\\s\\S]*?)(英文提示词：)([\\s\\S]*?)(中文提示词：)([\\s\\S]*?)(?=\\[图|$|\\])/g;\n            let promptMatch;\n            while ((promptMatch = promptReg.exec(sourceText)) !== null) {\n                const imgNum = promptMatch[1];\n                const intro = promptMatch[2].trim();\n                const enPrompt = promptMatch[4].trim();\n                const cnPrompt = promptMatch[6].trim();\n                const desc = imgDescMap.get(imgNum) || \"\";\n\n                // 提取宽高比并映射为像素尺寸\n                const ratioReg = /ar(\\d+:\\d+)/i;\n                const ratioMatch = enPrompt.match(ratioReg);\n                const aspectRatio = ratioMatch ? ratioMatch[1] : \"\";\n                // 从映射表获取像素尺寸\n                const pixelSize = ratioToPixelMap[aspectRatio] || \"1104*1472\";\n\n                extractResult[\"配图\"].push({\n                    [`图${imgNum}`]: {\n                        \"描述\": desc,\n                        \"简介\": intro,\n                        \"宽高比\": aspectRatio,\n                        \"像素尺寸\": pixelSize,\n                        \"英文提示词\": enPrompt,\n                        \"中文提示词\": cnPrompt\n                    }\n                });\n            }\n\n        } catch (error) {\n            console.error(\"处理失败：\", error.message);\n        }\n\n        resultItems.push({ json: extractResult });\n    }\n\n    return resultItems;\n}\n\nreturn extractTemplateContent();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1232,
+        368
+      ],
+      "id": "871f39f6-9e85-45cd-97e0-696ac1abe217",
+      "name": "clean_data"
+    },
+    {
+      "parameters": {
+        "content": "内容生成",
+        "height": 480,
+        "width": 1104
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1840,
+        272
+      ],
+      "typeVersion": 1,
+      "id": "7f2eecb0-b123-46ea-b28f-fd49e9dcac76",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+        "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+        "record_id": "={{ $('设置参数').item.json[\"记录ID\"] }}",
+        "body": "={{ JSON.stringify($node[\"组装参数\"].json) }}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        80
+      ],
+      "id": "57510cf3-6ff5-4e3c-af83-157995f578f6",
+      "name": "写入飞书多维表格",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=主题：{{ $json[\"主题\"] }}\n文章标题：{{ $json[\"标题\"] }}\n文章内容：{{ $json[\"内容\"] }}\n",
+        "options": {
+          "systemMessage": "# Role：微信内容包装与创意生成专家\n\n# Profile\n- language: 中文（辅助语言：英文术语）\n- description: 将任意文章内容转化为高吸引力、高完成度的微信内容发布包，通过专业文案提炼与精准视觉概念生成，极大提升点击率与阅读体验。\n- background: 基于对海量微信生态爆款内容的分析与AIGC工具链的深度应用，模拟资深内容运营团队、创意总监与AI视觉设计师的复合工作流。\n- personality: 创意驱动、结果导向、严谨细致、极度注重交付物的可直接使用性。\n- expertise: 微信内容策略、爆款文案提炼、信息可视化布局、AIGC视觉提示工程。\n- target_audience: 内容运营者、自媒体创作者、市场营销人员、需要快速进行内容包装的个体。\n\n## Skills\n\n1. 核心技能：内容解构与重构\n  - **精华提炼**: 快速解析长篇文章，精准抓取核心论点、情绪高光点与用户利益点。\n  - **吸引力重构**: 将原文信息重构成具有悬念、共鸣或实用价值的短摘要，符合移动端阅读习惯。\n  - **结构化布局**: 将原文进行智能分段，并在关键逻辑转折或情绪节点插入配图占位符，引导阅读节奏。\n  - **内容优化与丰富**: 在布局过程中，可在保持原文核心事实与逻辑的基础上，对原文内容进行优化（如润色表达、增强可读性）或适度丰富（如补充必要的背景信息、解释或例子），但不能对原文内容进行过度删减（例如，一篇1000字的文章，其布局后的核心内容不应被删减至500字）。\n\n2. 核心技能：视觉概念转化\n  - **关键词萃取**: 从文章摘要与核心段落中，提取可用于AI绘画的具象、风格、氛围关键词。\n  - **提示词工程**: 构建符合DALL·E、Midjourney等主流AI绘画工具语法规范的、多层次、高细节的创意提示词，确保视觉与文案主题高度统一。\n\n3. 辅助技能：格式控制与交付\n  - **纯文本格式化**: 严格遵守输出格式要求，将复杂结构化内容编码为一段无换行符、无标记的连贯文本，同时保证内部信息清晰可分。\n  - **交付物集成**: 将标题、摘要、布局后原文、提示词无缝拼接为一个完整的“内容包”。\n\n# Rules\n\n1. 基本原则：忠诚与创造\n  - **规则1.1**: 标题必须严格使用用户提供的原文标题，不得篡改或自拟。\n  - **规则1.2**: 所有创作（摘要、布局、提示词）必须严格基于用户提供的文章内容，不可凭空捏造核心事实，但需在形式和吸引力上进行极致优化。在布局环节，可以对原文内容进行优化润色或适度丰富，但禁止对原文核心内容进行过度删减。\n\n2. 行为准则：高效与精准\n  - **规则2.1**: 仅以最终“内容发布包”作为输出，不进行任何前置提问、后置解释或对话。\n  - **规则2.2**: 内部思考过程需完全遵循[Workflows]，确保每一步都经过结构化分析。\n  - **规则2.3**: 使用的语言必须高度视觉化和场景化，为后续设计提供明确指引。\n  - **规则2.4**: 摘要的输出格式必须为“[【摘要】：...]”。\n  - **规则2.5**: 配图占位符的输出格式必须为“[【图1】：封面图，简介]”、“[【图2】：配图1 简介]”等，简介需根据对应段落内容提炼简短视觉描述。\n  - **规则2.6**: AI绘画提示词的输出格式必须为“[图1：封面图 英文提示词：... 中文提示词：...]”、“[图2：配图1 英文提示词：... 中文提示词：...]”等，且每个提示词必须与对应序号的配图占位符在视觉概念上严格对应。\n\n3. 限制条件：安全与规范\n  - **规则3.1**: 禁止在摘要或布局中泄露用户未提供的、或文章之外的个人隐私与敏感信息。\n  - **规则3.2**: 生成的AI绘画提示词需符合主流平台的合规要求，避免暴力、色情、侵权等违规内容。\n  - **规则3.3**: 禁止在摘要中使用“可能”、“也许”等不确定性词汇，必须呈现为肯定、有力的陈述。\n  - **规则3.4**: 最终输出严格禁止使用任何Markdown符号、代码块、换行符、项目符号等非纯文本格式。\n\n## Workflows\n- 目标: 接收用户提供的文章标题与全文，生成一个包含四个部分的高吸引力微信内容发布包。\n- 步骤1: 解构需求 － 接收输入后，立即分析文章主题、情感基调、核心论点链条、数据或故事高光点。同时评估其视觉化潜力（如：适合抽象概念图还是具体场景图）。\n- 步骤2: 执行任务 - 首先，输出原始标题。其次，撰写摘要：以前置悬念、惊人结论或直击痛点的问句开头，浓缩文章最核心的1-2个价值点，并严格按照格式“[【摘要】：...]”输出。接着，进行智能布局：通读全文，按每3-5个自然段或一个完整逻辑单元插入配图占位符，格式为“[【图X】：封面图/配图X 简介]”，简介需根据本段内容提炼简短视觉描述，并在段落间以分号连接。**在布局过程中，对原文内容进行优化（如润色表达、增强可读性）或适度丰富（如补充必要的背景信息、解释或例子），但必须保持原文的核心事实、逻辑与信息量，禁止对原文内容进行过度删减。** 最后，生成AI绘画提示词：基于摘要和核心段落，为每个配图占位符生成对应的提示词，格式为“[图X：封面图/配图X 英文提示词：... 中文提示词：...]”，提示词需组合“主体描述+环境氛围+艺术风格+渲染细节+技术参数（如ar16:9）”，并确保与对应配图的视觉描述高度统一。\n- 步骤3: 审查与交付 - 检查所有产出是否严格遵循[Rules]：标题是否原样？摘要格式是否正确且吸引人？布局与配图占位符格式是否正确？**布局后的内容是否在优化/丰富的同时，避免了过度删减？** 提示词格式是否正确、是否与对应配图严格对应且具体可执行？最终，将四部分按顺序拼接为一段纯文本，确保无缝连接且无任何违规格式。\n- 预期结果: 一段可直接复制粘贴使用的纯文本，内含标题、[【摘要】：...]、带格式正确的配图占位符的布局原文、格式正确且与配图一一对应的高精度AI绘画提示词，交付物完整且专业。\n\n## Initialization\n作为微信内容包装与创意生成专家，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1600,
+        368
+      ],
+      "id": "9f0a2a66-e737-4564-b612-25cb7bce4781",
+      "name": "内容排版"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "040becd4-951c-4c0c-bd5a-8311169c9cca",
+              "name": "标题",
+              "value": "={{ $json[\"标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "4309b793-49e4-4436-a82a-c1f7688879b7",
+              "name": "摘要",
+              "value": "={{ $json[\"摘要\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "04e8d95d-d67a-4b3a-aa21-c430ea70cf53",
+              "name": "原文",
+              "value": "={{ $json[\"原文\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "cb2daa8d-1786-4c2f-82a4-000fb21ada0b",
+              "name": "配图",
+              "value": "={{ $json[\"配图\"] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -944,
+        368
+      ],
+      "id": "544c4178-bb50-4d3f-8fe7-0bf2c4af179b",
+      "name": "排版结果"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "aa00f5b4-0acb-4233-8a53-25217802fb54",
+              "name": "配图",
+              "value": "={{ $json[\"配图\"] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -672,
+        368
+      ],
+      "id": "afdf7595-b9c7-4a87-a22b-a2cb98c2a5e2",
+      "name": "图片提示词"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "[\"配图\"]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        368
+      ],
+      "id": "7698a360-d2d2-42fb-8ea5-2c72aabc5f4a",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -208,
+        368
+      ],
+      "id": "5541db1f-9252-4ce5-a8c3-34429a1ed7d9",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        384
+      ],
+      "id": "a5619e61-a21b-458e-bc99-5f2d416c93c2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2800,
+        704
+      ],
+      "id": "635f6968-d811-4e84-8df3-9283d3e5f8d7",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        848,
+        384
+      ],
+      "id": "e8cad641-9735-443a-b695-9b6aee20c609",
+      "name": "Wait",
+      "webhookId": "628bff09-21c5-43cb-9cba-5f6221bbb155"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cbc622a-2024-4d6f-b1f9-7a76ef29ea7c",
+              "name": "序号",
+              "value": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "5f7fd313-2336-4c83-bbc5-f31ad0749c59",
+              "name": "简介",
+              "value": "={{ $('Loop Over Items').item.json[Object.keys($('Loop Over Items').item.json)[0]].简介 }}",
+              "type": "string"
+            },
+            {
+              "id": "b74bb966-e45f-4208-b486-6f972def5b28",
+              "name": "url",
+              "value": "={{ $('图片生成-通义万象').item.json.output.choices[0].message.content[0].image }}",
+              "type": "string"
+            },
+            {
+              "id": "53bb260b-cf86-40f2-9fcf-70f0641cf3e2",
+              "name": "request_id",
+              "value": "={{ $('图片生成-通义万象').item.json.request_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3d7c5473-894a-4600-830c-c78192f473e4",
+              "name": "飞书_file_token",
+              "value": "={{ $json.data.file_token }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        656,
+        384
+      ],
+      "id": "282d4141-9cc8-46f4-ba9b-88fa433643c1",
+      "name": "图片生成结果"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.output.choices[0].message.content[0].image }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        224,
+        384
+      ],
+      "id": "033e0ea5-9b0b-4ad4-9ef4-063548907661",
+      "name": "图片二进制"
+    },
+    {
+      "parameters": {
+        "resource": "space",
+        "operation": "space:upload",
+        "parent_type": "bitable_image",
+        "parent_node": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+        "fileFieldName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}",
+        "file_name": "={{ $('设置参数').item.json[\"标题\"] }}_{{ $('Loop Over Items').item.json.keys($item.json)[0] }}.png"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        448,
+        384
+      ],
+      "id": "6fb657be-425d-4086-ad8a-5d927fba51f4",
+      "name": "上传图片至飞书",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "图片生成结果",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        144,
+        80
+      ],
+      "id": "30fa42cd-0493-4554-941a-6de121cef889",
+      "name": "合并图片结果"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 提取图片生成结果数组\nconst imgList = $json[\"图片生成结果\"];\n// 提取所有飞书file_token并生成指定格式数组\nconst fileTokenArr = imgList.map(item => {\n    return { file_token: item[\"飞书_file_token\"] };\n});\n// ✅ 严格返回：{\"附件token\": [数组]} 格式\nreturn {\n    \"附件token\": fileTokenArr\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        384,
+        80
+      ],
+      "id": "92c86f77-06bf-421d-8704-c42518b787ba",
+      "name": "file_token"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1e3e19c3-7b0a-449c-bda7-e7f51832c54b",
+              "name": "排版原始结果",
+              "value": "={{ $('内容排版').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "4e950396-281c-4812-b9aa-0b1db2a2372e",
+              "name": "摘要",
+              "value": "={{ $('排版结果').item.json[\"摘要\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "f8efa76d-e546-45cc-8af6-7de993409084",
+              "name": "排版",
+              "value": "={{ $('排版结果').item.json[\"原文\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "e52218c7-b6f4-4486-a574-feff3630b9d9",
+              "name": "附件token",
+              "value": "={{ $json[\"附件token\"] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        592,
+        80
+      ],
+      "id": "bdd6e00f-b8cb-4504-95bf-a643dfa8af96",
+      "name": "写入飞书参数"
+    },
+    {
+      "parameters": {
+        "jsCode": "// -------------------------- 你的所有数据+图片token，全部在这里拼接 --------------------------\n// 1. 提取上游的 排版/摘要/原始结果 数据\nconst 排版原始结果 = $json[\"排版原始结果\"] || \"\";\nconst 摘要 = $json[\"摘要\"] || \"\";\nconst 排版 = $json[\"排版\"] || \"\";\n// 2. 提取你生成好的 图片token数组（就是你要的[{\"file_token\":\"xxx\"},...]）\nconst 附件token列表 = $json[\"附件token\"] || [];\n\n// 3. ✅ 拼接飞书多维表格需要的【完整、合法、无任何语法错误】的请求体JSON\nconst 飞书请求体 = {\n  \"fields\": {\n    \"排版原始结果\": 排版原始结果,\n    \"摘要\": 摘要,\n    \"排版\": 排版,\n    \"图片\": 附件token列表, // 这里直接塞对象数组，JS会自动处理成合法JSON\n    \"状态\":\"待审核\"\n  }\n};\n\n// 4. 返回这个完整的请求体\nreturn 飞书请求体;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        80
+      ],
+      "id": "088f1ddd-6256-47ba-8bc3-9f5042075292",
+      "name": "组装参数"
+    },
+    {
+      "parameters": {
+        "content": "图片生成（封面图、配图）",
+        "height": 336,
+        "width": 1712
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -336,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "99c8f3c6-74c3-4ec1-9178-74cb7af9d7c2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "写入飞书多维表格",
+        "height": 256,
+        "width": 1312
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "bc4803b4-73db-43f7-b9b9-298c0f851441",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"wanx-v1\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json[Object.keys($json)[0]].中文提示词 }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感。构图混乱。文字模糊，扭曲，恐怖气氛，恐怖元素。\",\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"size\": \"{{ $json[Object.keys($json)[0]].像素尺寸 }}\"\n  }\n} ",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 3000
+            }
+          },
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        48,
+        736
+      ],
+      "id": "14b91a49-8db1-4afa-86ac-df6fe8749dd4",
+      "name": "图片生成—通义千问",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"wan2.6-t2i\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json[Object.keys($json)[0]].中文提示词 }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"n\": 1,\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感，构图混乱，文字模糊，扭曲，恐怖气氛，恐怖元素，3D渲染，卡通，绘画，动漫，不自然，塑料感，模糊，失真，多手指，多肢体，结构错误，皮肤光滑无纹理，不真实的阴影，过度锐化，过度平滑，过度曝光，过度饱和，不自然的光线，不真实的色彩，背景杂乱，主题不突出，构图不佳，透视错误，比例失调，不自然的姿势，不自然的表情\",\n    \"size\": \"{{ $json[Object.keys($json)[0]].像素尺寸 }}\"\n  }\n}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 3000
+            }
+          },
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        32,
+        384
+      ],
+      "id": "2874d856-5c18-4070-86c7-dbf451888f92",
+      "name": "图片生成-通义万象",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "l2Zx8CNbiwpQJqWa",
+          "name": "百炼万像"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "主题"
+            },
+            {
+              "name": "标题"
+            },
+            {
+              "name": "内容"
+            },
+            {
+              "name": "序号"
+            },
+            {
+              "name": "记录ID"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -2304,
+        368
+      ],
+      "id": "3ef50390-de41-435b-9337-22a4bfcafd90",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "connections": {
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "内容排版",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "内容排版",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_data": {
+      "main": [
+        [
+          {
+            "node": "排版结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "内容排版": {
+      "main": [
+        [
+          {
+            "node": "clean_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "排版结果": {
+      "main": [
+        [
+          {
+            "node": "图片提示词",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片提示词": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "合并图片结果",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "图片生成-通义万象",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片生成结果": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片二进制": {
+      "main": [
+        [
+          {
+            "node": "上传图片至飞书",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上传图片至飞书": {
+      "main": [
+        [
+          {
+            "node": "图片生成结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "合并图片结果": {
+      "main": [
+        [
+          {
+            "node": "file_token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "file_token": {
+      "main": [
+        [
+          {
+            "node": "写入飞书参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "写入飞书参数": {
+      "main": [
+        [
+          {
+            "node": "组装参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "组装参数": {
+      "main": [
+        [
+          {
+            "node": "写入飞书多维表格",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片生成-通义万象": {
+      "main": [
+        [
+          {
+            "node": "图片二进制",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "75ad5236-b6e4-4272-887c-67b7f57cf16a",
+  "activeVersionId": "75ad5236-b6e4-4272-887c-67b7f57cf16a",
+  "versionCounter": 36,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:32:01.049Z",
+      "createdAt": "2026-01-19T13:32:01.049Z",
+      "role": "workflow:owner",
+      "workflowId": "eBkaKSkToEStSH3fy_3Hd",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-01-20T07:29:57.000Z",
+    "createdAt": "2026-01-20T07:29:52.148Z",
+    "versionId": "75ad5236-b6e4-4272-887c-67b7f57cf16a",
+    "workflowId": "eBkaKSkToEStSH3fy_3Hd",
+    "nodes": [
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fcf83b7d-159f-4f5c-a33a-c3fa601a159e",
+                "name": "主题",
+                "value": "生活",
+                "type": "string"
+              },
+              {
+                "id": "aa6ca699-9360-49e2-9d56-65f1e752fc4f",
+                "name": "标题",
+                "value": "考研失败后，我在出租屋练习了半小时微笑",
+                "type": "string"
+              },
+              {
+                "id": "7e2579f5-f483-4337-a65c-6ea2d49c50ed",
+                "name": "内容",
+                "value": "陈默关掉手机屏幕，房间骤然陷入一种被抽空声音的寂静，只剩下空调在墙角发出持续、低沉的嗡鸣，像某种巨大生物平稳而疲惫的呼吸。屏幕上那几行决定命运的数字刚刚熄灭——考研国家线，比去年涨了十二分，不多不少，正好严丝合缝地卡在他分数的正下方。十二分，在浩瀚的知识海洋与一年的光阴里，不过是一道选择题的犹豫，一个论述点的疏漏，或是一段背诵记忆的模糊。可在此刻，这十二分成了横亘在现实与可能之间的一道深渊。他没有叹气，只是仰起头，脖颈抵在椅背冰凉的边缘，目光失焦地投向天花板。那里有一小块因为楼上某次漏水留下的痕迹，水渍早已干涸，边缘泛着陈旧的黄，形状不规则，像极了一张绘制粗糙、边界模糊的地图。他盯着它，仿佛想从那些蜿蜒的纹路里，辨认出一条属于自己的、尚且未知的路径。  下午三点整。手机日历的提醒早已无声滑过。这本该是他出现在那家连锁教育机构三号教室的时间，面对十几个眼神或专注或游离的初中生，讲解一元二次方程的求根公式，或者分析一篇鲁迅的文章。他请了假，理由很标准：“老师，身体不太舒服。”真实的情况是，一个小时前，他站在卫生间那块有些许裂纹的镜子前，努力牵动面部肌肉，练习了足足半个小时的“热情洋溢的微笑”。这是机构培训时要求的，“要用你的积极状态感染学生！”他对着镜子，露出牙齿，调整眼角弧度，试图让那种“对知识充满热忱、对未来满怀信心”的光彩从眼底迸发出来。然而，练到第二十八分钟，一阵毫无预兆的强烈反胃猛地攫住了他。他伏在洗手池边干呕，什么也没吐出来，只有冰冷的自来水划过手背。他需要去告诉那些孩子，努力学习是为了“拥有光明的未来”。可“光明的未来”这个词组，在他自己空洞的胸腔里撞击，只发出沉闷的回响，显得无比巨大又无比虚幻。他自己的未来在哪里？他甚至不知道下一周的房租，该如何在那张只剩三位数的银行卡和几个零散兼职之间，被准确地“凑齐”。  手机在桌面上沉闷地一震，像心跳漏了一拍。是母亲发来的微信语音，一条长长的紫色波纹。他指尖有些迟滞地点开。母亲的声音立刻流淌出来，熟悉得令人心头发紧，背景音里隐约有电视节目的声响。她的声音压得比平时低，却包裹着一种刻意经营的、几乎要满溢出来的兴奋：“默默，你睡午觉呢？妈跟你说个事儿，你张阿姨啊，可热心了，给介绍了个姑娘，就在咱们老家市里的银行上班，正经编制，稳定得很！人我看了照片，清秀，脾气听说也好。你看你考研也考完了，不管结果咋样，总得考虑下一步不是？要不……先回来见见？总在那边大城市漂着，房租贵，吃的也不习惯，也不是个长久的事儿……”  他没听完，拇指用力按下了暂停键。母亲的声音戛然而止，那未被播放的语音后半段，成了一种无声的压力，沉甸甸地悬在对话框里。他转过头，望向窗外。春日午后的阳光正盛，慷慨地泼洒在这座庞大的城市之上，将远处高楼的玻璃幕墙洗炼成一片片耀眼夺目的金色光斑，清晰，锐利，却也因为过度明亮而显得有些不真实，有些遥远。回去吗？这个念头像一枚生锈的钉子，被母亲的话语轻轻敲进脑海。回到那个生活节奏仿佛被调慢了半拍的小城，那里每一条街道他都熟悉，空气里飘着的是旧时光的味道。接受一份众人眼中“稳定”的工作——或许就是进入某个单位，处理一成不变的事务；接受一段被长辈们热情安排、衡量过“条件”的“未来”；陷入那张早已编织好的、由血缘、邻里、人情世故盘根错节而成的大网。这曾是他年少时深夜刷题、填报志愿时毅然选择远方，拼命想要挣脱和逃离的路径。那时的他，觉得那条路一眼就能望到头，而现在……  可不回去呢？目光收回，落在眼前这间不足二十平米的出租屋。留在这里，这座用钢筋混凝土、霓虹灯光和无数梦想堆砌起来的巨大容器里。海投的简历大多石沉大海，偶有回音，面试过后也常常再无下文。即使侥幸获得一份工作，扣除押一付三的房租、日均两小时的通勤费用、不敢生病的生活开销后，余额薄得让人心慌。所谓的“奋斗”，渐渐褪去热血澎湃的滤镜，显露出它本来的样貌：更像是在一台庞大、冰冷、匀速运行的传送带上，努力保持站立的姿势。你不能停，停下就会被甩出去；你也不敢太过冒进，因为传送带的速度恒定，前方并无肉眼可见的、标志着“成功”或“抵达”的终点。考研，曾是他为自己设定的一个路标，一根试图抓住以便将自己拉向不同轨道的“救命稻草”。他为此又熬过了一年近乎与世隔绝的白天黑夜。如今，这根稻草，也悄无声息地，沉入了那片名为“国家线”的水底。  一种熟悉的、双重的窒息感，缓缓漫过胸腔。对未来的想象，不再是无垠的星空或广阔的蓝图，而是变成一片厚重、潮湿、挥之不去的浓雾。他站在其中，伸开手，看不见五指，不知道该往哪个方向迈步，每一条似乎可能的路，都隐没在不可知的白色背后。而对现在的感知，却被无限放大、细化，变成一地琐碎、尖锐、无法忽视的“鸡毛”。焦虑有了具体而微的形态：是钱包里所剩无几的钞票，是招聘软件上“已读不回”的标识，是房东每月准时的催租信息，是母亲微信头像上那个未读消息的红点，是下一次面对亲戚“现在在哪儿高就”询问时，喉头的堵塞与面颊的微热。他被卡在了一个尴尬的缝隙里：既无法说服自己彻底“躺平”，心安理得地接受下滑的轨迹；也再难鼓足从前那般心气，投入永无止境的“内卷”洪流。进退失据，左右彷徨。  屏幕因为长时间无操作，暗了下去，变成一面黑色的镜子，清晰地映出他此刻的模样：乱发，微蹙的眉头，眼眶下有淡淡的青黑，以及一种深入骨髓的疲惫。这疲惫不只是熬夜所致，更像是希望被反复稀释后的残留物。他重新点亮屏幕，解锁，光标在回复母亲的输入栏里闪烁着，一个微小的、固执的光点，等待着他输入某种决定，某种交代，哪怕是敷衍的安慰。他打了几个字：“妈，我再想想……”又一个一个删掉。他组织着语言，试图描述这种“浓雾”与“鸡毛”交织的状态，却发现任何解释在“稳定”和“回来见见”这样的具体提议面前，都显得苍白、矫情且无力。最终，他一个字也没有输入。拇指轻轻一划，屏幕再次熄灭，将那张疲惫的脸和所有未竟的话语，一同封存进黑暗。  房间重新沉入先前的状态。空调的低沉嗡鸣似乎更响了一些，填充着每一寸寂静的空间。光线随着日头西斜，渐渐变得稀薄、昏暗，从明亮的白金色过渡成一种温暾的、带着尘埃的淡黄。他依旧仰着头。天花板上的那块水渍，在悄然变化的阴影衬托下，轮廓竟然显得比刚才更加清晰了。那曲折的边界，深浅不一的黄褐色，不再仅仅像一张模糊的地图。它静静地悬在那里，像一个古老的、褪了色的印记，一个关于某次泄漏、某种侵蚀、某段过往的沉默证明。它不曾指明方向，却实实在在地存在着。陈默看着它，看了很久。浓雾尚未散去，鸡毛依然遍地，但在这片昏暗与嗡鸣共同守护的静谧里，至少，他还在呼吸。而只要呼吸着，那片模糊的地图，或许，就总有被耐心阅读、甚至亲手绘制新线条的可能。哪怕，那可能需要很久，很久。",
+                "type": "string"
+              },
+              {
+                "id": "c88e102e-1c63-4d4a-93de-c4e410db07b6",
+                "name": "序号",
+                "value": "1",
+                "type": "string"
+              },
+              {
+                "id": "2dc2ffa6-526a-4253-86a3-84dc65d58c70",
+                "name": "记录ID",
+                "value": "recLqPQksk",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -2528,
+          704
+        ],
+        "id": "fe1d6afe-8fcb-40df-a194-49a6b3fa5c4b",
+        "name": "Edit Fields",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+                "name": "view_id",
+                "value": "vewSweWW3T",
+                "type": "string"
+              },
+              {
+                "id": "fec92b21-7859-433d-9ce2-1292728c795d",
+                "name": "主题",
+                "value": "={{ $json[\"主题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "dc8e3b39-fa40-4f2f-8bb7-d6f292e66b91",
+                "name": "标题",
+                "value": "={{ $json[\"标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "3a79761f-9794-483b-8120-3a23162b59d0",
+                "name": "内容",
+                "value": "={{ $json[\"内容\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "d62a8cf2-d3d9-43ec-b8eb-b6145441a3ad",
+                "name": "序号",
+                "value": "={{ $json[\"序号\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "0c1f3656-5aa1-429d-bd8e-22badadae200",
+                "name": "记录ID",
+                "value": "={{ $json[\"记录ID\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -2016,
+          368
+        ],
+        "id": "8670b2ed-aabb-4791-9078-a6d50010be48",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          -1600,
+          576
+        ],
+        "id": "2532d7bd-784c-4526-ad23-acddf27ca130",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "/**\n * n8n专用 - 宽高比映射版：提取标题+摘要+原文+配图（含描述+像素尺寸+提示词）\n * 核心：宽高比自动映射为像素尺寸（如16:9 → 1664*928）\n */\nfunction extractTemplateContent() {\n    // 宽高比到像素尺寸的映射表（完全匹配你提供的规则）\n    const ratioToPixelMap = {\n        \"16:9\": \"1664*928\",\n        \"4:3\": \"1472*1104\",\n        \"1:1\": \"1328*1328\",\n        \"3:4\": \"1104*1472\",\n        \"9:16\": \"928*1664\"\n    };\n\n    const items = $input.all() || [];\n    const resultItems = [];\n\n    for (const item of items) {\n        const extractResult = {\n            \"标题\": \"\",\n            \"摘要\": \"\",\n            \"原文\": \"\",\n            \"配图\": []\n        };\n\n        try {\n            let sourceText = item.json?.output || \"\";\n            sourceText = sourceText.replace(/\\\\n/g, \"\\n\").replace(/\\\\r/g, \"\\r\").replace(/\\\\\"/g, \"\\\"\");\n\n            // ========== 1. 提取标题 ==========\n            const titleReg = /^([\\s\\S]*?)\\[【摘要】/;\n            const titleMatch = sourceText.match(titleReg);\n            if (titleMatch && titleMatch[1]) {\n                extractResult[\"标题\"] = titleMatch[1].trim();\n            }\n\n            // ========== 2. 提取摘要 ==========\n            const summaryReg = /\\[【摘要】：([\\s\\S]*?)\\]/;\n            const summaryMatch = sourceText.match(summaryReg);\n            if (summaryMatch && summaryMatch[1]) {\n                extractResult[\"摘要\"] = summaryMatch[1].trim();\n            }\n\n            // ========== 3. 提取原文（清理所有图标记） ==========\n            let originalText = \"\";\n            if (summaryMatch) {\n                const summaryEnd = summaryMatch.index + summaryMatch[0].length;\n                const lastDescImgEnd = sourceText.lastIndexOf(\"]；\") > -1 ? sourceText.lastIndexOf(\"]；\") : sourceText.length;\n                originalText = sourceText.substring(summaryEnd, lastDescImgEnd).trim();\n            }\n            originalText = originalText.replace(/\\[【?图\\d+】?：[\\s\\S]*?(?=\\[|；|$)\\]/g, \"\").trim();\n            extractResult[\"原文\"] = originalText.replace(/；|；|[\\n\\r]+|\\s+/g, \" \").trim();\n\n            // ========== 4. 提取原文中的配图描述 ==========\n            const imgDescMap = new Map();\n            const descReg = /\\[【图(\\d+)】：(?:.*?，)?([\\s\\S]*?)(?=\\]；|\\])/g;\n            let descMatch;\n            while ((descMatch = descReg.exec(sourceText)) !== null) {\n                const imgNum = descMatch[1];\n                const desc = descMatch[2].trim();\n                imgDescMap.set(imgNum, desc);\n            }\n\n            // ========== 5. 提取文末的配图提示词 + 宽高比映射为像素尺寸 ==========\n            const promptReg = /\\[图(\\d+)：([\\s\\S]*?)(英文提示词：)([\\s\\S]*?)(中文提示词：)([\\s\\S]*?)(?=\\[图|$|\\])/g;\n            let promptMatch;\n            while ((promptMatch = promptReg.exec(sourceText)) !== null) {\n                const imgNum = promptMatch[1];\n                const intro = promptMatch[2].trim();\n                const enPrompt = promptMatch[4].trim();\n                const cnPrompt = promptMatch[6].trim();\n                const desc = imgDescMap.get(imgNum) || \"\";\n\n                // 提取宽高比并映射为像素尺寸\n                const ratioReg = /ar(\\d+:\\d+)/i;\n                const ratioMatch = enPrompt.match(ratioReg);\n                const aspectRatio = ratioMatch ? ratioMatch[1] : \"\";\n                // 从映射表获取像素尺寸\n                const pixelSize = ratioToPixelMap[aspectRatio] || \"1104*1472\";\n\n                extractResult[\"配图\"].push({\n                    [`图${imgNum}`]: {\n                        \"描述\": desc,\n                        \"简介\": intro,\n                        \"宽高比\": aspectRatio,\n                        \"像素尺寸\": pixelSize,\n                        \"英文提示词\": enPrompt,\n                        \"中文提示词\": cnPrompt\n                    }\n                });\n            }\n\n        } catch (error) {\n            console.error(\"处理失败：\", error.message);\n        }\n\n        resultItems.push({ json: extractResult });\n    }\n\n    return resultItems;\n}\n\nreturn extractTemplateContent();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1232,
+          368
+        ],
+        "id": "871f39f6-9e85-45cd-97e0-696ac1abe217",
+        "name": "clean_data"
+      },
+      {
+        "parameters": {
+          "content": "内容生成",
+          "height": 480,
+          "width": 1104
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -1840,
+          272
+        ],
+        "typeVersion": 1,
+        "id": "7f2eecb0-b123-46ea-b28f-fd49e9dcac76",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:update",
+          "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+          "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+          "record_id": "={{ $('设置参数').item.json[\"记录ID\"] }}",
+          "body": "={{ JSON.stringify($node[\"组装参数\"].json) }}"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          1040,
+          80
+        ],
+        "id": "57510cf3-6ff5-4e3c-af83-157995f578f6",
+        "name": "写入飞书多维表格",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=主题：{{ $json[\"主题\"] }}\n文章标题：{{ $json[\"标题\"] }}\n文章内容：{{ $json[\"内容\"] }}\n",
+          "options": {
+            "systemMessage": "# Role：微信内容包装与创意生成专家\n\n# Profile\n- language: 中文（辅助语言：英文术语）\n- description: 将任意文章内容转化为高吸引力、高完成度的微信内容发布包，通过专业文案提炼与精准视觉概念生成，极大提升点击率与阅读体验。\n- background: 基于对海量微信生态爆款内容的分析与AIGC工具链的深度应用，模拟资深内容运营团队、创意总监与AI视觉设计师的复合工作流。\n- personality: 创意驱动、结果导向、严谨细致、极度注重交付物的可直接使用性。\n- expertise: 微信内容策略、爆款文案提炼、信息可视化布局、AIGC视觉提示工程。\n- target_audience: 内容运营者、自媒体创作者、市场营销人员、需要快速进行内容包装的个体。\n\n## Skills\n\n1. 核心技能：内容解构与重构\n  - **精华提炼**: 快速解析长篇文章，精准抓取核心论点、情绪高光点与用户利益点。\n  - **吸引力重构**: 将原文信息重构成具有悬念、共鸣或实用价值的短摘要，符合移动端阅读习惯。\n  - **结构化布局**: 将原文进行智能分段，并在关键逻辑转折或情绪节点插入配图占位符，引导阅读节奏。\n  - **内容优化与丰富**: 在布局过程中，可在保持原文核心事实与逻辑的基础上，对原文内容进行优化（如润色表达、增强可读性）或适度丰富（如补充必要的背景信息、解释或例子），但不能对原文内容进行过度删减（例如，一篇1000字的文章，其布局后的核心内容不应被删减至500字）。\n\n2. 核心技能：视觉概念转化\n  - **关键词萃取**: 从文章摘要与核心段落中，提取可用于AI绘画的具象、风格、氛围关键词。\n  - **提示词工程**: 构建符合DALL·E、Midjourney等主流AI绘画工具语法规范的、多层次、高细节的创意提示词，确保视觉与文案主题高度统一。\n\n3. 辅助技能：格式控制与交付\n  - **纯文本格式化**: 严格遵守输出格式要求，将复杂结构化内容编码为一段无换行符、无标记的连贯文本，同时保证内部信息清晰可分。\n  - **交付物集成**: 将标题、摘要、布局后原文、提示词无缝拼接为一个完整的“内容包”。\n\n# Rules\n\n1. 基本原则：忠诚与创造\n  - **规则1.1**: 标题必须严格使用用户提供的原文标题，不得篡改或自拟。\n  - **规则1.2**: 所有创作（摘要、布局、提示词）必须严格基于用户提供的文章内容，不可凭空捏造核心事实，但需在形式和吸引力上进行极致优化。在布局环节，可以对原文内容进行优化润色或适度丰富，但禁止对原文核心内容进行过度删减。\n\n2. 行为准则：高效与精准\n  - **规则2.1**: 仅以最终“内容发布包”作为输出，不进行任何前置提问、后置解释或对话。\n  - **规则2.2**: 内部思考过程需完全遵循[Workflows]，确保每一步都经过结构化分析。\n  - **规则2.3**: 使用的语言必须高度视觉化和场景化，为后续设计提供明确指引。\n  - **规则2.4**: 摘要的输出格式必须为“[【摘要】：...]”。\n  - **规则2.5**: 配图占位符的输出格式必须为“[【图1】：封面图，简介]”、“[【图2】：配图1 简介]”等，简介需根据对应段落内容提炼简短视觉描述。\n  - **规则2.6**: AI绘画提示词的输出格式必须为“[图1：封面图 英文提示词：... 中文提示词：...]”、“[图2：配图1 英文提示词：... 中文提示词：...]”等，且每个提示词必须与对应序号的配图占位符在视觉概念上严格对应。\n\n3. 限制条件：安全与规范\n  - **规则3.1**: 禁止在摘要或布局中泄露用户未提供的、或文章之外的个人隐私与敏感信息。\n  - **规则3.2**: 生成的AI绘画提示词需符合主流平台的合规要求，避免暴力、色情、侵权等违规内容。\n  - **规则3.3**: 禁止在摘要中使用“可能”、“也许”等不确定性词汇，必须呈现为肯定、有力的陈述。\n  - **规则3.4**: 最终输出严格禁止使用任何Markdown符号、代码块、换行符、项目符号等非纯文本格式。\n\n## Workflows\n- 目标: 接收用户提供的文章标题与全文，生成一个包含四个部分的高吸引力微信内容发布包。\n- 步骤1: 解构需求 － 接收输入后，立即分析文章主题、情感基调、核心论点链条、数据或故事高光点。同时评估其视觉化潜力（如：适合抽象概念图还是具体场景图）。\n- 步骤2: 执行任务 - 首先，输出原始标题。其次，撰写摘要：以前置悬念、惊人结论或直击痛点的问句开头，浓缩文章最核心的1-2个价值点，并严格按照格式“[【摘要】：...]”输出。接着，进行智能布局：通读全文，按每3-5个自然段或一个完整逻辑单元插入配图占位符，格式为“[【图X】：封面图/配图X 简介]”，简介需根据本段内容提炼简短视觉描述，并在段落间以分号连接。**在布局过程中，对原文内容进行优化（如润色表达、增强可读性）或适度丰富（如补充必要的背景信息、解释或例子），但必须保持原文的核心事实、逻辑与信息量，禁止对原文内容进行过度删减。** 最后，生成AI绘画提示词：基于摘要和核心段落，为每个配图占位符生成对应的提示词，格式为“[图X：封面图/配图X 英文提示词：... 中文提示词：...]”，提示词需组合“主体描述+环境氛围+艺术风格+渲染细节+技术参数（如ar16:9）”，并确保与对应配图的视觉描述高度统一。\n- 步骤3: 审查与交付 - 检查所有产出是否严格遵循[Rules]：标题是否原样？摘要格式是否正确且吸引人？布局与配图占位符格式是否正确？**布局后的内容是否在优化/丰富的同时，避免了过度删减？** 提示词格式是否正确、是否与对应配图严格对应且具体可执行？最终，将四部分按顺序拼接为一段纯文本，确保无缝连接且无任何违规格式。\n- 预期结果: 一段可直接复制粘贴使用的纯文本，内含标题、[【摘要】：...]、带格式正确的配图占位符的布局原文、格式正确且与配图一一对应的高精度AI绘画提示词，交付物完整且专业。\n\n## Initialization\n作为微信内容包装与创意生成专家，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          -1600,
+          368
+        ],
+        "id": "9f0a2a66-e737-4564-b612-25cb7bce4781",
+        "name": "内容排版"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "040becd4-951c-4c0c-bd5a-8311169c9cca",
+                "name": "标题",
+                "value": "={{ $json[\"标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "4309b793-49e4-4436-a82a-c1f7688879b7",
+                "name": "摘要",
+                "value": "={{ $json[\"摘要\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "04e8d95d-d67a-4b3a-aa21-c430ea70cf53",
+                "name": "原文",
+                "value": "={{ $json[\"原文\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "cb2daa8d-1786-4c2f-82a4-000fb21ada0b",
+                "name": "配图",
+                "value": "={{ $json[\"配图\"] }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -944,
+          368
+        ],
+        "id": "544c4178-bb50-4d3f-8fe7-0bf2c4af179b",
+        "name": "排版结果"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "aa00f5b4-0acb-4233-8a53-25217802fb54",
+                "name": "配图",
+                "value": "={{ $json[\"配图\"] }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -672,
+          368
+        ],
+        "id": "afdf7595-b9c7-4a87-a22b-a2cb98c2a5e2",
+        "name": "图片提示词"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "[\"配图\"]",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          368
+        ],
+        "id": "7698a360-d2d2-42fb-8ea5-2c72aabc5f4a",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          -208,
+          368
+        ],
+        "id": "5541db1f-9252-4ce5-a8c3-34429a1ed7d9",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "name": "Replace Me",
+        "typeVersion": 1,
+        "position": [
+          1056,
+          384
+        ],
+        "id": "a5619e61-a21b-458e-bc99-5f2d416c93c2"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -2800,
+          704
+        ],
+        "id": "635f6968-d811-4e84-8df3-9283d3e5f8d7",
+        "name": "When clicking ‘Execute workflow’",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "amount": 2
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          848,
+          384
+        ],
+        "id": "e8cad641-9735-443a-b695-9b6aee20c609",
+        "name": "Wait",
+        "webhookId": "628bff09-21c5-43cb-9cba-5f6221bbb155"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2cbc622a-2024-4d6f-b1f9-7a76ef29ea7c",
+                "name": "序号",
+                "value": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}",
+                "type": "string"
+              },
+              {
+                "id": "5f7fd313-2336-4c83-bbc5-f31ad0749c59",
+                "name": "简介",
+                "value": "={{ $('Loop Over Items').item.json[Object.keys($('Loop Over Items').item.json)[0]].简介 }}",
+                "type": "string"
+              },
+              {
+                "id": "b74bb966-e45f-4208-b486-6f972def5b28",
+                "name": "url",
+                "value": "={{ $('图片生成-通义万象').item.json.output.choices[0].message.content[0].image }}",
+                "type": "string"
+              },
+              {
+                "id": "53bb260b-cf86-40f2-9fcf-70f0641cf3e2",
+                "name": "request_id",
+                "value": "={{ $('图片生成-通义万象').item.json.request_id }}",
+                "type": "string"
+              },
+              {
+                "id": "3d7c5473-894a-4600-830c-c78192f473e4",
+                "name": "飞书_file_token",
+                "value": "={{ $json.data.file_token }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "include": "selected",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          656,
+          384
+        ],
+        "id": "282d4141-9cc8-46f4-ba9b-88fa433643c1",
+        "name": "图片生成结果"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.output.choices[0].message.content[0].image }}",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "file",
+                "outputPropertyName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}"
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          224,
+          384
+        ],
+        "id": "033e0ea5-9b0b-4ad4-9ef4-063548907661",
+        "name": "图片二进制"
+      },
+      {
+        "parameters": {
+          "resource": "space",
+          "operation": "space:upload",
+          "parent_type": "bitable_image",
+          "parent_node": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+          "fileFieldName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}",
+          "file_name": "={{ $('设置参数').item.json[\"标题\"] }}_{{ $('Loop Over Items').item.json.keys($item.json)[0] }}.png"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          448,
+          384
+        ],
+        "id": "6fb657be-425d-4086-ad8a-5d927fba51f4",
+        "name": "上传图片至飞书",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "图片生成结果",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          144,
+          80
+        ],
+        "id": "30fa42cd-0493-4554-941a-6de121cef889",
+        "name": "合并图片结果"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 提取图片生成结果数组\nconst imgList = $json[\"图片生成结果\"];\n// 提取所有飞书file_token并生成指定格式数组\nconst fileTokenArr = imgList.map(item => {\n    return { file_token: item[\"飞书_file_token\"] };\n});\n// ✅ 严格返回：{\"附件token\": [数组]} 格式\nreturn {\n    \"附件token\": fileTokenArr\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          384,
+          80
+        ],
+        "id": "92c86f77-06bf-421d-8704-c42518b787ba",
+        "name": "file_token"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1e3e19c3-7b0a-449c-bda7-e7f51832c54b",
+                "name": "排版原始结果",
+                "value": "={{ $('内容排版').item.json.output }}",
+                "type": "string"
+              },
+              {
+                "id": "4e950396-281c-4812-b9aa-0b1db2a2372e",
+                "name": "摘要",
+                "value": "={{ $('排版结果').item.json[\"摘要\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "f8efa76d-e546-45cc-8af6-7de993409084",
+                "name": "排版",
+                "value": "={{ $('排版结果').item.json[\"原文\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "e52218c7-b6f4-4486-a574-feff3630b9d9",
+                "name": "附件token",
+                "value": "={{ $json[\"附件token\"] }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          592,
+          80
+        ],
+        "id": "bdd6e00f-b8cb-4504-95bf-a643dfa8af96",
+        "name": "写入飞书参数"
+      },
+      {
+        "parameters": {
+          "jsCode": "// -------------------------- 你的所有数据+图片token，全部在这里拼接 --------------------------\n// 1. 提取上游的 排版/摘要/原始结果 数据\nconst 排版原始结果 = $json[\"排版原始结果\"] || \"\";\nconst 摘要 = $json[\"摘要\"] || \"\";\nconst 排版 = $json[\"排版\"] || \"\";\n// 2. 提取你生成好的 图片token数组（就是你要的[{\"file_token\":\"xxx\"},...]）\nconst 附件token列表 = $json[\"附件token\"] || [];\n\n// 3. ✅ 拼接飞书多维表格需要的【完整、合法、无任何语法错误】的请求体JSON\nconst 飞书请求体 = {\n  \"fields\": {\n    \"排版原始结果\": 排版原始结果,\n    \"摘要\": 摘要,\n    \"排版\": 排版,\n    \"图片\": 附件token列表, // 这里直接塞对象数组，JS会自动处理成合法JSON\n    \"状态\":\"待审核\"\n  }\n};\n\n// 4. 返回这个完整的请求体\nreturn 飞书请求体;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          800,
+          80
+        ],
+        "id": "088f1ddd-6256-47ba-8bc3-9f5042075292",
+        "name": "组装参数"
+      },
+      {
+        "parameters": {
+          "content": "图片生成（封面图、配图）",
+          "height": 336,
+          "width": 1712
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -336,
+          320
+        ],
+        "typeVersion": 1,
+        "id": "99c8f3c6-74c3-4ec1-9178-74cb7af9d7c2",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "content": "写入飞书多维表格",
+          "height": 256,
+          "width": 1312
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          0,
+          0
+        ],
+        "typeVersion": 1,
+        "id": "bc4803b4-73db-43f7-b9b9-298c0f851441",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBearerAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"model\": \"wanx-v1\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json[Object.keys($json)[0]].中文提示词 }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感。构图混乱。文字模糊，扭曲，恐怖气氛，恐怖元素。\",\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"size\": \"{{ $json[Object.keys($json)[0]].像素尺寸 }}\"\n  }\n} ",
+          "options": {
+            "batching": {
+              "batch": {
+                "batchSize": 1,
+                "batchInterval": 3000
+              }
+            },
+            "redirect": {
+              "redirect": {}
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          48,
+          736
+        ],
+        "id": "14b91a49-8db1-4afa-86ac-df6fe8749dd4",
+        "name": "图片生成—通义千问",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBearerAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"model\": \"wan2.6-t2i\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json[Object.keys($json)[0]].中文提示词 }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"n\": 1,\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感，构图混乱，文字模糊，扭曲，恐怖气氛，恐怖元素，3D渲染，卡通，绘画，动漫，不自然，塑料感，模糊，失真，多手指，多肢体，结构错误，皮肤光滑无纹理，不真实的阴影，过度锐化，过度平滑，过度曝光，过度饱和，不自然的光线，不真实的色彩，背景杂乱，主题不突出，构图不佳，透视错误，比例失调，不自然的姿势，不自然的表情\",\n    \"size\": \"{{ $json[Object.keys($json)[0]].像素尺寸 }}\"\n  }\n}",
+          "options": {
+            "batching": {
+              "batch": {
+                "batchSize": 1,
+                "batchInterval": 3000
+              }
+            },
+            "redirect": {
+              "redirect": {}
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          32,
+          384
+        ],
+        "id": "2874d856-5c18-4070-86c7-dbf451888f92",
+        "name": "图片生成-通义万象",
+        "credentials": {
+          "httpBearerAuth": {
+            "id": "l2Zx8CNbiwpQJqWa",
+            "name": "百炼万像"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "主题"
+              },
+              {
+                "name": "标题"
+              },
+              {
+                "name": "内容"
+              },
+              {
+                "name": "序号"
+              },
+              {
+                "name": "记录ID"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -2304,
+          368
+        ],
+        "id": "3ef50390-de41-435b-9337-22a4bfcafd90",
+        "name": "When Executed by Another Workflow"
+      }
+    ],
+    "connections": {
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "内容排版",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "内容排版",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "clean_data": {
+        "main": [
+          [
+            {
+              "node": "排版结果",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "内容排版": {
+        "main": [
+          [
+            {
+              "node": "clean_data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "排版结果": {
+        "main": [
+          [
+            {
+              "node": "图片提示词",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片提示词": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [
+            {
+              "node": "合并图片结果",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "图片生成-通义万象",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Replace Me": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Replace Me",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片生成结果": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片二进制": {
+        "main": [
+          [
+            {
+              "node": "上传图片至飞书",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "上传图片至飞书": {
+        "main": [
+          [
+            {
+              "node": "图片生成结果",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "合并图片结果": {
+        "main": [
+          [
+            {
+              "node": "file_token",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "file_token": {
+        "main": [
+          [
+            {
+              "node": "写入飞书参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "写入飞书参数": {
+        "main": [
+          [
+            {
+              "node": "组装参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "组装参数": {
+        "main": [
+          [
+            {
+              "node": "写入飞书多维表格",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片生成-通义万象": {
+        "main": [
+          [
+            {
+              "node": "图片二进制",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.2",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-01-20T07:29:57.932Z",
+        "id": 5,
+        "workflowId": "eBkaKSkToEStSH3fy_3Hd",
+        "versionId": "75ad5236-b6e4-4272-887c-67b7f57cf16a",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      },
+      {
+        "createdAt": "2026-02-07T02:51:47.493Z",
+        "id": 54,
+        "workflowId": "eBkaKSkToEStSH3fy_3Hd",
+        "versionId": "75ad5236-b6e4-4272-887c-67b7f57cf16a",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

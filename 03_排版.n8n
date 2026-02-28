@@ -1,0 +1,2105 @@
+{
+  "updatedAt": "2026-02-11T06:17:53.511Z",
+  "createdAt": "2026-02-06T01:30:37.188Z",
+  "id": "1wxHFPuLevVm0vfs--aFG",
+  "name": "03_排版",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wechat-public-account-typesetting",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -912,
+        -96
+      ],
+      "id": "b5ef7cc8-647a-4fb6-a6e8-7f4a916ccdf3",
+      "name": "Webhook",
+      "webhookId": "d3bc72c6-960a-4dfa-af1f-bfb52a81e96c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b4fe734b-669d-49c2-b542-54d1d458c68e",
+              "name": "记录 ID",
+              "value": "={{ $json.query[\"记录ID\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "af46ab22-2b8f-4976-8cc4-79be72e01a47",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "100e8baa-8594-4587-9ce9-2e1dc84e42cc",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "ce122c11-2791-4c84-a11b-3ab0c851e920",
+              "name": "viewID",
+              "value": "vewSweWW3T",
+              "type": "string"
+            },
+            {
+              "id": "93c16430-220b-4c88-88c5-be5da79f0b7c",
+              "name": "是否新增",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -640,
+        -96
+      ],
+      "id": "fe81ef0f-7744-4261-9df6-815393b86912",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:get",
+        "app_toke": "={{ $('设置参数').item.json['飞书token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('设置参数').item.json['记录 ID'] }}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        -96
+      ],
+      "id": "76939c19-ae58-428c-9ed0-bca2e9ab5b73",
+      "name": "查询记录",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8d941dc4-1f2e-45cf-8f6e-d17ee8c04ab2",
+              "name": "文章主题",
+              "value": "={{ $json.data.records[0].fields[\"主题\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "6eccb707-65eb-4615-b78f-c745a0d879ba",
+              "name": "文章标题",
+              "value": "={{ $json.data.records[0].fields[\"标题\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "c0596628-94ad-4738-8037-2f35dfb37dbf",
+              "name": "文章摘要",
+              "value": "={{ $json.data.records[0].fields[\"摘要\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "98ff86e2-b871-4302-9479-eca8d526135a",
+              "name": "文章内容",
+              "value": "={{ $json.data.records[0].fields[\"内容\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "baff94ba-f85d-4eab-8a4d-4b65386ff0e3",
+              "name": "图片",
+              "value": "={{ $json.data.records[0].fields['图片'] }}",
+              "type": "array"
+            },
+            {
+              "id": "9dfa04fa-9b06-4b5b-8e7b-ce1594de99bd",
+              "name": "图片记录",
+              "value": "={{ $json.data.records[0].fields['图片记录'][0].text }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        -96
+      ],
+      "id": "8b7a5697-a6e6-4039-97cc-9b6d5a777bbc",
+      "name": "飞书数据"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "64753c6d-8913-4637-838e-2100d10bbd1c",
+              "name": "文章主题",
+              "value": "={{ $json[\"文章主题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "b55f0fec-f087-4dc5-8c36-62c5ed8784ba",
+              "name": "文章标题",
+              "value": "={{ $json[\"文章标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "906b9111-62a5-49b9-823b-c655200b2350",
+              "name": "文章摘要",
+              "value": "={{ $json[\"文章摘要\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "7a283bff-1596-4b25-9a76-cf8721fdea21",
+              "name": "文章内容",
+              "value": "={{ $json[\"文章内容\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "b9f51ec7-86d3-4eeb-91b6-0c996c43111b",
+              "name": "sessionId",
+              "value": "={{ $now.toMillis() }}",
+              "type": "string"
+            },
+            {
+              "id": "0872701e-76c6-483e-8e08-efbd92041765",
+              "name": "记录 ID",
+              "value": "={{ $('设置参数').item.json['记录 ID'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        384,
+        -96
+      ],
+      "id": "b808c40c-156a-4346-a993-07fcfea84eff",
+      "name": "组装数据"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        848,
+        48
+      ],
+      "id": "5626b1db-6883-4809-8e18-50e5a24f97eb",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=文章主题：{{ $json[\"文章主题\"] }}\n文章标题：{{ $json[\"文章标题\"] }}\n文章摘要：{{ $json[\"文章摘要\"] }}\n文章内容：{{ $json[\"文章内容\"] }}\n文章图片：{{ $json[\"图片记录\"] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# Role：微信公众号爆款文章排版架构师\n\n# Profile\n- language: 中文（辅助使用英文专业术语，如API, UI/UX, media_id）\n- description: 一位精通微信生态内容呈现规律与用户注意力的资深排版架构师。不仅负责美化文章，更致力于通过系统化的视觉层级、节奏控制和模块化设计，将原始内容重构为高完读率、高分享率的爆款格式，并直接输出为可执行的微信API草稿。\n- background: 基于微信公开平台设计规范、海量爆款文章视觉模式分析、新媒体用户行为数据及人机交互设计原则进行训练。\n- personality: 严谨细致，富有创造力和数据思维，对视觉美感与传播效果有极致追求，沟通风格专业且务实。\n- expertise: 微信富文本排版规范、视觉层级系统设计、移动端阅读体验优化、内容结构化重组、微信草稿API技术适配。\n- target_audience: 新媒体运营人员、公众号内容创作者、需要批量处理或标准化排版流程的团队。\n\n## Skills\n\n1. 核心架构与设计技能\n  - **内容诊断与结构化**: 快速分析文章主题、风格、情感调性与核心论点，将其解构为最适合移动端阅读的模块化逻辑单元（引言、分论点、案例、总结）。\n  - **视觉层级架构**: 运用字号、颜色、间距、分割线等元素，构建清晰、舒适、具有引导性的视觉阅读流，突出关键信息，降低认知负荷。\n  - **模板工程与适配**: 根据文章类型（观点、故事、教程、资讯）和目标受众，从风格模板库中智能匹配或融合创新，生成最合适的视觉风格方案。\n  - **爆款元素注入**: 熟练运用金句高亮、引导互动、情绪符号、节奏分隔等已被验证能提升传播力的排版技巧。\n\n2. 辅助执行与技术技能\n  - **微信API技术适配**: 准确理解并应用微信草稿接口规范，将HTML排版代码与图片media_id封装为标准的JSON请求体，确保零错误上传。\n  - **移动端体验优化**: 所有设计决策均优先考虑小屏幕设备的显示效果，确保文字清晰、布局不崩塌、图片适配。\n  - **A/B测试思维**: 在设计方案中提供可选的视觉变体（如重点色选择、布局微调），并说明其对用户注意力可能产生的不同影响。\n  - **无障碍设计基础**: 确保排版有足够的对比度，逻辑顺序清晰，对屏幕阅读器友好。\n\n# Rules\n\n1. 基本原则:\n  - **美学与功能统一**: 所有视觉设计必须服务于内容表达和阅读引导，禁止为装饰而装饰。美观性必须建立在极高的可读性之上。\n  - **以数据与规律驱动**: 设计选择应基于微信平台的已知用户行为规律（如首屏留存、滑动深度）和爆款内容共性，而非纯粹主观喜好。\n  - **严格遵循平台规范**: 生成的HTML代码必须完全符合微信富文本支持的范围，绝对避免使用不被支持的标签或样式。\n\n2. 行为准则:\n  - **分步执行，过程透明**: 必须严格按照Workflows的四个步骤执行，并在最终输出前，以架构师的口吻简要概述关键设计决策点（如为何选择某模板、如何安排图片顺序）。\n  - **决策透明化**: 当从多个可行方案中做出选择时（如选择模板A而非B），必须给出基于“文章主题”和“目标受众”的简要理由。\n  - **主动确认与替代**: 如果用户提供的“文章图片”数量或顺序与“文章内容”的配图需求严重不匹配，应主动指出并提出基于现有图片的优化调整方案，而非机械套用。\n\n3. 限制条件:\n  - **禁止使用模糊、不可量化的设计指令**: 如“让这里好看一点”。必须替换为具体操作，如“将此句设置为18px，颜色#FF6B35，并添加10px的左padding作为视觉强调”。\n  - **禁止引入外部依赖**: 所有样式必须以内联CSS形式实现，不能链接外部样式表或依赖特定字体（除非是微信默认字体）。\n  - **禁止生成无法通过微信API验证的代码**: 如使用`<script>`、`<iframe>`或过于复杂的CSS选择器。\n  - **禁止违反微信平台内容管理规则**。\n\n## Workflows\n- 目标: 基于用户提供的全部输入参数，创建一套创新实用的爆款文章排版方案，并输出为可直接调用微信草稿API的JSON格式数据。\n- 步骤1: **解构输入与诊断** － 调用**内容诊断与结构化**技能。仔细分析“文章主题”、“标题”、“摘要”和“内容”，判断文章类型（如：本文为“文化观察/观点型”）、情感基调（如：思辨与创新）、核心论点链条。同时，盘点“文章图片”资源，评估其与内容的契合度及视觉叙事潜力。\n- 步骤2: **架构视觉叙事** － 调用**模板工程与适配**和**爆款元素注入**技能。根据步骤1的诊断结果，从模板库中匹配或融合设计风格（如：本文适合融合“简约现代风”的清晰与“温馨生活风”的情感温度）。规划整体阅读节奏：开头如何吸引，中间如何分模块并穿插图片/强调，结尾如何升华并引导互动。确定图片的插入位置与叙事作用。\n- 步骤3: **执行详细设计** － 调用**视觉层级架构**和**移动端体验优化**技能。运用“视觉层级系统”的具体参数，为标题、副标题、正文、重点文本、引用块等元素赋予具体样式。在“内容组织策略”指导下，将原文重组为带小标题的模块，并插入分隔线、符号、强调框等元素。将图片的`media_id`嵌入到规划好的位置，并配以简练的图注。\n- 步骤4: **技术封装与交付** － 调用**微信API技术适配**技能。将步骤3产生的完整HTML内容，连同标题、摘要、封面图`media_id`等元数据，严格按照“输出规范”组装成JSON对象。进行最终校验：检查JSON格式、`media_id`引用是否正确、HTML是否纯净。随后，以架构师身份输出最终JSON，并附上关键设计逻辑的简要说明。\n- 预期结果: 一个符合微信公众平台草稿接口规范的、完整的JSON数据对象。其`content`字段包含精心排版、可在微信后台直接渲染的HTML代码，整体设计旨在最大化文章的阅读体验与传播潜力。\n\n## Initialization\n作为微信公众号爆款文章排版架构师，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。现在，请开始分析用户提供的文章要素与图片资源，并启动你的排版架构流程。首先，请用户提供本次需要排版的【文章主题】、【文章标题】、【文章摘要】和【文章内容】。我已准备好图片资源。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        896,
+        -128
+      ],
+      "id": "a91103c2-4ada-406e-81d6-fa6e4346cef2",
+      "name": "排版"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "deepseek-r1:8b",
+          "mode": "list",
+          "cachedResultName": "deepseek-r1:8b"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.contentAfterTitle }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源��信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过于流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准��程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循��户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严��使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时，禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心��务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审��案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力���逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        -720
+      ],
+      "id": "4d0dcfc5-c177-4a62-a577-d967a54bedf3",
+      "name": "分析1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "m7ItUzjoa8jVF8Mb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "qwen3:8b",
+          "mode": "list",
+          "cachedResultName": "qwen3:8b"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.contentAfterTitle }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证���的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文���与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提���的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        -528
+      ],
+      "id": "471219ff-3ee0-4506-a98c-8ad20fba7714",
+      "name": "分析2",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "ollamaApi": {
+          "id": "m7ItUzjoa8jVF8Mb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gemma3:12b",
+          "mode": "list",
+          "cachedResultName": "gemma3:12b"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.contentAfterTitle }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        -336
+      ],
+      "id": "b5593e57-713d-42ec-97ea-fcdf538a631d",
+      "name": "分析",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": false,
+      "credentials": {
+        "ollamaApi": {
+          "id": "m7ItUzjoa8jVF8Mb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code节点：健壮提取AI输出中的文章数据\ntry {\n  // 1. 从AI Agent节点获取输出\n  const aiInput = $input.first();\n  if (!aiInput?.json?.output) throw new Error('AI输出为空或格式错误');\n  const outputText = aiInput.json.output.trim();\n\n  // 调试：查看原始输出\n  console.log('原始输出长度:', outputText.length);\n  console.log('原始输出前500字符:', outputText.substring(0, 500));\n\n  // 2. 尝试多种方式提取HTML内容\n  let htmlContent = '';\n  \n  // 方式1: 尝试匹配html代码块\n  const htmlBlockMatch = outputText.match(/```html\\s*([\\s\\S]*?)\\s*```/);\n  if (htmlBlockMatch) {\n    htmlContent = htmlBlockMatch[1].trim();\n    console.log('从html代码块提取到内容，长度:', htmlContent.length);\n  } else {\n    // 方式2: 尝试匹配任何代码块（可能没有语言标识）\n    const anyCodeBlockMatch = outputText.match(/```\\s*([\\s\\S]*?)\\s*```/);\n    if (anyCodeBlockMatch) {\n      const codeContent = anyCodeBlockMatch[1].trim();\n      // 判断是否是HTML内容\n      if (codeContent.includes('<div') || codeContent.includes('<p style') || codeContent.includes('</div>')) {\n        htmlContent = codeContent;\n        console.log('从无标识代码块提取到HTML内容，长度:', htmlContent.length);\n      }\n    }\n  }\n\n  // 如果仍然没有HTML内容，尝试从整个输出中提取HTML片段\n  if (!htmlContent) {\n    console.log('尝试从整个输出中提取HTML...');\n    // 查找可能是HTML内容的部分\n    const htmlStart = outputText.indexOf('<div style=\"');\n    const htmlEnd = outputText.lastIndexOf('</div>') + 6;\n    if (htmlStart !== -1 && htmlEnd > htmlStart) {\n      htmlContent = outputText.substring(htmlStart, htmlEnd);\n      console.log('从输出中提取到HTML片段，长度:', htmlContent.length);\n    }\n  }\n\n  if (!htmlContent) {\n    throw new Error('无法从AI输出中提取HTML文章内容');\n  }\n\n  // 3. 尝试提取JSON数据（可能是无效的，我们需要手动构建）\n  console.log('尝试提取JSON数据...');\n  let wechatArticle = {\n    title: '',\n    author: '',\n    digest: '',\n    content: '',\n    content_source_url: '',\n    thumb_media_id: '',\n    need_open_comment: 1,\n    only_fans_can_comment: 0,\n    show_cover_pic: 1\n  };\n\n  // 尝试从JSON代码块提取\n  const jsonBlockMatch = outputText.match(/```json\\s*([\\s\\S]*?)\\s*```/);\n  if (jsonBlockMatch) {\n    try {\n      const jsonStr = jsonBlockMatch[1].trim();\n      console.log('找到JSON代码块，长度:', jsonStr.length);\n      const articleData = JSON.parse(jsonStr);\n      if (articleData?.articles?.[0]) {\n        wechatArticle = { ...wechatArticle, ...articleData.articles[0] };\n        console.log('从JSON块成功提取文章数据');\n      }\n    } catch (jsonError) {\n      console.log('JSON解析失败，尝试手动提取:', jsonError.message);\n      // JSON解析失败，尝试手动提取字段\n      try {\n        // 尝试从JSON字符串中提取关键字段\n        const titleMatch = jsonBlockMatch[1].match(/\"title\":\\s*\"([^\"]+)\"/);\n        const authorMatch = jsonBlockMatch[1].match(/\"author\":\\s*\"([^\"]+)\"/);\n        const digestMatch = jsonBlockMatch[1].match(/\"digest\":\\s*\"([^\"]+)\"/);\n        const thumbMediaIdMatch = jsonBlockMatch[1].match(/\"thumb_media_id\":\\s*\"([^\"]+)\"/);\n        \n        if (titleMatch) wechatArticle.title = titleMatch[1];\n        if (authorMatch) wechatArticle.author = authorMatch[1];\n        if (digestMatch) wechatArticle.digest = digestMatch[1];\n        if (thumbMediaIdMatch) wechatArticle.thumb_media_id = thumbMediaIdMatch[1];\n        \n        console.log('手动提取结果:', { \n          title: wechatArticle.title, \n          author: wechatArticle.author,\n          hasDigest: !!wechatArticle.digest,\n          thumbMediaId: wechatArticle.thumb_media_id\n        });\n      } catch (manualError) {\n        console.log('手动提取也失败:', manualError.message);\n      }\n    }\n  }\n\n  // 4. 如果没有从JSON提取到数据，尝试从AI输出的其他部分提取\n  if (!wechatArticle.title) {\n    console.log('尝试从AI输出的文本中提取标题...');\n    // 从AI输出的文本描述中提取标题\n    const titleMatch = outputText.match(/title\":\\s*\"([^\"]+)\"/) || \n                      outputText.match(/标题[：:]\\s*([^\\n]+)/) ||\n                      outputText.match(/文章标题[：:]\\s*([^\\n]+)/);\n    \n    if (titleMatch) {\n      wechatArticle.title = titleMatch[1].trim();\n      console.log('从文本提取到标题:', wechatArticle.title);\n    }\n  }\n\n  if (!wechatArticle.digest) {\n    console.log('尝试从AI输出的文本中提取摘要...');\n    // 提取摘要 - 寻找digest字段或摘要描述\n    const digestMatch = outputText.match(/\"digest\":\\s*\"([^\"]+)\"/) ||\n                       outputText.match(/摘要[：:]\\s*([^\\n]+)/);\n    \n    if (digestMatch) {\n      wechatArticle.digest = digestMatch[1].trim();\n      console.log('从文本提取到摘要，长度:', wechatArticle.digest.length);\n    }\n  }\n\n  // 5. 设置默认值\n  if (!wechatArticle.title) {\n    wechatArticle.title = '别再说年味\"淡\"了！是我们这代人，正在把它\"玩坏\"并重塑';\n    console.log('使用默认标题');\n  }\n  \n  if (!wechatArticle.author) {\n    wechatArticle.author = '【你的公众号名称】';\n  }\n  \n  if (!wechatArticle.digest) {\n    // 从HTML内容中提取前100字作为摘要\n    const textContent = htmlContent.replace(/<[^>]*>/g, ' ').replace(/\\s+/g, ' ').trim();\n    wechatArticle.digest = textContent.substring(0, 100) + (textContent.length > 100 ? '...' : '');\n    console.log('从HTML内容生成摘要，长度:', wechatArticle.digest.length);\n  }\n  \n  if (!wechatArticle.thumb_media_id) {\n    wechatArticle.thumb_media_id = 'media_id_1';\n  }\n\n  // 6. 处理HTML内容中的图片\n  console.log('处理HTML中的图片...');\n  wechatArticle.content = htmlContent\n    // 替换微信图片链接为media_id占位符\n    .replace(/src=\"[^\"]*mmbiz[^\"]*\"/g, (match, index) => {\n      // 根据顺序分配media_id，从1开始（0是封面图）\n      return `src=\"media_id_${index + 1}\"`;\n    })\n    // 清理转义字符\n    .replace(/\\\\\"/g, '\"')\n    .replace(/\\\\n/g, '\\n')\n    .trim();\n\n  // 7. 确保content_source_url为空字符串（不是null或undefined）\n  wechatArticle.content_source_url = wechatArticle.content_source_url || '';\n\n  // 8. 验证最终数据\n  console.log('最终数据验证...');\n  if (!wechatArticle.content) {\n    throw new Error('文章内容为空');\n  }\n  \n  // 统计图片占位符\n  const imagePlaceholders = (wechatArticle.content.match(/media_id_\\d+/g) || []).length;\n  console.log('图片占位符数量:', imagePlaceholders);\n\n  // 9. 返回最终数据\n  return {\n    json: {\n      articles: [wechatArticle],\n      _debug: {\n        extraction_success: true,\n        html_content_length: htmlContent.length,\n        final_content_length: wechatArticle.content.length,\n        article_title: wechatArticle.title,\n        digest_length: wechatArticle.digest.length,\n        image_placeholders_count: imagePlaceholders,\n        thumb_media_id: wechatArticle.thumb_media_id,\n        note: '如果JSON解析失败，已从其他部分提取必要数据'\n      }\n    }\n  };\n\n} catch (error) {\n  console.error('解析AI输出失败:', error.message);\n  console.error('错误堆栈:', error.stack);\n  \n  // 返回错误信息，但格式化为n8n可以继续处理的格式\n  return {\n    json: {\n      error: true,\n      errorMessage: `处理AI输出错误: ${error.message}`,\n      suggestion: '请检查AI输出格式，确保包含有效的HTML内容',\n      rawOutputPreview: $input.first()?.json?.output?.substring(0, 500) || '无输出'\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        -128
+      ],
+      "id": "3dbe9863-6c88-44c7-8378-1eac98e9f91e",
+      "name": "解析结果"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        976,
+        64
+      ],
+      "id": "707435b0-6a37-4a49-ab88-a2292dd94b42",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2192,
+        -720
+      ],
+      "id": "69ade5e8-5efb-4dfa-a4e6-d10fd1360f46",
+      "name": "分析结果1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2192,
+        -528
+      ],
+      "id": "57c1514d-6b36-49fd-9612-aa3e0a952048",
+      "name": "分析结果2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        -336
+      ],
+      "id": "dad4a297-7a56-48dc-a31b-8adddf329cb4",
+      "name": "分析结果3"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=Authorization",
+              "value": "=Bearer {{ $('获取飞书token2').item.json.tenant_access_token }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "file",
+              "outputPropertyName": "=data"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        976,
+        400
+      ],
+      "id": "c4a6d251-df12-4b50-ac13-59724c71c160",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "['图片']",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        400,
+        384
+      ],
+      "id": "ae96a729-3b04-4e09-910e-2c449e3fda2d",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        688,
+        384
+      ],
+      "id": "f968904a-1a79-4729-b154-70eb39027b20",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        1808,
+        400
+      ],
+      "id": "56d39c66-f045-4e08-8338-9668ab70302e"
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "media:uploadOther"
+      },
+      "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        400
+      ],
+      "id": "8e7d3fbc-fa45-46e6-921d-9e8295a84f4f",
+      "name": "上传至素材库",
+      "credentials": {
+        "wechatOfficialAccountCredentialsApi": {
+          "id": "BAd0mnfPzK4DI5b4",
+          "name": "Wechat Official Account Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d19beb58-86d1-4315-8e0e-1d6b6ebde59c",
+              "name": "图片名称",
+              "value": "={{ $('Loop Over Items1').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "dae5765c-cc1a-4be5-82ff-043b1b538450",
+              "name": "media_id",
+              "value": "={{ $json.media_id }}",
+              "type": "string"
+            },
+            {
+              "id": "72950d62-b199-4fdc-bf2d-df53e39f004a",
+              "name": "url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1456,
+        400
+      ],
+      "id": "918e084b-e738-48b9-8754-3c7b35c1117d",
+      "name": "素材库对应id"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -320,
+        -96
+      ],
+      "id": "ef929f4d-c4c1-49d4-b732-179913771fb6",
+      "name": "获取飞书token2",
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "notes": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -96,
+        752
+      ],
+      "id": "7d77b499-4c9e-4d90-89f9-3df7dbfddc36",
+      "name": "获取飞书token",
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "notes": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        592,
+        -96
+      ],
+      "id": "d0251c29-f771-4090-9841-d7d907940682",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "operation": "draft:add",
+        "articles": "=[\n  {\n    \"title\": \"{{ $json.articles[0].title }}\",\n    \"content\": \"{{ $json.articles[0].content }}\",\n    \"thumb_media_id\": \"{{ $json.articles[0].thumb_media_id }}\",\n    \"author\": \"慢读杂货铺\",\n    \"digest\": \"{{ $json.articles[0].digest }}\",\n    \"show_cover_pic\": 1\n  }\n]"
+      },
+      "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+      "typeVersion": 1,
+      "position": [
+        1632,
+        -128
+      ],
+      "id": "8acb1d76-5662-4fa5-b429-2b3e11d19a68",
+      "name": "上传至微信草稿",
+      "credentials": {
+        "wechatOfficialAccountCredentialsApi": {
+          "id": "BAd0mnfPzK4DI5b4",
+          "name": "Wechat Official Account Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ========== 第一步：容错处理 + 定义media_id/url匹配数据源 ==========\n// 读取media数据并做容错，避免数据源不存在导致报错\nconst mediaSource = $input.first()?.json?.data || [];\nif (mediaSource.length === 0) {\n  console.warn(\"media数据源为空，请检查上游输入！\");\n}\n\n// ========== 第二步：构建「图片名称（去后缀）→ {media_id, url}」映射表 ==========\nconst mediaUrlMap = {};\nmediaSource.forEach(item => {\n  // 加容错：避免item或图片名称不存在导致报错\n  if (!item || !item[\"图片名称\"]) return;\n  \n  // 去除图片名称的.png后缀，作为匹配key（与飞书数据的\"序号\"字段匹配）\n  const matchKey = item[\"图片名称\"].replace('.png', '');\n  \n  // 存储media_id和url，双重容错：避免字段不存在导致值为undefined\n  mediaUrlMap[matchKey] = {\n    media_id: item.media_id || null,\n    url: item.url || null // 新增：存储对应url\n  };\n});\n\n// ========== 第三步：容错处理 + 读取原始数据 ==========\n// 读取飞书数据的图片记录，加多层容错\nconst feishuData = $('飞书数据').first()?.json || {};\nconst originalItems = feishuData[\"图片记录\"] || [];\nif (originalItems.length === 0) {\n  console.warn(\"飞书图片记录为空，请检查飞书数据节点！\");\n}\n\n// ========== 第四步：遍历匹配（核心优化：替换url + 保留media_id） ==========\nconst resultItems = originalItems.map(item => {\n  // 加容错：避免item为空\n  if (!item) return { json: {} };\n  \n  // 核心：获取匹配key（飞书数据的\"序号\"字段）\n  const serialNumber = item.序号 || '';\n  \n  // 获取匹配到的media_id和url（匹配不到则返回空对象）\n  const matchedData = mediaUrlMap[serialNumber] || {};\n\n  return {\n    // 保留原始数据所有字段\n    ...item,\n    // 替换url：优先使用匹配到的url，匹配不到则保留原url（也可改为null，根据需求调整）\n    url: matchedData.url || item.url,\n    // 新增media_id字段：匹配不到则为null\n    media_id: matchedData.media_id || null\n  };\n});\n\n// ========== 第五步：返回处理后的数据 ==========\nreturn {图片记录: resultItems};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        832,
+        208
+      ],
+      "id": "1170c7d1-e62d-4ec9-8435-2bdc7207d412",
+      "name": "图片记录"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        640,
+        176
+      ],
+      "id": "79e084cf-8403-4aca-9a58-abcb5b002e01",
+      "name": "聚合media_id"
+    },
+    {
+      "parameters": {
+        "jsCode": "async function run() {\n  try {\n    // 1. 阿拉伯数字转中文数字（适配picList的「图一/图二」序号，核心匹配逻辑）\n    const numToCn = (num) => {\n      const cn = ['一','二','三','四','五','六','七','八','九','十'];\n      return cn[num-1] || num.toString();\n    };\n\n    // 2. 读取输入数据\n    const inputItems = $input.all();\n    if (!inputItems.length) throw new Error(\"无输入数据\");\n    const rootData = inputItems[0].json;\n    const [article] = rootData.articles || [];\n    const picList = $('Merge').first().json[\"图片记录\"] || [];\n    \n    if (!article) throw new Error(\"文章数据为空\");\n    if (picList.length === 0) throw new Error(\"图片记录为空\");\n\n    // 3. 构建「中文数字序号→图片URL」映射表（仅提取URL，放弃media_id）\n    const picUrlMap = {};\n    picList.forEach(item => {\n      if (!item || !item.序号 || !item.url) return;\n      // 仅保留有效URL，过滤空值/无效值\n      const validUrl = item.url.trim();\n      if (validUrl && (validUrl.startsWith('http://') || validUrl.startsWith('https://'))) {\n        picUrlMap[item.序号] = validUrl;\n      }\n    });\n\n    // 4. 处理正文内容：清理隐形字符+仅一次JSON转义（避免过度）\n    let content = article.content || \"\";\n    content = content\n      .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '') // 移除控制字符\n      .replace(/\\u3000|\\u200B|\\u200C|\\u200D/g, ' ') // 移除隐形空格\n      .trim();\n\n    // 5. 核心修复：替换<img>为你指定的「标准样式标签」（完全匹配你的要求）\n    let imgIndex = 0;\n    const wechatContent = content.replace(/<img[^>]*>/gi, (originalImg) => {\n      imgIndex++;\n      // 生成和picList一致的中文数字Key（图一_封面图、图二_文内配图）\n      const picType = imgIndex === 1 ? '封面图' : '文内配图';\n      const picKey = `图${numToCn(imgIndex)}_${picType}`;\n      // 获取匹配的图片URL，无则直接返回原标签（兜底）\n      const picUrl = picUrlMap[picKey] || '';\n      if (!picUrl) {\n        console.warn(`未匹配到${picKey}的有效URL，保留原标签`);\n        return originalImg;\n      }\n\n      // 严格按你提供的正确样式生成标签：data-src+src+alt+固定样式\n      // 双URL填充（data-src=原始URL，src=同URL），样式固定display:block;width:100%\n      return `<img data-src=\\\"${picUrl}\\\" src=\\\"${picUrl}\\\" alt=\\\"文章配图${imgIndex}\\\" style=\\\"display: block; width: 100%;\\\"/>`;\n    });\n\n    // 6. 统一JSON转义（仅一次，避免微信解析异常）\n    const finalContent = wechatContent\n      .replace(/\\\\/g, '\\\\\\\\')\n      .replace(/\"/g, '\\\\\"');\n\n    // 7. 整理草稿参数（返回单个JSON对象，无数组包裹，微信节点唯一正确格式）\n    const draftArticle = {\n      title: (article.title || \"默认标题\")\n        .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '')\n        .replace(/\"/g, '\\\\\"')\n        .trim(),\n      author: (article.author || \"慢读杂货铺\")\n        .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '')\n        .replace(/\"/g, '\\\\\"')\n        .trim(),\n      digest: (article.digest || \"\")\n        .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '')\n        .replace(/\"/g, '\\\\\"')\n        .slice(0, 120)\n        .trim(),\n      content: finalContent,\n      thumb_media_id: picList[0]?.media_id || \"\", // 封面图media_id保留（不影响正文）\n      need_open_comment: 1,\n      only_fans_can_comment: 0,\n      show_cover_pic: 1\n    };\n\n    // 8. 最终结果：单个JSON对象（微信节点强制要求）\n    const finalResult = {\n      articles: [draftArticle]\n    };\n\n    // 验证JSON合法性，提前排错\n    JSON.stringify(finalResult);\n    console.log(`成功替换${imgIndex}个图片标签，均为你指定的标准样式`);\n    return finalResult;\n  } catch (error) {\n    console.error(\"处理失败：\", error.message);\n    return {\n      error: true,\n      message: error.message.slice(0, 200)\n    };\n  }\n}\nreturn run();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        -128
+      ],
+      "id": "13fc3db5-0601-4e43-bb9f-1699a2b71cfc",
+      "name": "图片格式替换"
+    },
+    {
+      "parameters": {
+        "jsCode": "async function run() {\n  try {\n    // 1. 读取数据并严格校验\n    const inputItems = $input.all();\n    if (!inputItems.length) throw new Error(\"无输入数据\");\n    \n    const inputData = inputItems[0].json;\n    const [article] = inputData.articles || [];\n    const picList = $('Merge').first().json[\"图片记录\"] || [];\n    \n    if (!article) throw new Error(\"文章数据为空\");\n    if (!picList.length) throw new Error(\"图片记录为空\");\n    if (!article.content) throw new Error(\"文章内容为空\");\n\n    // 2. 提取并校验图片类型永久素材media_id\n    const validMediaIds = picList\n      .map(item => (item.media_id || \"\").trim())\n      .filter(id => id.length >= 20 && /^[a-zA-Z0-9_\\-]+$/.test(id));\n    \n    if (!validMediaIds.length) throw new Error(\n      \"无有效图片类型media_id！请确认：\\n1. 素材上传节点选「新增永久图片素材」\\n2. media_id在公众号「素材管理→图片」中可查\"\n    );\n\n    // 3. 核心：替换img为微信官方<image>标签（无任何转义）\n    let finalContent = article.content || \"\";\n    let imgIndex = 0;\n    // 先替换img标签，避免后续清理误删\n    finalContent = finalContent.replace(/<img[^>]*>/g, () => {\n      if (imgIndex >= validMediaIds.length) return \"\";\n      const id = validMediaIds[imgIndex];\n      imgIndex++;\n      return `<image mediaid=\"${id}\"/>`; // 仅生成纯image标签，无转义\n    });\n\n    // 4. 极致清理内容（仅保留必要字符，彻底杜绝JSON错误）\n    finalContent = finalContent\n      // 移除所有换行/回车/制表符（JSON最大杀手）\n      .replace(/[\\r\\n\\t]/g, ' ')\n      // 移除所有控制字符（0x00-0x1F、0x7F）\n      .replace(/[\\x00-\\x1F\\x7F]/g, ' ')\n      // 替换中文引号为英文（避免引号不匹配）\n      .replace(/“|”/g, '\"')\n      // 清理HTML空格/多余空格\n      .replace(/&nbsp;/g, ' ')\n      .replace(/\\s+/g, ' ')\n      // 仅保留微信白名单标签（确保无非法标签）\n      .replace(/<[^>]*>/g, match => {\n        const allowedTags = ['p', 'strong', 'em', 'h2', 'h3', 'ul', 'li', 'image', '/p', '/strong', '/em', '/h2', '/h3', '/ul', '/li'];\n        const tagName = match.toLowerCase().replace(/<\\/?|\\s.*|>/g, '');\n        return allowedTags.includes(tagName) ? match : '';\n      })\n      .slice(0, 200000)\n      .trim();\n\n    // 5. 处理标题/摘要（仅清理，不手动转义）\n    const cleanTitle = (article.title || \"默认标题\")\n      .replace(/[\\r\\n\\t]/g, ' ')\n      .replace(/“|”/g, '\"')\n      .replace(/\\s+/g, ' ')\n      .trim();\n      \n    const cleanDigest = ((article.digest || \"\").slice(0, 120))\n      .replace(/[\\r\\n\\t]/g, ' ')\n      .replace(/“|”/g, '\"')\n      .replace(/\\s+/g, ' ')\n      .trim();\n\n    // 6. 构建纯JS对象（无任何手动JSON处理）\n    const draftArticle = {\n      title: cleanTitle,\n      author: (article.author || \"【你的公众号名称】\").replace(/[\\r\\n\\t]/g, ' ').trim(),\n      digest: cleanDigest,\n      content: finalContent,\n      thumb_media_id: validMediaIds[0],\n      content_source_url: \"\",\n      need_open_comment: 1,\n      only_fans_can_comment: 0,\n      show_cover_pic: 1\n    };\n\n    // 7. 输出纯对象（n8n会自动序列化为合法JSON）\n    return [\n      {\n        json: {\n          articles: [draftArticle], // 核心：输出纯数组对象，非字符串\n          _debug: {\n            media_ids: validMediaIds,\n            content_length: finalContent.length,\n            title_sample: cleanTitle.slice(0, 50),\n            tip: \"输出纯JS对象，由n8n自动处理JSON序列化，无语法错误\"\n          }\n        }\n      }\n    ];\n\n  } catch (error) {\n    // 错误输出也保证是纯对象\n    return [{\n      json: {\n        error: true,\n        message: error.message.replace(/[\\r\\n\\t]/g, ' '),\n        tip: \"优先检查：1.media_id是否为图片类型 2.输入数据是否有非法字符\"\n      }\n    }];\n  }\n}\nreturn run();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        -544
+      ],
+      "id": "65686737-347c-4518-9033-17ad874a4de4",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        2048,
+        176
+      ],
+      "id": "e2f70b64-622b-42a2-a1ba-dcdfaf0bb648",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "operation": "draft:add",
+        "articles": "=[\n  {\n    \"title\": \"测试标题\",\n    \"author\": \"测试作者\",\n    \"digest\": \"测试摘要\",\n    \"content\": \"<image media_id=\\\"tRYyiVdgnGdRvL_tc-CDsKlZJIJwv_3HoBR_mAObnuARFGIaz4cIXoG6WdOvhUvj\\\"/>\",\n    \"thumb_media_id\": \"tRYyiVdgnGdRvL_tc-CDsKlZJIJwv_3HoBR_mAObnuARFGIaz4cIXoG6WdOvhUvj\",\n    \"content_source_url\": \"\",\n    \"need_open_comment\": 1,\n    \"only_fans_can_comment\": 0,\n    \"show_cover_pic\": 1\n  }\n]"
+      },
+      "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+      "typeVersion": 1,
+      "position": [
+        2368,
+        176
+      ],
+      "id": "2a2ceee9-434d-415b-b40a-7cb2188da73a",
+      "name": "上传至微信草稿1",
+      "credentials": {
+        "wechatOfficialAccountCredentialsApi": {
+          "id": "BAd0mnfPzK4DI5b4",
+          "name": "Wechat Official Account Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code节点：精准提取AI输出中的JSON文章块并生成微信草稿数据\ntry {\n  // 1. 从AI Agent节点获取输出\n  const aiInput = $input.first();\n  if (!aiInput?.json?.output) throw new Error('AI输出为空或格式错误');\n  const outputText = aiInput.json.output.trim();\n\n  // 2. 核心：提取output中的JSON代码块（优先获取AI生成的完整文章数据）\n  const jsonBlockMatch = outputText.match(/```json\\s*([\\s\\S]*?)\\s*```/);\n  if (!jsonBlockMatch) throw new Error('未在AI输出中找到JSON文章数据块');\n  \n  // 解析JSON代码块\n  const articleJsonStr = jsonBlockMatch[1].trim();\n  const articleData = JSON.parse(articleJsonStr);\n  if (!articleData?.articles || !Array.isArray(articleData.articles) || articleData.articles.length === 0) {\n    throw new Error('JSON块中未找到有效的articles数据');\n  }\n\n  // 3. 获取JSON块内的文章数据（直接使用AI生成的完整字段）\n  let wechatArticle = articleData.articles[0];\n\n  // 4. 处理content中的media_id占位符（统一替换为标准占位符，方便后续替换）\n  wechatArticle.content = wechatArticle.content\n    // 替换AI输出中的{{请替换为您的XX media_id}}占位符\n    .replace(/\\{\\{请替换为您的(.*?) media_id\\}\\}/g, (_, type) => {\n      const typeMap = {\n        '封面图': 'media_id_0',\n        '配图1': 'media_id_1',\n        '配图2': 'media_id_2',\n        '配图3': 'media_id_3',\n        '配图4': 'media_id_4',\n        '配图5': 'media_id_5'\n      };\n      return typeMap[type] || 'media_id_placeholder';\n    })\n    // 清理可能的转义异常\n    .replace(/\\\\\"/g, '\"')\n    .trim();\n\n  // 5. 补充默认字段（若JSON块中缺失）\n  wechatArticle = {\n    title: wechatArticle.title || '微信公众号文章',\n    author: wechatArticle.author || '【你的公众号名称】',\n    digest: (wechatArticle.digest || '').substring(0, 120), // 微信摘要长度限制\n    content: wechatArticle.content || '',\n    content_source_url: wechatArticle.content_source_url || '',\n    thumb_media_id: wechatArticle.thumb_media_id || 'media_id_0',\n    need_open_comment: wechatArticle.need_open_comment ?? 1,\n    only_fans_can_comment: wechatArticle.only_fans_can_comment ?? 0,\n    show_cover_pic: wechatArticle.show_cover_pic ?? 1\n  };\n\n  // 6. 验证数据有效性\n  if (!wechatArticle.content) throw new Error('文章内容为空');\n\n  // 7. 返回最终数据\n  return {\n    json: {\n      articles: [wechatArticle],\n      _debug: {\n        extraction_success: true,\n        json_block_extracted: true,\n        article_title: wechatArticle.title,\n        content_media_placeholders: (wechatArticle.content.match(/media_id_\\d+/g) || []).length\n      }\n    }\n  };\n\n} catch (error) {\n  console.error('解析AI输出失败:', error.message, error.stack);\n  throw new Error(`处理AI输出错误: ${error.message}`);\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        -640
+      ],
+      "id": "cfa6a2bc-a542-46aa-97db-0c673438765f",
+      "name": "解析结果1"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "获取飞书token2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查询记录": {
+      "main": [
+        [
+          {
+            "node": "飞书数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "飞书数据": {
+      "main": [
+        [
+          {
+            "node": "组装数据",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "组装数据": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "排版",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "排版": {
+      "main": [
+        [
+          {
+            "node": "解析结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "排版",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "解析结果": {
+      "main": [
+        [
+          {
+            "node": "图片格式替换",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分析1": {
+      "main": [
+        [
+          {
+            "node": "分析结果1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分析2": {
+      "main": [
+        [
+          {
+            "node": "分析结果2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分析": {
+      "main": [
+        [
+          {
+            "node": "分析结果3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "上传至素材库",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "聚合media_id",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上传至素材库": {
+      "main": [
+        [
+          {
+            "node": "素材库对应id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "素材库对应id": {
+      "main": [
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取飞书token2": {
+      "main": [
+        [
+          {
+            "node": "查询记录",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "排版",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片记录": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "聚合media_id": {
+      "main": [
+        [
+          {
+            "node": "图片记录",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片格式替换": {
+      "main": [
+        [
+          {
+            "node": "上传至微信草稿",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "上传至微信草稿1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "callerPolicy": "workflowsFromSameOwner",
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Shanghai",
+    "binaryMode": "separate"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "aa7c3ce7-72af-4fdb-b0e8-0bb2d8112280",
+  "activeVersionId": "aa7c3ce7-72af-4fdb-b0e8-0bb2d8112280",
+  "versionCounter": 476,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-06T01:30:37.213Z",
+      "createdAt": "2026-02-06T01:30:37.213Z",
+      "role": "workflow:owner",
+      "workflowId": "1wxHFPuLevVm0vfs--aFG",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-11T06:18:15.000Z",
+    "createdAt": "2026-02-11T06:17:53.520Z",
+    "versionId": "aa7c3ce7-72af-4fdb-b0e8-0bb2d8112280",
+    "workflowId": "1wxHFPuLevVm0vfs--aFG",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "wechat-public-account-typesetting",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -912,
+          -96
+        ],
+        "id": "b5ef7cc8-647a-4fb6-a6e8-7f4a916ccdf3",
+        "name": "Webhook",
+        "webhookId": "d3bc72c6-960a-4dfa-af1f-bfb52a81e96c"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "b4fe734b-669d-49c2-b542-54d1d458c68e",
+                "name": "记录 ID",
+                "value": "={{ $json.query[\"记录ID\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "af46ab22-2b8f-4976-8cc4-79be72e01a47",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "100e8baa-8594-4587-9ce9-2e1dc84e42cc",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "ce122c11-2791-4c84-a11b-3ab0c851e920",
+                "name": "viewID",
+                "value": "vewSweWW3T",
+                "type": "string"
+              },
+              {
+                "id": "93c16430-220b-4c88-88c5-be5da79f0b7c",
+                "name": "是否新增",
+                "value": true,
+                "type": "boolean"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -640,
+          -96
+        ],
+        "id": "fe81ef0f-7744-4261-9df6-815393b86912",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:get",
+          "app_toke": "={{ $('设置参数').item.json['飞书token'] }}",
+          "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+          "record_id": "={{ $('设置参数').item.json['记录 ID'] }}"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          -32,
+          -96
+        ],
+        "id": "76939c19-ae58-428c-9ed0-bca2e9ab5b73",
+        "name": "查询记录",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "8d941dc4-1f2e-45cf-8f6e-d17ee8c04ab2",
+                "name": "文章主题",
+                "value": "={{ $json.data.records[0].fields[\"主题\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "6eccb707-65eb-4615-b78f-c745a0d879ba",
+                "name": "文章标题",
+                "value": "={{ $json.data.records[0].fields[\"标题\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "c0596628-94ad-4738-8037-2f35dfb37dbf",
+                "name": "文章摘要",
+                "value": "={{ $json.data.records[0].fields[\"摘要\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "98ff86e2-b871-4302-9479-eca8d526135a",
+                "name": "文章内容",
+                "value": "={{ $json.data.records[0].fields[\"内容\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "baff94ba-f85d-4eab-8a4d-4b65386ff0e3",
+                "name": "图片",
+                "value": "={{ $json.data.records[0].fields['图片'] }}",
+                "type": "array"
+              },
+              {
+                "id": "9dfa04fa-9b06-4b5b-8e7b-ce1594de99bd",
+                "name": "图片记录",
+                "value": "={{ $json.data.records[0].fields['图片记录'][0].text }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          176,
+          -96
+        ],
+        "id": "8b7a5697-a6e6-4039-97cc-9b6d5a777bbc",
+        "name": "飞书数据"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "64753c6d-8913-4637-838e-2100d10bbd1c",
+                "name": "文章主题",
+                "value": "={{ $json[\"文章主题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "b55f0fec-f087-4dc5-8c36-62c5ed8784ba",
+                "name": "文章标题",
+                "value": "={{ $json[\"文章标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "906b9111-62a5-49b9-823b-c655200b2350",
+                "name": "文章摘要",
+                "value": "={{ $json[\"文章摘要\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "7a283bff-1596-4b25-9a76-cf8721fdea21",
+                "name": "文章内容",
+                "value": "={{ $json[\"文章内容\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "b9f51ec7-86d3-4eeb-91b6-0c996c43111b",
+                "name": "sessionId",
+                "value": "={{ $now.toMillis() }}",
+                "type": "string"
+              },
+              {
+                "id": "0872701e-76c6-483e-8e08-efbd92041765",
+                "name": "记录 ID",
+                "value": "={{ $('设置参数').item.json['记录 ID'] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          384,
+          -96
+        ],
+        "id": "b808c40c-156a-4346-a993-07fcfea84eff",
+        "name": "组装数据"
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          848,
+          48
+        ],
+        "id": "5626b1db-6883-4809-8e18-50e5a24f97eb",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=文章主题：{{ $json[\"文章主题\"] }}\n文章标题：{{ $json[\"文章标题\"] }}\n文章摘要：{{ $json[\"文章摘要\"] }}\n文章内容：{{ $json[\"文章内容\"] }}\n文章图片：{{ $json[\"图片记录\"] }}",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "# Role：微信公众号爆款文章排版架构师\n\n# Profile\n- language: 中文（辅助使用英文专业术语，如API, UI/UX, media_id）\n- description: 一位精通微信生态内容呈现规律与用户注意力的资深排版架构师。不仅负责美化文章，更致力于通过系统化的视觉层级、节奏控制和模块化设计，将原始内容重构为高完读率、高分享率的爆款格式，并直接输出为可执行的微信API草稿。\n- background: 基于微信公开平台设计规范、海量爆款文章视觉模式分析、新媒体用户行为数据及人机交互设计原则进行训练。\n- personality: 严谨细致，富有创造力和数据思维，对视觉美感与传播效果有极致追求，沟通风格专业且务实。\n- expertise: 微信富文本排版规范、视觉层级系统设计、移动端阅读体验优化、内容结构化重组、微信草稿API技术适配。\n- target_audience: 新媒体运营人员、公众号内容创作者、需要批量处理或标准化排版流程的团队。\n\n## Skills\n\n1. 核心架构与设计技能\n  - **内容诊断与结构化**: 快速分析文章主题、风格、情感调性与核心论点，将其解构为最适合移动端阅读的模块化逻辑单元（引言、分论点、案例、总结）。\n  - **视觉层级架构**: 运用字号、颜色、间距、分割线等元素，构建清晰、舒适、具有引导性的视觉阅读流，突出关键信息，降低认知负荷。\n  - **模板工程与适配**: 根据文章类型（观点、故事、教程、资讯）和目标受众，从风格模板库中智能匹配或融合创新，生成最合适的视觉风格方案。\n  - **爆款元素注入**: 熟练运用金句高亮、引导互动、情绪符号、节奏分隔等已被验证能提升传播力的排版技巧。\n\n2. 辅助执行与技术技能\n  - **微信API技术适配**: 准确理解并应用微信草稿接口规范，将HTML排版代码与图片media_id封装为标准的JSON请求体，确保零错误上传。\n  - **移动端体验优化**: 所有设计决策均优先考虑小屏幕设备的显示效果，确保文字清晰、布局不崩塌、图片适配。\n  - **A/B测试思维**: 在设计方案中提供可选的视觉变体（如重点色选择、布局微调），并说明其对用户注意力可能产生的不同影响。\n  - **无障碍设计基础**: 确保排版有足够的对比度，逻辑顺序清晰，对屏幕阅读器友好。\n\n# Rules\n\n1. 基本原则:\n  - **美学与功能统一**: 所有视觉设计必须服务于内容表达和阅读引导，禁止为装饰而装饰。美观性必须建立在极高的可读性之上。\n  - **以数据与规律驱动**: 设计选择应基于微信平台的已知用户行为规律（如首屏留存、滑动深度）和爆款内容共性，而非纯粹主观喜好。\n  - **严格遵循平台规范**: 生成的HTML代码必须完全符合微信富文本支持的范围，绝对避免使用不被支持的标签或样式。\n\n2. 行为准则:\n  - **分步执行，过程透明**: 必须严格按照Workflows的四个步骤执行，并在最终输出前，以架构师的口吻简要概述关键设计决策点（如为何选择某模板、如何安排图片顺序）。\n  - **决策透明化**: 当从多个可行方案中做出选择时（如选择模板A而非B），必须给出基于“文章主题”和“目标受众”的简要理由。\n  - **主动确认与替代**: 如果用户提供的“文章图片”数量或顺序与“文章内容”的配图需求严重不匹配，应主动指出并提出基于现有图片的优化调整方案，而非机械套用。\n\n3. 限制条件:\n  - **禁止使用模糊、不可量化的设计指令**: 如“让这里好看一点”。必须替换为具体操作，如“将此句设置为18px，颜色#FF6B35，并添加10px的左padding作为视觉强调”。\n  - **禁止引入外部依赖**: 所有样式必须以内联CSS形式实现，不能链接外部样式表或依赖特定字体（除非是微信默认字体）。\n  - **禁止生成无法通过微信API验证的代码**: 如使用`<script>`、`<iframe>`或过于复杂的CSS选择器。\n  - **禁止违反微信平台内容管理规则**。\n\n## Workflows\n- 目标: 基于用户提供的全部输入参数，创建一套创新实用的爆款文章排版方案，并输出为可直接调用微信草稿API的JSON格式数据。\n- 步骤1: **解构输入与诊断** － 调用**内容诊断与结构化**技能。仔细分析“文章主题”、“标题”、“摘要”和“内容”，判断文章类型（如：本文为“文化观察/观点型”）、情感基调（如：思辨与创新）、核心论点链条。同时，盘点“文章图片”资源，评估其与内容的契合度及视觉叙事潜力。\n- 步骤2: **架构视觉叙事** － 调用**模板工程与适配**和**爆款元素注入**技能。根据步骤1的诊断结果，从模板库中匹配或融合设计风格（如：本文适合融合“简约现代风”的清晰与“温馨生活风”的情感温度）。规划整体阅读节奏：开头如何吸引，中间如何分模块并穿插图片/强调，结尾如何升华并引导互动。确定图片的插入位置与叙事作用。\n- 步骤3: **执行详细设计** － 调用**视觉层级架构**和**移动端体验优化**技能。运用“视觉层级系统”的具体参数，为标题、副标题、正文、重点文本、引用块等元素赋予具体样式。在“内容组织策略”指导下，将原文重组为带小标题的模块，并插入分隔线、符号、强调框等元素。将图片的`media_id`嵌入到规划好的位置，并配以简练的图注。\n- 步骤4: **技术封装与交付** － 调用**微信API技术适配**技能。将步骤3产生的完整HTML内容，连同标题、摘要、封面图`media_id`等元数据，严格按照“输出规范”组装成JSON对象。进行最终校验：检查JSON格式、`media_id`引用是否正确、HTML是否纯净。随后，以架构师身份输出最终JSON，并附上关键设计逻辑的简要说明。\n- 预期结果: 一个符合微信公众平台草稿接口规范的、完整的JSON数据对象。其`content`字段包含精心排版、可在微信后台直接渲染的HTML代码，整体设计旨在最大化文章的阅读体验与传播潜力。\n\n## Initialization\n作为微信公众号爆款文章排版架构师，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。现在，请开始分析用户提供的文章要素与图片资源，并启动你的排版架构流程。首先，请用户提供本次需要排版的【文章主题】、【文章标题】、【文章摘要】和【文章内容】。我已准备好图片资源。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          896,
+          -128
+        ],
+        "id": "a91103c2-4ada-406e-81d6-fa6e4346cef2",
+        "name": "排版"
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "deepseek-r1:8b",
+            "mode": "list",
+            "cachedResultName": "deepseek-r1:8b"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "={{ $json.contentAfterTitle }}"
+              }
+            ]
+          },
+          "options": {
+            "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源��信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过于流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准��程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循��户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严��使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时，禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心��务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审��案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力���逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.ollama",
+        "typeVersion": 1,
+        "position": [
+          1840,
+          -720
+        ],
+        "id": "4d0dcfc5-c177-4a62-a577-d967a54bedf3",
+        "name": "分析1",
+        "credentials": {
+          "ollamaApi": {
+            "id": "m7ItUzjoa8jVF8Mb",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "qwen3:8b",
+            "mode": "list",
+            "cachedResultName": "qwen3:8b"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "={{ $json.contentAfterTitle }}"
+              }
+            ]
+          },
+          "options": {
+            "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证���的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文���与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提���的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.ollama",
+        "typeVersion": 1,
+        "position": [
+          1840,
+          -528
+        ],
+        "id": "471219ff-3ee0-4506-a98c-8ad20fba7714",
+        "name": "分析2",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "ollamaApi": {
+            "id": "m7ItUzjoa8jVF8Mb",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "gemma3:12b",
+            "mode": "list",
+            "cachedResultName": "gemma3:12b"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "={{ $json.contentAfterTitle }}"
+              }
+            ]
+          },
+          "options": {
+            "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.ollama",
+        "typeVersion": 1,
+        "position": [
+          1840,
+          -336
+        ],
+        "id": "b5593e57-713d-42ec-97ea-fcdf538a631d",
+        "name": "分析",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "alwaysOutputData": false,
+        "credentials": {
+          "ollamaApi": {
+            "id": "m7ItUzjoa8jVF8Mb",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n Code节点：健壮提取AI输出中的文章数据\ntry {\n  // 1. 从AI Agent节点获取输出\n  const aiInput = $input.first();\n  if (!aiInput?.json?.output) throw new Error('AI输出为空或格式错误');\n  const outputText = aiInput.json.output.trim();\n\n  // 调试：查看原始输出\n  console.log('原始输出长度:', outputText.length);\n  console.log('原始输出前500字符:', outputText.substring(0, 500));\n\n  // 2. 尝试多种方式提取HTML内容\n  let htmlContent = '';\n  \n  // 方式1: 尝试匹配html代码块\n  const htmlBlockMatch = outputText.match(/```html\\s*([\\s\\S]*?)\\s*```/);\n  if (htmlBlockMatch) {\n    htmlContent = htmlBlockMatch[1].trim();\n    console.log('从html代码块提取到内容，长度:', htmlContent.length);\n  } else {\n    // 方式2: 尝试匹配任何代码块（可能没有语言标识）\n    const anyCodeBlockMatch = outputText.match(/```\\s*([\\s\\S]*?)\\s*```/);\n    if (anyCodeBlockMatch) {\n      const codeContent = anyCodeBlockMatch[1].trim();\n      // 判断是否是HTML内容\n      if (codeContent.includes('<div') || codeContent.includes('<p style') || codeContent.includes('</div>')) {\n        htmlContent = codeContent;\n        console.log('从无标识代码块提取到HTML内容，长度:', htmlContent.length);\n      }\n    }\n  }\n\n  // 如果仍然没有HTML内容，尝试从整个输出中提取HTML片段\n  if (!htmlContent) {\n    console.log('尝试从整个输出中提取HTML...');\n    // 查找可能是HTML内容的部分\n    const htmlStart = outputText.indexOf('<div style=\"');\n    const htmlEnd = outputText.lastIndexOf('</div>') + 6;\n    if (htmlStart !== -1 && htmlEnd > htmlStart) {\n      htmlContent = outputText.substring(htmlStart, htmlEnd);\n      console.log('从输出中提取到HTML片段，长度:', htmlContent.length);\n    }\n  }\n\n  if (!htmlContent) {\n    throw new Error('无法从AI输出中提取HTML文章内容');\n  }\n\n  // 3. 尝试提取JSON数据（可能是无效的，我们需要手动构建）\n  console.log('尝试提取JSON数据...');\n  let wechatArticle = {\n    title: '',\n    author: '',\n    digest: '',\n    content: '',\n    content_source_url: '',\n    thumb_media_id: '',\n    need_open_comment: 1,\n    only_fans_can_comment: 0,\n    show_cover_pic: 1\n  };\n\n  // 尝试从JSON代码块提取\n  const jsonBlockMatch = outputText.match(/```json\\s*([\\s\\S]*?)\\s*```/);\n  if (jsonBlockMatch) {\n    try {\n      const jsonStr = jsonBlockMatch[1].trim();\n      console.log('找到JSON代码块，长度:', jsonStr.length);\n      const articleData = JSON.parse(jsonStr);\n      if (articleData?.articles?.[0]) {\n        wechatArticle = { ...wechatArticle, ...articleData.articles[0] };\n        console.log('从JSON块成功提取文章数据');\n      }\n    } catch (jsonError) {\n      console.log('JSON解析失败，尝试手动提取:', jsonError.message);\n      // JSON解析失败，尝试手动提取字段\n      try {\n        // 尝试从JSON字符串中提取关键字段\n        const titleMatch = jsonBlockMatch[1].match(/\"title\":\\s*\"([^\"]+)\"/);\n        const authorMatch = jsonBlockMatch[1].match(/\"author\":\\s*\"([^\"]+)\"/);\n        const digestMatch = jsonBlockMatch[1].match(/\"digest\":\\s*\"([^\"]+)\"/);\n        const thumbMediaIdMatch = jsonBlockMatch[1].match(/\"thumb_media_id\":\\s*\"([^\"]+)\"/);\n        \n        if (titleMatch) wechatArticle.title = titleMatch[1];\n        if (authorMatch) wechatArticle.author = authorMatch[1];\n        if (digestMatch) wechatArticle.digest = digestMatch[1];\n        if (thumbMediaIdMatch) wechatArticle.thumb_media_id = thumbMediaIdMatch[1];\n        \n        console.log('手动提取结果:', { \n          title: wechatArticle.title, \n          author: wechatArticle.author,\n          hasDigest: !!wechatArticle.digest,\n          thumbMediaId: wechatArticle.thumb_media_id\n        });\n      } catch (manualError) {\n        console.log('手动提取也失败:', manualError.message);\n      }\n    }\n  }\n\n  // 4. 如果没有从JSON提取到数据，尝试从AI输出的其他部分提取\n  if (!wechatArticle.title) {\n    console.log('尝试从AI输出的文本中提取标题...');\n    // 从AI输出的文本描述中提取标题\n    const titleMatch = outputText.match(/title\":\\s*\"([^\"]+)\"/) || \n                      outputText.match(/标题[：:]\\s*([^\\n]+)/) ||\n                      outputText.match(/文章标题[：:]\\s*([^\\n]+)/);\n    \n    if (titleMatch) {\n      wechatArticle.title = titleMatch[1].trim();\n      console.log('从文本提取到标题:', wechatArticle.title);\n    }\n  }\n\n  if (!wechatArticle.digest) {\n    console.log('尝试从AI输出的文本中提取摘要...');\n    // 提取摘要 - 寻找digest字段或摘要描述\n    const digestMatch = outputText.match(/\"digest\":\\s*\"([^\"]+)\"/) ||\n                       outputText.match(/摘要[：:]\\s*([^\\n]+)/);\n    \n    if (digestMatch) {\n      wechatArticle.digest = digestMatch[1].trim();\n      console.log('从文本提取到摘要，长度:', wechatArticle.digest.length);\n    }\n  }\n\n  // 5. 设置默认值\n  if (!wechatArticle.title) {\n    wechatArticle.title = '别再说年味\"淡\"了！是我们这代人，正在把它\"玩坏\"并重塑';\n    console.log('使用默认标题');\n  }\n  \n  if (!wechatArticle.author) {\n    wechatArticle.author = '【你的公众号名称】';\n  }\n  \n  if (!wechatArticle.digest) {\n    // 从HTML内容中提取前100字作为摘要\n    const textContent = htmlContent.replace(/<[^>]*>/g, ' ').replace(/\\s+/g, ' ').trim();\n    wechatArticle.digest = textContent.substring(0, 100) + (textContent.length > 100 ? '...' : '');\n    console.log('从HTML内容生成摘要，长度:', wechatArticle.digest.length);\n  }\n  \n  if (!wechatArticle.thumb_media_id) {\n    wechatArticle.thumb_media_id = 'media_id_1';\n  }\n\n  // 6. 处理HTML内容中的图片\n  console.log('处理HTML中的图片...');\n  wechatArticle.content = htmlContent\n    // 替换微信图片链接为media_id占位符\n    .replace(/src=\"[^\"]*mmbiz[^\"]*\"/g, (match, index) => {\n      // 根据顺序分配media_id，从1开始（0是封面图）\n      return `src=\"media_id_${index + 1}\"`;\n    })\n    // 清理转义字符\n    .replace(/\\\\\"/g, '\"')\n    .replace(/\\\\n/g, '\\n')\n    .trim();\n\n  // 7. 确保content_source_url为空字符串（不是null或undefined）\n  wechatArticle.content_source_url = wechatArticle.content_source_url || '';\n\n  // 8. 验证最终数据\n  console.log('最终数据验证...');\n  if (!wechatArticle.content) {\n    throw new Error('文章内容为空');\n  }\n  \n  // 统计图片占位符\n  const imagePlaceholders = (wechatArticle.content.match(/media_id_\\d+/g) || []).length;\n  console.log('图片占位符数量:', imagePlaceholders);\n\n  // 9. 返回最终数据\n  return {\n    json: {\n      articles: [wechatArticle],\n      _debug: {\n        extraction_success: true,\n        html_content_length: htmlContent.length,\n        final_content_length: wechatArticle.content.length,\n        article_title: wechatArticle.title,\n        digest_length: wechatArticle.digest.length,\n        image_placeholders_count: imagePlaceholders,\n        thumb_media_id: wechatArticle.thumb_media_id,\n        note: '如果JSON解析失败，已从其他部分提取必要数据'\n      }\n    }\n  };\n\n} catch (error) {\n  console.error('解析AI输出失败:', error.message);\n  console.error('错误堆栈:', error.stack);\n  \n  // 返回错误信息，但格式化为n8n可以继续处理的格式\n  return {\n    json: {\n      error: true,\n      errorMessage: `处理AI输出错误: ${error.message}`,\n      suggestion: '请检查AI输出格式，确保包含有效的HTML内容',\n      rawOutputPreview: $input.first()?.json?.output?.substring(0, 500) || '无输出'\n    }\n  };\n}"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1248,
+          -128
+        ],
+        "id": "3dbe9863-6c88-44c7-8378-1eac98e9f91e",
+        "name": "解析结果"
+      },
+      {
+        "parameters": {
+          "contextWindowLength": 10
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          976,
+          64
+        ],
+        "id": "707435b0-6a37-4a49-ab88-a2292dd94b42",
+        "name": "Simple Memory"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2192,
+          -720
+        ],
+        "id": "69ade5e8-5efb-4dfa-a4e6-d10fd1360f46",
+        "name": "分析结果1"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2192,
+          -528
+        ],
+        "id": "57c1514d-6b36-49fd-9612-aa3e0a952048",
+        "name": "分析结果2"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2208,
+          -336
+        ],
+        "id": "dad4a297-7a56-48dc-a31b-8adddf329cb4",
+        "name": "分析结果3"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.url }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "=Authorization",
+                "value": "=Bearer {{ $('获取飞书token2').item.json.tenant_access_token }}"
+              }
+            ]
+          },
+          "options": {
+            "response": {
+              "response": {
+                "fullResponse": true,
+                "responseFormat": "file",
+                "outputPropertyName": "=data"
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          976,
+          400
+        ],
+        "id": "c4a6d251-df12-4b50-ac13-59724c71c160",
+        "name": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "['图片']",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          400,
+          384
+        ],
+        "id": "ae96a729-3b04-4e09-910e-2c449e3fda2d",
+        "name": "Split Out1"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          688,
+          384
+        ],
+        "id": "f968904a-1a79-4729-b154-70eb39027b20",
+        "name": "Loop Over Items1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "name": "Replace Me1",
+        "typeVersion": 1,
+        "position": [
+          1808,
+          400
+        ],
+        "id": "56d39c66-f045-4e08-8338-9668ab70302e"
+      },
+      {
+        "parameters": {
+          "resource": "media",
+          "operation": "media:uploadOther"
+        },
+        "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          400
+        ],
+        "id": "8e7d3fbc-fa45-46e6-921d-9e8295a84f4f",
+        "name": "上传至素材库",
+        "credentials": {
+          "wechatOfficialAccountCredentialsApi": {
+            "id": "BAd0mnfPzK4DI5b4",
+            "name": "Wechat Official Account Credentials account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "d19beb58-86d1-4315-8e0e-1d6b6ebde59c",
+                "name": "图片名称",
+                "value": "={{ $('Loop Over Items1').item.json.name }}",
+                "type": "string"
+              },
+              {
+                "id": "dae5765c-cc1a-4be5-82ff-043b1b538450",
+                "name": "media_id",
+                "value": "={{ $json.media_id }}",
+                "type": "string"
+              },
+              {
+                "id": "72950d62-b199-4fdc-bf2d-df53e39f004a",
+                "name": "url",
+                "value": "={{ $json.url }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1456,
+          400
+        ],
+        "id": "918e084b-e738-48b9-8754-3c7b35c1117d",
+        "name": "素材库对应id"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+          "sendHeaders": true,
+          "specifyHeaders": "json",
+          "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+          "options": {
+            "timeout": 60000
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -320,
+          -96
+        ],
+        "id": "ef929f4d-c4c1-49d4-b732-179913771fb6",
+        "name": "获取飞书token2",
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "maxTries": 5,
+        "notes": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+          "sendHeaders": true,
+          "specifyHeaders": "json",
+          "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+          "options": {
+            "timeout": 60000
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -96,
+          752
+        ],
+        "id": "7d77b499-4c9e-4d90-89f9-3df7dbfddc36",
+        "name": "获取飞书token",
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "maxTries": 5,
+        "notes": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineAll",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          592,
+          -96
+        ],
+        "id": "d0251c29-f771-4090-9841-d7d907940682",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "resource": "draft",
+          "operation": "draft:add",
+          "articles": "=[\n  {\n    \"title\": \"{{ $json.articles[0].title }}\",\n    \"content\": \"{{ $json.articles[0].content }}\",\n    \"thumb_media_id\": \"{{ $json.articles[0].thumb_media_id }}\",\n    \"author\": \"慢读杂货铺\",\n    \"digest\": \"{{ $json.articles[0].digest }}\",\n    \"show_cover_pic\": 1\n  }\n]"
+        },
+        "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+        "typeVersion": 1,
+        "position": [
+          1632,
+          -128
+        ],
+        "id": "8acb1d76-5662-4fa5-b429-2b3e11d19a68",
+        "name": "上传至微信草稿",
+        "credentials": {
+          "wechatOfficialAccountCredentialsApi": {
+            "id": "BAd0mnfPzK4DI5b4",
+            "name": "Wechat Official Account Credentials account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// ========== 第一步：容错处理 + 定义media_id/url匹配数据源 ==========\n// 读取media数据并做容错，避免数据源不存在导致报错\nconst mediaSource = $input.first()?.json?.data || [];\nif (mediaSource.length === 0) {\n  console.warn(\"media数据源为空，请检查上游输入！\");\n}\n\n// ========== 第二步：构建「图片名称（去后缀）→ {media_id, url}」映射表 ==========\nconst mediaUrlMap = {};\nmediaSource.forEach(item => {\n  // 加容错：避免item或图片名称不存在导致报错\n  if (!item || !item[\"图片名称\"]) return;\n  \n  // 去除图片名称的.png后缀，作为匹配key（与飞书数据的\"序号\"字段匹配）\n  const matchKey = item[\"图片名称\"].replace('.png', '');\n  \n  // 存储media_id和url，双重容错：避免字段不存在导致值为undefined\n  mediaUrlMap[matchKey] = {\n    media_id: item.media_id || null,\n    url: item.url || null // 新增：存储对应url\n  };\n});\n\n// ========== 第三步：容错处理 + 读取原始数据 ==========\n// 读取飞书数据的图片记录，加多层容错\nconst feishuData = $('飞书数据').first()?.json || {};\nconst originalItems = feishuData[\"图片记录\"] || [];\nif (originalItems.length === 0) {\n  console.warn(\"飞书图片记录为空，请检查飞书数据节点！\");\n}\n\n// ========== 第四步：遍历匹配（核心优化：替换url + 保留media_id） ==========\nconst resultItems = originalItems.map(item => {\n  // 加容错：避免item为空\n  if (!item) return { json: {} };\n  \n  // 核心：获取匹配key（飞书数据的\"序号\"字段）\n  const serialNumber = item.序号 || '';\n  \n  // 获取匹配到的media_id和url（匹配不到则返回空对象）\n  const matchedData = mediaUrlMap[serialNumber] || {};\n\n  return {\n    // 保留原始数据所有字段\n    ...item,\n    // 替换url：优先使用匹配到的url，匹配不到则保留原url（也可改为null，根据需求调整）\n    url: matchedData.url || item.url,\n    // 新增media_id字段：匹配不到则为null\n    media_id: matchedData.media_id || null\n  };\n});\n\n// ========== 第五步：返回处理后的数据 ==========\nreturn {图片记录: resultItems};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          832,
+          208
+        ],
+        "id": "1170c7d1-e62d-4ec9-8435-2bdc7207d412",
+        "name": "图片记录"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          640,
+          176
+        ],
+        "id": "79e084cf-8403-4aca-9a58-abcb5b002e01",
+        "name": "聚合media_id"
+      },
+      {
+        "parameters": {
+          "jsCode": "async function run() {\n  try {\n    // 1. 阿拉伯数字转中文数字（适配picList的「图一/图二」序号，核心匹配逻辑）\n    const numToCn = (num) => {\n      const cn = ['一','二','三','四','五','六','七','八','九','十'];\n      return cn[num-1] || num.toString();\n    };\n\n    // 2. 读取输入数据\n    const inputItems = $input.all();\n    if (!inputItems.length) throw new Error(\"无输入数据\");\n    const rootData = inputItems[0].json;\n    const [article] = rootData.articles || [];\n    const picList = $('Merge').first().json[\"图片记录\"] || [];\n    \n    if (!article) throw new Error(\"文章数据为空\");\n    if (picList.length === 0) throw new Error(\"图片记录为空\");\n\n    // 3. 构建「中文数字序号→图片URL」映射表（仅提取URL，放弃media_id）\n    const picUrlMap = {};\n    picList.forEach(item => {\n      if (!item || !item.序号 || !item.url) return;\n      // 仅保留有效URL，过滤空值/无效值\n      const validUrl = item.url.trim();\n      if (validUrl && (validUrl.startsWith('http://') || validUrl.startsWith('https://'))) {\n        picUrlMap[item.序号] = validUrl;\n      }\n    });\n\n    // 4. 处理正文内容：清理隐形字符+仅一次JSON转义（避免过度）\n    let content = article.content || \"\";\n    content = content\n      .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '') // 移除控制字符\n      .replace(/\\u3000|\\u200B|\\u200C|\\u200D/g, ' ') // 移除隐形空格\n      .trim();\n\n    // 5. 核心修复：替换<img>为你指定的「标准样式标签」（完全匹配你的要求）\n    let imgIndex = 0;\n    const wechatContent = content.replace(/<img[^>]*>/gi, (originalImg) => {\n      imgIndex++;\n      // 生成和picList一致的中文数字Key（图一_封面图、图二_文内配图）\n      const picType = imgIndex === 1 ? '封面图' : '文内配图';\n      const picKey = `图${numToCn(imgIndex)}_${picType}`;\n      // 获取匹配的图片URL，无则直接返回原标签（兜底）\n      const picUrl = picUrlMap[picKey] || '';\n      if (!picUrl) {\n        console.warn(`未匹配到${picKey}的有效URL，保留原标签`);\n        return originalImg;\n      }\n\n      // 严格按你提供的正确样式生成标签：data-src+src+alt+固定样式\n      // 双URL填充（data-src=原始URL，src=同URL），样式固定display:block;width:100%\n      return `<img data-src=\\\"${picUrl}\\\" src=\\\"${picUrl}\\\" alt=\\\"文章配图${imgIndex}\\\" style=\\\"display: block; width: 100%;\\\"/>`;\n    });\n\n    // 6. 统一JSON转义（仅一次，避免微信解析异常）\n    const finalContent = wechatContent\n      .replace(/\\\\/g, '\\\\\\\\')\n      .replace(/\"/g, '\\\\\"');\n\n    // 7. 整理草稿参数（返回单个JSON对象，无数组包裹，微信节点唯一正确格式）\n    const draftArticle = {\n      title: (article.title || \"默认标题\")\n        .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '')\n        .replace(/\"/g, '\\\\\"')\n        .trim(),\n      author: (article.author || \"慢读杂货铺\")\n        .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '')\n        .replace(/\"/g, '\\\\\"')\n        .trim(),\n      digest: (article.digest || \"\")\n        .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, '')\n        .replace(/\"/g, '\\\\\"')\n        .slice(0, 120)\n        .trim(),\n      content: finalContent,\n      thumb_media_id: picList[0]?.media_id || \"\", // 封面图media_id保留（不影响正文）\n      need_open_comment: 1,\n      only_fans_can_comment: 0,\n      show_cover_pic: 1\n    };\n\n    // 8. 最终结果：单个JSON对象（微信节点强制要求）\n    const finalResult = {\n      articles: [draftArticle]\n    };\n\n    // 验证JSON合法性，提前排错\n    JSON.stringify(finalResult);\n    console.log(`成功替换${imgIndex}个图片标签，均为你指定的标准样式`);\n    return finalResult;\n  } catch (error) {\n    console.error(\"处理失败：\", error.message);\n    return {\n      error: true,\n      message: error.message.slice(0, 200)\n    };\n  }\n}\nreturn run();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1440,
+          -128
+        ],
+        "id": "13fc3db5-0601-4e43-bb9f-1699a2b71cfc",
+        "name": "图片格式替换"
+      },
+      {
+        "parameters": {
+          "jsCode": "async function run() {\n  try {\n    // 1. 读取数据并严格校验\n    const inputItems = $input.all();\n    if (!inputItems.length) throw new Error(\"无输入数据\");\n    \n    const inputData = inputItems[0].json;\n    const [article] = inputData.articles || [];\n    const picList = $('Merge').first().json[\"图片记录\"] || [];\n    \n    if (!article) throw new Error(\"文章数据为空\");\n    if (!picList.length) throw new Error(\"图片记录为空\");\n    if (!article.content) throw new Error(\"文章内容为空\");\n\n    // 2. 提取并校验图片类型永久素材media_id\n    const validMediaIds = picList\n      .map(item => (item.media_id || \"\").trim())\n      .filter(id => id.length >= 20 && /^[a-zA-Z0-9_\\-]+$/.test(id));\n    \n    if (!validMediaIds.length) throw new Error(\n      \"无有效图片类型media_id！请确认：\\n1. 素材上传节点选「新增永久图片素材」\\n2. media_id在公众号「素材管理→图片」中可查\"\n    );\n\n    // 3. 核心：替换img为微信官方<image>标签（无任何转义）\n    let finalContent = article.content || \"\";\n    let imgIndex = 0;\n    // 先替换img标签，避免后续清理误删\n    finalContent = finalContent.replace(/<img[^>]*>/g, () => {\n      if (imgIndex >= validMediaIds.length) return \"\";\n      const id = validMediaIds[imgIndex];\n      imgIndex++;\n      return `<image mediaid=\"${id}\"/>`; // 仅生成纯image标签，无转义\n    });\n\n    // 4. 极致清理内容（仅保留必要字符，彻底杜绝JSON错误）\n    finalContent = finalContent\n      // 移除所有换行/回车/制表符（JSON最大杀手）\n      .replace(/[\\r\\n\\t]/g, ' ')\n      // 移除所有控制字符（0x00-0x1F、0x7F）\n      .replace(/[\\x00-\\x1F\\x7F]/g, ' ')\n      // 替换中文引号为英文（避免引号不匹配）\n      .replace(/“|”/g, '\"')\n      // 清理HTML空格/多余空格\n      .replace(/&nbsp;/g, ' ')\n      .replace(/\\s+/g, ' ')\n      // 仅保留微信白名单标签（确保无非法标签）\n      .replace(/<[^>]*>/g, match => {\n        const allowedTags = ['p', 'strong', 'em', 'h2', 'h3', 'ul', 'li', 'image', '/p', '/strong', '/em', '/h2', '/h3', '/ul', '/li'];\n        const tagName = match.toLowerCase().replace(/<\\/?|\\s.*|>/g, '');\n        return allowedTags.includes(tagName) ? match : '';\n      })\n      .slice(0, 200000)\n      .trim();\n\n    // 5. 处理标题/摘要（仅清理，不手动转义）\n    const cleanTitle = (article.title || \"默认标题\")\n      .replace(/[\\r\\n\\t]/g, ' ')\n      .replace(/“|”/g, '\"')\n      .replace(/\\s+/g, ' ')\n      .trim();\n      \n    const cleanDigest = ((article.digest || \"\").slice(0, 120))\n      .replace(/[\\r\\n\\t]/g, ' ')\n      .replace(/“|”/g, '\"')\n      .replace(/\\s+/g, ' ')\n      .trim();\n\n    // 6. 构建纯JS对象（无任何手动JSON处理）\n    const draftArticle = {\n      title: cleanTitle,\n      author: (article.author || \"【你的公众号名称】\").replace(/[\\r\\n\\t]/g, ' ').trim(),\n      digest: cleanDigest,\n      content: finalContent,\n      thumb_media_id: validMediaIds[0],\n      content_source_url: \"\",\n      need_open_comment: 1,\n      only_fans_can_comment: 0,\n      show_cover_pic: 1\n    };\n\n    // 7. 输出纯对象（n8n会自动序列化为合法JSON）\n    return [\n      {\n        json: {\n          articles: [draftArticle], // 核心：输出纯数组对象，非字符串\n          _debug: {\n            media_ids: validMediaIds,\n            content_length: finalContent.length,\n            title_sample: cleanTitle.slice(0, 50),\n            tip: \"输出纯JS对象，由n8n自动处理JSON序列化，无语法错误\"\n          }\n        }\n      }\n    ];\n\n  } catch (error) {\n    // 错误输出也保证是纯对象\n    return [{\n      json: {\n        error: true,\n        message: error.message.replace(/[\\r\\n\\t]/g, ' '),\n        tip: \"优先检查：1.media_id是否为图片类型 2.输入数据是否有非法字符\"\n      }\n    }];\n  }\n}\nreturn run();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1568,
+          -544
+        ],
+        "id": "65686737-347c-4518-9033-17ad874a4de4",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          2048,
+          176
+        ],
+        "id": "e2f70b64-622b-42a2-a1ba-dcdfaf0bb648",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "resource": "draft",
+          "operation": "draft:add",
+          "articles": "=[\n  {\n    \"title\": \"测试标题\",\n    \"author\": \"测试作者\",\n    \"digest\": \"测试摘要\",\n    \"content\": \"<image media_id=\\\"tRYyiVdgnGdRvL_tc-CDsKlZJIJwv_3HoBR_mAObnuARFGIaz4cIXoG6WdOvhUvj\\\"/>\",\n    \"thumb_media_id\": \"tRYyiVdgnGdRvL_tc-CDsKlZJIJwv_3HoBR_mAObnuARFGIaz4cIXoG6WdOvhUvj\",\n    \"content_source_url\": \"\",\n    \"need_open_comment\": 1,\n    \"only_fans_can_comment\": 0,\n    \"show_cover_pic\": 1\n  }\n]"
+        },
+        "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+        "typeVersion": 1,
+        "position": [
+          2368,
+          176
+        ],
+        "id": "2a2ceee9-434d-415b-b40a-7cb2188da73a",
+        "name": "上传至微信草稿1",
+        "credentials": {
+          "wechatOfficialAccountCredentialsApi": {
+            "id": "BAd0mnfPzK4DI5b4",
+            "name": "Wechat Official Account Credentials account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n Code节点：精准提取AI输出中的JSON文章块并生成微信草稿数据\ntry {\n  // 1. 从AI Agent节点获取输出\n  const aiInput = $input.first();\n  if (!aiInput?.json?.output) throw new Error('AI输出为空或格式错误');\n  const outputText = aiInput.json.output.trim();\n\n  // 2. 核心：提取output中的JSON代码块（优先获取AI生成的完整文章数据）\n  const jsonBlockMatch = outputText.match(/```json\\s*([\\s\\S]*?)\\s*```/);\n  if (!jsonBlockMatch) throw new Error('未在AI输出中找到JSON文章数据块');\n  \n  // 解析JSON代码块\n  const articleJsonStr = jsonBlockMatch[1].trim();\n  const articleData = JSON.parse(articleJsonStr);\n  if (!articleData?.articles || !Array.isArray(articleData.articles) || articleData.articles.length === 0) {\n    throw new Error('JSON块中未找到有效的articles数据');\n  }\n\n  // 3. 获取JSON块内的文章数据（直接使用AI生成的完整字段）\n  let wechatArticle = articleData.articles[0];\n\n  // 4. 处理content中的media_id占位符（统一替换为标准占位符，方便后续替换）\n  wechatArticle.content = wechatArticle.content\n    // 替换AI输出中的{{请替换为您的XX media_id}}占位符\n    .replace(/\\{\\{请替换为您的(.*?) media_id\\}\\}/g, (_, type) => {\n      const typeMap = {\n        '封面图': 'media_id_0',\n        '配图1': 'media_id_1',\n        '配图2': 'media_id_2',\n        '配图3': 'media_id_3',\n        '配图4': 'media_id_4',\n        '配图5': 'media_id_5'\n      };\n      return typeMap[type] || 'media_id_placeholder';\n    })\n    // 清理可能的转义异常\n    .replace(/\\\\\"/g, '\"')\n    .trim();\n\n  // 5. 补充默认字段（若JSON块中缺失）\n  wechatArticle = {\n    title: wechatArticle.title || '微信公众号文章',\n    author: wechatArticle.author || '【你的公众号名称】',\n    digest: (wechatArticle.digest || '').substring(0, 120), // 微信摘要长度限制\n    content: wechatArticle.content || '',\n    content_source_url: wechatArticle.content_source_url || '',\n    thumb_media_id: wechatArticle.thumb_media_id || 'media_id_0',\n    need_open_comment: wechatArticle.need_open_comment ?? 1,\n    only_fans_can_comment: wechatArticle.only_fans_can_comment ?? 0,\n    show_cover_pic: wechatArticle.show_cover_pic ?? 1\n  };\n\n  // 6. 验证数据有效性\n  if (!wechatArticle.content) throw new Error('文章内容为空');\n\n  // 7. 返回最终数据\n  return {\n    json: {\n      articles: [wechatArticle],\n      _debug: {\n        extraction_success: true,\n        json_block_extracted: true,\n        article_title: wechatArticle.title,\n        content_media_placeholders: (wechatArticle.content.match(/media_id_\\d+/g) || []).length\n      }\n    }\n  };\n\n} catch (error) {\n  console.error('解析AI输出失败:', error.message, error.stack);\n  throw new Error(`处理AI输出错误: ${error.message}`);\n}"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1216,
+          -640
+        ],
+        "id": "cfa6a2bc-a542-46aa-97db-0c673438765f",
+        "name": "解析结果1"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "获取飞书token2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "查询记录": {
+        "main": [
+          [
+            {
+              "node": "飞书数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "飞书数据": {
+        "main": [
+          [
+            {
+              "node": "组装数据",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Split Out1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "组装数据": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "排版",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "排版": {
+        "main": [
+          [
+            {
+              "node": "解析结果",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "排版",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "解析结果": {
+        "main": [
+          [
+            {
+              "node": "图片格式替换",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "分析1": {
+        "main": [
+          [
+            {
+              "node": "分析结果1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "分析2": {
+        "main": [
+          [
+            {
+              "node": "分析结果2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "分析": {
+        "main": [
+          [
+            {
+              "node": "分析结果3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "上传至素材库",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out1": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items1": {
+        "main": [
+          [
+            {
+              "node": "聚合media_id",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Replace Me1": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "上传至素材库": {
+        "main": [
+          [
+            {
+              "node": "素材库对应id",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "素材库对应id": {
+        "main": [
+          [
+            {
+              "node": "Replace Me1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取飞书token2": {
+        "main": [
+          [
+            {
+              "node": "查询记录",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "排版",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片记录": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "聚合media_id": {
+        "main": [
+          [
+            {
+              "node": "图片记录",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片格式替换": {
+        "main": [
+          [
+            {
+              "node": "上传至微信草稿",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          []
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "上传至微信草稿1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.15",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-11T06:18:15.140Z",
+        "id": 85,
+        "workflowId": "1wxHFPuLevVm0vfs--aFG",
+        "versionId": "aa7c3ce7-72af-4fdb-b0e8-0bb2d8112280",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

@@ -1,0 +1,841 @@
+{
+  "updatedAt": "2026-01-19T14:28:50.754Z",
+  "createdAt": "2026-01-19T13:22:07.042Z",
+  "id": "kLER_yyl7YboFE5IYqIMU",
+  "name": "01_初始内容生成",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        2144,
+        256
+      ],
+      "id": "aeae3db7-6664-4bb8-80c8-a27a426771e8",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d4adbec6-c456-484f-9fc7-068972884f3b",
+              "name": "主题",
+              "value": "生活",
+              "type": "string"
+            },
+            {
+              "id": "f49372f2-46a4-4d7a-a6a2-b014acae72fe",
+              "name": "初始标题",
+              "value": "对未来迷茫，对现在焦虑",
+              "type": "string"
+            },
+            {
+              "id": "fd7d6edb-d11f-4713-9a5e-d96f49a9b2cc",
+              "name": "序号",
+              "value": "1",
+              "type": "string"
+            },
+            {
+              "id": "e830d4f5-a2db-400a-8efe-33a039a178c5",
+              "name": "记录ID",
+              "value": "recLqPQksk",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2352,
+        256
+      ],
+      "id": "d8294aba-b1b9-47be-93d3-9367f6561bde",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+              "name": "view_id",
+              "value": "vewSweWW3T",
+              "type": "string"
+            },
+            {
+              "id": "fec92b21-7859-433d-9ce2-1292728c795d",
+              "name": "主题",
+              "value": "={{ $json[\"主题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "f3f7983b-3e34-4fb5-b6f3-b344881a565c",
+              "name": "初始标题",
+              "value": "={{ $json[\"初始标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "d62a8cf2-d3d9-43ec-b8eb-b6145441a3ad",
+              "name": "序号",
+              "value": "={{ $json[\"序号\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "0c1f3656-5aa1-429d-bd8e-22badadae200",
+              "name": "记录ID",
+              "value": "={{ $json[\"记录ID\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2624,
+        -64
+      ],
+      "id": "582c0c03-e9e9-4afc-a5f5-80611a0fa282",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=主题： {{ $json[\"主题\"] }}\n标题： {{ $json[\"初始标题\"] }}",
+        "options": {
+          "systemMessage": "# Role：共情社会叙事者\n\n# Profile\n- language: 中文（涉及社会学术语时会使用英文辅助）\n- description: 一位深耕于当代中国社会肌理与个体情感世界的非虚构故事创作者。擅长将用户提供的抽象主题与具象标题，转化为扎根于现实生活、折射时代特征、涌动人性真情的高浓度微故事。\n- background: 基于对社会学、心理学、当代非虚构文学的深度研习，以及海量真实生活案例、新闻报道、人文纪实文本的分析训练，模拟具有敏锐观察力与深刻共情力的专业作家/社会记录者。\n- personality: 敏锐、温暖、求真、克制。以平实而精准的语言捕捉细节，拒绝过度煽情，相信真实的力量本身最具感染力。\n- expertise: 1) 当代社会现象洞察与微观解构；2) 普通人在特定社会环境下的情感与行为逻辑刻画；3) 非虚构叙事结构与节奏把控。\n- target_audience: 需要灵感的内容创作者（如自媒体、教育工作者）、寻求情感共鸣的普通读者、希望以故事形式理解某一社会议题的观察者。\n\n## Skills（定义角色的能力边界和知识库）\n\n1. **核心叙事构建技能**\n  - **主题-标题解构与锚定**: 精准解析用户提供的“主题”（如“内卷与倦怠”）与“标题”（如“周末的未读消息”）之间的潜在关联，找到将宏大社会议题融入具体生活切片的叙事锚点。\n  - **社会观察与细节还原**: 调用对中国当下（近5-10年）社会生活、工作模式、家庭关系、技术影响、城乡变迁等方面的知识库，选取最具时代感和真实性的细节（如“通勤地铁上的面容识别失败”、“家族微信群里的养生文章”、“租房App上的虚假精美图片”）。\n  - **情感逻辑与人物弧光**: 构建符合普通人心理和行为模式的情感发展路径。情感流露自然、有铺垫，避免突然的戏剧化转变，追求“于无声处听惊雷”的共鸣效果。\n\n2. **辅助事实与风格技能**\n  - **真实性基底核查**: 确保故事中涉及的社会规则（如职场潜规则、政策流程）、技术应用（如移动支付、社交软件功能）、生活成本（如租金、物价）符合普遍认知的现实。\n  - **非虚构笔触与节奏**: 使用简洁、清晰、富有画面感的语言。控制故事篇幅，在有限的字数内完成起承转合，结尾往往留有余韵或一个克制的观察，而非强行总结升华。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **真实高于一切**: 故事必须基于可观察、可推演的社会现实与人性逻辑。所有情节和情感转折都需有现实依据，杜绝纯粹幻想、魔幻或脱离时代背景的设定。\n  - **共情而非评判**: 以观察者和记录者的视角呈现故事，避免对故事中的人物或现象进行直接的道德审判或说教。情感通过细节和情节自然流露。\n\n2. **行为准则（在交互中如何表现）**:\n  - **深度确认**: 在生成故事前，必须通过提问或复述，与用户确认对“主题”与“标题”的理解是否准确，尤其是其中可能存在的隐喻或双关。\n  - **构思透明化（内部）**: 在创作过程中，内部逻辑应清晰：先根据主题锁定1-2个核心社会现象，再根据标题确定具体的人物身份、场景和冲突，最后将两者有机融合。\n  - **交付结构化**: 最终交付的故事应是一个完整的叙事段落，逻辑自洽，有开头、发展和结尾。**故事必须采用第一人称“我”的视角进行叙述。** 可在故事后以【叙事锚点】为标题，用一两句话简要说明故事是如何体现主题与标题的。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止虚假巧合**: 严禁使用“突然中彩票”、“失散多年亲人偶然相遇”等低概率事件作为故事的核心推动力。\n  - **禁止刻板印象**: 避免对任何地域、职业、年龄、性别群体进行简单化、标签化的描写。\n  - **禁止直白说教**: 禁止在故事中直接插入“这个故事告诉我们……”等说教性语句。\n  - **禁止滥用网络流行语**: 谨慎、克制地使用网络词汇，仅在其能精确反映人物性格或时代氛围时才使用，避免使故事显得轻浮或速朽。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 根据用户提供的“主题”和“标题”，生成一段约300-500字、贴合当下中国社会环境、真实且充满真情实感的小故事。**故事需以第一人称“我”的视角展开。**\n- 步骤1: **解构与确认** - 接收到“主题”(A)和“标题”(B)。分析A的抽象层次（是社会议题、情感状态还是哲学概念？），分析B的具体性（是场景、动作还是隐喻？）。向用户确认：“我将围绕‘A’这一主题，并以‘B’作为故事的核心标题/切入点，采用第一人称‘我’的视角进行创作，我的理解对吗？” 等待用户确认或修正。\n- 步骤2: **构思与锚定** - (内部思考) 1) **社会联想**: 针对主题A，联想2-3个最具代表性的当代生活场景或普遍困境（如“数字化孤独”、“代际沟通壁垒”、“城市生存压力”）。2) **标题定位**: 将标题B植入一个最可能发生、且能承载A主题的具体日常生活情境中（如将“未读消息”置于“深夜加班后的家庭微信群”）。3) **融合叙事**: 确定“我”的身份（普通如公司职员、新手父母、小镇青年、退休教师），构思一个在该情境下由B触发、并深刻体现A的小型事件或内心波动。\n- 步骤3: **创作与审查** - 调用Skills中所有能力进行写作。**写作时必须严格采用第一人称“我”的视角。** 完成后，严格对照Rules进行自我审查：检查细节真实性、情感逻辑是否自然、有无违反限制条件。最终，呈现以“我”为主角的故事正文，并在文末附上【叙事锚点】。\n- 预期结果: 一个能让读者感到“这故事仿佛就在我身边发生过”或“这就是我和我朋友的缩影”的高质量微故事，它紧密贴合用户给出的主题与标题，采用第一人称叙述，并在真实的社会背景下，自然流淌出真挚的情感。\n\n## Initialization\n作为“共情社会叙事者”，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的首要任务是基于用户确认后的主题和标题，创作出根植于现实、以第一人称“我”的视角叙述、打动人心的小故事。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2832,
+        -64
+      ],
+      "id": "62f39df0-15f1-4b55-a21f-05d1c2e7170f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        2832,
+        176
+      ],
+      "id": "5d56c9a6-15da-41f5-9cfb-4315ca3b40cd",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 这是适用于n8n的JavaScript代码节点\n// 假设输入的文本存储在 $input.first().json.text 中\n// 你可以根据实际的输入字段名调整\n\n// 获取输入的原始文本\nconst rawText = $input.first().json.output || '';\n\n// 定义提取函数\nfunction extractStoryData(text) {\n    // 初始化结果对象\n    const result = {\n        标题: '',\n        内容: '',\n        叙事锚点: ''\n    };\n\n    // 1. 提取标题：匹配 **标题内容** 格式，捕获中间的标题文本\n    const titleRegex = /\\*\\*(.+?)\\*\\*/;\n    const titleMatch = text.match(titleRegex);\n    if (titleMatch && titleMatch[1]) {\n        result.标题 = titleMatch[1].trim();\n    }\n\n    // 2. 提取叙事锚点：匹配【叙事锚点】后的内容\n    const anchorRegex = /【叙事锚点】\\s*(.+)/s; // s修饰符让.匹配换行符\n    const anchorMatch = text.match(anchorRegex);\n    if (anchorMatch && anchorMatch[1]) {\n        result.叙事锚点 = anchorMatch[1].trim();\n    }\n\n    // 3. 提取正文内容：标题之后、叙事锚点之前的部分\n    const contentStartIndex = titleMatch ? titleMatch.index + titleMatch[0].length : 0;\n    const contentEndIndex = anchorMatch ? anchorMatch.index : text.length;\n    let content = text.substring(contentStartIndex, contentEndIndex).trim();\n    \n    // 清理正文里多余的空行和换行符，保留合理的段落分隔\n    result.内容 = content.replace(/\\n{3,}/g, '\\n\\n').trim();\n\n    return result;\n}\n\n// 执行提取\nconst extractedData = extractStoryData(rawText);\n\n// 输出结果（n8n会将这个对象作为节点输出）\nreturn [\n    {\n        json: extractedData\n    }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3184,
+        -64
+      ],
+      "id": "38ae46c2-3ec7-4ccd-83aa-763b091a12e4",
+      "name": "clean_data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "613ff34c-4c44-41f5-a5d5-fb05ae7c5e97",
+              "name": "序号",
+              "value": "={{ $('设置参数').item.json[\"序号\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "b0c288c5-d310-4982-8387-b91498b7a810",
+              "name": "记录ID",
+              "value": "={{ $('设置参数').item.json[\"记录ID\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "193c0fc4-180c-4556-bf74-560aa00eb92f",
+              "name": "主题",
+              "value": "={{ $('设置参数').item.json[\"主题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "b2f56940-706c-497b-b79d-6fe81a0a9bf7",
+              "name": "初始标题",
+              "value": "={{ $('设置参数').item.json[\"初始标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "298c9499-6ae4-4530-84a0-3315a41896c9",
+              "name": "初始内容",
+              "value": "={{ $json[\"内容\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "0b4ab160-1ab3-406f-87ca-4cd8ce8ceab8",
+              "name": "叙事锚点",
+              "value": "={{ $json[\"叙事锚点\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3616,
+        -64
+      ],
+      "id": "c6bdc91e-6c5f-4130-973a-c6cc4996c4ef",
+      "name": "组装数据"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+        "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+        "record_id": "={{ $json[\"记录ID\"] }}",
+        "body": "={\"fields\":{\n  \"初始内容\":\"{{ $json[\"初始内容\"] }}\",\n  \"叙事锚点\":\"{{ $json[\"叙事锚点\"] }}\",\n  \"状态\":\"待生成\"\n}} "
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        3872,
+        -64
+      ],
+      "id": "625f5d18-e7f0-47ef-99bb-c3b9bdffca3b",
+      "name": "写入飞书多维表格",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 替换字符串中的转义字符为显式转义形式\n * @param {string} input - 需要处理的原始字符串\n * @returns {string} 替换后的字符串\n */\nfunction escapeSpecialChars(input) {\n    if (!input || typeof input !== 'string') {\n        return input || '';\n    }\n    \n    const escapeMap = {\n        '\\n': '\\\\n',\n        '\\r': '\\\\r',\n        '\\t': '\\\\t',\n        '\\b': '\\\\b',\n        '\\f': '\\\\f',\n        '\\\\': '\\\\\\\\'\n    };\n    \n    // 修正正则表达式（原表达式存在语法错误）\n    return input.replace(/[\\n\\r\\t\\b\\f\\\\]/g, match => escapeMap[match]);\n}\n\n// n8n中正确的字段引用与输出方式\nconst items = $input.all(); // 处理所有输入项（适配多数据场景）\nfor (const item of items) {\n    // 读取输入字段（对应你的输入键“你要输入的提示词”）\n    const originalString = item.json[\"内容\"];\n    const processedString = escapeSpecialChars(originalString);\n    // 写入输出字段（覆盖原字段或新增字段）\n    item.json[\"内容\"] = processedString; \n}\n\nreturn items; // 返回所有处理后的项"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3392,
+        -64
+      ],
+      "id": "1bae1e35-805f-4a0f-b75c-4720de0cfa08",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "主题"
+            },
+            {
+              "name": "初始标题"
+            },
+            {
+              "name": "序号"
+            },
+            {
+              "name": "记录ID"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        2384,
+        -64
+      ],
+      "id": "51977cfc-e38f-4028-88e6-38f1b62a74d2",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "clean_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_data": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "组装数据": {
+      "main": [
+        [
+          {
+            "node": "写入飞书多维表格",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "组装数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "cd41e97c-2ed6-4ea3-9dd8-8328404a0bfb",
+  "activeVersionId": "cd41e97c-2ed6-4ea3-9dd8-8328404a0bfb",
+  "versionCounter": 29,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:22:07.048Z",
+      "createdAt": "2026-01-19T13:22:07.048Z",
+      "role": "workflow:owner",
+      "workflowId": "kLER_yyl7YboFE5IYqIMU",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-01-19T14:29:02.000Z",
+    "createdAt": "2026-01-19T14:28:50.756Z",
+    "versionId": "cd41e97c-2ed6-4ea3-9dd8-8328404a0bfb",
+    "workflowId": "kLER_yyl7YboFE5IYqIMU",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          2144,
+          256
+        ],
+        "id": "aeae3db7-6664-4bb8-80c8-a27a426771e8",
+        "name": "When clicking ‘Execute workflow’",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "d4adbec6-c456-484f-9fc7-068972884f3b",
+                "name": "主题",
+                "value": "生活",
+                "type": "string"
+              },
+              {
+                "id": "f49372f2-46a4-4d7a-a6a2-b014acae72fe",
+                "name": "初始标题",
+                "value": "对未来迷茫，对现在焦虑",
+                "type": "string"
+              },
+              {
+                "id": "fd7d6edb-d11f-4713-9a5e-d96f49a9b2cc",
+                "name": "序号",
+                "value": "1",
+                "type": "string"
+              },
+              {
+                "id": "e830d4f5-a2db-400a-8efe-33a039a178c5",
+                "name": "记录ID",
+                "value": "recLqPQksk",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2352,
+          256
+        ],
+        "id": "d8294aba-b1b9-47be-93d3-9367f6561bde",
+        "name": "Edit Fields",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+                "name": "view_id",
+                "value": "vewSweWW3T",
+                "type": "string"
+              },
+              {
+                "id": "fec92b21-7859-433d-9ce2-1292728c795d",
+                "name": "主题",
+                "value": "={{ $json[\"主题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "f3f7983b-3e34-4fb5-b6f3-b344881a565c",
+                "name": "初始标题",
+                "value": "={{ $json[\"初始标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "d62a8cf2-d3d9-43ec-b8eb-b6145441a3ad",
+                "name": "序号",
+                "value": "={{ $json[\"序号\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "0c1f3656-5aa1-429d-bd8e-22badadae200",
+                "name": "记录ID",
+                "value": "={{ $json[\"记录ID\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2624,
+          -64
+        ],
+        "id": "582c0c03-e9e9-4afc-a5f5-80611a0fa282",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=主题： {{ $json[\"主题\"] }}\n标题： {{ $json[\"初始标题\"] }}",
+          "options": {
+            "systemMessage": "# Role：共情社会叙事者\n\n# Profile\n- language: 中文（涉及社会学术语时会使用英文辅助）\n- description: 一位深耕于当代中国社会肌理与个体情感世界的非虚构故事创作者。擅长将用户提供的抽象主题与具象标题，转化为扎根于现实生活、折射时代特征、涌动人性真情的高浓度微故事。\n- background: 基于对社会学、心理学、当代非虚构文学的深度研习，以及海量真实生活案例、新闻报道、人文纪实文本的分析训练，模拟具有敏锐观察力与深刻共情力的专业作家/社会记录者。\n- personality: 敏锐、温暖、求真、克制。以平实而精准的语言捕捉细节，拒绝过度煽情，相信真实的力量本身最具感染力。\n- expertise: 1) 当代社会现象洞察与微观解构；2) 普通人在特定社会环境下的情感与行为逻辑刻画；3) 非虚构叙事结构与节奏把控。\n- target_audience: 需要灵感的内容创作者（如自媒体、教育工作者）、寻求情感共鸣的普通读者、希望以故事形式理解某一社会议题的观察者。\n\n## Skills（定义角色的能力边界和知识库）\n\n1. **核心叙事构建技能**\n  - **主题-标题解构与锚定**: 精准解析用户提供的“主题”（如“内卷与倦怠”）与“标题”（如“周末的未读消息”）之间的潜在关联，找到将宏大社会议题融入具体生活切片的叙事锚点。\n  - **社会观察与细节还原**: 调用对中国当下（近5-10年）社会生活、工作模式、家庭关系、技术影响、城乡变迁等方面的知识库，选取最具时代感和真实性的细节（如“通勤地铁上的面容识别失败”、“家族微信群里的养生文章”、“租房App上的虚假精美图片”）。\n  - **情感逻辑与人物弧光**: 构建符合普通人心理和行为模式的情感发展路径。情感流露自然、有铺垫，避免突然的戏剧化转变，追求“于无声处听惊雷”的共鸣效果。\n\n2. **辅助事实与风格技能**\n  - **真实性基底核查**: 确保故事中涉及的社会规则（如职场潜规则、政策流程）、技术应用（如移动支付、社交软件功能）、生活成本（如租金、物价）符合普遍认知的现实。\n  - **非虚构笔触与节奏**: 使用简洁、清晰、富有画面感的语言。控制故事篇幅，在有限的字数内完成起承转合，结尾往往留有余韵或一个克制的观察，而非强行总结升华。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **真实高于一切**: 故事必须基于可观察、可推演的社会现实与人性逻辑。所有情节和情感转折都需有现实依据，杜绝纯粹幻想、魔幻或脱离时代背景的设定。\n  - **共情而非评判**: 以观察者和记录者的视角呈现故事，避免对故事中的人物或现象进行直接的道德审判或说教。情感通过细节和情节自然流露。\n\n2. **行为准则（在交互中如何表现）**:\n  - **深度确认**: 在生成故事前，必须通过提问或复述，与用户确认对“主题”与“标题”的理解是否准确，尤其是其中可能存在的隐喻或双关。\n  - **构思透明化（内部）**: 在创作过程中，内部逻辑应清晰：先根据主题锁定1-2个核心社会现象，再根据标题确定具体的人物身份、场景和冲突，最后将两者有机融合。\n  - **交付结构化**: 最终交付的故事应是一个完整的叙事段落，逻辑自洽，有开头、发展和结尾。**故事必须采用第一人称“我”的视角进行叙述。** 可在故事后以【叙事锚点】为标题，用一两句话简要说明故事是如何体现主题与标题的。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止虚假巧合**: 严禁使用“突然中彩票”、“失散多年亲人偶然相遇”等低概率事件作为故事的核心推动力。\n  - **禁止刻板印象**: 避免对任何地域、职业、年龄、性别群体进行简单化、标签化的描写。\n  - **禁止直白说教**: 禁止在故事中直接插入“这个故事告诉我们……”等说教性语句。\n  - **禁止滥用网络流行语**: 谨慎、克制地使用网络词汇，仅在其能精确反映人物性格或时代氛围时才使用，避免使故事显得轻浮或速朽。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 根据用户提供的“主题”和“标题”，生成一段约300-500字、贴合当下中国社会环境、真实且充满真情实感的小故事。**故事需以第一人称“我”的视角展开。**\n- 步骤1: **解构与确认** - 接收到“主题”(A)和“标题”(B)。分析A的抽象层次（是社会议题、情感状态还是哲学概念？），分析B的具体性（是场景、动作还是隐喻？）。向用户确认：“我将围绕‘A’这一主题，并以‘B’作为故事的核心标题/切入点，采用第一人称‘我’的视角进行创作，我的理解对吗？” 等待用户确认或修正。\n- 步骤2: **构思与锚定** - (内部思考) 1) **社会联想**: 针对主题A，联想2-3个最具代表性的当代生活场景或普遍困境（如“数字化孤独”、“代际沟通壁垒”、“城市生存压力”）。2) **标题定位**: 将标题B植入一个最可能发生、且能承载A主题的具体日常生活情境中（如将“未读消息”置于“深夜加班后的家庭微信群”）。3) **融合叙事**: 确定“我”的身份（普通如公司职员、新手父母、小镇青年、退休教师），构思一个在该情境下由B触发、并深刻体现A的小型事件或内心波动。\n- 步骤3: **创作与审查** - 调用Skills中所有能力进行写作。**写作时必须严格采用第一人称“我”的视角。** 完成后，严格对照Rules进行自我审查：检查细节真实性、情感逻辑是否自然、有无违反限制条件。最终，呈现以“我”为主角的故事正文，并在文末附上【叙事锚点】。\n- 预期结果: 一个能让读者感到“这故事仿佛就在我身边发生过”或“这就是我和我朋友的缩影”的高质量微故事，它紧密贴合用户给出的主题与标题，采用第一人称叙述，并在真实的社会背景下，自然流淌出真挚的情感。\n\n## Initialization\n作为“共情社会叙事者”，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的首要任务是基于用户确认后的主题和标题，创作出根植于现实、以第一人称“我”的视角叙述、打动人心的小故事。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          2832,
+          -64
+        ],
+        "id": "62f39df0-15f1-4b55-a21f-05d1c2e7170f",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          2832,
+          176
+        ],
+        "id": "5d56c9a6-15da-41f5-9cfb-4315ca3b40cd",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 这是适用于n8n的JavaScript代码节点\n// 假设输入的文本存储在 $input.first().json.text 中\n// 你可以根据实际的输入字段名调整\n\n// 获取输入的原始文本\nconst rawText = $input.first().json.output || '';\n\n// 定义提取函数\nfunction extractStoryData(text) {\n    // 初始化结果对象\n    const result = {\n        标题: '',\n        内容: '',\n        叙事锚点: ''\n    };\n\n    // 1. 提取标题：匹配 **标题内容** 格式，捕获中间的标题文本\n    const titleRegex = /\\*\\*(.+?)\\*\\*/;\n    const titleMatch = text.match(titleRegex);\n    if (titleMatch && titleMatch[1]) {\n        result.标题 = titleMatch[1].trim();\n    }\n\n    // 2. 提取叙事锚点：匹配【叙事锚点】后的内容\n    const anchorRegex = /【叙事锚点】\\s*(.+)/s; // s修饰符让.匹配换行符\n    const anchorMatch = text.match(anchorRegex);\n    if (anchorMatch && anchorMatch[1]) {\n        result.叙事锚点 = anchorMatch[1].trim();\n    }\n\n    // 3. 提取正文内容：标题之后、叙事锚点之前的部分\n    const contentStartIndex = titleMatch ? titleMatch.index + titleMatch[0].length : 0;\n    const contentEndIndex = anchorMatch ? anchorMatch.index : text.length;\n    let content = text.substring(contentStartIndex, contentEndIndex).trim();\n    \n    // 清理正文里多余的空行和换行符，保留合理的段落分隔\n    result.内容 = content.replace(/\\n{3,}/g, '\\n\\n').trim();\n\n    return result;\n}\n\n// 执行提取\nconst extractedData = extractStoryData(rawText);\n\n// 输出结果（n8n会将这个对象作为节点输出）\nreturn [\n    {\n        json: extractedData\n    }\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3184,
+          -64
+        ],
+        "id": "38ae46c2-3ec7-4ccd-83aa-763b091a12e4",
+        "name": "clean_data"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "613ff34c-4c44-41f5-a5d5-fb05ae7c5e97",
+                "name": "序号",
+                "value": "={{ $('设置参数').item.json[\"序号\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "b0c288c5-d310-4982-8387-b91498b7a810",
+                "name": "记录ID",
+                "value": "={{ $('设置参数').item.json[\"记录ID\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "193c0fc4-180c-4556-bf74-560aa00eb92f",
+                "name": "主题",
+                "value": "={{ $('设置参数').item.json[\"主题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "b2f56940-706c-497b-b79d-6fe81a0a9bf7",
+                "name": "初始标题",
+                "value": "={{ $('设置参数').item.json[\"初始标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "298c9499-6ae4-4530-84a0-3315a41896c9",
+                "name": "初始内容",
+                "value": "={{ $json[\"内容\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "0b4ab160-1ab3-406f-87ca-4cd8ce8ceab8",
+                "name": "叙事锚点",
+                "value": "={{ $json[\"叙事锚点\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3616,
+          -64
+        ],
+        "id": "c6bdc91e-6c5f-4130-973a-c6cc4996c4ef",
+        "name": "组装数据"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:update",
+          "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+          "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+          "record_id": "={{ $json[\"记录ID\"] }}",
+          "body": "={\"fields\":{\n  \"初始内容\":\"{{ $json[\"初始内容\"] }}\",\n  \"叙事锚点\":\"{{ $json[\"叙事锚点\"] }}\",\n  \"状态\":\"待生成\"\n}} "
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          3872,
+          -64
+        ],
+        "id": "625f5d18-e7f0-47ef-99bb-c3b9bdffca3b",
+        "name": "写入飞书多维表格",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "/**\n * 替换字符串中的转义字符为显式转义形式\n * @param {string} input - 需要处理的原始字符串\n * @returns {string} 替换后的字符串\n */\nfunction escapeSpecialChars(input) {\n    if (!input || typeof input !== 'string') {\n        return input || '';\n    }\n    \n    const escapeMap = {\n        '\\n': '\\\\n',\n        '\\r': '\\\\r',\n        '\\t': '\\\\t',\n        '\\b': '\\\\b',\n        '\\f': '\\\\f',\n        '\\\\': '\\\\\\\\'\n    };\n    \n    // 修正正则表达式（原表达式存在语法错误）\n    return input.replace(/[\\n\\r\\t\\b\\f\\\\]/g, match => escapeMap[match]);\n}\n\n// n8n中正确的字段引用与输出方式\nconst items = $input.all(); // 处理所有输入项（适配多数据场景）\nfor (const item of items) {\n    // 读取输入字段（对应你的输入键“你要输入的提示词”）\n    const originalString = item.json[\"内容\"];\n    const processedString = escapeSpecialChars(originalString);\n    // 写入输出字段（覆盖原字段或新增字段）\n    item.json[\"内容\"] = processedString; \n}\n\nreturn items; // 返回所有处理后的项"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3392,
+          -64
+        ],
+        "id": "1bae1e35-805f-4a0f-b75c-4720de0cfa08",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "主题"
+              },
+              {
+                "name": "初始标题"
+              },
+              {
+                "name": "序号"
+              },
+              {
+                "name": "记录ID"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          2384,
+          -64
+        ],
+        "id": "51977cfc-e38f-4028-88e6-38f1b62a74d2",
+        "name": "When Executed by Another Workflow"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "clean_data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "clean_data": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "组装数据": {
+        "main": [
+          [
+            {
+              "node": "写入飞书多维表格",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "组装数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.0",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-01-19T14:29:02.709Z",
+        "id": 1,
+        "workflowId": "kLER_yyl7YboFE5IYqIMU",
+        "versionId": "cd41e97c-2ed6-4ea3-9dd8-8328404a0bfb",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

@@ -1,0 +1,2452 @@
+{
+  "updatedAt": "2026-02-05T02:17:12.103Z",
+  "createdAt": "2026-01-24T07:07:31.268Z",
+  "id": "nlWXDhbcdzeEiid4qMBJu",
+  "name": "每日信息获取",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6355c56a-27f3-4061-93f7-deefb21338cf",
+              "name": "飞书token",
+              "value": "1",
+              "type": "string"
+            },
+            {
+              "id": "579ce39e-247f-4334-b766-d997b5f18fb9",
+              "name": "多维表格id",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "7518e4b3-c38f-412d-8385-1b1810b662d4",
+              "name": "veiw_id",
+              "value": "2",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -576,
+        -48
+      ],
+      "id": "f24515dc-3636-477d-8448-47bdf1262298",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/rednote",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        -880
+      ],
+      "id": "f9772b6f-2fad-4fa0-9b68-b4059070b4de",
+      "name": "获取小红书热点信息"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/douyin",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        -672
+      ],
+      "id": "143d1ceb-2e10-45fb-b4a6-a65228dc430a",
+      "name": "获取抖音热点信息"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/bili",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        -464
+      ],
+      "id": "0d1d1506-1c63-4c5a-b2ed-812cfc77567d",
+      "name": "获取bilibili热点信息"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/zhihu",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        -48
+      ],
+      "id": "804d648c-e423-4d13-942b-ed1f53640c19",
+      "name": "获取知乎信息"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/weibo",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        -256
+      ],
+      "id": "972b1b20-4a7b-4f14-b48b-741f442e4de8",
+      "name": "获取微博热点信息3"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/ai-news",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -192,
+        720
+      ],
+      "id": "9791a785-cbf2-46eb-8c86-026485675fe7",
+      "name": "获取AI热点信息6"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/60s",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -192,
+        464
+      ],
+      "id": "3cc06d05-9e66-47e2-a7de-9578c2ab81c9",
+      "name": "60 秒读懂世界"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "03e64cc4-a283-4645-ab42-709b39634123",
+              "name": "标题",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "89aa9bea-e313-412a-ab9a-926d6a0a1f83",
+              "name": "排名",
+              "value": "={{ $json.rank }}",
+              "type": "number"
+            },
+            {
+              "id": "ba28a8ab-989f-4b56-ad69-713262d4fe59",
+              "name": "关键词类型",
+              "value": "={{ $json.word_type }}",
+              "type": "string"
+            },
+            {
+              "id": "4f4a9b61-9e64-4063-baa1-d113d955730b",
+              "name": "热度",
+              "value": "={{ $json.score }}",
+              "type": "string"
+            },
+            {
+              "id": "3d14ef19-4789-47bd-ac39-9f259a0b156b",
+              "name": "链接",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        288,
+        -880
+      ],
+      "id": "67911542-9c9a-4d61-9743-050892c6c305",
+      "name": "设置参数1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1f0403ce-66ec-4873-bbf2-1ae1d4acb425",
+              "name": "标题",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "0519d9f5-b1e0-446d-9c5b-2e50d4433a1b",
+              "name": "热度",
+              "value": "={{ $json.hot_value }}",
+              "type": "number"
+            },
+            {
+              "id": "a6c664fe-ceaa-4079-8594-3f7429fa3f39",
+              "name": "详情",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "8d30d89a-4f3b-4557-aa90-4d603f958386",
+              "name": "封面图",
+              "value": "={{ $json.cover }}",
+              "type": "string"
+            },
+            {
+              "id": "c787ae3a-bdf6-4570-933c-5933a4c7e507",
+              "name": "事件发生时间",
+              "value": "={{ $json.event_time }}",
+              "type": "string"
+            },
+            {
+              "id": "1d4a6b35-5a2e-407a-92d0-fdce8d37e5f0",
+              "name": "热搜激活时间",
+              "value": "={{ $json.active_time }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        -672
+      ],
+      "id": "c5d649f7-451a-4b88-807a-d6c0642f3f0c",
+      "name": "设置参数2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1551e52-e4af-42ea-8f47-5dde1b736547",
+              "name": "标题",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "fb019d89-5958-42bc-9014-4c25ab6ae4f9",
+              "name": "链接",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        -464
+      ],
+      "id": "a8d982b6-382b-4a97-ad27-85521032b0a5",
+      "name": "设置参数3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e1e21d3f-9a60-4d6b-b8d5-2e96366b7d35",
+              "name": "标题",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "aa788f27-274c-4439-a9f6-7a252928d7de",
+              "name": "热度",
+              "value": "={{ $json.hot_value }}",
+              "type": "number"
+            },
+            {
+              "id": "f7416d48-1266-4cf9-bbbe-55f13c534c37",
+              "name": "链接",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        -256
+      ],
+      "id": "1bd6ad8d-542c-45ed-b894-853297b55c1c",
+      "name": "设置参数4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "22f09983-afad-40a8-94d3-2036bdfa0253",
+              "name": "标题",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "6ec473fd-268d-49cf-8967-4e79a3724cbb",
+              "name": "详情",
+              "value": "={{ $json.detail }}",
+              "type": "string"
+            },
+            {
+              "id": "5d45c4d6-1d89-4e7d-9e60-1c7d835759f5",
+              "name": "封面图",
+              "value": "={{ $json.cover }}",
+              "type": "string"
+            },
+            {
+              "id": "bf785ffc-6974-4e1b-861a-607b8f336807",
+              "name": "热度",
+              "value": "={{ $json.hot_value_desc }}",
+              "type": "string"
+            },
+            {
+              "id": "0f297fea-53b1-47c7-8a7b-714f3b486abc",
+              "name": "回答数",
+              "value": "={{ $json.answer_cnt }}",
+              "type": "number"
+            },
+            {
+              "id": "0fa3a407-6493-465f-b722-1c66c8e7104b",
+              "name": "关注数",
+              "value": "={{ $json.follower_cnt }}",
+              "type": "number"
+            },
+            {
+              "id": "db584847-567b-42c1-bd4c-3840ba5fb5ad",
+              "name": "评论数",
+              "value": "={{ $json.comment_cnt }}",
+              "type": "number"
+            },
+            {
+              "id": "41e0f73a-7040-4395-9fda-0c59def89827",
+              "name": "链接",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        -48
+      ],
+      "id": "7dc4f76e-bf5c-43e0-8b7e-69d50db26322",
+      "name": "设置参数5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "daf0edcf-f117-4cd7-89d9-cff5fe4323a6",
+              "name": "世界新闻",
+              "value": "={{ $json.data.news }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        464
+      ],
+      "id": "2f102fa8-c022-4ec9-bff4-b6f1f488ba06",
+      "name": "设置参数6"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "48aed072-fed4-4f50-ad27-2146c20e65fa",
+              "name": "标题",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "551d1e3d-c6a5-4662-8275-f0225fad5dd3",
+              "name": "详情",
+              "value": "={{ $json.detail }}",
+              "type": "string"
+            },
+            {
+              "id": "5384af64-a329-4a11-a0de-42ade43bb865",
+              "name": "链接",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "143b1124-1ac6-441c-a74f-630b3e563baa",
+              "name": "日期",
+              "value": "={{ $json.date }}",
+              "type": "string"
+            },
+            {
+              "id": "f2bc7e0e-e684-460c-b7e9-e05461c32170",
+              "name": "关于",
+              "value": "={{ $json.source }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        720
+      ],
+      "id": "4964c3a1-f12c-48ea-9b93-b3377572fc3c",
+      "name": "设置参数7"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -880
+      ],
+      "id": "45938bbc-750c-42bb-b501-1f9fcdc09d07",
+      "name": "设置键名1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -672
+      ],
+      "id": "48450640-9651-4781-92d9-a14dbe2f9f04",
+      "name": "设置键名2"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -464
+      ],
+      "id": "985e0832-3a50-4259-81a2-6fe47818d321",
+      "name": "设置键名3"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -256
+      ],
+      "id": "4585f376-69bb-4a63-8ccc-f795210f3b97",
+      "name": "设置键名4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "22f09983-afad-40a8-94d3-2036bdfa0253",
+              "name": "标题",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "5d45c4d6-1d89-4e7d-9e60-1c7d835759f5",
+              "name": "封面图",
+              "value": "={{ $json.cover }}",
+              "type": "string"
+            },
+            {
+              "id": "bf785ffc-6974-4e1b-861a-607b8f336807",
+              "name": "热度",
+              "value": "={{ $json.hot_value }}",
+              "type": "string"
+            },
+            {
+              "id": "41e0f73a-7040-4395-9fda-0c59def89827",
+              "name": "链接",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        192
+      ],
+      "id": "65f8d59d-1e17-4a7e-b819-635d2be4072d",
+      "name": "设置参数8"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:4399/v2/toutiao",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        192
+      ],
+      "id": "1033b6ce-a359-48db-9d6c-b4f45e6e3407",
+      "name": "获取头条信息1"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -48
+      ],
+      "id": "8129b42d-2e5a-4965-976e-8f2433174386",
+      "name": "设置键名5"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        64,
+        192
+      ],
+      "id": "8ea51347-d4e7-480b-b2fc-6b1e754c075a",
+      "name": "设置键名6"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.news",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        64,
+        720
+      ],
+      "id": "e21af3bf-03a5-4a54-a3a0-74bf0e28c2a8",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "小红书",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -880
+      ],
+      "id": "ee8be5f7-ae63-4d1c-a56e-6950d3f908ca",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "抖音",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        512,
+        -672
+      ],
+      "id": "48ac91b3-7981-4cd3-9b6b-1333761f4bec",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "bilibili",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -464
+      ],
+      "id": "1b7e338c-ac76-4ea0-9e48-d4f9b6e4af90",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "微博",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -256
+      ],
+      "id": "85193f16-fb22-4755-856b-1fe19fc6ca67",
+      "name": "Aggregate3"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "知乎",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -48
+      ],
+      "id": "344adc48-c04b-4457-94dc-5decf7e4bdef",
+      "name": "Aggregate4"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "头条",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        528,
+        192
+      ],
+      "id": "3d2dcc94-b827-4b1d-b3f1-ede9a92d474b",
+      "name": "Aggregate5"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "世界新闻",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        512,
+        464
+      ],
+      "id": "980c4120-79d9-4b38-87a8-3aaf1ba58db9",
+      "name": "Aggregate6"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "AI资讯",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        512,
+        720
+      ],
+      "id": "2481329c-72ba-433f-b734-f4bac50c70e7",
+      "name": "Aggregate7"
+    },
+    {
+      "parameters": {
+        "numberInputs": 8
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1008,
+        -240
+      ],
+      "id": "ba4c536f-0435-4b55-a96a-18f53e30a7ba",
+      "name": "信息"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "信息",
+        "options": {
+          "includeBinaries": true
+        }
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1264,
+        -144
+      ],
+      "id": "2e699d9a-af00-4e4c-b6fc-b2726aa33f34",
+      "name": "Aggregate8"
+    },
+    {
+      "parameters": {
+        "path": "information-everyday",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -848,
+        -48
+      ],
+      "id": "063555c6-abf4-4591-b67c-f53f0a5dc571",
+      "name": "Webhook",
+      "webhookId": "3c683026-158b-4448-b56b-4b9f7a045573"
+    }
+  ],
+  "connections": {
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "获取小红书热点信息",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "获取抖音热点信息",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "获取bilibili热点信息",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "获取微博热点信息3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "获取知乎信息",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "60 秒读懂世界",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "获取AI热点信息6",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "获取头条信息1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取小红书热点信息": {
+      "main": [
+        [
+          {
+            "node": "设置键名1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取抖音热点信息": {
+      "main": [
+        [
+          {
+            "node": "设置键名2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取bilibili热点信息": {
+      "main": [
+        [
+          {
+            "node": "设置键名3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取微博热点信息3": {
+      "main": [
+        [
+          {
+            "node": "设置键名4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取知乎信息": {
+      "main": [
+        [
+          {
+            "node": "设置键名5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "60 秒读懂世界": {
+      "main": [
+        [
+          {
+            "node": "设置参数6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取AI热点信息6": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数6": {
+      "main": [
+        [
+          {
+            "node": "Aggregate6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数3": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数4": {
+      "main": [
+        [
+          {
+            "node": "Aggregate3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数5": {
+      "main": [
+        [
+          {
+            "node": "Aggregate4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数7": {
+      "main": [
+        [
+          {
+            "node": "Aggregate7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置键名1": {
+      "main": [
+        [
+          {
+            "node": "设置参数1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置键名2": {
+      "main": [
+        [
+          {
+            "node": "设置参数2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置键名3": {
+      "main": [
+        [
+          {
+            "node": "设置参数3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置键名4": {
+      "main": [
+        [
+          {
+            "node": "设置参数4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取头条信息1": {
+      "main": [
+        [
+          {
+            "node": "设置键名6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数8": {
+      "main": [
+        [
+          {
+            "node": "Aggregate5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置键名5": {
+      "main": [
+        [
+          {
+            "node": "设置参数5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置键名6": {
+      "main": [
+        [
+          {
+            "node": "设置参数8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "设置参数7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Aggregate3": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Aggregate4": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Aggregate5": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "Aggregate6": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 6
+          }
+        ]
+      ]
+    },
+    "Aggregate7": {
+      "main": [
+        [
+          {
+            "node": "信息",
+            "type": "main",
+            "index": 7
+          }
+        ]
+      ]
+    },
+    "信息": {
+      "main": [
+        [
+          {
+            "node": "Aggregate8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Shanghai",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "c3c96dd9-0b9f-467f-b6f5-ebc44abe166b",
+  "activeVersionId": "c3c96dd9-0b9f-467f-b6f5-ebc44abe166b",
+  "versionCounter": 41,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-24T07:07:31.273Z",
+      "createdAt": "2026-01-24T07:07:31.273Z",
+      "role": "workflow:owner",
+      "workflowId": "nlWXDhbcdzeEiid4qMBJu",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-04T08:23:10.000Z",
+    "createdAt": "2026-02-04T08:23:08.498Z",
+    "versionId": "c3c96dd9-0b9f-467f-b6f5-ebc44abe166b",
+    "workflowId": "nlWXDhbcdzeEiid4qMBJu",
+    "nodes": [
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "6355c56a-27f3-4061-93f7-deefb21338cf",
+                "name": "飞书token",
+                "value": "1",
+                "type": "string"
+              },
+              {
+                "id": "579ce39e-247f-4334-b766-d997b5f18fb9",
+                "name": "多维表格id",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "7518e4b3-c38f-412d-8385-1b1810b662d4",
+                "name": "veiw_id",
+                "value": "2",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -576,
+          -48
+        ],
+        "id": "f24515dc-3636-477d-8448-47bdf1262298",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/rednote",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -176,
+          -880
+        ],
+        "id": "f9772b6f-2fad-4fa0-9b68-b4059070b4de",
+        "name": "获取小红书热点信息"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/douyin",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -176,
+          -672
+        ],
+        "id": "143d1ceb-2e10-45fb-b4a6-a65228dc430a",
+        "name": "获取抖音热点信息"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/bili",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -176,
+          -464
+        ],
+        "id": "0d1d1506-1c63-4c5a-b2ed-812cfc77567d",
+        "name": "获取bilibili热点信息"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/zhihu",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -176,
+          -48
+        ],
+        "id": "804d648c-e423-4d13-942b-ed1f53640c19",
+        "name": "获取知乎信息"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/weibo",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -176,
+          -256
+        ],
+        "id": "972b1b20-4a7b-4f14-b48b-741f442e4de8",
+        "name": "获取微博热点信息3"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/ai-news",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "date"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -192,
+          720
+        ],
+        "id": "9791a785-cbf2-46eb-8c86-026485675fe7",
+        "name": "获取AI热点信息6"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/60s",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -192,
+          464
+        ],
+        "id": "3cc06d05-9e66-47e2-a7de-9578c2ab81c9",
+        "name": "60 秒读懂世界"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "03e64cc4-a283-4645-ab42-709b39634123",
+                "name": "标题",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "89aa9bea-e313-412a-ab9a-926d6a0a1f83",
+                "name": "排名",
+                "value": "={{ $json.rank }}",
+                "type": "number"
+              },
+              {
+                "id": "ba28a8ab-989f-4b56-ad69-713262d4fe59",
+                "name": "关键词类型",
+                "value": "={{ $json.word_type }}",
+                "type": "string"
+              },
+              {
+                "id": "4f4a9b61-9e64-4063-baa1-d113d955730b",
+                "name": "热度",
+                "value": "={{ $json.score }}",
+                "type": "string"
+              },
+              {
+                "id": "3d14ef19-4789-47bd-ac39-9f259a0b156b",
+                "name": "链接",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          288,
+          -880
+        ],
+        "id": "67911542-9c9a-4d61-9743-050892c6c305",
+        "name": "设置参数1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1f0403ce-66ec-4873-bbf2-1ae1d4acb425",
+                "name": "标题",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "0519d9f5-b1e0-446d-9c5b-2e50d4433a1b",
+                "name": "热度",
+                "value": "={{ $json.hot_value }}",
+                "type": "number"
+              },
+              {
+                "id": "a6c664fe-ceaa-4079-8594-3f7429fa3f39",
+                "name": "详情",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              },
+              {
+                "id": "8d30d89a-4f3b-4557-aa90-4d603f958386",
+                "name": "封面图",
+                "value": "={{ $json.cover }}",
+                "type": "string"
+              },
+              {
+                "id": "c787ae3a-bdf6-4570-933c-5933a4c7e507",
+                "name": "事件发生时间",
+                "value": "={{ $json.event_time }}",
+                "type": "string"
+              },
+              {
+                "id": "1d4a6b35-5a2e-407a-92d0-fdce8d37e5f0",
+                "name": "热搜激活时间",
+                "value": "={{ $json.active_time }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          304,
+          -672
+        ],
+        "id": "c5d649f7-451a-4b88-807a-d6c0642f3f0c",
+        "name": "设置参数2"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "a1551e52-e4af-42ea-8f47-5dde1b736547",
+                "name": "标题",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "fb019d89-5958-42bc-9014-4c25ab6ae4f9",
+                "name": "链接",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          304,
+          -464
+        ],
+        "id": "a8d982b6-382b-4a97-ad27-85521032b0a5",
+        "name": "设置参数3"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e1e21d3f-9a60-4d6b-b8d5-2e96366b7d35",
+                "name": "标题",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "aa788f27-274c-4439-a9f6-7a252928d7de",
+                "name": "热度",
+                "value": "={{ $json.hot_value }}",
+                "type": "number"
+              },
+              {
+                "id": "f7416d48-1266-4cf9-bbbe-55f13c534c37",
+                "name": "链接",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          320,
+          -256
+        ],
+        "id": "1bd6ad8d-542c-45ed-b894-853297b55c1c",
+        "name": "设置参数4"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "22f09983-afad-40a8-94d3-2036bdfa0253",
+                "name": "标题",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "6ec473fd-268d-49cf-8967-4e79a3724cbb",
+                "name": "详情",
+                "value": "={{ $json.detail }}",
+                "type": "string"
+              },
+              {
+                "id": "5d45c4d6-1d89-4e7d-9e60-1c7d835759f5",
+                "name": "封面图",
+                "value": "={{ $json.cover }}",
+                "type": "string"
+              },
+              {
+                "id": "bf785ffc-6974-4e1b-861a-607b8f336807",
+                "name": "热度",
+                "value": "={{ $json.hot_value_desc }}",
+                "type": "string"
+              },
+              {
+                "id": "0f297fea-53b1-47c7-8a7b-714f3b486abc",
+                "name": "回答数",
+                "value": "={{ $json.answer_cnt }}",
+                "type": "number"
+              },
+              {
+                "id": "0fa3a407-6493-465f-b722-1c66c8e7104b",
+                "name": "关注数",
+                "value": "={{ $json.follower_cnt }}",
+                "type": "number"
+              },
+              {
+                "id": "db584847-567b-42c1-bd4c-3840ba5fb5ad",
+                "name": "评论数",
+                "value": "={{ $json.comment_cnt }}",
+                "type": "number"
+              },
+              {
+                "id": "41e0f73a-7040-4395-9fda-0c59def89827",
+                "name": "链接",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          320,
+          -48
+        ],
+        "id": "7dc4f76e-bf5c-43e0-8b7e-69d50db26322",
+        "name": "设置参数5"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "daf0edcf-f117-4cd7-89d9-cff5fe4323a6",
+                "name": "世界新闻",
+                "value": "={{ $json.data.news }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          304,
+          464
+        ],
+        "id": "2f102fa8-c022-4ec9-bff4-b6f1f488ba06",
+        "name": "设置参数6"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "48aed072-fed4-4f50-ad27-2146c20e65fa",
+                "name": "标题",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "551d1e3d-c6a5-4662-8275-f0225fad5dd3",
+                "name": "详情",
+                "value": "={{ $json.detail }}",
+                "type": "string"
+              },
+              {
+                "id": "5384af64-a329-4a11-a0de-42ade43bb865",
+                "name": "链接",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              },
+              {
+                "id": "143b1124-1ac6-441c-a74f-630b3e563baa",
+                "name": "日期",
+                "value": "={{ $json.date }}",
+                "type": "string"
+              },
+              {
+                "id": "f2bc7e0e-e684-460c-b7e9-e05461c32170",
+                "name": "关于",
+                "value": "={{ $json.source }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          304,
+          720
+        ],
+        "id": "4964c3a1-f12c-48ea-9b93-b3377572fc3c",
+        "name": "设置参数7"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -880
+        ],
+        "id": "45938bbc-750c-42bb-b501-1f9fcdc09d07",
+        "name": "设置键名1"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -672
+        ],
+        "id": "48450640-9651-4781-92d9-a14dbe2f9f04",
+        "name": "设置键名2"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -464
+        ],
+        "id": "985e0832-3a50-4259-81a2-6fe47818d321",
+        "name": "设置键名3"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -256
+        ],
+        "id": "4585f376-69bb-4a63-8ccc-f795210f3b97",
+        "name": "设置键名4"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "22f09983-afad-40a8-94d3-2036bdfa0253",
+                "name": "标题",
+                "value": "={{ $json.title }}",
+                "type": "string"
+              },
+              {
+                "id": "5d45c4d6-1d89-4e7d-9e60-1c7d835759f5",
+                "name": "封面图",
+                "value": "={{ $json.cover }}",
+                "type": "string"
+              },
+              {
+                "id": "bf785ffc-6974-4e1b-861a-607b8f336807",
+                "name": "热度",
+                "value": "={{ $json.hot_value }}",
+                "type": "string"
+              },
+              {
+                "id": "41e0f73a-7040-4395-9fda-0c59def89827",
+                "name": "链接",
+                "value": "={{ $json.link }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          320,
+          192
+        ],
+        "id": "65f8d59d-1e17-4a7e-b819-635d2be4072d",
+        "name": "设置参数8"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:4399/v2/toutiao",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -176,
+          192
+        ],
+        "id": "1033b6ce-a359-48db-9d6c-b4f45e6e3407",
+        "name": "获取头条信息1"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -48
+        ],
+        "id": "8129b42d-2e5a-4965-976e-8f2433174386",
+        "name": "设置键名5"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          64,
+          192
+        ],
+        "id": "8ea51347-d4e7-480b-b2fc-6b1e754c075a",
+        "name": "设置键名6"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "data.news",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          64,
+          720
+        ],
+        "id": "e21af3bf-03a5-4a54-a3a0-74bf0e28c2a8",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "小红书",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          496,
+          -880
+        ],
+        "id": "ee8be5f7-ae63-4d1c-a56e-6950d3f908ca",
+        "name": "Aggregate"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "抖音",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          512,
+          -672
+        ],
+        "id": "48ac91b3-7981-4cd3-9b6b-1333761f4bec",
+        "name": "Aggregate1"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "bilibili",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          528,
+          -464
+        ],
+        "id": "1b7e338c-ac76-4ea0-9e48-d4f9b6e4af90",
+        "name": "Aggregate2"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "微博",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          528,
+          -256
+        ],
+        "id": "85193f16-fb22-4755-856b-1fe19fc6ca67",
+        "name": "Aggregate3"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "知乎",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          528,
+          -48
+        ],
+        "id": "344adc48-c04b-4457-94dc-5decf7e4bdef",
+        "name": "Aggregate4"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "头条",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          528,
+          192
+        ],
+        "id": "3d2dcc94-b827-4b1d-b3f1-ede9a92d474b",
+        "name": "Aggregate5"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "世界新闻",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          512,
+          464
+        ],
+        "id": "980c4120-79d9-4b38-87a8-3aaf1ba58db9",
+        "name": "Aggregate6"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "AI资讯",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          512,
+          720
+        ],
+        "id": "2481329c-72ba-433f-b734-f4bac50c70e7",
+        "name": "Aggregate7"
+      },
+      {
+        "parameters": {
+          "numberInputs": 8
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          1008,
+          -240
+        ],
+        "id": "ba4c536f-0435-4b55-a96a-18f53e30a7ba",
+        "name": "信息"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "信息",
+          "options": {
+            "includeBinaries": true
+          }
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          1264,
+          -144
+        ],
+        "id": "2e699d9a-af00-4e4c-b6fc-b2726aa33f34",
+        "name": "Aggregate8"
+      },
+      {
+        "parameters": {
+          "path": "information-everyday",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -848,
+          -48
+        ],
+        "id": "063555c6-abf4-4591-b67c-f53f0a5dc571",
+        "name": "Webhook",
+        "webhookId": "3c683026-158b-4448-b56b-4b9f7a045573"
+      }
+    ],
+    "connections": {
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "获取小红书热点信息",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "获取抖音热点信息",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "获取bilibili热点信息",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "获取微博热点信息3",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "获取知乎信息",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "60 秒读懂世界",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "获取AI热点信息6",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "获取头条信息1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取小红书热点信息": {
+        "main": [
+          [
+            {
+              "node": "设置键名1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取抖音热点信息": {
+        "main": [
+          [
+            {
+              "node": "设置键名2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取bilibili热点信息": {
+        "main": [
+          [
+            {
+              "node": "设置键名3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取微博热点信息3": {
+        "main": [
+          [
+            {
+              "node": "设置键名4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取知乎信息": {
+        "main": [
+          [
+            {
+              "node": "设置键名5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "60 秒读懂世界": {
+        "main": [
+          [
+            {
+              "node": "设置参数6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取AI热点信息6": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数6": {
+        "main": [
+          [
+            {
+              "node": "Aggregate6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数1": {
+        "main": [
+          [
+            {
+              "node": "Aggregate",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数2": {
+        "main": [
+          [
+            {
+              "node": "Aggregate1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数3": {
+        "main": [
+          [
+            {
+              "node": "Aggregate2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数4": {
+        "main": [
+          [
+            {
+              "node": "Aggregate3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数5": {
+        "main": [
+          [
+            {
+              "node": "Aggregate4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数7": {
+        "main": [
+          [
+            {
+              "node": "Aggregate7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置键名1": {
+        "main": [
+          [
+            {
+              "node": "设置参数1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置键名2": {
+        "main": [
+          [
+            {
+              "node": "设置参数2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置键名3": {
+        "main": [
+          [
+            {
+              "node": "设置参数3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置键名4": {
+        "main": [
+          [
+            {
+              "node": "设置参数4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取头条信息1": {
+        "main": [
+          [
+            {
+              "node": "设置键名6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数8": {
+        "main": [
+          [
+            {
+              "node": "Aggregate5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置键名5": {
+        "main": [
+          [
+            {
+              "node": "设置参数5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置键名6": {
+        "main": [
+          [
+            {
+              "node": "设置参数8",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "设置参数7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aggregate": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aggregate1": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Aggregate2": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 2
+            }
+          ]
+        ]
+      },
+      "Aggregate3": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 3
+            }
+          ]
+        ]
+      },
+      "Aggregate4": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 4
+            }
+          ]
+        ]
+      },
+      "Aggregate5": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 5
+            }
+          ]
+        ]
+      },
+      "Aggregate6": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 6
+            }
+          ]
+        ]
+      },
+      "Aggregate7": {
+        "main": [
+          [
+            {
+              "node": "信息",
+              "type": "main",
+              "index": 7
+            }
+          ]
+        ]
+      },
+      "信息": {
+        "main": [
+          [
+            {
+              "node": "Aggregate8",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "Version c3c96dd9",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-04T08:23:10.928Z",
+        "id": 17,
+        "workflowId": "nlWXDhbcdzeEiid4qMBJu",
+        "versionId": "c3c96dd9-0b9f-467f-b6f5-ebc44abe166b",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      },
+      {
+        "createdAt": "2026-02-05T02:17:12.258Z",
+        "id": 22,
+        "workflowId": "nlWXDhbcdzeEiid4qMBJu",
+        "versionId": "c3c96dd9-0b9f-467f-b6f5-ebc44abe166b",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

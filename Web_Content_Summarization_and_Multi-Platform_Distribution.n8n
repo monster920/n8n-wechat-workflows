@@ -1,0 +1,356 @@
+{
+  "updatedAt": "2026-01-20T08:53:29.578Z",
+  "createdAt": "2026-01-20T08:53:13.242Z",
+  "id": "Rn7V3IlbhDdDqKwOLKPnX",
+  "name": "Web Content Summarization and Multi-Platform Distribution",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "summarize",
+        "options": {}
+      },
+      "id": "c001ad25-0af2-46a4-968e-e8d17b23c61e",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1472,
+        96
+      ],
+      "webhookId": "6d60bdd0-26a1-4d9a-af24-35909b392b0c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cca95c20-6c87-41c7-840d-f3480c2de5e5",
+              "name": "url",
+              "value": "={{ $json.body.url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "70031353-962b-45a7-8ac3-c7a51a6c13fd",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1248,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "e12f2e03-3d7c-4b73-9947-bbd59a95cea7",
+      "name": "Fetch Web Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1024,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "content",
+              "cssSelector": ".article"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8b6c4f82-23fc-43a1-afed-524fc2e5f67f",
+      "name": "Extract HTML Content",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -800,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一个专业的内容编辑。请基于以下网页内容，生成三个版本的摘要：\n\n网页内容：\n{{ $json.content }}\n\n请按以下JSON格式输出（必须是有效的JSON）：\n{\n  \"summary\": \"150字以内的中文摘要\",\n  \"twitter\": \"280字符以内的Twitter版本（适合社交媒体，简洁有趣）\",\n  \"linkedin\": \"专业语气的LinkedIn版本（适合职场分享，体现专业性）\"\n}\n\n注意：\n1. 确保输出是有效的JSON格式\n2. summary必须在150字以内\n3. twitter必须在280字符以内\n4. linkedin要体现专业性和深度",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "id": "2d71683d-e565-4eb9-8c20-06598c69c1d9",
+      "name": "AI Content Generator",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -576,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const aiOutput = $input.first().json.output;\nlet parsed;\n\ntry {\n  // Try to parse as JSON\n  parsed = JSON.parse(aiOutput);\n} catch (e) {\n  // If parsing fails, try to extract JSON from markdown code blocks\n  const jsonMatch = aiOutput.match(/```(?:json)?\\s*([\\s\\S]*?)```/);\n  if (jsonMatch) {\n    parsed = JSON.parse(jsonMatch[1].trim());\n  } else {\n    throw new Error('Failed to parse AI output as JSON');\n  }\n}\n\nreturn [{\n  json: {\n    url: $('Workflow Configuration').first().json.query.url,\n    summary: parsed.summary,\n    twitter: parsed.twitter,\n    linkedin: parsed.linkedin,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "cd04e171-9b37-4424-a30e-50b1f7d2b2df",
+      "name": "Parse AI Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "28e629a6-152d-80ea-8aae-c4c27fd00212",
+          "mode": "list",
+          "cachedResultName": "Workflow builder测试",
+          "cachedResultUrl": "https://www.notion.so/28e629a6152d80ea8aaec4c27fd00212"
+        },
+        "title": "={{ $('Workflow Configuration').item.json.body.url }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "url|title",
+              "title": "={{ $('Workflow Configuration').item.json.body.url }}"
+            },
+            {
+              "key": "摘要|rich_text",
+              "textContent": "={{ $json.summary }}"
+            },
+            {
+              "key": "twitter|rich_text",
+              "textContent": "={{ $json.twitter }}"
+            },
+            {
+              "key": "linkedin|rich_text",
+              "textContent": "={{ $json.linkedin }}"
+            },
+            {
+              "key": "时间|date",
+              "date": "={{ $json.timestamp }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a4682214-0733-4d56-a10c-29a0ee767cfd",
+      "name": "Save to Notion",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "5154027218",
+        "text": "=📝 *网页内容摘要*\n\n🔗 URL: {{ $('Workflow Configuration').item.json.body.url }}\n\n*150字摘要：*\n{{ $('Parse AI Output').item.json.summary }}\n\n*Twitter版本：*\n{{ $('Parse AI Output').item.json.twitter }}\n\n*LinkedIn版本：*\n{{ $('Parse AI Output').item.json.linkedin }}\n\n⏰ {{ $('Parse AI Output').item.json.timestamp }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "27a424d6-1122-45da-9b44-9fee74a26134",
+      "name": "Send to Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        192
+      ],
+      "webhookId": "b97c2efd-eea9-4dde-af84-35b272cb4f99"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        320
+      ],
+      "id": "ba8a5c8d-ab03-4bc9-932d-514246e5b95b",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Fetch Web Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Web Page": {
+      "main": [
+        [
+          {
+            "node": "Extract HTML Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract HTML Content": {
+      "main": [
+        [
+          {
+            "node": "AI Content Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Content Generator": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Output": {
+      "main": [
+        [
+          {
+            "node": "Save to Notion",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Content Generator",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "6ea91eea-a1f2-4b43-b77f-9c77ad48e038",
+  "activeVersionId": null,
+  "versionCounter": 3,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-20T08:53:13.259Z",
+      "createdAt": "2026-01-20T08:53:13.259Z",
+      "role": "workflow:owner",
+      "workflowId": "Rn7V3IlbhDdDqKwOLKPnX",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}

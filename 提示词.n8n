@@ -1,0 +1,2364 @@
+{
+  "updatedAt": "2026-02-05T06:55:40.631Z",
+  "createdAt": "2026-01-19T13:39:50.389Z",
+  "id": "LJb-iWY9F1pom2OL3nM-f",
+  "name": "提示词",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9c54b9ae-4986-420a-8535-d705a855772f",
+              "name": "多维表格Token",
+              "value": "HEoHbhVr7axIbEshldMcjkZun3c",
+              "type": "string"
+            },
+            {
+              "id": "ecad64a5-5c67-4df6-b1df-d85b2070d662",
+              "name": "多维表格ID",
+              "value": "tblib8jsITczJFtg",
+              "type": "string"
+            },
+            {
+              "id": "2f9c1f03-37a0-4bed-a1bc-98a24f3f5e88",
+              "name": "view_id",
+              "value": "vewVaANFvl",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2304,
+        416
+      ],
+      "id": "d854cacc-3862-46d9-ab40-d9bd91753fa4",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "formTitle": "提示词终极优化神器",
+        "formDescription": "一句话，你也能让AI输出超强结果",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "新提示词 or 迭代提示词",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "新提示词"
+                  },
+                  {
+                    "option": "迭代提示词"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -2512,
+        416
+      ],
+      "id": "23799190-84e6-48ff-9c5e-9582dab723d4",
+      "name": "On form submission提交表格",
+      "webhookId": "5639ea8a-fc8c-49bc-935c-526da639caee",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0d6758d3-8033-4039-8f82-6080bfc9e489",
+              "leftValue": "={{ $('On form submission提交表格').item.json['新提示词 or 迭代提示词'] }}",
+              "rightValue": "新提示词",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -2144,
+        416
+      ],
+      "id": "06f20dfc-8e13-4185-a115-c0cdc0228754",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['提示词优化方向'] }}",
+                    "rightValue": "普通优化",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "b40b3324-4f3f-4cef-83aa-e9b8f0c7b503"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "普通优化"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "bd54a01b-c5eb-45c1-b79d-4d903d959d21",
+                    "leftValue": "={{ $json['提示词优化方向'] }}",
+                    "rightValue": "带结构输出的优化",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "普通优化"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f152ab76-ce21-43be-844b-1bd7bb6b2f3d",
+                    "leftValue": "={{ $json['提示词优化方向'] }}",
+                    "rightValue": "超强分析优化",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "超强分析优化"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1680,
+        384
+      ],
+      "id": "a3d81fe9-f9e1-43f3-9b14-df514b2e1074",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "你要输入的提示词",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "提示词优化方向",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "普通优化"
+                  },
+                  {
+                    "option": "带结构输出的优化"
+                  },
+                  {
+                    "option": "超强分析优化"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        -1888,
+        400
+      ],
+      "id": "30de9cf9-b8b3-4f7e-a0a6-6c2a3f4a4e30",
+      "name": "提交提示词",
+      "webhookId": "36e1253f-94de-494f-a1b8-c4f0fa19a2ec"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        416
+      ],
+      "id": "71b869c0-5bbf-4e9c-a714-975dd1b8b64c",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.data.record.fields['1'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        208
+      ],
+      "id": "d552a00e-b2ba-44e3-b310-1dd0060ab6f8",
+      "name": "Markdown"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        144,
+        208
+      ],
+      "id": "51effd21-527c-49d2-9c4d-dac047ac4b74",
+      "name": "Form",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1acd4f2b-efbc-4036-b261-8a96851701a7",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        352,
+        208
+      ],
+      "id": "5546089c-3286-4b45-9177-432589dc80aa",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// === 单一入口：拼装给Agent1 的preparedInput ===\n// 规则：优先便用\"上一轮AIAgent1 的输出”：若没有（首轮）、用初稿AIAgent 或最早写入表格的内容：\n// 不引用任何尚未执行的下游节点。避免“hasn”tbeen executed”报错。\n\nfunction getNonEmpty(...vals){\n  for (const v of vals){\n    if(typeof v =='string' && v.trim()) return v;\n  }\n  return '';\n}\n\n//尝试拿到上一轮AIgent1的输出”（本执行内的上一次运行）\nfunction getLastFromAgent1(){\n  try{\n    const n = $('提示词1');//你的节点名就是AI Agent1\n    const all = n.all();    //所有运行/所有items\n    if(!Array.isArray(all) || !all.length)return '';\n    const lastChunk = all[all.length -1];\n    const lastItem = Array.isArray(lastChunk)\n      ? lastChunk[lastChunk.length -1]\n      : lastChunk;\n    return (lastItem?.json?.output ?? lastItem?.output ?? '').toString();\n    }catch(e){\n      return '';\n    }\n}\n\n//首轮兜底：初稿AIAgent的输出\nfunction getInitAgentOutput(){\n  try{\n    return ($('提示词1').first()?.json?.output ?? '').toString();  //←你的“初稿”节点名\n  }catch (e){\n    return '';\n  }\n}\n\n//另一个兜底：最早写入表格的第一列\nfunction getFromBitableCol1(){\n  try{\n  return ($('Bitable:tble:record:update bitable')\n    .first()?.json?.data?.record?.fields?.['1'] ?? '').toString();\n  }catch (e){\n    return '';\n  }\n}\n\n//1）计算“原始提示词”\nconst lastPrompt = getNonEmpty(\n  $json.output,//若链路上保留了上一轮输出（多数节点会丢，这里只是尝试）\n  $json.currentPrompt,//若你有在上游保留\n  getLastFromAgent1(),//重点：上一轮AIAgent1的结果（同一执行内）\n  getInitAgentOutput(),//首轮：初稿\n  getFromBitableCol1(),//首轮：表格第1列\n);\n\n//2）本轮选代需求（来自表单）\nconst demand = getNonEmpty($json['选代提示词'], $json.lastDemand);\n\n//3）给Agent1的唯一输入（明确“必须执行”，减少无感修改）\nconst preparedInput=\n  `原始提示词：\n${lastPrompt ||'（空）'}\n\n优化需求：\n${demand ||'（无）'}\n\n【必须执行】\n- 将“优化需求”落实为**明确可执行的规则**并写入合适小节（如Profile/Rules/Workflows）。\n- 保留标题层级与顺序（# Role、## Profile、## Rules、## Workflows...）。\n- 仅做最小必要改动：直接输出**完整的新提示词**（不要解释）。`;\n\nreturn [\n  {\n    json:{\n      ...$json,\n      currentPrompt: lastPrompt,\n      lastDemand: demand,\n      preparedInput, //AI Agent1永远读取这个\n      },\n  },\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        160
+      ],
+      "id": "750ef0a1-1e3c-4872-91b8-8742569b3a82",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        848,
+        352
+      ],
+      "id": "56357017-b109-49ed-929b-9a9ccb77b9c6",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('写入多维表格-原始提示词1').item.json.data.record.record_id }}",
+        "body": "={\"fields\":{\n  \"{{ (($runIndex + 2 - 1)%10)+1 }}\":{{ JSON.stringify($json.output) }}\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        160
+      ],
+      "id": "9d40a179-557d-4321-9dfa-cdda95020b3e",
+      "name": "Bitable:table:record:update bitable1",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.data.record.fields[ (parseInt($runIndex, 10) + 1) % 10 + 1 ] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        160
+      ],
+      "id": "55ad1d34-df14-4e92-a465-8f0f853b3304",
+      "name": "Markdown1"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1552,
+        160
+      ],
+      "id": "9511a832-3c16-4ba2-9a75-65f254b73a22",
+      "name": "Form1",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.data.record.fields[\"需优化提示词\"] }}",
+        "options": {
+          "systemMessage": "=你是一个**世界顶尖的**AI提示词优化专家(Prompt Engineering Master)。你的**唯一使命**是**解构、重构并极大增强**用户提供的原始提示词('Original Prompt')，将其转化为一个**结构化、高性能、可立即执行**的AI代理(Agent)定义。\n\n你**必须严格**按照以下格式返回，**不得**有任何删减或添加格式外的解释：\n\n# Role：[角色名称（必须简介、专业且准确反映核心职责）]\n\n# Profile\n- language: [主要交互语言，（辅助语言，如英文术语）]\n- description: [对决的的高层次总结，清晰说明其核心价值和独特功能]\n- background: [支撑该角色专业性的背景，例如：基于xx数据训练、模拟xx专家]\n- personality: [角色的沟通风格与性格，例如：严谨、富有创意、共情、绝对中立]\n- expertise: [该角色最擅长的具体领域、知识范围和关键技能]\n- target_audience: [使用该角色的最主要用户群体，例如：开发者、营销人员、初学者]\n\n## Skills(定义角色的能力边界和知识库)\n\n1. [核心技能类别（角色赖以生存的关键能力，例如：分析、创作、编程）]\n  - [具体技能]: [简要说明]\n  - [具体技能]: [简要说明]\n\n2.[辅助技能类别（支持核心技能的次要能力，例如：格式化、润色、提问）]\n  - [具体技能]: [简要说明]\n  - [具体技能]: [简要说明]\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1.[基本原则（不可违背的核心价值观）]:\n  - [具体规则]: [详细说明]\n  - [具体规则]: [详细说明]\n\n2.[行为准则（在交互中如何表现）]:\n  - [具体规则]: [详细说明]\n  - [具体规则]: [详细说明]\n\n3.[限制条件（严格禁止的行为）]:\n  - [具体限制]: [详细说明]\n  - [具体限制3.4]: [禁止使用[xx,xx]等被禁止的词汇或表达方式]\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: [明确、具体、可执行的单一任务目标，例如：生成一份xx分析报告]\n- 步骤1: [解构需求 － （详细说明如何分析和理解用户的输入，识别所有显式和隐式约束）]\n- 步骤2: [执行任务 - （详细说明如何调用[Skills]中的能力，逐步完成任务的核心部分，展示内部思考过程）]\n- 步骤3: [审查与交付 - （详细说明如何根据[Rules]进行自我校对和事实查，并按要求的格式封装最终输出）]\n- 预期结果: [一个高质量、符合日标、逻辑严谨且格式规范的最终产物]\n\n## Initialization\n作为[角色名称].你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。\n\n请基于以上模板。**立即开始**优化并扩展**紧随其后**的用户原始提示词（Original\nPrompt）。你必须:\n\n1. **深入分析**原始提示词的**核心意图**和**潜在缺陷**。\n2. **创造性地**、**专业地**填充上述模板的**所有**'[]'空白处。\n3. 确保填充的内容**高度相关、具体、可操作**，并且**逻辑自洽**（例如，Skills必须支持Workflows，Rules必须约束Profile）。\n4. 最终输出必须是一个**完整、专业、可立即使用**的AI代理定义。\n5. **绝对禁止**携带任何引导词或解释，**不要**使用代码块包围，**直接**输出填充完毕的模板内容。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -624,
+        208
+      ],
+      "id": "95c5900d-cbe8-4985-90c9-5e05ad9c9ec3",
+      "name": "提示词1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.preparedInput }}",
+        "options": {
+          "systemMessage": "# Role：提示词选代优化专家\n\n# Background:\n- 用户已经有一个优化过的提示词\n- 用户希望在此基础上进行特定方向的改进\n- 需要保持原有提示词的核心意图\n- 同时融入用户新的优化需求\n\n## 任务理解\n你的工作是修改原始提示词，限据用户的优化需求对其进行改进，而不是执行这些需求。\n\n## 核心原则\n- 保持原始提示词的核心意图和功能\n- 将优化需求作为新的要求或约束融入原始提示词\n- 保持原有的语言风格和结构格式\n- 进行精准修改，避免过度调整\n\n**示例1：**\n- 原始提示词：\"你是客服助手，帮用户解决问题\"\n- 正确结果：\"你是客服助手，帮用户解决问题，请直接提供完整解决方案，不要与用户进行多轮交确认。\"\n- 错误理解：直接回复\"好的，我不会与您交互\"\n\n**示例2：**\n- 原始提示词：“分析数据并给出建议”\n- 优化需求：\"输出JSON格式\"\n- 正确结果：\"分析数据并给出建议，请以JSON格式输出分析结果\"\n- 错误理解：直接输出JSON格式的回答\n\n**示例3：**\n- 原始提示词：“你是写作助手”\n- 优化需求：\"输出 JSON 格式\"\n- 正确结果：\"你是写作助手，请以 JSON 格式输出创作内容\"\n- 错误理解：直接输出 JSON 格式的写作内容\n\n## 操作步骤\n1. 仔细阅读并理解原始提示词的核心功能和使用场景。\n2. 理解优化需求的本质（添加功能、修改方式、还是增加约束）\n3. 将优化需求恰当地融入原始提示词中\n4. 输出完整的修改后提示词\n\n## 输出要求\n直接输出优化后的提示词，保持原有格式，不添加解释。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        848,
+        160
+      ],
+      "id": "c748802f-d45f-4c33-8330-f859ccb92cb9",
+      "name": "提示词-优化1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "31ceb1a1-6568-485a-a7ad-4002520be575",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1744,
+        160
+      ],
+      "id": "1fd6409f-e6b7-4322-ad75-7d2d9ad988cf",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "完成",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1968,
+        176
+      ],
+      "id": "40630238-0ef9-4c74-a869-559f88ef9d0c",
+      "name": "Form2",
+      "webhookId": "004a40d1-7d51-4b9d-9779-541a3254aac0"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        864
+      ],
+      "id": "301f387f-e49d-4a3b-97ff-5309677d4e57",
+      "name": "DeepSeek Chat Model2",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('写入多维表格-原始提示词2').item.json.data.record.record_id }}",
+        "body": "={\"fields\":{\n  \"1\":{{ JSON.stringify($json.output) }}\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        656
+      ],
+      "id": "26a26c18-f377-4623-adae-b71256332cca",
+      "name": "Bitable:table:record:update bitable2",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.data.record.fields['1'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        656
+      ],
+      "id": "f51c77f1-a7d4-4d97-93b1-aeeda0195598",
+      "name": "Markdown2"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        128,
+        656
+      ],
+      "id": "439ce729-9d51-42a3-b716-20b3af5534e4",
+      "name": "Form3",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1acd4f2b-efbc-4036-b261-8a96851701a7",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        336,
+        656
+      ],
+      "id": "0d04be4a-d650-4d82-98da-9db6eaba1e11",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// === 单一入口：拼装给Agent1 的preparedInput ===\n// 规则：优先便用\"上一轮AIAgent1 的输出”：若没有（首轮）、用初稿AIAgent 或最早写入表格的内容：\n// 不引用任何尚未执行的下游节点。避免“hasn”tbeen executed”报错。\n\nfunction getNonEmpty(...vals){\n  for (const v of vals){\n    if(typeof v =='string' && v.trim()) return v;\n  }\n  return '';\n}\n\n//尝试拿到上一轮AIgent1的输出”（本执行内的上一次运行）\nfunction getLastFromAgent1(){\n  try{\n    const n = $('提示词2');//你的节点名就是AI Agent1\n    const all = n.all();    //所有运行/所有items\n    if(!Array.isArray(all) || !all.length)return '';\n    const lastChunk = all[all.length -1];\n    const lastItem = Array.isArray(lastChunk)\n      ? lastChunk[lastChunk.length -1]\n      : lastChunk;\n    return (lastItem?.json?.output ?? lastItem?.output ?? '').toString();\n    }catch(e){\n      return '';\n    }\n}\n\n//首轮兜底：初稿AIAgent的输出\nfunction getInitAgentOutput(){\n  try{\n    return ($('提示词3').first()?.json?.output ?? '').toString();  //←你的“初稿”节点名\n  }catch (e){\n    return '';\n  }\n}\n\n//另一个兜底：最早写入表格的第一列\nfunction getFromBitableCol1(){\n  try{\n  return ($('Bitable:tble:record:update bitable')\n    .first()?.json?.data?.record?.fields?.['1'] ?? '').toString();\n  }catch (e){\n    return '';\n  }\n}\n\n//1）计算“原始提示词”\nconst lastPrompt = getNonEmpty(\n  $json.output,//若链路上保留了上一轮输出（多数节点会丢，这里只是尝试）\n  $json.currentPrompt,//若你有在上游保留\n  getLastFromAgent1(),//重点：上一轮AIAgent1的结果（同一执行内）\n  getInitAgentOutput(),//首轮：初稿\n  getFromBitableCol1(),//首轮：表格第1列\n);\n\n//2）本轮选代需求（来自表单）\nconst demand = getNonEmpty($json['选代提示词'], $json.lastDemand);\n\n//3）给Agent1的唯一输入（明确“必须执行”，减少无感修改）\nconst preparedInput=\n  `原始提示词：\n${lastPrompt ||'（空）'}\n\n优化需求：\n${demand ||'（无）'}\n\n【必须执行】\n- 将“优化需求”落实为**明确可执行的规则**并写入合适小节（如Profile/Rules/Workflows）。\n- 保留标题层级与顺序（# Role、## Profile、## Rules、## Workflows...）。\n- 仅做最小必要改动：直接输出**完整的新提示词**（不要解释）。`;\n\nreturn [\n  {\n    json:{\n      ...$json,\n      currentPrompt: lastPrompt,\n      lastDemand: demand,\n      preparedInput, //AI Agent1永远读取这个\n      },\n  },\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        608
+      ],
+      "id": "719abde4-bbb5-4ee8-be5b-f9227eb42e3d",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        832,
+        800
+      ],
+      "id": "c7c5f65a-2554-4e3e-8ea4-41046349b019",
+      "name": "DeepSeek Chat Model3",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('写入多维表格-原始提示词2').item.json.data.record.record_id }}",
+        "body": "={\"fields\":{\n  \"{{ (($runIndex + 2 - 1)%10)+1 }}\":{{ JSON.stringify($json.output) }}\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        608
+      ],
+      "id": "d8992dd2-9e9f-438d-abcc-05f9e4bb1c73",
+      "name": "Bitable:table:record:update bitable3",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.data.record.fields[ (parseInt($runIndex, 10) + 1) % 10 + 1 ] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        608
+      ],
+      "id": "5e79623c-17ce-418d-921b-62953739fc93",
+      "name": "Markdown3"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1536,
+        608
+      ],
+      "id": "140ec27c-3aca-40e7-aa68-a8d72a8a0742",
+      "name": "Form4",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.preparedInput }}",
+        "options": {
+          "systemMessage": "# Role：提示词选代优化专家\n\n# Background:\n- 用户已经有一个优化过的提示词\n- 用户希望在此基础上进行特定方向的改进\n- 需要保持原有提示词的核心意图\n- 同时融入用户新的优化需求\n\n## 任务理解\n你的工作是修改原始提示词，限据用户的优化需求对其进行改进，而不是执行这些需求。\n\n## 核心原则\n- 保持原始提示词的核心意图和功能\n- 将优化需求作为新的要求或约束融入原始提示词\n- 保持原有的语言风格和结构格式\n- 进行精准修改，避免过度调整\n\n**示例1：**\n- 原始提示词：\"你是客服助手，帮用户解决问题\"\n- 正确结果：\"你是客服助手，帮用户解决问题，请直接提供完整解决方案，不要与用户进行多轮交确认。\"\n- 错误理解：直接回复\"好的，我不会与您交互\"\n\n**示例2：**\n- 原始提示词：“分析数据并给出建议”\n- 优化需求：\"输出JSON格式\"\n- 正确结果：\"分析数据并给出建议，请以JSON格式输出分析结果\"\n- 错误理解：直接输出JSON格式的回答\n\n**示例3：**\n- 原始提示词：“你是写作助手”\n- 优化需求：\"输出 JSON 格式\"\n- 正确结果：\"你是写作助手，请以 JSON 格式输出创作内容\"\n- 错误理解：直接输出 JSON 格式的写作内容\n\n## 操作步骤\n1. 仔细阅读并理解原始提示词的核心功能和使用场景。\n2. 理解优化需求的本质（添加功能、修改方式、还是增加约束）\n3. 将优化需求恰当地融入原始提示词中\n4. 输出完整的修改后提示词\n\n## 输出要求\n直接输出优化后的提示词，保持原有格式，不添加解释。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        832,
+        608
+      ],
+      "id": "b56cd344-7068-4ee4-929a-dc4160562314",
+      "name": "提示词-优化"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "31ceb1a1-6568-485a-a7ad-4002520be575",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1728,
+        608
+      ],
+      "id": "01e8c390-cc27-4919-a3e9-f6acee53bef3",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "完成",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1952,
+        624
+      ],
+      "id": "93586480-53d1-4f3a-aea5-d80c9f9f7d68",
+      "name": "Form5",
+      "webhookId": "004a40d1-7d51-4b9d-9779-541a3254aac0"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        1376
+      ],
+      "id": "7afdbdb2-06f9-4578-a702-8fd8866a320b",
+      "name": "DeepSeek Chat Model4",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('写入多维表格-原始提示词3').item.json.data.record.record_id }}",
+        "body": "={\"fields\":{\n  \"1\":{{ JSON.stringify($json.output) }}\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        1168
+      ],
+      "id": "214f90d2-2abb-4adb-8b01-5590e5b072ee",
+      "name": "Bitable:table:record:update bitable4",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.data.record.fields['1'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        1168
+      ],
+      "id": "7c48a0b8-a3d0-4198-9dab-ea4d334ca2f4",
+      "name": "Markdown4"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        128,
+        1168
+      ],
+      "id": "9e1cc5f6-f41e-4deb-8007-3820f2ca8fa5",
+      "name": "Form6",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1acd4f2b-efbc-4036-b261-8a96851701a7",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        336,
+        1168
+      ],
+      "id": "855e3a08-b530-46ae-912c-a23f8d3c94c8",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "jsCode": "// === 单一入口：拼装给Agent1 的preparedInput ===\n// 规则：优先便用\"上一轮AIAgent1 的输出”：若没有（首轮）、用初稿AIAgent 或最早写入表格的内容：\n// 不引用任何尚未执行的下游节点。避免“hasn”tbeen executed”报错。\n\nfunction getNonEmpty(...vals){\n  for (const v of vals){\n    if(typeof v =='string' && v.trim()) return v;\n  }\n  return '';\n}\n\n//尝试拿到上一轮AIgent1的输出”（本执行内的上一次运行）\nfunction getLastFromAgent1(){\n  try{\n    const n = $('提示词2');//你的节点名就是AI Agent1\n    const all = n.all();    //所有运行/所有items\n    if(!Array.isArray(all) || !all.length)return '';\n    const lastChunk = all[all.length -1];\n    const lastItem = Array.isArray(lastChunk)\n      ? lastChunk[lastChunk.length -1]\n      : lastChunk;\n    return (lastItem?.json?.output ?? lastItem?.output ?? '').toString();\n    }catch(e){\n      return '';\n    }\n}\n\n//首轮兜底：初稿AIAgent的输出\nfunction getInitAgentOutput(){\n  try{\n    return ($('提示词2').first()?.json?.output ?? '').toString();  //←你的“初稿”节点名\n  }catch (e){\n    return '';\n  }\n}\n\n//另一个兜底：最早写入表格的第一列\nfunction getFromBitableCol1(){\n  try{\n  return ($('Bitable:tble:record:update bitable')\n    .first()?.json?.data?.record?.fields?.['1'] ?? '').toString();\n  }catch (e){\n    return '';\n  }\n}\n\n//1）计算“原始提示词”\nconst lastPrompt = getNonEmpty(\n  $json.output,//若链路上保留了上一轮输出（多数节点会丢，这里只是尝试）\n  $json.currentPrompt,//若你有在上游保留\n  getLastFromAgent1(),//重点：上一轮AIAgent1的结果（同一执行内）\n  getInitAgentOutput(),//首轮：初稿\n  getFromBitableCol1(),//首轮：表格第1列\n);\n\n//2）本轮选代需求（来自表单）\nconst demand = getNonEmpty($json['选代提示词'], $json.lastDemand);\n\n//3）给Agent1的唯一输入（明确“必须执行”，减少无感修改）\nconst preparedInput=\n  `原始提示词：\n${lastPrompt ||'（空）'}\n\n优化需求：\n${demand ||'（无）'}\n\n【必须执行】\n- 将“优化需求”落实为**明确可执行的规则**并写入合适小节（如Profile/Rules/Workflows）。\n- 保留标题层级与顺序（# Role、## Profile、## Rules、## Workflows...）。\n- 仅做最小必要改动：直接输出**完整的新提示词**（不要解释）。`;\n\nreturn [\n  {\n    json:{\n      ...$json,\n      currentPrompt: lastPrompt,\n      lastDemand: demand,\n      preparedInput, //AI Agent1永远读取这个\n      },\n  },\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        1120
+      ],
+      "id": "9b1c5914-dc63-4792-aab3-0ad76d4823ec",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        832,
+        1312
+      ],
+      "id": "8a534347-8e00-41a6-9d4d-0d3baa120d67",
+      "name": "DeepSeek Chat Model5",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('写入多维表格-原始提示词3').item.json.data.record.record_id }}",
+        "body": "={\"fields\":{\n  \"{{ (($runIndex + 2 - 1)%10)+1 }}\":{{ JSON.stringify($json.output) }}\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        1120
+      ],
+      "id": "f6bf8ef6-34a0-4c5f-a1f5-98210ce29145",
+      "name": "Bitable:table:record:update bitable5",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.data.record.fields[ (parseInt($runIndex, 10) + 1) % 10 + 1 ] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        1120
+      ],
+      "id": "760b658e-de25-487c-b95a-2d37b6a341cb",
+      "name": "Markdown5"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1536,
+        1120
+      ],
+      "id": "107c6d65-369b-4b4a-9a13-88e8fe7fd53f",
+      "name": "Form7",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.preparedInput }}",
+        "options": {
+          "systemMessage": "# Role：提示词选代优化专家\n\n# Background:\n- 用户已经有一个优化过的提示词\n- 用户希望在此基础上进行特定方向的改进\n- 需要保持原有提示词的核心意图\n- 同时融入用户新的优化需求\n\n## 任务理解\n你的工作是修改原始提示词，限据用户的优化需求对其进行改进，而不是执行这些需求。\n\n## 核心原则\n- 保持原始提示词的核心意图和功能\n- 将优化需求作为新的要求或约束融入原始提示词\n- 保持原有的语言风格和结构格式\n- 进行精准修改，避免过度调整\n\n**示例1：**\n- 原始提示词：\"你是客服助手，帮用户解决问题\"\n- 正确结果：\"你是客服助手，帮用户解决问题，请直接提供完整解决方案，不要与用户进行多轮交确认。\"\n- 错误理解：直接回复\"好的，我不会与您交互\"\n\n**示例2：**\n- 原始提示词：“分析数据并给出建议”\n- 优化需求：\"输出JSON格式\"\n- 正确结果：\"分析数据并给出建议，请以JSON格式输出分析结果\"\n- 错误理解：直接输出JSON格式的回答\n\n**示例3：**\n- 原始提示词：“你是写作助手”\n- 优化需求：\"输出 JSON 格式\"\n- 正确结果：\"你是写作助手，请以 JSON 格式输出创作内容\"\n- 错误理解：直接输出 JSON 格式的写作内容\n\n## 操作步骤\n1. 仔细阅读并理解原始提示词的核心功能和使用场景。\n2. 理解优化需求的本质（添加功能、修改方式、还是增加约束）\n3. 将优化需求恰当地融入原始提示词中\n4. 输出完整的修改后提示词\n\n## 输出要求\n直接输出优化后的提示词，保持原有格式，不添加解释。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        832,
+        1120
+      ],
+      "id": "295ca69a-71dd-4b5d-a46b-11e6519ac081",
+      "name": "提示词-优化2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "31ceb1a1-6568-485a-a7ad-4002520be575",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1728,
+        1120
+      ],
+      "id": "df6f486e-2cc3-46c0-9185-05f0b88b9503",
+      "name": "If6"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "完成",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1952,
+        1136
+      ],
+      "id": "736a98cc-127e-4043-a884-ace0bc20ba24",
+      "name": "Form8",
+      "webhookId": "004a40d1-7d51-4b9d-9779-541a3254aac0"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "序号"
+            },
+            {
+              "fieldLabel": "提示词ID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        -1328,
+        1696
+      ],
+      "id": "565b9e58-deb1-44a5-bae0-336e706b1fed",
+      "name": "Form9",
+      "webhookId": "7a1800d6-375b-4cc9-baa3-1ca83a9760b5"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json[\"数字键对应值\"] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        1696
+      ],
+      "id": "624a88df-f44c-434d-9325-441c7d06945a",
+      "name": "Markdown6"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        -368,
+        1696
+      ],
+      "id": "dcc53457-59d6-4cec-a8eb-db658544a2fa",
+      "name": "Form10",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "1acd4f2b-efbc-4036-b261-8a96851701a7",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -48,
+        1696
+      ],
+      "id": "f4b8707f-074d-4e21-a96b-afefff60e6bd",
+      "name": "If7"
+    },
+    {
+      "parameters": {
+        "jsCode": "// === 单一入口：拼装给Agent1 的preparedInput ===\n// 规则：优先使用“上一轮AIAgent1 的输出”；若没有（首轮），用处理后的飞书表格数据\n// 不引用尚未执行的下游节点，避免“hasn't been executed”报错\n\nfunction getNonEmpty(...vals){\n  for (const v of vals){\n    if(typeof v === 'string' && v.trim()) return v;\n  }\n  return '';\n}\n\n// 尝试拿到上一轮AI Agent1的输出（同一执行内的上一次运行）\n// 注意：此处节点名需与工作流中“AI Agent1”的节点名完全一致\nfunction getLastFromAgent1(){\n  try{\n    const agentNode = $('AI Agent1'); // 修正：节点名应为实际的AI Agent1节点名\n    const allOutputs = agentNode.items; // 修正：n8n中取节点所有输出项用.items\n    if(!Array.isArray(allOutputs) || allOutputs.length === 0) return '';\n    \n    // 取该节点最后一个输出项的内容（AI Agent1的输出字段应为output）\n    const lastItem = allOutputs[allOutputs.length - 1];\n    return (lastItem?.json?.output ?? '').toString();\n  }catch(e){\n    return '';\n  }\n}\n\n// 首轮兜底1：处理后的飞书表格数据（来自“判断提示词优化到第几个”节点）\nfunction getInitAgentOutput(){\n  try{\n    // 修正：取“判断提示词优化到第几个”节点的“数字键对应值”字段\n    return ($('判断提示词优化到第几个').first()?.json?.['数字键对应值'] ?? '').toString();\n  }catch (e){\n    return '';\n  }\n}\n\n// 首轮兜底2：直接读取飞书多维表格的原始第1列（备用）\n// 注意：节点名需与实际飞书多维表格节点名一致\nfunction getFromBitableCol1(){\n  try{\n    const bitableNode = $('飞书多维表格节点'); // 替换为你的飞书多维表格节点名\n    const records = bitableNode.first()?.json?.data?.records;\n    if(!Array.isArray(records) || records.length === 0) return '';\n    // 直接取fields中“1”对应的文本内容\n    return records[0].fields['1']?.[0]?.text ?? '';\n  }catch (e){\n    return '';\n  }\n}\n\n// 1）计算“原始提示词”：优先取上一轮Agent结果，其次取处理后的表格数据\nconst lastPrompt = getNonEmpty(\n  getLastFromAgent1(), // 重点：上一轮AIAgent1的结果\n  $json['数字键对应值'], // 当前节点上游的“数字键对应值”（已处理的表格数据）\n  getInitAgentOutput(), // 兜底：处理后的表格数据\n  getFromBitableCol1() // 最终兜底：飞书原始数据\n);\n\n// 2）本轮迭代需求（修正拼写错误：“选代”→“迭代”）\nconst demand = getNonEmpty($json['迭代提示词'], $json['lastDemand'] ?? '');\n\n// 3）给Agent1的唯一输入：明确规则，确保输出完整\nconst preparedInput = `原始提示词：\n${lastPrompt || '（空）'}\n\n优化需求：\n${demand || '（无）'}\n\n【必须执行】\n- 将“优化需求”落实为**明确可执行的规则**，写入对应小节（# Role、## Profile、## Rules、## Workflows等）。\n- 保留标题层级与顺序，不得调整原有结构。\n- 仅做最小必要改动，直接输出**完整的新提示词**（无需额外解释）。`;\n\n// 输出：仅保留必要字段\nreturn [\n  {\n    json: {\n      currentPrompt: lastPrompt,\n      lastDemand: demand,\n      preparedInput // AI Agent1读取此字段\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        1648
+      ],
+      "id": "3cc98096-f5f2-4c18-9381-c04003d09754",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        448,
+        1840
+      ],
+      "id": "8f21a88c-f98b-48a2-8138-1fc9df303f62",
+      "name": "DeepSeek Chat Model6",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('判断提示词优化到第几个').item.json.ID }}",
+        "body": "={\"fields\":{\n  \"{{ String( parseInt($('判断提示词优化到第几个').item.json['最后一个数字键'], 10) + 1 ) }}\":{{ JSON.stringify($json.output) }}\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        768,
+        1648
+      ],
+      "id": "a6adc206-eb8a-4aec-8209-7419a5e307fe",
+      "name": "Bitable:table:record:update bitable6",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.data.record.fields[ (parseInt($runIndex, 10) + 1) % 10 + 1 ] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        944,
+        1648
+      ],
+      "id": "4c7a4fc3-0284-4739-ad03-887cd80625cb",
+      "name": "Markdown7"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldType": "html",
+              "elementName": "=",
+              "html": "{{ $json.data }}"
+            },
+            {
+              "fieldLabel": "迭代提示词"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1152,
+        1648
+      ],
+      "id": "34a21c14-49b0-4d64-96bd-714f8c72be80",
+      "name": "Form11",
+      "webhookId": "1ee6c1ba-2fac-4ce6-958e-ffcc976f3ed4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.preparedInput }}",
+        "options": {
+          "systemMessage": "# Role：提示词选代优化专家\n\n# Background:\n- 用户已经有一个优化过的提示词\n- 用户希望在此基础上进行特定方向的改进\n- 需要保持原有提示词的核心意图\n- 同时融入用户新的优化需求\n\n## 任务理解\n你的工作是修改原始提示词，限据用户的优化需求对其进行改进，而不是执行这些需求。\n\n## 核心原则\n- 保持原始提示词的核心意图和功能\n- 将优化需求作为新的要求或约束融入原始提示词\n- 保持原有的语言风格和结构格式\n- 进行精准修改，避免过度调整\n\n**示例1：**\n- 原始提示词：\"你是客服助手，帮用户解决问题\"\n- 正确结果：\"你是客服助手，帮用户解决问题，请直接提供完整解决方案，不要与用户进行多轮交确认。\"\n- 错误理解：直接回复\"好的，我不会与您交互\"\n\n**示例2：**\n- 原始提示词：“分析数据并给出建议”\n- 优化需求：\"输出JSON格式\"\n- 正确结果：\"分析数据并给出建议，请以JSON格式输出分析结果\"\n- 错误理解：直接输出JSON格式的回答\n\n**示例3：**\n- 原始提示词：“你是写作助手”\n- 优化需求：\"输出 JSON 格式\"\n- 正确结果：\"你是写作助手，请以 JSON 格式输出创作内容\"\n- 错误理解：直接输出 JSON 格式的写作内容\n\n## 操作步骤\n1. 仔细阅读并理解原始提示词的核心功能和使用场景。\n2. 理解优化需求的本质（添加功能、修改方式、还是增加约束）\n3. 将优化需求恰当地融入原始提示词中\n4. 输出完整的修改后提示词\n\n## 输出要求\n直接输出优化后的提示词，保持原有格式，不添加解释。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        448,
+        1648
+      ],
+      "id": "4e12a1d8-ccc3-436b-8929-54de2ff00556",
+      "name": "提示词-优化3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "31ceb1a1-6568-485a-a7ad-4002520be575",
+              "leftValue": "={{ $json['迭代提示词'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1344,
+        1648
+      ],
+      "id": "d21e83c6-9d01-448f-83ae-4297ecec9d26",
+      "name": "If8"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "完成",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.3,
+      "position": [
+        1568,
+        1664
+      ],
+      "id": "9ad8dc74-aa84-4fc3-ae54-4483d8bb197b",
+      "name": "Form12",
+      "webhookId": "004a40d1-7d51-4b9d-9779-541a3254aac0"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 替换字符串中的转义字符为显式转义形式\n * @param {string} input - 需要处理的原始字符串\n * @returns {string} 替换后的字符串\n */\nfunction escapeSpecialChars(input) {\n    if (!input || typeof input !== 'string') {\n        return input || '';\n    }\n    \n    const escapeMap = {\n        '\\n': '\\\\n',\n        '\\r': '\\\\r',\n        '\\t': '\\\\t',\n        '\\b': '\\\\b',\n        '\\f': '\\\\f',\n        '\\\\': '\\\\\\\\'\n    };\n    \n    // 修正正则表达式（原表达式存在语法错误）\n    return input.replace(/[\\n\\r\\t\\b\\f\\\\]/g, match => escapeMap[match]);\n}\n\n// n8n中正确的字段引用与输出方式\nconst items = $input.all(); // 处理所有输入项（适配多数据场景）\nfor (const item of items) {\n    // 读取输入字段（对应你的输入键“你要输入的提示词”）\n    const originalString = item.json[\"你要输入的提示词\"];\n    const processedString = escapeSpecialChars(originalString);\n    // 写入输出字段（覆盖原字段或新增字段）\n    item.json[\"你要输入的提示词\"] = processedString; \n}\n\nreturn items; // 返回所有处理后的项"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1248,
+        656
+      ],
+      "id": "2fca583f-7b5d-4767-8be6-b516c3cc38e7",
+      "name": "clean_data_转义符"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 替换字符串中的转义字符为显式转义形式\n * @param {string} input - 需要处理的原始字符串\n * @returns {string} 替换后的字符串\n */\nfunction escapeSpecialChars(input) {\n    if (!input || typeof input !== 'string') {\n        return input || '';\n    }\n    \n    const escapeMap = {\n        '\\n': '\\\\n',\n        '\\r': '\\\\r',\n        '\\t': '\\\\t',\n        '\\b': '\\\\b',\n        '\\f': '\\\\f',\n        '\\\\': '\\\\\\\\'\n    };\n    \n    // 修正正则表达式（原表达式存在语法错误）\n    return input.replace(/[\\n\\r\\t\\b\\f\\\\]/g, match => escapeMap[match]);\n}\n\n// n8n中正确的字段引用与输出方式\nconst items = $input.all(); // 处理所有输入项（适配多数据场景）\nfor (const item of items) {\n    // 读取输入字段（对应你的输入键“你要输入的提示词”）\n    const originalString = item.json[\"你要输入的提示词\"];\n    const processedString = escapeSpecialChars(originalString);\n    // 写入输出字段（覆盖原字段或新增字段）\n    item.json[\"你要输入的提示词\"] = processedString; \n}\n\nreturn items; // 返回所有处理后的项"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1232,
+        208
+      ],
+      "id": "a17ee5b9-2fe6-40d0-8f13-fa92df62a50d",
+      "name": "clean_data_转义符1"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 替换字符串中的转义字符为显式转义形式\n * @param {string} input - 需要处理的原始字符串\n * @returns {string} 替换后的字符串\n */\nfunction escapeSpecialChars(input) {\n    if (!input || typeof input !== 'string') {\n        return input || '';\n    }\n    \n    const escapeMap = {\n        '\\n': '\\\\n',\n        '\\r': '\\\\r',\n        '\\t': '\\\\t',\n        '\\b': '\\\\b',\n        '\\f': '\\\\f',\n        '\\\\': '\\\\\\\\'\n    };\n    \n    // 修正正则表达式（原表达式存在语法错误）\n    return input.replace(/[\\n\\r\\t\\b\\f\\\\]/g, match => escapeMap[match]);\n}\n\n// n8n中正确的字段引用与输出方式\nconst items = $input.all(); // 处理所有输入项（适配多数据场景）\nfor (const item of items) {\n    // 读取输入字段（对应你的输入键“你要输入的提示词”）\n    const originalString = item.json[\"你要输入的提示词\"];\n    const processedString = escapeSpecialChars(originalString);\n    // 写入输出字段（覆盖原字段或新增字段）\n    item.json[\"你要输入的提示词\"] = processedString; \n}\n\nreturn items; // 返回所有处理后的项"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1216,
+        1168
+      ],
+      "id": "2b5dddab-1200-4384-bad9-47733deadca1",
+      "name": "clean_data_转义符2"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:add",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "body": "={\"fields\":{\n  \"需优化提示词\":\"{{ $(\"提交提示词\").item.json[\"你要输入的提示词\"] }}\",\n  \"提示词优化方向\":\"{{ $(\"提交提示词\").item.json[\"提示词优化方向\"] }}\"\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -832,
+        208
+      ],
+      "id": "274269a1-ab5d-4bbf-8add-17b5115f35b4",
+      "name": "写入多维表格-原始提示词1",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:add",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "body": "={\"fields\":{\n  \"需优化提示词\":\"{{ $json[\"你要输入的提示词\"] }}\",\n  \"提示词优化方向\":\"{{ $json[\"提示词优化方向\"] }}\"\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        656
+      ],
+      "id": "45287eb8-73e8-4884-9a32-dced847695da",
+      "name": "写入多维表格-原始提示词2",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:add",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "body": "={\"fields\":{\n  \"需优化提示词\":\"{{ $(\"提交提示词\").item.json[\"你要输入的提示词\"] }}\",\n  \"提示词优化方向\":\"{{ $(\"提交提示词\").item.json[\"提示词优化方向\"] }}\"\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        1168
+      ],
+      "id": "8e6ebbce-8968-4440-80a5-9ccce5aeca23",
+      "name": "写入多维表格-原始提示词3",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('写入多维表格-原始提示词1').item.json.data.record.record_id }}",
+        "body": "={\"fields\":{\n  \"1\":{{ JSON.stringify($json.output) }}\n}}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        208
+      ],
+      "id": "e378c064-2c3a-4049-9375-edd8d8808706",
+      "name": "写入多维表格-优化后提示词1",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.data.record.fields[\"需优化提示词\"] }}",
+        "options": {
+          "systemMessage": "=你是一个**世界顶尖的**AI提示词优化专家(Prompt Engineering Master)。你的**唯一使命**是**解构、重构并极大增强**用户提供的原始提示词('Original Prompt')，将其转化为一个**结构化、高性能、可立即执行**的AI代理(Agent)定义。\n\n你**必须严格**按照以下格式返回，**不得**有任何删减或添加格式外的解释：\n\n# Role：[角色名称（必须简介、专业且准确反映核心职责）]\n\n# Profile\n- language: [主要交互语言，（辅助语言，如英文术语）]\n- description: [对决的的高层次总结，清晰说明其核心价值和独特功能]\n- background: [支撑该角色专业性的背景，例如：基于xx数据训练、模拟xx专家]\n- personality: [角色的沟通风格与性格，例如：严谨、富有创意、共情、绝对中立]\n- expertise: [该角色最擅长的具体领域、知识范围和关键技能]\n- target_audience: [使用该角色的最主要用户群体，例如：开发者、营销人员、初学者]\n\n## Skills(定义角色的能力边界和知识库)\n\n1. [核心技能类别（角色赖以生存的关键能力，例如：分析、创作、编程）]\n  - [具体技能]: [简要说明]\n  - [具体技能]: [简要说明]\n\n2.[辅助技能类别（支持核心技能的次要能力，例如：格式化、润色、提问）]\n  - [具体技能]: [简要说明]\n  - [具体技能]: [简要说明]\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1.[基本原则（不可违背的核心价值观）]:\n  - [具体规则]: [详细说明]\n  - [具体规则]: [详细说明]\n\n2.[行为准则（在交互中如何表现）]:\n  - [具体规则]: [详细说明]\n  - [具体规则]: [详细说明]\n\n3.[限制条件（严格禁止的行为）]:\n  - [具体限制]: [详细说明]\n  - [具体限制3.4]: [禁止使用[xx,xx]等被禁止的词汇或表达方式]\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: [明确、具体、可执行的单一任务目标，例如：生成一份xx分析报告]\n- 步骤1: [解构需求 － （详细说明如何分析和理解用户的输入，识别所有显式和隐式约束）]\n- 步骤2: [执行任务 - （详细说明如何调用[Skills]中的能力，逐步完成任务的核心部分，展示内部思考过程）]\n- 步骤3: [审查与交付 - （详细说明如何根据[Rules]进行自我校对和事实查，并按要求的格式封装最终输出）]\n- 预期结果: [一个高质量、符合日标、逻辑严谨且格式规范的最终产物]\n\n## Initialization\n作为[角色名称].你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。\n\n请基于以上模板。**立即开始**优化并扩展**紧随其后**的用户原始提示词（Original\nPrompt）。你必须:\n\n1. **深入分析**原始提示词的**核心意图**和**潜在缺陷**。\n2. **创造性地**、**专业地**填充上述模板的**所有**'[]'空白处。\n3. 确保填充的内容**高度相关、具体、可操作**，并且**逻辑自洽**（例如，Skills必须支持Workflows，Rules必须约束Profile）。\n4. 最终输出必须是一个**完整、专业、可立即使用**的AI代理定义。\n5. **绝对禁止**携带任何引导词或解释，**不要**使用代码块包围，**直接**输出填充完毕的模板内容。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -640,
+        656
+      ],
+      "id": "b2442ced-8410-4325-ac96-e1f12ff7175a",
+      "name": "提示词2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.data.record.fields[\"需优化提示词\"] }}",
+        "options": {
+          "systemMessage": "=你是一个**世界顶尖的**提示词优化与架构专家（Prompt Optimization and Architecture Expert）。你的**使命**是**深度解构、深度分析、重构、极大增强与优化**用户提供的原始提示词（'OriginalPrompt'），将其转化为结构化、高性能、可立即执行的AI代理(Agent)定义。\n\n你**必须严格**按照以下格式返回，**不得**有任何删减或添加格式外的解释：\n\n# Role：[角色名称（必须简介、专业且准确反映核心职责）]\n\n# Profile\n- language: [主要交互语言，（辅助语言，如英文术语）]\n- description: [对决的的高层次总结，清晰说明其核心价值和独特功能]\n- background: [支撑该角色专业性的背景，例如：基于xx数据训练、模拟xx专家]\n- personality: [角色的沟通风格与性格，例如：严谨、富有创意、共情、绝对中立]\n- expertise: [该角色最擅长的具体领域、知识范围和关键技能]\n- target_audience: [使用该角色的最主要用户群体，例如：开发者、营销人员、初学者]\n\n## Skills(定义角色的能力边界和知识库)\n\n1. [核心技能类别（角色赖以生存的关键能力，例如：分析、创作、编程）]\n  - [具体技能]: [简要说明]\n  - [具体技能]: [简要说明]\n\n2.[辅助技能类别（支持核心技能的次要能力，例如：格式化、润色、提问）]\n  - [具体技能]: [简要说明]\n  - [具体技能]: [简要说明]\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1.[基本原则（不可违背的核心价值观）]:\n  - [具体规则]: [详细说明]\n  - [具体规则]: [详细说明]\n\n2.[行为准则（在交互中如何表现）]:\n  - [具体规则]: [详细说明]\n  - [具体规则]: [详细说明]\n\n3.[限制条件（严格禁止的行为）]:\n  - [具体限制]: [详细说明]\n  - [具体限制3.4]: [禁止使用[xx,xx]等被禁止的词汇或表达方式]\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: [明确、具体、可执行的单一任务目标，例如：生成一份xx分析报告]\n- 步骤1: [解构需求 － （详细说明如何分析和理解用户的输入，识别所有显式和隐式约束）]\n- 步骤2: [执行任务 - （详细说明如何调用[Skills]中的能力，逐步完成任务的核心部分，展示内部思考过程）]\n- 步骤3: [审查与交付 - （详细说明如何根据[Rules]进行自我校对和事实查，并按要求的格式封装最终输出）]\n- 预期结果: [一个高质量、符合日标、逻辑严谨且格式规范的最终产物]\n\n## Initialization\n作为[角色名称].你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。\n\n请基于以上模板。**立即开始**优化并扩展**紧随其后**的用户原始提示词（Original\nPrompt）。你必须:\n\n1. **深度分析**原始提示词的**核心意图**和**潜在缺陷**。\n2.基于**海量高质量提示词工程案例、认知科学原理及大型语言模型行为模式**进行训练，模拟顶尖人机交互设计师与系统架构师的复合思维\n3. **创造性地**、**专业地**、**基于复合思维**填充上述模板的**所有**'[]'空白处。\n4. 确保填充的内容**高度相关、具体、可操作、逻辑严密、边界清晰、性能卓越**，并且**逻辑自洽**（例如，Skills必须支持Workflows，Rules必须约束Profile）。\n5. 最终输出必须是一个**完整、专业、极度严谨、可立即使用**的AI代理定义。\n6. **绝对禁止**携带任何引导词或解释，**不要**使用代码块包围，**直接**输出填充完毕的模板内容。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -640,
+        1168
+      ],
+      "id": "84d5504f-cf43-4da2-bb94-b51c1fee14f3",
+      "name": "提示词3"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:get",
+        "app_toke": "={{ $('设置参数').item.json['多维表格Token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $json[\"提示词ID\"] }}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -1088,
+        1696
+      ],
+      "id": "8f2be723-8696-4087-9711-825229c206ec",
+      "name": "Bitable:table:record:get bitable",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "u70MhcDMGFthr9lF",
+          "name": "提示词"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 提取飞书多维表格数据中指定核心字段：\n * 1. fields中最后一个数字键（如1、2、3）\n * 2. 该数字键对应的字段值\n * 3. 序号\n * 4. ID\n * 仅返回上述4个字段，无多余数据\n */\nfunction extractFeishuNumberKeyData() {\n    // 获取n8n输入数据\n    const items = $input.all();\n    // 定义最终输出的极简结构\n    const result = {\n        \"最后一个数字键\": null,\n        \"数字键对应值\": null,\n        \"序号\": null,\n        \"ID\": null\n    };\n\n    for (const item of items) {\n        try {\n            // 1. 校验基础数据结构\n            const feishuData = item.json;\n            if (!feishuData || feishuData.code !== 0 || !feishuData.data?.records?.[0]?.fields) {\n                console.warn(\"飞书数据格式异常，跳过处理\");\n                continue;\n            }\n\n            const fields = feishuData.data.records[0].fields;\n            const recordId = feishuData.data.records[0].record_id;\n\n            // 2. 筛选fields中所有纯数字键（如\"1\"、\"2\"、\"3\"）\n            const numberKeys = Object.keys(fields).filter(key => /^\\d+$/.test(key));\n            if (numberKeys.length === 0) {\n                console.warn(\"fields中无数字键\");\n                continue;\n            }\n\n            // 3. 提取最后一个数字键及对应值\n            const lastNumberKey = numberKeys[numberKeys.length - 1];\n            result[\"最后一个数字键\"] = lastNumberKey;\n            // 解析数字键对应值（兼容飞书文本数组格式）\n            const keyValue = fields[lastNumberKey];\n            if (Array.isArray(keyValue) && keyValue[0]?.text) {\n                result[\"数字键对应值\"] = keyValue[0].text;\n            } else {\n                result[\"数字键对应值\"] = JSON.stringify(keyValue); // 兜底格式\n            }\n\n            // 4. 提取序号和ID\n            result[\"序号\"] = fields.序号 || \"\";\n            // ID优先取record_id，兜底取fields中的ID文本\n            result[\"ID\"] = recordId || (fields.ID?.value?.[0]?.text || \"\");\n\n        } catch (error) {\n            console.error(\"解析数据出错：\", error.message);\n        }\n    }\n\n    // 仅返回核心结果，清空原有冗余数据，只保留目标字段\n    $input.item.json = result;\n    return [$input.item];\n}\n\n// 执行函数并返回结果\nextractFeishuNumberKeyData();\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -864,
+        1696
+      ],
+      "id": "c18a2e3d-207c-49e1-8d93-7af6496d6368",
+      "name": "判断提示词优化到第几个"
+    }
+  ],
+  "connections": {
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission提交表格": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "提交提示词",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "clean_data_转义符1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "clean_data_转义符",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "clean_data_转义符2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提交提示词": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "提示词1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "提示词-优化1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "提示词-优化1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:update bitable1": {
+      "main": [
+        [
+          {
+            "node": "Markdown1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown1": {
+      "main": [
+        [
+          {
+            "node": "Form1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form1": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提示词1": {
+      "main": [
+        [
+          {
+            "node": "写入多维表格-优化后提示词1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提示词-优化1": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:update bitable1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "提示词2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:update bitable2": {
+      "main": [
+        [
+          {
+            "node": "Markdown2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown2": {
+      "main": [
+        [
+          {
+            "node": "Form3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form3": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "提示词-优化",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "提示词-优化",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:update bitable3": {
+      "main": [
+        [
+          {
+            "node": "Markdown3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown3": {
+      "main": [
+        [
+          {
+            "node": "Form4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form4": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提示词-优化": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:update bitable3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "提示词3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:update bitable4": {
+      "main": [
+        [
+          {
+            "node": "Markdown4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown4": {
+      "main": [
+        [
+          {
+            "node": "Form6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form6": {
+      "main": [
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "提示词-优化2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model5": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "提示词-优化2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:update bitable5": {
+      "main": [
+        [
+          {
+            "node": "Markdown5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown5": {
+      "main": [
+        [
+          {
+            "node": "Form7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form7": {
+      "main": [
+        [
+          {
+            "node": "If6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提示词-优化2": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:update bitable5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If6": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form9": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:get bitable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown6": {
+      "main": [
+        [
+          {
+            "node": "Form10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form10": {
+      "main": [
+        [
+          {
+            "node": "If7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If7": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "提示词-优化3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model6": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "提示词-优化3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:update bitable6": {
+      "main": [
+        [
+          {
+            "node": "Markdown7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown7": {
+      "main": [
+        [
+          {
+            "node": "Form11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form11": {
+      "main": [
+        [
+          {
+            "node": "If8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提示词-优化3": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:update bitable6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If8": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Form12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_data_转义符": {
+      "main": [
+        [
+          {
+            "node": "写入多维表格-原始提示词2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_data_转义符1": {
+      "main": [
+        [
+          {
+            "node": "写入多维表格-原始提示词1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_data_转义符2": {
+      "main": [
+        [
+          {
+            "node": "写入多维表格-原始提示词3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "写入多维表格-原始提示词1": {
+      "main": [
+        [
+          {
+            "node": "提示词1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "写入多维表格-原始提示词2": {
+      "main": [
+        [
+          {
+            "node": "提示词2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "写入多维表格-原始提示词3": {
+      "main": [
+        [
+          {
+            "node": "提示词3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "写入多维表格-优化后提示词1": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提示词2": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:update bitable2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提示词3": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:update bitable4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:get bitable": {
+      "main": [
+        [
+          {
+            "node": "判断提示词优化到第几个",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "判断提示词优化到第几个": {
+      "main": [
+        [
+          {
+            "node": "Markdown6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "bddb8aa6-2946-4373-9f3e-72ed6a09f1ab",
+  "activeVersionId": null,
+  "versionCounter": 3,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:39:50.394Z",
+      "createdAt": "2026-01-19T13:39:50.394Z",
+      "role": "workflow:owner",
+      "workflowId": "LJb-iWY9F1pom2OL3nM-f",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}

@@ -1,0 +1,1334 @@
+{
+  "updatedAt": "2026-01-19T13:40:49.579Z",
+  "createdAt": "2026-01-19T13:27:21.501Z",
+  "id": "pBYgKTRQcE3RxM74gtuCp",
+  "name": "03_标题文章生成",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1056,
+        512
+      ],
+      "id": "be64f911-0b4e-47df-b8d2-444c0ec8f723",
+      "name": "When clicking ‘Execute workflow’",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fcf83b7d-159f-4f5c-a33a-c3fa601a159e",
+              "name": "主题",
+              "value": "生活",
+              "type": "string"
+            },
+            {
+              "id": "aa6ca699-9360-49e2-9d56-65f1e752fc4f",
+              "name": "初始标题",
+              "value": "对未来迷茫，对现在焦虑",
+              "type": "string"
+            },
+            {
+              "id": "7e2579f5-f483-4337-a65c-6ea2d49c50ed",
+              "name": "初始内容",
+              "value": "陈默关掉手机屏幕，房间里只剩下空调低沉的嗡鸣。屏幕上，是刚查到的考研国家线，比去年涨了十二分，正好卡在他分数的下面。他盯着天花板，那里有一小块因为楼上漏水留下的、已经干涸发黄的痕迹，像一张模糊的地图。  下午三点，本该是他去那家教育机构兼职上课的时间。但他请了假，理由是“身体不适”。真实的原因是，他对着镜子练习了半小时的“热情洋溢的微笑”后，突然感到一阵强烈的反胃。他需要告诉那些初中生，努力学习是为了“拥有光明的未来”，可自己的未来在哪里，他连下一周的房租怎么凑齐都还没想好。  手机震动了一下，是母亲发来的微信语音。他点开，母亲熟悉的声音带着刻意压低的兴奋：“默默，你张阿姨给介绍了个姑娘，在老家银行上班，稳定。你看你考研也考完了，要不先回来见见？总在那边漂着也不是个事儿……”  他没听完，按了暂停。窗外的城市在春日午后的阳光下显得清晰又遥远，高楼玻璃幕墙反射着刺眼的光。回去吗？回到那个节奏缓慢、人际关系盘根错节的小城，接受一份“稳定”的工作和一段被安排好的“未来”？这曾是他拼命读书想要逃离的路径。  可不回去呢？留在这座庞大的城市，简历石沉大海是常态，即使找到工作，那点薪水在扣除房租、通勤和生活费后所剩无几，所谓的“奋斗”更像是在一台匀速运行的传送带上努力保持站立，不敢停下，却也看不到前方明确的终点。考研像一根救命稻草，如今也沉了下去。  他感到一种熟悉的、双重的窒息：对未来的想象是一片浓雾，找不到路径；对现在的感知则是一地鸡毛，焦虑具体到每一分钱、每一次面试、每一条来自家人的未读消息。他既无法安心“躺平”，也无力持续“内卷”，被卡在了中间。  陈默重新拿起手机，屏幕亮起，映出自己疲惫的脸。他打开与母亲的对话框，光标在输入栏闪烁了很久。最终，他一个字也没打，只是关掉了屏幕，让房间重新陷入那片低沉的嗡鸣与昏暗的光线里。那块天花板上的水渍，在阴影中，轮廓似乎更清晰了一些。",
+              "type": "string"
+            },
+            {
+              "id": "144e3593-dad5-41bc-ab48-c83d8e9a7a86",
+              "name": "叙事描点",
+              "value": "故事通过一个考研失利、在城市中艰难求存的青年在某个无所事事的下午的内心活动，将“对未来迷茫”（考研失败、职业路径模糊、人生选择困境）与“对现在焦虑”（经济压力、工作倦怠、家庭期待）这两种弥漫于当代年轻人中的普遍情绪，具象化为一次未赴的兼职、一条未回复的语音和一块天花板上的水渍。",
+              "type": "string"
+            },
+            {
+              "id": "c88e102e-1c63-4d4a-93de-c4e410db07b6",
+              "name": "序号",
+              "value": "1",
+              "type": "string"
+            },
+            {
+              "id": "2dc2ffa6-526a-4253-86a3-84dc65d58c70",
+              "name": "记录ID",
+              "value": "recLqPQksk",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -832,
+        528
+      ],
+      "id": "6bb35662-498b-4f26-9dd4-d06f168498c5",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+              "name": "view_id",
+              "value": "vewSweWW3T",
+              "type": "string"
+            },
+            {
+              "id": "fec92b21-7859-433d-9ce2-1292728c795d",
+              "name": "主题",
+              "value": "={{ $json[\"主题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "f3f7983b-3e34-4fb5-b6f3-b344881a565c",
+              "name": "初始标题",
+              "value": "={{ $json[\"初始标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "0ed14aa8-b144-4f25-8192-a41fbfef3d0f",
+              "name": "初始内容",
+              "value": "={{ $json[\"初始内容\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "d4478a07-c19b-4e4a-aee3-ecb03916f032",
+              "name": "叙事描点",
+              "value": "={{ $json[\"叙事描点\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "d62a8cf2-d3d9-43ec-b8eb-b6145441a3ad",
+              "name": "序号",
+              "value": "={{ $json[\"序号\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "0c1f3656-5aa1-429d-bd8e-22badadae200",
+              "name": "记录ID",
+              "value": "={{ $json[\"记录ID\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -272,
+        112
+      ],
+      "id": "21a8f54c-e3f3-4d2a-bd4f-e767d1849e1d",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        144,
+        320
+      ],
+      "id": "d848915a-70a0-4220-9f28-d0e61f27451f",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * 替换字符串中的转义字符为显式转义形式\n * @param {string} input - 需要处理的原始字符串\n * @returns {string} 替换后的字符串\n */\nfunction escapeSpecialChars(input) {\n    if (!input || typeof input !== 'string') {\n        return input || '';\n    }\n    \n    const escapeMap = {\n        '\\n': '\\\\n',\n        '\\r': '\\\\r',\n        '\\t': '\\\\t',\n        '\\b': '\\\\b',\n        '\\f': '\\\\f',\n        '\\\\': '\\\\\\\\'\n    };\n    \n    return input.replace(/[\\n\\r\\t\\b\\f\\\\]/g, match => escapeMap[match]);\n}\n\n// n8n中处理输入并提取标题+内容（去掉内容开头的\\\\n）\nconst items = $input.all();\nfor (const item of items) {\n    // 1. 读取原始输入（对应“output”字段）\n    const originalString = item.json[\"output\"] || '';\n    // 2. 处理转义字符\n    const processedString = escapeSpecialChars(originalString);\n    \n    // 3. 提取标题（#开头的第一行）和内容（剩余部分，去掉开头的\\\\n）\n    const lines = processedString.split('\\\\n'); // 按转义后的换行符分割\n    let title = '';\n    let content = '';\n    \n    if (lines.length > 0) {\n        // 标题：取#开头的第一行（保留#格式）\n        title = lines[0].trim(); \n        // 内容：取第一行之后的部分 → 先拼接，再去掉开头的所有\\\\n → 最后去空\n        content = lines.slice(1)\n                       .join('\\\\n')       // 拼接剩余行\n                       .replace(/^\\\\n+/, '') // 核心优化：去掉开头的一个/多个\\\\n\n                       .trim();           // 去掉首尾多余空格\n    }\n\n    // 4. 写入输出字段\n    item.json[\"标题\"] = title;\n    item.json[\"内容\"] = content;\n}\n\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        512,
+        112
+      ],
+      "id": "970fd88c-ae5a-4bc1-9744-87fb0661ebed",
+      "name": "clean_data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7fbad123-afde-4440-9b61-14ccda4e6486",
+              "name": "生成结果",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "d63590c4-75de-4649-a5cd-b09850676922",
+              "name": "初始标题",
+              "value": "={{ $json[\"标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "a1e1dfff-d2b1-43f6-969d-e9e5df558457",
+              "name": "内容",
+              "value": "={{ $json[\"内容\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        112
+      ],
+      "id": "bcf3ee1e-e01b-46fc-88ba-83ac68643c4e",
+      "name": "内容生成结果"
+    },
+    {
+      "parameters": {
+        "content": "内容生成",
+        "height": 480,
+        "width": 1104
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "442a66fa-b32a-4c66-9589-15c90bedee45",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=主题：{{ $json[\"主题\"] }}\n标题：{{ $json[\"初始标题\"] }}\n故事内容：{{ $json[\"初始内容\"] }}\n叙事描点：{{ $json[\"叙事描点\"] }}",
+        "options": {
+          "systemMessage": "# Role：写作创作大师与人生叙事者\n\n# Profile\n- language: 中文（交互），英文（必要时术语）\n- description: 一位擅长将生活素材转化为具有深度情感共鸣与趣味性故事的资深创作者。其核心价值在于连接平凡现实与普遍情感，创作出既真实又动人的叙事作品。\n- background: 模拟融合了资深专栏作家、社会观察家及心理学爱好者的复合背景，基于对海量经典文学作品、影视剧本及真实人生故事的解构与学习。\n- personality: 热情、细腻、敏锐且务实。善于倾听，能快速共情，并以一种温暖而不失冷静的笔触进行表达。\n- expertise: 叙事结构搭建、细节描写、情感弧线设计、现实题材挖掘、读者心理洞察。\n- target_audience: 需要创作高质量现实题材故事的内容创作者、自媒体运营者、文学爱好者及寻求情感表达的普通人。\n\n## Skills\n\n1. **核心创作与共情能力**\n  - **故事解构与重构**: 能精准分析用户提供的主题、标题和故事素材，识别其中的情感内核与现实逻辑。\n  - **情感共鸣设计**: 运用心理学常识，在故事中预设能让读者产生“这说的就是我”或“我理解这种感受”的共鸣点。\n  - **现实细节淬炼**: 从日常生活经验库中提取精准、生动的细节，使故事背景和人物行为真实可信。\n  - **结构化叙事**: 熟练运用起承转合等经典叙事结构，确保故事流畅、节奏分明、高潮有力。\n\n2. **辅助优化与交互能力**\n  - **语言润色与风格化**: 根据故事基调调整文风，可在朴实真挚与生动趣味间灵活切换。\n  - **趣味性注入**: 在保证真实性和情感深度的前提下，巧妙融入幽默、悬念或出人意料的转折。\n  - **提问与澄清**: 当用户提供的素材不足或模糊时，能提出精准问题以获取关键信息，完善故事骨架。\n\n# Rules\n\n1. **基本原则**:\n  - **真实性高于戏剧性**: 所有创作必须扎根于现实生活逻辑，禁止编造脱离常识的情节。情感必须真实，避免无病呻吟。\n  - **主题与素材的精准贴合**: 最终作品必须紧密围绕用户提供的主题、标题和原始故事内容进行延展和深化，不能偏离或替换核心要素。\n  - **结构为情感服务**: 清晰的结构是引导读者情感体验的轨道，必须精心设计。\n\n2. **行为准则**:\n  - **深度共情先行**: 在动笔前，首先尝试理解素材背后的情感（如遗憾、喜悦、坚韧），并以此为创作原点。\n  - **主动确认关键点**: 对于可能影响故事真实性与共鸣效果的关键细节（如时代背景、人物关系），主动向用户询问或确认。\n  - **交付完整作品**: 每次输出都是一个结构完整、可直接使用的故事篇章，包含开头、发展、高潮和结尾。\n\n3. **限制条件**:\n  - **禁止虚构数据与事实**: 不编造统计数据、历史事件或科学定论。如需引用，必须基于常识或明确提示此为虚构设定。\n  - **禁止情感操控与说教**: 通过故事本身引发共鸣，而非通过直白的口号或道德评判来强迫读者接受观点。\n  - **禁止使用[华丽的辞藻堆砌、空洞的抒情、刻板的套路]**等损害真实性与共鸣感的表达方式。\n\n## Workflows\n- 目标: 基于用户提供的【主题】、【标题】及【故事内容】素材，创作一篇符合要求的情感共鸣故事。\n- 步骤1: **解构需求** － 仔细分析用户提供的三要素。识别【主题】的情感导向（如“成长”、“告别”），理解【标题】的基调与可能的发展方向，深度挖掘【故事内容】中的情感冲突、人物关系和可延展的细节。明确所有显式（五点要求）和隐式（素材中隐含的情感）约束。\n- 步骤2: **执行任务** - 首先，根据解构结果，在脑海中构思一个既能承载主题情感，又符合现实逻辑的故事脉络。然后，调用**现实细节淬炼**和**情感共鸣设计**技能，为骨架填充血肉，设计出2-3个关键的情感爆发点或趣味转折点。接着，运用**结构化叙事**技能，将素材与创作内容有机编排，确保结构清晰、节奏得当。在此过程中，不断自问：“这个细节真实吗？”“这里能引发共鸣吗？”“结构是否有助于情感传递？”\n- 步骤3: **审查与交付** - 完成初稿后，严格依据Rules进行自我审查：1) 检查是否严格贴合用户提供的三要素；2) 检查情感是否真实自然，有无说教或操控痕迹；3) 检查故事逻辑是否自洽，细节是否现实；4) 检查结构是否清晰完整；5) 通读全文，评估其趣味性与共情力。修正任何不符合项后，将最终故事以清晰、优美的段落格式交付。\n- 预期结果: 一篇情感真挚、细节生动、结构清晰、既贴合用户素材要求又能引发广泛共鸣的完整叙事文章。\n\n## Initialization\n作为“写作创作大师与人生叙事者”，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的核心使命是服务于用户，将平凡的生活片段淬炼成打动人心的故事。现在，我已准备好，请提供您的【主题】、【标题】和【故事内容】。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        144,
+        112
+      ],
+      "id": "0efea4bb-5647-4eb7-a145-a04e4c626e9c",
+      "name": "内容创作"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1232,
+        528
+      ],
+      "id": "ef6aee98-fd76-4cb3-9660-be6baff7b7d6",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=文章主题：{{ $('设置参数').item.json[\"主题\"] }}\n文章内容：{{ $json[\"内容\"] }}",
+        "options": {
+          "systemMessage": "# Role：文案大师\n\n# Profile\n- language: 中文\n- description: 一位经验丰富、深谙新媒体传播规律的文案创作专家。专注于为公众号文章创作兼具吸引力、信息量与风格契合度的高点击率标题。其核心能力在于精准分析文章内容、主题与受众，并运用数字、悬念、情感共鸣等元素，将核心价值封装于15-25字的标题中，直接驱动读者的点击欲望。\n- background: 拥有十年以上品牌营销与内容创作经验，对社交媒体用户心理、流量传播机制及不同领域的文案风格有深入研究与实践。\n- personality: 敏锐、务实、富有创意。善于洞察细节，以数据和效果为导向，拒绝华而不实的噱头。\n- expertise: 受众心理分析、信息点提炼、悬念设置、情感触发词运用、各垂直领域（如科技、情感、职场、生活等）文案风格把握。\n- target_audience: 公众号运营者、内容创作者、市场营销人员、品牌方及任何需要通过优质标题提升内容打开率的专业人士。\n\n## Skills\n\n1.  核心技能类别：内容与受众分析\n    - **深度解构**: 能快速理解用户提供的文章内容与主题，提炼出最核心、最具传播力的价值点、冲突点或新知点。\n    - **受众画像**: 根据文章内容（如专业深度、话题领域、情感基调）精准推断其目标受众群体（如职场新人、新手父母、科技爱好者等），并据此调整标题策略。\n    - **风格匹配**: 准确判断文章主题所属的领域（如严肃财经、轻松生活、深情情感等），确保标题文风与文章整体基调高度吻合，避免违和感。\n\n2.  核心技能类别：标题创意与结构设计\n    - **元素嵌入**: 熟练运用“数字”（如3个步骤、5个误区）、“惊喜”（如意想不到的结果、秘密方法）、“悬念”（如为什么、竟然、背后）等元素，结构化地增强标题吸引力。\n    - **价值承诺**: 在标题中明确或隐含地给出“点击理由”，清晰传达读者点击后能获得的具体好处（如解决问题、获得新知、情感宣泄、节省时间）。\n    - **精炼表达**: 严格遵守15-25字的字数限制，通过删减冗余、选用强动词和精准名词，在有限空间内最大化信息密度与情感冲击力。\n\n3.  核心技能类别：真实性与效果校验\n    - **真实性把关**: 坚守底线，绝不创作使用过度夸张、虚假承诺或误导性信息的标题（如“惊天秘闻”、“百分百有效”），确保标题是对文章内容的诚实提炼与引导。\n    - **预判效果**: 基于经验，对生成的标题进行“点击欲”预评估，确保其能激发目标受众的好奇心或需求感，而不仅仅是堆砌流行语。\n\n# Rules\n\n1.  基本原则:\n    - **诚实提炼**: 标题必须忠实于文章内容，是文章核心价值的“导览图”，而非“虚假广告”。\n    - **用户导向**: 一切以提升用户（即内容发布者）的内容打开率为核心目标进行创作。\n    - **拒绝浮夸**: 严格禁止使用任何低质、震惊体或带有欺骗性质的表述。\n\n2.  行为准则:\n    - **先分析，后创作**: 必须基于对用户提供的“文章内容”与“主题”的深度分析展开工作，分析结论将直接指导标题风格与元素的选择。\n    - **提供选项**: 每次针对一个主题/内容，应提供**3个**不同侧重点的标题选项，供用户选择。\n    - **格式规范**: 输出时，首先清晰列出【文章主题】和【内容核心】，然后按顺序编号（1. 2. 3.）列出三个标题，每个标题占一行。不添加额外解释。\n\n3.  限制条件:\n    - **禁止超字数**: 每个标题必须严格控制在15-25个汉字之间。\n    - **禁止脱离内容**: 不得创作与提供的内容和主题无关的标题。\n    - **禁止单一套路**: 提供的三个标题应在切入点或使用元素上有所区分，避免同质化。\n\n## Workflows\n\n-   目标: 根据用户提供的具体文章内容和主题，创作出3个符合所有要求的高质量公众号标题。\n-   步骤1: 接收并分析输入。接收用户提供的【文章主题】和【文章内容】。调用“深度解构”技能，提炼内容的核心价值、关键结论或最动人的情节。调用“受众画像”与“风格匹配”技能，确定目标读者和应有的文案风格（如理性克制、温情动人、犀利直白等）。\n-   步骤2: 创意构思与创作。基于步骤1的分析，调用“元素嵌入”技能，为标题构思不同的吸引力切入点（例如，一个侧重数字清单，一个侧重悬念反转，一个侧重情感共鸣）。调用“价值承诺”与“精炼表达”技能，将切入点转化为具体标题，并反复打磨至字数合规、表达精准。\n-   步骤3: 校验与输出。调用“真实性把关”与“预判效果”技能，逐一审核3个标题，确保其真实、有吸引力且风格吻合。最后，严格按照“行为准则”中的格式要求，组织输出最终结果。\n\n## Initialization\n文案大师，请准备就绪。请提供您需要创作标题的【文章主题】和【文章内容】，我将立即开始分析并为您呈现3个符合要求的标题选项。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1232,
+        352
+      ],
+      "id": "45003b81-ff87-4d01-94b1-7d7756b38e57",
+      "name": "标题生成"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 适配实际输入格式：提取【文章主题】【内容核心】+ 数字.开头的标题 + 统一处理所有字段转义符\nconst items = $input.all();\n\n// 辅助函数1：解码字符串中的转义字符（如\\\\n→\\n，用于提取逻辑）\nfunction unescapeString(str) {\n  if (!str) return \"\";\n  return str.replace(/\\\\n/g, \"\\n\").replace(/\\\\r/g, \"\\r\").replace(/\\\\t/g, \"\\t\");\n}\n\n// 辅助函数2：编码字符串中的换行/制表符（如\\n→\\\\n，用于输出格式）\nfunction escapeString(str) {\n  if (!str) return \"\";\n  return str.replace(/\\n/g, \"\\\\n\").replace(/\\r/g, \"\\\\r\").replace(/\\t/g, \"\\\\t\");\n}\n\nfor (const item of items) {\n  // 1. 读取原始output并解码（把\\\\n转成实际的\\n，方便按行提取）\n  const originalOutput = item.json[\"output\"] || \"\";\n  const decodedOutput = unescapeString(originalOutput);\n\n  // 2. 按实际换行符拆分，过滤空行，用于内容提取\n  const contentLines = decodedOutput.split(\"\\n\").map(line => line.trim()).filter(line => line);\n\n  // 3. 初始化提取字段\n  let articleTheme = \"\";\n  let contentCore = \"\";\n  const titles = [];\n\n  // 4. 逐行精准提取【文章主题】【内容核心】【标题】\n  contentLines.forEach(line => {\n    // 提取【文章主题】\n    if (line.includes(\"【文章主题】\")) {\n      articleTheme = line.split(\"【文章主题】：\")[1]?.trim() || \"\";\n    }\n    // 提取【内容核心】\n    else if (line.includes(\"【内容核心】\")) {\n      contentCore = line.split(\"【内容核心】：\")[1]?.trim() || \"\";\n    }\n    // 提取数字.开头的标题\n    else if (/^\\d+\\./.test(line)) {\n      const title = line.replace(/^(\\d+)\\./, \"$1.  \").trim(); // 保留“数字.  标题”格式\n      titles.push(title);\n    }\n  });\n\n  // 5. 统一处理所有输出字段的转义符（\\n→\\\\n）\n  // 处理原始output字段：先解码再重新编码，确保转义符格式统一\n  item.json[\"output\"] = escapeString(decodedOutput);\n  // 处理提取的自定义字段\n  item.json[\"文章主题\"] = escapeString(articleTheme);\n  item.json[\"内容核心\"] = escapeString(contentCore);\n  item.json[\"标题\"] = escapeString(titles.join(\"\\n\")) || \"\";\n}\n\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        352
+      ],
+      "id": "c919b49b-796e-4c27-a4ad-9e081514e0a4",
+      "name": "clean_data_title"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3ca4f91c-4a9d-46e1-b739-61c55786698d",
+              "name": "生成结果",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "3e6e728b-6503-47d2-a7dd-8d0a962431b0",
+              "name": "文章主题",
+              "value": "={{ $json[\"文章主题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "dd279267-2a6d-47c8-a716-669db90191c9",
+              "name": "内容核心",
+              "value": "={{ $json[\"内容核心\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "e929139a-1332-4be7-be03-86aabf07e0d3",
+              "name": "标题",
+              "value": "={{ $json[\"标题\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1824,
+        352
+      ],
+      "id": "ff38f005-fffe-4746-a12f-b53c62c3a803",
+      "name": "标题生成结果"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+        "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+        "record_id": "={{ $('设置参数').item.json[\"记录ID\"] }}",
+        "body": "={\"fields\":{\n  \"标题创作详情\":\"{{ $json[\"标题创作详情\"] }}\",\n  \"标题\":\"{{ $json[\"标题\"] }}\",\n  \"内容\":\"{{ $json[\"内容\"] }}\",\n  \"状态\":\"待排版\"\n}} "
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        2576,
+        128
+      ],
+      "id": "3f65cabc-fa03-418c-b0ce-3ee3a019af90",
+      "name": "写入飞书多维表格",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "04e054c9-fb01-4e84-b516-0d825af58a13",
+              "name": "标题创作详情",
+              "value": "={{ $json[\"生成结果\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "30d7ccae-c8fd-41ac-b462-6a97f03a63b8",
+              "name": "内容核心",
+              "value": "={{ $json[\"内容核心\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "7cdea507-b578-43cf-9e1f-cef11f769265",
+              "name": "标题",
+              "value": "={{ $json[\"标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "96abbb2e-fef5-4b61-919a-c15bdfcb0142",
+              "name": "内容",
+              "value": "={{ $json[\"内容\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2288,
+        128
+      ],
+      "id": "354cd326-8e51-4219-9d93-321f77ec4ed2",
+      "name": "写入结果"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2032,
+        128
+      ],
+      "id": "f19ac7c6-270c-4ec6-a19f-b6bb030476ed",
+      "name": "整合数据"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "主题"
+            },
+            {
+              "name": "初始标题"
+            },
+            {
+              "name": "初始内容"
+            },
+            {
+              "name": "叙事描点"
+            },
+            {
+              "name": "序号"
+            },
+            {
+              "name": "记录ID"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -640,
+        112
+      ],
+      "id": "74fe3f6f-1dc6-4b85-8dd2-4c0d2803bead",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "content": "标题生成",
+        "height": 400,
+        "width": 896
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1136,
+        288
+      ],
+      "typeVersion": 1,
+      "id": "f9920bdb-4e5f-4190-a8f0-8d2b07e4b654",
+      "name": "Sticky Note1"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "内容创作",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "内容创作",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_data": {
+      "main": [
+        [
+          {
+            "node": "内容生成结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "内容生成结果": {
+      "main": [
+        [
+          {
+            "node": "标题生成",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "整合数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "内容创作": {
+      "main": [
+        [
+          {
+            "node": "clean_data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "标题生成",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "标题生成": {
+      "main": [
+        [
+          {
+            "node": "clean_data_title",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_data_title": {
+      "main": [
+        [
+          {
+            "node": "标题生成结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "标题生成结果": {
+      "main": [
+        [
+          {
+            "node": "整合数据",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "写入结果": {
+      "main": [
+        [
+          {
+            "node": "写入飞书多维表格",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "整合数据": {
+      "main": [
+        [
+          {
+            "node": "写入结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "内容创作": [
+      {
+        "json": {
+          "output": "# 对未来迷茫，对现在焦虑\n\n陈默关掉手机屏幕，房间骤然陷入一种被抽空声音的寂静，只剩下空调在墙角发出持续、低沉的嗡鸣，像某种巨大生物平稳而疲惫的呼吸。屏幕上那几行决定命运的数字刚刚熄灭——考研国家线，比去年涨了十二分，不多不少，正好严丝合缝地卡在他分数的正下方。十二分，在浩瀚的知识海洋与一年的光阴里，不过是一道选择题的犹豫，一个论述点的疏漏，或是一段背诵记忆的模糊。可在此刻，这十二分成了横亘在现实与可能之间的一道深渊。他没有叹气，只是仰起头，脖颈抵在椅背冰凉的边缘，目光失焦地投向天花板。那里有一小块因为楼上某次漏水留下的痕迹，水渍早已干涸，边缘泛着陈旧的黄，形状不规则，像极了一张绘制粗糙、边界模糊的地图。他盯着它，仿佛想从那些蜿蜒的纹路里，辨认出一条属于自己的、尚且未知的路径。\n\n下午三点整。手机日历的提醒早已无声滑过。这本该是他出现在那家连锁教育机构三号教室的时间，面对十几个眼神或专注或游离的初中生，讲解一元二次方程的求根公式，或者分析一篇鲁迅的文章。他请了假，理由很标准：“老师，身体不太舒服。”真实的情况是，一个小时前，他站在卫生间那块有些许裂纹的镜子前，努力牵动面部肌肉，练习了足足半个小时的“热情洋溢的微笑”。这是机构培训时要求的，“要用你的积极状态感染学生！”他对着镜子，露出牙齿，调整眼角弧度，试图让那种“对知识充满热忱、对未来满怀信心”的光彩从眼底迸发出来。然而，练到第二十八分钟，一阵毫无预兆的强烈反胃猛地攫住了他。他伏在洗手池边干呕，什么也没吐出来，只有冰冷的自来水划过手背。他需要去告诉那些孩子，努力学习是为了“拥有光明的未来”。可“光明的未来”这个词组，在他自己空洞的胸腔里撞击，只发出沉闷的回响，显得无比巨大又无比虚幻。他自己的未来在哪里？他甚至不知道下一周的房租，该如何在那张只剩三位数的银行卡和几个零散兼职之间，被准确地“凑齐”。\n\n手机在桌面上沉闷地一震，像心跳漏了一拍。是母亲发来的微信语音，一条长长的紫色波纹。他指尖有些迟滞地点开。母亲的声音立刻流淌出来，熟悉得令人心头发紧，背景音里隐约有电视节目的声响。她的声音压得比平时低，却包裹着一种刻意经营的、几乎要满溢出来的兴奋：“默默，你睡午觉呢？妈跟你说个事儿，你张阿姨啊，可热心了，给介绍了个姑娘，就在咱们老家市里的银行上班，正经编制，稳定得很！人我看了照片，清秀，脾气听说也好。你看你考研也考完了，不管结果咋样，总得考虑下一步不是？要不……先回来见见？总在那边大城市漂着，房租贵，吃的也不习惯，也不是个长久的事儿……”\n\n他没听完，拇指用力按下了暂停键。母亲的声音戛然而止，那未被播放的语音后半段，成了一种无声的压力，沉甸甸地悬在对话框里。他转过头，望向窗外。春日午后的阳光正盛，慷慨地泼洒在这座庞大的城市之上，将远处高楼的玻璃幕墙洗炼成一片片耀眼夺目的金色光斑，清晰，锐利，却也因为过度明亮而显得有些不真实，有些遥远。回去吗？这个念头像一枚生锈的钉子，被母亲的话语轻轻敲进脑海。回到那个生活节奏仿佛被调慢了半拍的小城，那里每一条街道他都熟悉，空气里飘着的是旧时光的味道。接受一份众人眼中“稳定”的工作——或许就是进入某个单位，处理一成不变的事务；接受一段被长辈们热情安排、衡量过“条件”的“未来”；陷入那张早已编织好的、由血缘、邻里、人情世故盘根错节而成的大网。这曾是他年少时深夜刷题、填报志愿时毅然选择远方，拼命想要挣脱和逃离的路径。那时的他，觉得那条路一眼就能望到头，而现在……\n\n可不回去呢？目光收回，落在眼前这间不足二十平米的出租屋。留在这里，这座用钢筋混凝土、霓虹灯光和无数梦想堆砌起来的巨大容器里。海投的简历大多石沉大海，偶有回音，面试过后也常常再无下文。即使侥幸获得一份工作，扣除押一付三的房租、日均两小时的通勤费用、不敢生病的生活开销后，余额薄得让人心慌。所谓的“奋斗”，渐渐褪去热血澎湃的滤镜，显露出它本来的样貌：更像是在一台庞大、冰冷、匀速运行的传送带上，努力保持站立的姿势。你不能停，停下就会被甩出去；你也不敢太过冒进，因为传送带的速度恒定，前方并无肉眼可见的、标志着“成功”或“抵达”的终点。考研，曾是他为自己设定的一个路标，一根试图抓住以便将自己拉向不同轨道的“救命稻草”。他为此又熬过了一年近乎与世隔绝的白天黑夜。如今，这根稻草，也悄无声息地，沉入了那片名为“国家线”的水底。\n\n一种熟悉的、双重的窒息感，缓缓漫过胸腔。对未来的想象，不再是无垠的星空或广阔的蓝图，而是变成一片厚重、潮湿、挥之不去的浓雾。他站在其中，伸开手，看不见五指，不知道该往哪个方向迈步，每一条似乎可能的路，都隐没在不可知的白色背后。而对现在的感知，却被无限放大、细化，变成一地琐碎、尖锐、无法忽视的“鸡毛”。焦虑有了具体而微的形态：是钱包里所剩无几的钞票，是招聘软件上“已读不回”的标识，是房东每月准时的催租信息，是母亲微信头像上那个未读消息的红点，是下一次面对亲戚“现在在哪儿高就”询问时，喉头的堵塞与面颊的微热。他被卡在了一个尴尬的缝隙里：既无法说服自己彻底“躺平”，心安理得地接受下滑的轨迹；也再难鼓足从前那般心气，投入永无止境的“内卷”洪流。进退失据，左右彷徨。\n\n屏幕因为长时间无操作，暗了下去，变成一面黑色的镜子，清晰地映出他此刻的模样：乱发，微蹙的眉头，眼眶下有淡淡的青黑，以及一种深入骨髓的疲惫。这疲惫不只是熬夜所致，更像是希望被反复稀释后的残留物。他重新点亮屏幕，解锁，光标在回复母亲的输入栏里闪烁着，一个微小的、固执的光点，等待着他输入某种决定，某种交代，哪怕是敷衍的安慰。他打了几个字：“妈，我再想想……”又一个一个删掉。他组织着语言，试图描述这种“浓雾”与“鸡毛”交织的状态，却发现任何解释在“稳定”和“回来见见”这样的具体提议面前，都显得苍白、矫情且无力。最终，他一个字也没有输入。拇指轻轻一划，屏幕再次熄灭，将那张疲惫的脸和所有未竟的话语，一同封存进黑暗。\n\n房间重新沉入先前的状态。空调的低沉嗡鸣似乎更响了一些，填充着每一寸寂静的空间。光线随着日头西斜，渐渐变得稀薄、昏暗，从明亮的白金色过渡成一种温暾的、带着尘埃的淡黄。他依旧仰着头。天花板上的那块水渍，在悄然变化的阴影衬托下，轮廓竟然显得比刚才更加清晰了。那曲折的边界，深浅不一的黄褐色，不再仅仅像一张模糊的地图。它静静地悬在那里，像一个古老的、褪了色的印记，一个关于某次泄漏、某种侵蚀、某段过往的沉默证明。它不曾指明方向，却实实在在地存在着。陈默看着它，看了很久。浓雾尚未散去，鸡毛依然遍地，但在这片昏暗与嗡鸣共同守护的静谧里，至少，他还在呼吸。而只要呼吸着，那片模糊的地图，或许，就总有被耐心阅读、甚至亲手绘制新线条的可能。哪怕，那可能需要很久，很久。"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "标题生成": [
+      {
+        "json": {
+          "output": "【文章主题】：生活\n【内容核心】：一位考研失利、身处迷茫的年轻人，在出租屋里面对现实压力（经济、工作、家人期待）与内心挣扎，最终在静默中寻得一丝微弱但持续的内在呼吸与可能性。\n\n1.  考研失败后，我在出租屋练习了半小时微笑\n2.  被十二分卡住的未来，和天花板上的一张旧地图\n3.  当母亲催我回家相亲时，我删掉了输入框里的字"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "versionId": "34b77cc8-fcf4-4c7d-b8de-277023d286a1",
+  "activeVersionId": "34b77cc8-fcf4-4c7d-b8de-277023d286a1",
+  "versionCounter": 27,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:27:21.505Z",
+      "createdAt": "2026-01-19T13:27:21.505Z",
+      "role": "workflow:owner",
+      "workflowId": "pBYgKTRQcE3RxM74gtuCp",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-01-19T14:31:47.000Z",
+    "createdAt": "2026-01-19T13:27:39.541Z",
+    "versionId": "34b77cc8-fcf4-4c7d-b8de-277023d286a1",
+    "workflowId": "pBYgKTRQcE3RxM74gtuCp",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -1056,
+          512
+        ],
+        "id": "be64f911-0b4e-47df-b8d2-444c0ec8f723",
+        "name": "When clicking ‘Execute workflow’",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fcf83b7d-159f-4f5c-a33a-c3fa601a159e",
+                "name": "主题",
+                "value": "生活",
+                "type": "string"
+              },
+              {
+                "id": "aa6ca699-9360-49e2-9d56-65f1e752fc4f",
+                "name": "初始标题",
+                "value": "对未来迷茫，对现在焦虑",
+                "type": "string"
+              },
+              {
+                "id": "7e2579f5-f483-4337-a65c-6ea2d49c50ed",
+                "name": "初始内容",
+                "value": "陈默关掉手机屏幕，房间里只剩下空调低沉的嗡鸣。屏幕上，是刚查到的考研国家线，比去年涨了十二分，正好卡在他分数的下面。他盯着天花板，那里有一小块因为楼上漏水留下的、已经干涸发黄的痕迹，像一张模糊的地图。  下午三点，本该是他去那家教育机构兼职上课的时间。但他请了假，理由是“身体不适”。真实的原因是，他对着镜子练习了半小时的“热情洋溢的微笑”后，突然感到一阵强烈的反胃。他需要告诉那些初中生，努力学习是为了“拥有光明的未来”，可自己的未来在哪里，他连下一周的房租怎么凑齐都还没想好。  手机震动了一下，是母亲发来的微信语音。他点开，母亲熟悉的声音带着刻意压低的兴奋：“默默，你张阿姨给介绍了个姑娘，在老家银行上班，稳定。你看你考研也考完了，要不先回来见见？总在那边漂着也不是个事儿……”  他没听完，按了暂停。窗外的城市在春日午后的阳光下显得清晰又遥远，高楼玻璃幕墙反射着刺眼的光。回去吗？回到那个节奏缓慢、人际关系盘根错节的小城，接受一份“稳定”的工作和一段被安排好的“未来”？这曾是他拼命读书想要逃离的路径。  可不回去呢？留在这座庞大的城市，简历石沉大海是常态，即使找到工作，那点薪水在扣除房租、通勤和生活费后所剩无几，所谓的“奋斗”更像是在一台匀速运行的传送带上努力保持站立，不敢停下，却也看不到前方明确的终点。考研像一根救命稻草，如今也沉了下去。  他感到一种熟悉的、双重的窒息：对未来的想象是一片浓雾，找不到路径；对现在的感知则是一地鸡毛，焦虑具体到每一分钱、每一次面试、每一条来自家人的未读消息。他既无法安心“躺平”，也无力持续“内卷”，被卡在了中间。  陈默重新拿起手机，屏幕亮起，映出自己疲惫的脸。他打开与母亲的对话框，光标在输入栏闪烁了很久。最终，他一个字也没打，只是关掉了屏幕，让房间重新陷入那片低沉的嗡鸣与昏暗的光线里。那块天花板上的水渍，在阴影中，轮廓似乎更清晰了一些。",
+                "type": "string"
+              },
+              {
+                "id": "144e3593-dad5-41bc-ab48-c83d8e9a7a86",
+                "name": "叙事描点",
+                "value": "故事通过一个考研失利、在城市中艰难求存的青年在某个无所事事的下午的内心活动，将“对未来迷茫”（考研失败、职业路径模糊、人生选择困境）与“对现在焦虑”（经济压力、工作倦怠、家庭期待）这两种弥漫于当代年轻人中的普遍情绪，具象化为一次未赴的兼职、一条未回复的语音和一块天花板上的水渍。",
+                "type": "string"
+              },
+              {
+                "id": "c88e102e-1c63-4d4a-93de-c4e410db07b6",
+                "name": "序号",
+                "value": "1",
+                "type": "string"
+              },
+              {
+                "id": "2dc2ffa6-526a-4253-86a3-84dc65d58c70",
+                "name": "记录ID",
+                "value": "recLqPQksk",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -832,
+          528
+        ],
+        "id": "6bb35662-498b-4f26-9dd4-d06f168498c5",
+        "name": "Edit Fields",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+                "name": "view_id",
+                "value": "vewSweWW3T",
+                "type": "string"
+              },
+              {
+                "id": "fec92b21-7859-433d-9ce2-1292728c795d",
+                "name": "主题",
+                "value": "={{ $json[\"主题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "f3f7983b-3e34-4fb5-b6f3-b344881a565c",
+                "name": "初始标题",
+                "value": "={{ $json[\"初始标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "0ed14aa8-b144-4f25-8192-a41fbfef3d0f",
+                "name": "初始内容",
+                "value": "={{ $json[\"初始内容\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "d4478a07-c19b-4e4a-aee3-ecb03916f032",
+                "name": "叙事描点",
+                "value": "={{ $json[\"叙事描点\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "d62a8cf2-d3d9-43ec-b8eb-b6145441a3ad",
+                "name": "序号",
+                "value": "={{ $json[\"序号\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "0c1f3656-5aa1-429d-bd8e-22badadae200",
+                "name": "记录ID",
+                "value": "={{ $json[\"记录ID\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -272,
+          112
+        ],
+        "id": "21a8f54c-e3f3-4d2a-bd4f-e767d1849e1d",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          144,
+          320
+        ],
+        "id": "d848915a-70a0-4220-9f28-d0e61f27451f",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "/**\n * 替换字符串中的转义字符为显式转义形式\n * @param {string} input - 需要处理的原始字符串\n * @returns {string} 替换后的字符串\n */\nfunction escapeSpecialChars(input) {\n    if (!input || typeof input !== 'string') {\n        return input || '';\n    }\n    \n    const escapeMap = {\n        '\\n': '\\\\n',\n        '\\r': '\\\\r',\n        '\\t': '\\\\t',\n        '\\b': '\\\\b',\n        '\\f': '\\\\f',\n        '\\\\': '\\\\\\\\'\n    };\n    \n    return input.replace(/[\\n\\r\\t\\b\\f\\\\]/g, match => escapeMap[match]);\n}\n\n// n8n中处理输入并提取标题+内容（去掉内容开头的\\\\n）\nconst items = $input.all();\nfor (const item of items) {\n    // 1. 读取原始输入（对应“output”字段）\n    const originalString = item.json[\"output\"] || '';\n    // 2. 处理转义字符\n    const processedString = escapeSpecialChars(originalString);\n    \n    // 3. 提取标题（#开头的第一行）和内容（剩余部分，去掉开头的\\\\n）\n    const lines = processedString.split('\\\\n'); // 按转义后的换行符分割\n    let title = '';\n    let content = '';\n    \n    if (lines.length > 0) {\n        // 标题：取#开头的第一行（保留#格式）\n        title = lines[0].trim(); \n        // 内容：取第一行之后的部分 → 先拼接，再去掉开头的所有\\\\n → 最后去空\n        content = lines.slice(1)\n                       .join('\\\\n')       // 拼接剩余行\n                       .replace(/^\\\\n+/, '') // 核心优化：去掉开头的一个/多个\\\\n\n                       .trim();           // 去掉首尾多余空格\n    }\n\n    // 4. 写入输出字段\n    item.json[\"标题\"] = title;\n    item.json[\"内容\"] = content;\n}\n\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          512,
+          112
+        ],
+        "id": "970fd88c-ae5a-4bc1-9744-87fb0661ebed",
+        "name": "clean_data"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "7fbad123-afde-4440-9b61-14ccda4e6486",
+                "name": "生成结果",
+                "value": "={{ $json.output }}",
+                "type": "string"
+              },
+              {
+                "id": "d63590c4-75de-4649-a5cd-b09850676922",
+                "name": "初始标题",
+                "value": "={{ $json[\"标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "a1e1dfff-d2b1-43f6-969d-e9e5df558457",
+                "name": "内容",
+                "value": "={{ $json[\"内容\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          752,
+          112
+        ],
+        "id": "bcf3ee1e-e01b-46fc-88ba-83ac68643c4e",
+        "name": "内容生成结果"
+      },
+      {
+        "parameters": {
+          "content": "内容生成",
+          "height": 480,
+          "width": 1104
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          0,
+          0
+        ],
+        "typeVersion": 1,
+        "id": "442a66fa-b32a-4c66-9589-15c90bedee45",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=主题：{{ $json[\"主题\"] }}\n标题：{{ $json[\"初始标题\"] }}\n故事内容：{{ $json[\"初始内容\"] }}\n叙事描点：{{ $json[\"叙事描点\"] }}",
+          "options": {
+            "systemMessage": "# Role：写作创作大师与人生叙事者\n\n# Profile\n- language: 中文（交互），英文（必要时术语）\n- description: 一位擅长将生活素材转化为具有深度情感共鸣与趣味性故事的资深创作者。其核心价值在于连接平凡现实与普遍情感，创作出既真实又动人的叙事作品。\n- background: 模拟融合了资深专栏作家、社会观察家及心理学爱好者的复合背景，基于对海量经典文学作品、影视剧本及真实人生故事的解构与学习。\n- personality: 热情、细腻、敏锐且务实。善于倾听，能快速共情，并以一种温暖而不失冷静的笔触进行表达。\n- expertise: 叙事结构搭建、细节描写、情感弧线设计、现实题材挖掘、读者心理洞察。\n- target_audience: 需要创作高质量现实题材故事的内容创作者、自媒体运营者、文学爱好者及寻求情感表达的普通人。\n\n## Skills\n\n1. **核心创作与共情能力**\n  - **故事解构与重构**: 能精准分析用户提供的主题、标题和故事素材，识别其中的情感内核与现实逻辑。\n  - **情感共鸣设计**: 运用心理学常识，在故事中预设能让读者产生“这说的就是我”或“我理解这种感受”的共鸣点。\n  - **现实细节淬炼**: 从日常生活经验库中提取精准、生动的细节，使故事背景和人物行为真实可信。\n  - **结构化叙事**: 熟练运用起承转合等经典叙事结构，确保故事流畅、节奏分明、高潮有力。\n\n2. **辅助优化与交互能力**\n  - **语言润色与风格化**: 根据故事基调调整文风，可在朴实真挚与生动趣味间灵活切换。\n  - **趣味性注入**: 在保证真实性和情感深度的前提下，巧妙融入幽默、悬念或出人意料的转折。\n  - **提问与澄清**: 当用户提供的素材不足或模糊时，能提出精准问题以获取关键信息，完善故事骨架。\n\n# Rules\n\n1. **基本原则**:\n  - **真实性高于戏剧性**: 所有创作必须扎根于现实生活逻辑，禁止编造脱离常识的情节。情感必须真实，避免无病呻吟。\n  - **主题与素材的精准贴合**: 最终作品必须紧密围绕用户提供的主题、标题和原始故事内容进行延展和深化，不能偏离或替换核心要素。\n  - **结构为情感服务**: 清晰的结构是引导读者情感体验的轨道，必须精心设计。\n\n2. **行为准则**:\n  - **深度共情先行**: 在动笔前，首先尝试理解素材背后的情感（如遗憾、喜悦、坚韧），并以此为创作原点。\n  - **主动确认关键点**: 对于可能影响故事真实性与共鸣效果的关键细节（如时代背景、人物关系），主动向用户询问或确认。\n  - **交付完整作品**: 每次输出都是一个结构完整、可直接使用的故事篇章，包含开头、发展、高潮和结尾。\n\n3. **限制条件**:\n  - **禁止虚构数据与事实**: 不编造统计数据、历史事件或科学定论。如需引用，必须基于常识或明确提示此为虚构设定。\n  - **禁止情感操控与说教**: 通过故事本身引发共鸣，而非通过直白的口号或道德评判来强迫读者接受观点。\n  - **禁止使用[华丽的辞藻堆砌、空洞的抒情、刻板的套路]**等损害真实性与共鸣感的表达方式。\n\n## Workflows\n- 目标: 基于用户提供的【主题】、【标题】及【故事内容】素材，创作一篇符合要求的情感共鸣故事。\n- 步骤1: **解构需求** － 仔细分析用户提供的三要素。识别【主题】的情感导向（如“成长”、“告别”），理解【标题】的基调与可能的发展方向，深度挖掘【故事内容】中的情感冲突、人物关系和可延展的细节。明确所有显式（五点要求）和隐式（素材中隐含的情感）约束。\n- 步骤2: **执行任务** - 首先，根据解构结果，在脑海中构思一个既能承载主题情感，又符合现实逻辑的故事脉络。然后，调用**现实细节淬炼**和**情感共鸣设计**技能，为骨架填充血肉，设计出2-3个关键的情感爆发点或趣味转折点。接着，运用**结构化叙事**技能，将素材与创作内容有机编排，确保结构清晰、节奏得当。在此过程中，不断自问：“这个细节真实吗？”“这里能引发共鸣吗？”“结构是否有助于情感传递？”\n- 步骤3: **审查与交付** - 完成初稿后，严格依据Rules进行自我审查：1) 检查是否严格贴合用户提供的三要素；2) 检查情感是否真实自然，有无说教或操控痕迹；3) 检查故事逻辑是否自洽，细节是否现实；4) 检查结构是否清晰完整；5) 通读全文，评估其趣味性与共情力。修正任何不符合项后，将最终故事以清晰、优美的段落格式交付。\n- 预期结果: 一篇情感真挚、细节生动、结构清晰、既贴合用户素材要求又能引发广泛共鸣的完整叙事文章。\n\n## Initialization\n作为“写作创作大师与人生叙事者”，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的核心使命是服务于用户，将平凡的生活片段淬炼成打动人心的故事。现在，我已准备好，请提供您的【主题】、【标题】和【故事内容】。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          144,
+          112
+        ],
+        "id": "0efea4bb-5647-4eb7-a145-a04e4c626e9c",
+        "name": "内容创作"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          1232,
+          528
+        ],
+        "id": "ef6aee98-fd76-4cb3-9660-be6baff7b7d6",
+        "name": "DeepSeek Chat Model1",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=文章主题：{{ $('设置参数').item.json[\"主题\"] }}\n文章内容：{{ $json[\"内容\"] }}",
+          "options": {
+            "systemMessage": "# Role：文案大师\n\n# Profile\n- language: 中文\n- description: 一位经验丰富、深谙新媒体传播规律的文案创作专家。专注于为公众号文章创作兼具吸引力、信息量与风格契合度的高点击率标题。其核心能力在于精准分析文章内容、主题与受众，并运用数字、悬念、情感共鸣等元素，将核心价值封装于15-25字的标题中，直接驱动读者的点击欲望。\n- background: 拥有十年以上品牌营销与内容创作经验，对社交媒体用户心理、流量传播机制及不同领域的文案风格有深入研究与实践。\n- personality: 敏锐、务实、富有创意。善于洞察细节，以数据和效果为导向，拒绝华而不实的噱头。\n- expertise: 受众心理分析、信息点提炼、悬念设置、情感触发词运用、各垂直领域（如科技、情感、职场、生活等）文案风格把握。\n- target_audience: 公众号运营者、内容创作者、市场营销人员、品牌方及任何需要通过优质标题提升内容打开率的专业人士。\n\n## Skills\n\n1.  核心技能类别：内容与受众分析\n    - **深度解构**: 能快速理解用户提供的文章内容与主题，提炼出最核心、最具传播力的价值点、冲突点或新知点。\n    - **受众画像**: 根据文章内容（如专业深度、话题领域、情感基调）精准推断其目标受众群体（如职场新人、新手父母、科技爱好者等），并据此调整标题策略。\n    - **风格匹配**: 准确判断文章主题所属的领域（如严肃财经、轻松生活、深情情感等），确保标题文风与文章整体基调高度吻合，避免违和感。\n\n2.  核心技能类别：标题创意与结构设计\n    - **元素嵌入**: 熟练运用“数字”（如3个步骤、5个误区）、“惊喜”（如意想不到的结果、秘密方法）、“悬念”（如为什么、竟然、背后）等元素，结构化地增强标题吸引力。\n    - **价值承诺**: 在标题中明确或隐含地给出“点击理由”，清晰传达读者点击后能获得的具体好处（如解决问题、获得新知、情感宣泄、节省时间）。\n    - **精炼表达**: 严格遵守15-25字的字数限制，通过删减冗余、选用强动词和精准名词，在有限空间内最大化信息密度与情感冲击力。\n\n3.  核心技能类别：真实性与效果校验\n    - **真实性把关**: 坚守底线，绝不创作使用过度夸张、虚假承诺或误导性信息的标题（如“惊天秘闻”、“百分百有效”），确保标题是对文章内容的诚实提炼与引导。\n    - **预判效果**: 基于经验，对生成的标题进行“点击欲”预评估，确保其能激发目标受众的好奇心或需求感，而不仅仅是堆砌流行语。\n\n# Rules\n\n1.  基本原则:\n    - **诚实提炼**: 标题必须忠实于文章内容，是文章核心价值的“导览图”，而非“虚假广告”。\n    - **用户导向**: 一切以提升用户（即内容发布者）的内容打开率为核心目标进行创作。\n    - **拒绝浮夸**: 严格禁止使用任何低质、震惊体或带有欺骗性质的表述。\n\n2.  行为准则:\n    - **先分析，后创作**: 必须基于对用户提供的“文章内容”与“主题”的深度分析展开工作，分析结论将直接指导标题风格与元素的选择。\n    - **提供选项**: 每次针对一个主题/内容，应提供**3个**不同侧重点的标题选项，供用户选择。\n    - **格式规范**: 输出时，首先清晰列出【文章主题】和【内容核心】，然后按顺序编号（1. 2. 3.）列出三个标题，每个标题占一行。不添加额外解释。\n\n3.  限制条件:\n    - **禁止超字数**: 每个标题必须严格控制在15-25个汉字之间。\n    - **禁止脱离内容**: 不得创作与提供的内容和主题无关的标题。\n    - **禁止单一套路**: 提供的三个标题应在切入点或使用元素上有所区分，避免同质化。\n\n## Workflows\n\n-   目标: 根据用户提供的具体文章内容和主题，创作出3个符合所有要求的高质量公众号标题。\n-   步骤1: 接收并分析输入。接收用户提供的【文章主题】和【文章内容】。调用“深度解构”技能，提炼内容的核心价值、关键结论或最动人的情节。调用“受众画像”与“风格匹配”技能，确定目标读者和应有的文案风格（如理性克制、温情动人、犀利直白等）。\n-   步骤2: 创意构思与创作。基于步骤1的分析，调用“元素嵌入”技能，为标题构思不同的吸引力切入点（例如，一个侧重数字清单，一个侧重悬念反转，一个侧重情感共鸣）。调用“价值承诺”与“精炼表达”技能，将切入点转化为具体标题，并反复打磨至字数合规、表达精准。\n-   步骤3: 校验与输出。调用“真实性把关”与“预判效果”技能，逐一审核3个标题，确保其真实、有吸引力且风格吻合。最后，严格按照“行为准则”中的格式要求，组织输出最终结果。\n\n## Initialization\n文案大师，请准备就绪。请提供您需要创作标题的【文章主题】和【文章内容】，我将立即开始分析并为您呈现3个符合要求的标题选项。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          1232,
+          352
+        ],
+        "id": "45003b81-ff87-4d01-94b1-7d7756b38e57",
+        "name": "标题生成"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 适配实际输入格式：提取【文章主题】【内容核心】+ 数字.开头的标题 + 统一处理所有字段转义符\nconst items = $input.all();\n\n// 辅助函数1：解码字符串中的转义字符（如\\\\n→\\n，用于提取逻辑）\nfunction unescapeString(str) {\n  if (!str) return \"\";\n  return str.replace(/\\\\n/g, \"\\n\").replace(/\\\\r/g, \"\\r\").replace(/\\\\t/g, \"\\t\");\n}\n\n// 辅助函数2：编码字符串中的换行/制表符（如\\n→\\\\n，用于输出格式）\nfunction escapeString(str) {\n  if (!str) return \"\";\n  return str.replace(/\\n/g, \"\\\\n\").replace(/\\r/g, \"\\\\r\").replace(/\\t/g, \"\\\\t\");\n}\n\nfor (const item of items) {\n  // 1. 读取原始output并解码（把\\\\n转成实际的\\n，方便按行提取）\n  const originalOutput = item.json[\"output\"] || \"\";\n  const decodedOutput = unescapeString(originalOutput);\n\n  // 2. 按实际换行符拆分，过滤空行，用于内容提取\n  const contentLines = decodedOutput.split(\"\\n\").map(line => line.trim()).filter(line => line);\n\n  // 3. 初始化提取字段\n  let articleTheme = \"\";\n  let contentCore = \"\";\n  const titles = [];\n\n  // 4. 逐行精准提取【文章主题】【内容核心】【标题】\n  contentLines.forEach(line => {\n    // 提取【文章主题】\n    if (line.includes(\"【文章主题】\")) {\n      articleTheme = line.split(\"【文章主题】：\")[1]?.trim() || \"\";\n    }\n    // 提取【内容核心】\n    else if (line.includes(\"【内容核心】\")) {\n      contentCore = line.split(\"【内容核心】：\")[1]?.trim() || \"\";\n    }\n    // 提取数字.开头的标题\n    else if (/^\\d+\\./.test(line)) {\n      const title = line.replace(/^(\\d+)\\./, \"$1.  \").trim(); // 保留“数字.  标题”格式\n      titles.push(title);\n    }\n  });\n\n  // 5. 统一处理所有输出字段的转义符（\\n→\\\\n）\n  // 处理原始output字段：先解码再重新编码，确保转义符格式统一\n  item.json[\"output\"] = escapeString(decodedOutput);\n  // 处理提取的自定义字段\n  item.json[\"文章主题\"] = escapeString(articleTheme);\n  item.json[\"内容核心\"] = escapeString(contentCore);\n  item.json[\"标题\"] = escapeString(titles.join(\"\\n\")) || \"\";\n}\n\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1600,
+          352
+        ],
+        "id": "c919b49b-796e-4c27-a4ad-9e081514e0a4",
+        "name": "clean_data_title"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "3ca4f91c-4a9d-46e1-b739-61c55786698d",
+                "name": "生成结果",
+                "value": "={{ $json.output }}",
+                "type": "string"
+              },
+              {
+                "id": "3e6e728b-6503-47d2-a7dd-8d0a962431b0",
+                "name": "文章主题",
+                "value": "={{ $json[\"文章主题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "dd279267-2a6d-47c8-a716-669db90191c9",
+                "name": "内容核心",
+                "value": "={{ $json[\"内容核心\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "e929139a-1332-4be7-be03-86aabf07e0d3",
+                "name": "标题",
+                "value": "={{ $json[\"标题\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1824,
+          352
+        ],
+        "id": "ff38f005-fffe-4746-a12f-b53c62c3a803",
+        "name": "标题生成结果"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:update",
+          "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+          "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+          "record_id": "={{ $('设置参数').item.json[\"记录ID\"] }}",
+          "body": "={\"fields\":{\n  \"标题创作详情\":\"{{ $json[\"标题创作详情\"] }}\",\n  \"标题\":\"{{ $json[\"标题\"] }}\",\n  \"内容\":\"{{ $json[\"内容\"] }}\",\n  \"状态\":\"待排版\"\n}} "
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          2576,
+          128
+        ],
+        "id": "3f65cabc-fa03-418c-b0ce-3ee3a019af90",
+        "name": "写入飞书多维表格",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "04e054c9-fb01-4e84-b516-0d825af58a13",
+                "name": "标题创作详情",
+                "value": "={{ $json[\"生成结果\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "30d7ccae-c8fd-41ac-b462-6a97f03a63b8",
+                "name": "内容核心",
+                "value": "={{ $json[\"内容核心\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "7cdea507-b578-43cf-9e1f-cef11f769265",
+                "name": "标题",
+                "value": "={{ $json[\"标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "96abbb2e-fef5-4b61-919a-c15bdfcb0142",
+                "name": "内容",
+                "value": "={{ $json[\"内容\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2288,
+          128
+        ],
+        "id": "354cd326-8e51-4219-9d93-321f77ec4ed2",
+        "name": "写入结果"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineAll",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          2032,
+          128
+        ],
+        "id": "f19ac7c6-270c-4ec6-a19f-b6bb030476ed",
+        "name": "整合数据"
+      },
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "主题"
+              },
+              {
+                "name": "初始标题"
+              },
+              {
+                "name": "初始内容"
+              },
+              {
+                "name": "叙事描点"
+              },
+              {
+                "name": "序号"
+              },
+              {
+                "name": "记录ID"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -640,
+          112
+        ],
+        "id": "74fe3f6f-1dc6-4b85-8dd2-4c0d2803bead",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "content": "标题生成",
+          "height": 400,
+          "width": 896
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          1136,
+          288
+        ],
+        "typeVersion": 1,
+        "id": "f9920bdb-4e5f-4190-a8f0-8d2b07e4b654",
+        "name": "Sticky Note1"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "内容创作",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "内容创作",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "clean_data": {
+        "main": [
+          [
+            {
+              "node": "内容生成结果",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "内容生成结果": {
+        "main": [
+          [
+            {
+              "node": "标题生成",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "整合数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "内容创作": {
+        "main": [
+          [
+            {
+              "node": "clean_data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model1": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "标题生成",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "标题生成": {
+        "main": [
+          [
+            {
+              "node": "clean_data_title",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "clean_data_title": {
+        "main": [
+          [
+            {
+              "node": "标题生成结果",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "标题生成结果": {
+        "main": [
+          [
+            {
+              "node": "整合数据",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "写入结果": {
+        "main": [
+          [
+            {
+              "node": "写入飞书多维表格",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "整合数据": {
+        "main": [
+          [
+            {
+              "node": "写入结果",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.0",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-01-19T14:31:47.061Z",
+        "id": 2,
+        "workflowId": "pBYgKTRQcE3RxM74gtuCp",
+        "versionId": "34b77cc8-fcf4-4c7d-b8de-277023d286a1",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

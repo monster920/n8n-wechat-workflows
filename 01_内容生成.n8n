@@ -1,0 +1,2694 @@
+{
+  "updatedAt": "2026-02-12T03:31:11.296Z",
+  "createdAt": "2026-02-02T08:54:18.112Z",
+  "id": "4yFfmhTfnpbEX4GJaoIiH",
+  "name": "01_内容生成",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wechat-public-account-content",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        464,
+        0
+      ],
+      "id": "a307a21e-2ed4-47ba-b10f-f5895eb943d6",
+      "name": "Webhook",
+      "webhookId": "90271344-f665-4056-8688-144cf5880681"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "06165fd0-c0e2-4b10-9044-25f7d16df086",
+              "name": "分析报告",
+              "value": "={{ $json.body.file }}",
+              "type": "string"
+            },
+            {
+              "id": "6e59d5a3-d02f-4b1a-a4e0-eecf374a4567",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "2d44a0cd-d746-457e-ab5c-cbe642c4f20f",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "04093979-a02a-4ec2-b743-2eee53c2a5cb",
+              "name": "viewID",
+              "value": "vewSweWW3T",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        912,
+        0
+      ],
+      "id": "9e378fc7-73d4-43a2-8fb3-ab81a88d8fad",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "url": "http://172.18.8.176:5678/webhook/information-everyday",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1168,
+        0
+      ],
+      "id": "09203669-0c81-4069-b79a-08f304dd5cbc",
+      "name": "获取信息"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1792,
+        240
+      ],
+      "id": "adcaabb4-3f9c-4e96-9143-4e39dabc25b0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        240
+      ],
+      "id": "e1ba0341-952c-4bf4-b4dd-32f7ad64ec4b",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "deepseek-r1:8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        528
+      ],
+      "id": "70773564-0dcf-45b3-96a8-08740ebdca72",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "m7ItUzjoa8jVF8Mb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7ab112d2-c83b-41ba-810f-a55770bc28e3",
+              "name": "小红书",
+              "value": "={{ $json['信息'][0]['小红书'] }}",
+              "type": "string"
+            },
+            {
+              "id": "1e016eb1-537d-49eb-8e28-f9342c3da64d",
+              "name": "抖音",
+              "value": "={{ $json['信息'][1]['抖音'] }}",
+              "type": "string"
+            },
+            {
+              "id": "d5e59341-eb1f-4fa0-a7a3-314d1d065e18",
+              "name": "bilibili",
+              "value": "={{ $json['信息'][2].bilibili }}",
+              "type": "string"
+            },
+            {
+              "id": "da276650-16c1-49e7-a98c-d22c78ea935b",
+              "name": "微博",
+              "value": "={{ $json['信息'][3]['微博'] }}",
+              "type": "string"
+            },
+            {
+              "id": "2eabb94d-4de4-4758-8f3a-25165ea59ac5",
+              "name": "知乎",
+              "value": "={{ $json['信息'][4]['知乎'] }}",
+              "type": "string"
+            },
+            {
+              "id": "0abb1328-5d70-4ead-a4e6-81071587f5d8",
+              "name": "头条",
+              "value": "={{ $json['信息'][5]['头条'] }}",
+              "type": "string"
+            },
+            {
+              "id": "6d7fc140-f96a-4ff9-9370-8265a6253216",
+              "name": "世界新闻",
+              "value": "={{ $json['信息'][6]['世界新闻'] }}",
+              "type": "string"
+            },
+            {
+              "id": "b04c231e-cd47-4b56-8ac6-86ed620cc997",
+              "name": "AI资讯",
+              "value": "={{ $json['信息'][7]['AI资讯'] }}",
+              "type": "string"
+            },
+            {
+              "id": "4c13cbdf-2348-48cc-8ec8-36c3a79419fc",
+              "name": "sessionId",
+              "value": "={{ $now.toMillis() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1376,
+        0
+      ],
+      "id": "0207763d-5f39-4d05-aa41-e7f035e5752c",
+      "name": "json转文本"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n专用：分析模板转JSON 解析函数（返回原生对象，而非字符串）\nfunction parseAnalysisToJson(analysisText) {\n  // 精准匹配标题格式\n  const regStep1 = /### \\*\\*步骤1：解构需求\\*\\*([\\s\\S]*?)### \\*\\*步骤2：执行任务\\*\\*/g;\n  const regStep2 = /### \\*\\*步骤2：执行任务\\*\\*([\\s\\S]*?)### \\*\\*步骤3：审查与交付\\*\\*/g;\n  const regStep3 = /### \\*\\*步骤3：审查与交付\\*\\*([\\s\\S]*)$/g;\n\n  // 清洗内容格式\n  const cleanContent = (str) => {\n    if (!str) return '';\n    return str.replace(/\\*\\*/g, '')\n              .replace(/\\n{3,}/g, '\\n\\n')\n              .replace(/\\t+/g, ' ')\n              .trim();\n  };\n  \n  // 提取各步骤内容\n  const step1Match = regStep1.exec(analysisText);\n  const step2Match = regStep2.exec(analysisText);\n  const step3Match = regStep3.exec(analysisText);\n\n  const step1 = cleanContent(step1Match ? step1Match[1] : '');\n  const step2 = cleanContent(step2Match ? step2Match[1] : '');\n  const step3 = cleanContent(step3Match ? step3Match[1] : '');\n\n  // 直接返回原生对象（关键：不转成字符串）\n  return {\n    '步骤1：解构需求': step1,\n    '步骤2：执行任务': step2,\n    '步骤3：审查与交付': step3\n  };\n}\n\n// n8n 核心执行逻辑\nconst items = $input.all().map(item => {\n  // 读取上游AI Agent的output字段\n  const analysisText = item.json.output || '';\n\n  // 执行转换（返回原生对象）\n  const jsonResult = parseAnalysisToJson(analysisText);\n\n  // n8n标准输出：直接把对象赋值给jsonResult\n  return jsonResult;\n});\n\n// 必须的输出语句\nreturn { items };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1456,
+        -928
+      ],
+      "id": "decec6c8-16c3-4bad-bf65-2007bd417563",
+      "name": "步骤分离",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0d80c3d5-199c-460a-a104-a50de524ddb7",
+              "name": "步骤1：解构需求",
+              "value": "={{ $json.items[0]['步骤1：解构需求'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1744,
+        -1104
+      ],
+      "id": "7231555d-02ae-4930-b43e-b45a3f1a16f0",
+      "name": "步骤1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a4ac78df-f73d-4000-b7ff-ab8d8ab9764c",
+              "name": "步骤2：执行任务",
+              "value": "={{ $json.items[0]['步骤2：执行任务'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1744,
+        -816
+      ],
+      "id": "57291726-26b8-4323-8f3c-fdb4808c6c94",
+      "name": "步骤2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c43ef0b6-2021-425a-ab12-1022d56982d2",
+              "name": "步骤3：审查与交付",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1984,
+        0
+      ],
+      "id": "948fda50-f1a6-4023-ba7a-723496329296",
+      "name": "步骤3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const originalText = $input.first().json[\"步骤2：执行任务\"]\n\nconst [part1, part2] = originalText.split('2.2 选定核心主题与角度：');\nconst [part3, part4] = part2.split('2.3 生成文章内容：');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst CleaningContent1 = part1.replace('2.1 数据评估与趋势预测：', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst CleaningContent2 = part3.replace('2.2 选定核心主题与角度：', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent3 = part4.replace('2.3 生成文章内容：', '').replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"数据评估与趋势预测\": CleaningContent1,\n  \"选定核心主题与角度\": CleaningContent2,\n  \"生成文章内容\": CleaningContent3\n};\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1952,
+        -816
+      ],
+      "id": "66ad1d5b-b9e5-41db-ab64-1bfe9f328023",
+      "name": "步骤2json",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const originalText = $input.first().json[\"步骤1：解构需求\"]\n\nconst [part1, part2] = originalText.split('跨平台关联与趋势预测：');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst dataCleaningContent = part1.replace('数据清洗与洞察：', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst crossPlatformContent = part2.replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"数据清洗与洞察\": dataCleaningContent,\n  \"跨平台关联与趋势预测\": crossPlatformContent\n};\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1952,
+        -1104
+      ],
+      "id": "024832b4-2e92-465e-863c-8b3e3cc0ceff",
+      "name": "步骤1json",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const originalText = $input.first().json[\"步骤3：审查与交付\"]\n\nconst Text = originalText.replace(\"：\",\":\").replace(\"主题:\",\"**主题:**\").replace(\"标题:\",\"**标题**\").replace(\"摘要:\",\"**摘要**\").replace(\"内容:\",\"**内容**\")\n\nconst [part1, part2] = Text.replace('**主题:**','**主题**').replace('**主题：**','**主题**').split('**主题**');\nconst [part3, part4] = part2.replace('**标题:**','**标题**').replace('**标题：**','**标题**').split('**标题**');\nconst [part5, part6] = part4.replace('**摘要:**','**摘要**').replace('**摘要：**','**摘要**').split('**摘要**');\nconst [part7, part8] = part6.replace('**内容:**','**内容**').replace('**内容：**','**内容**').split('**内容**');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst CleaningContent1 = part3.replace('**主题**', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst CleaningContent2 = part5.replace('**标题**', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent3 = part7.replace('**摘要**', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent4 = part8.replace('**内容**', '').replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"主题\": CleaningContent1,\n  \"标题\": CleaningContent2,\n  \"摘要\": CleaningContent3,\n  \"内容\": CleaningContent4\n};\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        0
+      ],
+      "id": "9a0fe704-7d3e-4731-803b-3cda4a4f4ec4",
+      "name": "步骤3json"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        464,
+        368
+      ],
+      "id": "94286c51-6546-4807-a63d-8a72f0139a8d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:add",
+        "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+        "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+        "body": "={\"fields\":{\n  \"主题\":\"{{ $json['文章主题'] }}\",\n  \"初始标题\":\"{{ $json[\"标题\"] }}\",\n  \"初始内容\":\"{{ $json[\"摘要\"] }}\",\n  \"初始摘要\":\"{{ $json[\"内容\"] }}\",\n  \"标题\":\"{{ $json['文章标题'] }}\",\n  \"摘要\":\"{{ $json['文章摘要'] }}\",\n  \"内容\":\"{{ $json['文章内容'] }}\",\n  \"状态\":\"待排版\"\n}} "
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        5296,
+        528
+      ],
+      "id": "a4962d4c-00e3-4b2b-8974-a289297f29ae",
+      "name": "写入飞书表格",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [
+        2448,
+        0
+      ],
+      "id": "2ae2c1fa-5db7-4568-8fce-99beb34a5309",
+      "name": "Chat Memory Manager"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('json转文本').item.json.sessionId }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2448,
+        224
+      ],
+      "id": "a93abd85-7f3d-4f8d-b8cb-dc22284e9d7a",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=热点信息：\n小红书： {{ $json['小红书'] }}\n抖音：{{ $json['抖音'] }}\nbilibili：{{ $json.bilibili }}\n微博：{{ $json['微博'] }}\n知乎：{{ $json['知乎'] }}\n今日头条：{{ $json['头条'] }}\n世界新闻：{{ $json['世界新闻'] }}\nAI咨询：{{ $json['AI资讯'] }}",
+        "options": {
+          "systemMessage": "# Role: AI热点分析师与爆款内容架构师\n\n# Profile\n- language: 中文\n- description: 一个由数据和创造力双重驱动的专业内容AI，专门处理多平台海量热点信息，通过深度分析和趋势预测，高效生成符合公众号生态的爆款文章。\n- background: 基于海量自媒体平台数据训练，模拟顶尖内容运营专家与数据新闻记者的复合思维模式。\n- personality: 冷静、敏锐、富有洞察力与创造力，沟通风格直接高效，注重数据与逻辑。\n- expertise: 多平台热点信息解码、趋势预测与生命周期判断、公众号爆款内容创作策略。\n- target_audience: 自媒体创作者、内容运营者、公众号编辑、市场及品牌人员。\n\n## Skills\n\n1. **信息解码与洞察**\n  - **数据清洗与结构化**：能够解析用户提供的零散、非结构化热点数据，识别关键要素如主题、平台、热度、趋势、受众情绪。\n  - **跨平台关联分析**：能够将不同平台（如抖音、微博、知乎）的孤立热点进行关联，发现潜在的话题脉络与舆论场共振点。\n  - **模式识别与预测**：基于历史爆款模型与实时热度变化，识别话题的“爆点”潜力，预测其发酵方向与生命周期。\n\n2. **公众号内容工程学**\n  - **标题与摘要生成**：精通高点击率、高分享率的标题公式（如悬念、数字、对比、身份认同），能生成吸引眼球的标题和概括全文的摘要。\n  - **结构化叙事能力**：擅长运用“Hook（开头钩子）- Story（故事化论述）- Offer（价值点/共鸣）- Conclusion（结论升华）”的爆款文章结构。\n  - **调性适配与包装**：能根据不同主题（感情、科技等）调整语言风格，将原始热点包装成有深度、有共鸣、可传播的公众号文章。\n\n# Rules\n\n1. **基本原则**:\n  - **数据驱动，而非主观臆断**：所有分析和预测必须基于用户提供的热点数据，或明确标注假设前提。\n  - **以终为始**：所有分析步骤的最终目标，必须是生成一篇**高质量、可立即发布**的公众号文章。\n\n2. **行为准则**:\n  - **批判性思维**：对热点信息保持批判态度，识别信息的真实性、完整性和潜在偏见。\n  - **原创性与价值增量**：禁止简单复述或搬运热点。必须提供分析、观点、解读或新的叙事角度，为用户提供价值增量。\n  - **遵循平台规则**：生成的内容必须符合微信公众号平台的内容规范和安全要求。\n\n3. **限制条件**:\n  - **禁止主观臆断**：在没有数据支撑的情况下，不得凭空预测或编造热点。\n  - **禁止低俗与煽动**：不得使用夸张、低俗、具有强烈煽动性或可能引发对立的词汇和表达方式。\n  - **输出格式严格限定**：最终输出必须、且仅包含：`主题`、`标题`、`摘要`、`内容`四个部分，格式清晰。\n\n## Workflows\n- 目标: 基于用户提供的多平台热点信息，分析并生成一篇结构完整、吸引力强的公众号爆款文章。\n- 步骤1: **解构需求** － 仔细阅读用户提供的所有热点数据。识别每条信息的核心主题、来源平台、当前热度指标（排名、浏览量等）、关键细节以及不同信息之间可能存在的联系或矛盾。\n- 步骤2: **执行任务** -\n  - **2.1 数据评估与趋势预测**：综合评估各热点的“爆点”元素（如争议性、共鸣感、实用性、新奇性）。预测哪个或哪几个关联热点最有可能在公众号受众中引发广泛传播。\n  - **2.2 选定核心主题与角度**：从预测的潜力热点中，选定一个最适配公众号调性的核心主题（如：情感、科技、职场等），并确定一个独特的切入角度或核心观点。\n  - **2.3 生成文章内容**：调用`公众号内容工程学`技能。\n    - **构思标题**：结合核心主题与角度，生成3-5个备选标题，选择最优。\n    - **撰写摘要**：用一段话概括文章核心价值与结论，激发点击欲。\n    - **构建内容**：按照“开头钩子（用热点现象或问题引入）- 故事化论述（结合多个热点案例进行深度分析，体现关联性）- 提炼价值/引发共鸣（给出见解、方法论或情感宣泄点）- 总结升华（呼应开头，给出展望或行动号召）”的结构完成文章撰写。\n- 步骤3: **审查与交付** － 依据`Rules`进行最终审查，检查内容是否数据驱动、有价值增量、符合规范，并严格按`主题`、`标题`、`摘要`、`内容`的格式封装输出。\n- 预期结果: 一篇主题明确、标题吸引人、摘要精炼、内容结构清晰且具有传播潜力的完整公众号文章草案。\n\n## Initialization\n作为AI热点分析师与爆款内容架构师，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，基于其提供的热点数据，高效、准确地生成一篇预测性的公众号爆款文章。现在，请开始处理用户提供的热点信息。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1664,
+        0
+      ],
+      "id": "ec951063-fba7-4f16-8e3f-4962c93a9622",
+      "name": "热点预测"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=《爆款文章拆解分析报告》： {{ $('设置参数').item.json['分析报告'] }}\n文章素材：\n文章主题：{{ $('步骤3json').item.json['主题'] }}\n文章标题：{{ $('步骤3json').item.json['标题'] }}\n文章摘要：{{ $('步骤3json').item.json['摘要'] }}\n文章内容：{{ $('步骤3json').item.json['内容'] }}",
+        "options": {
+          "systemMessage": "# Role：公众号爆款文章策略重构师（WeChat Article Strategist & Reconstructor）\n\n# Profile\n- language: 中文（主要交互语言）\n- description: 专精于将深度内容诊断报告转化为可执行爆款策略的专家。基于科学的量化诊断模型，精准定位原文优劣，并创造性地产出符合爆款逻辑、具有高传播潜力的完整公众号文章。\n- background: 基于海量��众号爆款案例分析、用户阅读心理学及传播学原理，熟练掌握内容量化诊断模板的解读与应用。\n- personality: 高度数据驱动、富有创造力、目标导向、注重细节与逻辑。\n- expertise: 诊断报告解构、目标受众再聚焦、爆款元素（金句/悬念/情绪）植入、结构化叙事重构、互动传播设计。\n- target_audience: 公众号内容运营者、编辑、自媒体创作者、品牌内容营销人员。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（策略分析与转化）**\n  - **诊断报告深度解读**: 能精准理解诊断报告中各维度的评分、评语及核心结论，识别“优势”与“短板”背后的本质原因。\n  - **爆款策略制定**: 能根据诊断结论，特别是“优化策略与行动建议”，制定出具体、可融入文章创作的核心策略，如重塑观点、强化钩子、明确受众对话���吻。\n  - **目标受众重构**: 能基于模糊的原始受众画像，重新定义更精准、更具共鸣感的核心读者群体，并以此指导全文的语调和内容侧重。\n\n2. **辅助技能类别（内容创作与优化）**\n  - **爆款标题与摘要生成**: 能创作符合“吸引力、关键词、情绪调动”原则的多个标题变体及摘要，有效提升点击率。\n  - **叙事结构与节奏调整**: 能优化原文结构，强化逻辑勾连，控制信息密度与情绪曲线，确保阅读流畅且富有张力。\n  - **金句与传播点设计**: 能在文章关键位置（开头、转折、结尾）植入提炼出的尖锐观点或动人金句，制造记忆点和社交货币。\n  - **互动引导模块设计**: 能设计自然、不生硬的文末互动环节，有效引导评论、分享、关注，延长内容生命周期。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **诊断驱动，策略先行**: 所有重构必须严格基于用户提供的《爆款文章拆解分析报告》模板得出的诊断结论和优化策略进行，不可凭空创作。\n  - **爆款导向，传播至上**: 重构的核心目标是提升文章的传播潜力（点击、分享、互动），所有优化决策应服务于这一终极目标。\n  - **尊重原核，优化形式**: 必须忠实于用户提供的“文章主题、标题、摘要、内容”的核心事实与主体故事，优化的是其表达方式、结构、观点提炼和包装。\n\n2. **行为准则（在交互中如何表现）**:\n  - **结构化输出**: 最终输出必须严格且仅包含“### **文章主题**”、“### **文章标题**”、“### **文章摘要**”、“### **文章内容**”四个部分，并使用指定的Markdown标题格式清晰呈现，每部分内容紧随其标题之后。\n  - **主动思考与标注**: 在输出文章内容时，可在关键优化处使用`【】`括号简要注明此处应用的策略或意图（如`【金句提炼】`、`【互动引导】`），但最终交付时可选择移除。\n  - **结果导向**: 输出的文章应是可直接发布的高质量成品，语言流畅，逻辑自洽。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止偏离诊断**: 严禁无视诊断报告中的“关键短板”和“优化策略”，进行与诊断结论相悖的修改。\n  - **禁止虚构核心事实**: 严禁对用户提供的原文核心事实、人物故事、数据案例进行捏造或篡改。\n  - **禁止输出格式错误**: 最终输出必须是完整的文章包，四部分必须严格按指定标题格式呈现，缺一不可，且内容连贯。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 基于用户提供的《爆款文章拆解分析报告》和新的“文章主题、标题、摘要、内容”，输出一篇优化后的、具有高传播潜力的完整公众号爆款文章。\n- 步骤1: **解构需求** － 深度研读用户提供的《诊断报告》，理解其对原文的量化评分、优势短板分析及具体的“优化策略与行动建议”。同时，仔细分析用户新提供的“文章四要素”（主题、标题、摘要、内容），把握其核心事实与故事脉络。明确本次重构需解决的核心问题：如何将诊断出的“短板”（如受众模糊、观点温和、无互动）在新区中予以补强。\n- 步骤2: **执行任务** - 调用【Skills】。首先进行“诊断报告深度解读”和“目标受众重构”，确定本次重构的核心策略方向（例如：明确受众为“都市职场人”，提炼核心观点为“真正的危机是拒绝进化的头脑”）。接着进行“爆款标题与摘要生成”，创作更具吸引力和传播力的版本。然后进行“叙事结构与节奏调整”和“金句与传播点设计”，对用户提供的“文章内容”进行重构，在保留主干故事的基础上，优化开头引入、段落衔接、结尾升华，并植入金句。最后进行“互动引导模块设计”，添加文末互动环节。\n- 步骤3: **审查与交付** - 根据【Rules】进行最终审查。检查文章是否严格遵循了诊断报告中的优化策略；检查核心事实是否未被篡改；检查“### **文章主题**”、“### **文章标题**”、“### **文章摘要**”、“### **文章内容**”四部分是否完整、格式正确、高质量且符合爆款特征。确认无误后，将四部分内容按顺序、以指定格式封装为最终输出。\n- 预期结果: 一个包含完整四要素（严格按`### **文章主题**`等格式）、深度优化、直击诊断短板、具备显著更高传播潜力的公众号文章包，可直接用于发布。\n\n## Initialization\n作为[公众号爆款文章策略重构师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。请准备接收用户提供的《爆款文章拆解分析报告》及文章素材。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2800,
+        0
+      ],
+      "id": "cd2e62fc-3c9c-4d05-9c94-d6add5d437b7",
+      "name": "重新生成内容"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. 读取上游传入的所有数据\nconst items = $input.all();\n\n// 2. 定义需要匹配的标记\nconst targetTag = '### **文章主题**';\n\n// 3. 处理单条数据\nif (items.length > 0) {\n  const currentItem = items[0];\n  // 关键修复：使用上游实际存在的字段名 `output`\n  const originalContent = currentItem.json.output;\n\n  let contentAfterTag = '';\n  if (!originalContent) {\n    contentAfterTag = '错误：上游节点未传入有效文本';\n  } else {\n    const tagIndex = originalContent.indexOf(targetTag);\n    if (tagIndex !== -1) {\n      contentAfterTag = '### **文章主题**'+originalContent.slice(tagIndex + targetTag.length);\n    } else {\n      contentAfterTag = `错误：未在文本中找到标记「${targetTag}」`;\n    }\n  }\n\n  // 将筛选结果挂载到标准json属性下\n  currentItem.json.contentAfterTitle = contentAfterTag;\n}\n\n// 4. 返回符合n8n要求的数组格式\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3168,
+        0
+      ],
+      "id": "4a84fdae-2247-44e4-9ddc-3b8fb9cb06ac",
+      "name": "数据提取"
+    },
+    {
+      "parameters": {
+        "content": "# 排版"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        6560,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "07dccf1b-44c8-466e-8e55-36682c08cdc7",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# 图片生成"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        6560,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "bfd79fc7-26e5-41bd-8aaa-5739e78c421d",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        2752,
+        256
+      ],
+      "id": "fb9191a8-38d9-4fa5-a84b-cf4c8ac8165c",
+      "name": "DeepSeek Chat Model1",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('json转文本').item.json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        2928,
+        256
+      ],
+      "id": "ad29477f-3bdd-417f-864f-94123a029e94",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const originalText = $input.first().json.contentAfterTitle\n\nconst [part1, part2] = originalText.split('### **文章标题**\\n');\nconst [part3, part4] = part2.split('### **文章摘要**\\n');\nconst [part5, part6] = part4.split('### **文章内容**\\n');\n// const [part7, part8] = part6.split('### **文章内容**\\n');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst CleaningContent1 = part1.replace('### **文章主题**\\n', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst CleaningContent2 = part3.replace('### **文章标题**\\n', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent3 = part5.replace('### **文章摘要**\\n', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent4 = part6.replace('### **文章内容**\\n', '').replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"文章主题\": CleaningContent1,\n  \"文章标题\": CleaningContent2,\n  \"文章摘要\": CleaningContent3,\n  \"文章内容\": CleaningContent4\n};\n\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3456,
+        256
+      ],
+      "id": "8b912aae-1314-4468-a2dc-6dddeac60111",
+      "name": "数据转json"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "deepseek-r1:8b",
+          "mode": "list",
+          "cachedResultName": "deepseek-r1:8b"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.contentAfterTitle }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源��信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过于流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循��户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严��使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时，禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力���逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        3616,
+        -608
+      ],
+      "id": "3d1662d3-b40d-4e88-8d96-1de4df413363",
+      "name": "分析1",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "ollamaApi": {
+          "id": "m7ItUzjoa8jVF8Mb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "qwen3:8b",
+          "mode": "list",
+          "cachedResultName": "qwen3:8b"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.contentAfterTitle }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        3616,
+        -384
+      ],
+      "id": "2e075c4a-e2b8-48d9-a4af-dd2dcc86bedb",
+      "name": "分析2",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "ollamaApi": {
+          "id": "m7ItUzjoa8jVF8Mb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工创作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.content;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3984,
+        -608
+      ],
+      "id": "1f208a69-8151-4f61-b666-94cde3695126",
+      "name": "AI率1",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工���作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.output;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2528,
+        -1136
+      ],
+      "id": "a2ac9b37-a231-4d84-b1b1-ae052fe08c59",
+      "name": "AI率3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工创作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.content;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3984,
+        -384
+      ],
+      "id": "3c304a3e-e1a5-4d82-a743-05675fe75bf8",
+      "name": "AI率2"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4400,
+        -400
+      ],
+      "id": "c375b129-e124-44ac-8960-3c4a25edbe18",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        2176,
+        -848
+      ],
+      "id": "3b3c75e1-8272-44bb-a42f-4af7250282ed",
+      "name": "DeepSeek Chat Model2",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        3936,
+        544
+      ],
+      "id": "5a23fbc2-2507-4775-a513-855ed3e9b610",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.contentAfterTitle }}",
+        "options": {
+          "systemMessage": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过于流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时，禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2176,
+        -1088
+      ],
+      "id": "694bf334-6024-43c1-9e5e-3772e09be25b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gemma3:12b",
+          "mode": "list",
+          "cachedResultName": "gemma3:12b"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.contentAfterTitle }}"
+            }
+          ]
+        },
+        "options": {
+          "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.ollama",
+      "typeVersion": 1,
+      "position": [
+        3616,
+        -144
+      ],
+      "id": "5f31fc3d-e5c9-42d7-9d44-5ff4fc608a3d",
+      "name": "分析",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "alwaysOutputData": false,
+      "credentials": {
+        "ollamaApi": {
+          "id": "m7ItUzjoa8jVF8Mb",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工创作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.content;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3984,
+        -144
+      ],
+      "id": "bf607b2f-9a0b-4569-862b-adb03aa30c17",
+      "name": "AI率"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "分析结果",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        4608,
+        -384
+      ],
+      "id": "62f24e5e-80e3-4044-8253-beceab6c9602",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Function节点专属代码：适配你的输入结构，计算平均AI生成率、人工创作率\nconst FIXED_DECIMALS = 1; // 小数精度配置，1=保留1位，2=保留2位\n\n// 1. 正确获取输入数组（从上游节点的「分析结果」字段中提取）\nconst inputData = $input.first().json[\"分析结果\"] || [];\n\n// 2. 初始化统计变量\nlet totalAiRate = 0;\nlet totalHumanRate = 0;\nlet validCount = 0;\n\n// 3. 遍历数组（适配你的输入结构：每个item是普通对象，直接取aiAnalysisResult）\ninputData.forEach(item => {\n  // 过滤无效数据：确保存��aiAnalysisResult，且率值为有效数字\n  if (\n    item?.aiAnalysisResult &&\n    typeof item.aiAnalysisResult[\"AI生成率\"] === \"number\" &&\n    typeof item.aiAnalysisResult[\"人工创作率\"] === \"number\"\n  ) {\n    totalAiRate += item.aiAnalysisResult[\"AI生成率\"];\n    totalHumanRate += item.aiAnalysisResult[\"人工创作率\"];\n    validCount++;\n  }\n});\n\n// 4. 计算平均值（避免除以0）\nconst averageAiRate = validCount > 0 \n  ? Number((totalAiRate / validCount).toFixed(FIXED_DECIMALS)) \n  : 0;\nconst averageHumanRate = validCount > 0 \n  ? Number((totalHumanRate / validCount).toFixed(FIXED_DECIMALS)) \n  : 0;\n\n// 5. n8n标准输出格式\nreturn [\n  {\n    json: {\n      \"平均AI率\":averageAiRate,\n      \"平均人功率\":averageHumanRate,\n      \"有效数据\": validCount\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4816,
+        -384
+      ],
+      "id": "8a75c755-e7bf-4535-b3d7-e3d75f9edba2",
+      "name": "平均AI率人工率"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cf1b74d4-66ff-4c23-b84e-6005fd4d6ff3",
+              "leftValue": "={{ $json[\"平均AI率\"] }}",
+              "rightValue": 40,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        5024,
+        -384
+      ],
+      "id": "ca475a4d-8ff6-4773-b46d-93deb0d6399c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "fXNExbeUJrUwDEeIy_Dm5",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/fXNExbeUJrUwDEeIy_Dm5",
+          "cachedResultName": "文章去AI味"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "content": "={{ $('数据提取').item.json.contentAfterTitle }}"
+          },
+          "matchingColumns": [
+            "content"
+          ],
+          "schema": [
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        5328,
+        -944
+      ],
+      "id": "45405a20-4206-437a-888d-bd197c59dfd4",
+      "name": "Call '文章去AI味'"
+    },
+    {
+      "parameters": {
+        "mode": "chooseBranch",
+        "useDataOfInput": 2
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        5008,
+        528
+      ],
+      "id": "2ea84a7b-54f6-46c7-9cef-ba9b823aa7e8",
+      "name": "Merge2"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "获取信息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取信息": {
+      "main": [
+        [
+          {
+            "node": "json转文本",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "热点预测",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "热点预测",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "json转文本": {
+      "main": [
+        [
+          {
+            "node": "热点预测",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "步骤分离": {
+      "main": [
+        [
+          {
+            "node": "步骤1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "步骤2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "步骤1": {
+      "main": [
+        [
+          {
+            "node": "步骤1json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "步骤2": {
+      "main": [
+        [
+          {
+            "node": "步骤2json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "步骤3": {
+      "main": [
+        [
+          {
+            "node": "步骤3json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "步骤3json": {
+      "main": [
+        [
+          {
+            "node": "Chat Memory Manager",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat Memory Manager",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "步骤2json": {
+      "main": [
+        []
+      ]
+    },
+    "步骤1json": {
+      "main": [
+        []
+      ]
+    },
+    "热点预测": {
+      "main": [
+        [
+          {
+            "node": "步骤3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory Manager": {
+      "main": [
+        [
+          {
+            "node": "重新生成内容",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "重新生成内容": {
+      "main": [
+        [
+          {
+            "node": "数据提取",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "数据提取": {
+      "main": [
+        [
+          {
+            "node": "数据转json",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "分析1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "分析2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "分析",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "重新生成内容",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "重新生成内容",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "数据转json": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分析1": {
+      "main": [
+        [
+          {
+            "node": "AI率1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分析2": {
+      "main": [
+        [
+          {
+            "node": "AI率2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI率1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI率2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "AI率3": {
+      "main": [
+        []
+      ]
+    },
+    "DeepSeek Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "写入飞书表格": {
+      "main": [
+        []
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "AI率3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分析": {
+      "main": [
+        [
+          {
+            "node": "AI率",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI率": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "平均AI率人工率",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "平均AI率人工率": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Call '文章去AI味'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call '文章去AI味'": {
+      "main": [
+        [
+          {
+            "node": "数据提取",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "写入飞书表格",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Shanghai",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "a5ca717b-5778-4cd7-b162-71e6ca56f82e",
+  "activeVersionId": "a5ca717b-5778-4cd7-b162-71e6ca56f82e",
+  "versionCounter": 193,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-02T08:54:18.130Z",
+      "createdAt": "2026-02-02T08:54:18.130Z",
+      "role": "workflow:owner",
+      "workflowId": "4yFfmhTfnpbEX4GJaoIiH",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-12T03:31:23.000Z",
+    "createdAt": "2026-02-12T03:31:11.301Z",
+    "versionId": "a5ca717b-5778-4cd7-b162-71e6ca56f82e",
+    "workflowId": "4yFfmhTfnpbEX4GJaoIiH",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "wechat-public-account-content",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          464,
+          0
+        ],
+        "id": "a307a21e-2ed4-47ba-b10f-f5895eb943d6",
+        "name": "Webhook",
+        "webhookId": "90271344-f665-4056-8688-144cf5880681"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "06165fd0-c0e2-4b10-9044-25f7d16df086",
+                "name": "分析报告",
+                "value": "={{ $json.body.file }}",
+                "type": "string"
+              },
+              {
+                "id": "6e59d5a3-d02f-4b1a-a4e0-eecf374a4567",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "2d44a0cd-d746-457e-ab5c-cbe642c4f20f",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "04093979-a02a-4ec2-b743-2eee53c2a5cb",
+                "name": "viewID",
+                "value": "vewSweWW3T",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          912,
+          0
+        ],
+        "id": "9e378fc7-73d4-43a2-8fb3-ab81a88d8fad",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "url": "http://172.18.8.176:5678/webhook/information-everyday",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          1168,
+          0
+        ],
+        "id": "09203669-0c81-4069-b79a-08f304dd5cbc",
+        "name": "获取信息"
+      },
+      {
+        "parameters": {
+          "contextWindowLength": 20
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          1792,
+          240
+        ],
+        "id": "adcaabb4-3f9c-4e96-9143-4e39dabc25b0",
+        "name": "Simple Memory"
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          1664,
+          240
+        ],
+        "id": "e1ba0341-952c-4bf4-b4dd-32f7ad64ec4b",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": "deepseek-r1:8b",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "typeVersion": 1,
+        "position": [
+          1888,
+          528
+        ],
+        "id": "70773564-0dcf-45b3-96a8-08740ebdca72",
+        "name": "Ollama Chat Model",
+        "credentials": {
+          "ollamaApi": {
+            "id": "m7ItUzjoa8jVF8Mb",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "7ab112d2-c83b-41ba-810f-a55770bc28e3",
+                "name": "小红书",
+                "value": "={{ $json['信息'][0]['小红书'] }}",
+                "type": "string"
+              },
+              {
+                "id": "1e016eb1-537d-49eb-8e28-f9342c3da64d",
+                "name": "抖音",
+                "value": "={{ $json['信息'][1]['抖音'] }}",
+                "type": "string"
+              },
+              {
+                "id": "d5e59341-eb1f-4fa0-a7a3-314d1d065e18",
+                "name": "bilibili",
+                "value": "={{ $json['信息'][2].bilibili }}",
+                "type": "string"
+              },
+              {
+                "id": "da276650-16c1-49e7-a98c-d22c78ea935b",
+                "name": "微博",
+                "value": "={{ $json['信息'][3]['微博'] }}",
+                "type": "string"
+              },
+              {
+                "id": "2eabb94d-4de4-4758-8f3a-25165ea59ac5",
+                "name": "知乎",
+                "value": "={{ $json['信息'][4]['知乎'] }}",
+                "type": "string"
+              },
+              {
+                "id": "0abb1328-5d70-4ead-a4e6-81071587f5d8",
+                "name": "头条",
+                "value": "={{ $json['信息'][5]['头条'] }}",
+                "type": "string"
+              },
+              {
+                "id": "6d7fc140-f96a-4ff9-9370-8265a6253216",
+                "name": "世界新闻",
+                "value": "={{ $json['信息'][6]['世界新闻'] }}",
+                "type": "string"
+              },
+              {
+                "id": "b04c231e-cd47-4b56-8ac6-86ed620cc997",
+                "name": "AI资讯",
+                "value": "={{ $json['信息'][7]['AI资讯'] }}",
+                "type": "string"
+              },
+              {
+                "id": "4c13cbdf-2348-48cc-8ec8-36c3a79419fc",
+                "name": "sessionId",
+                "value": "={{ $now.toMillis() }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1376,
+          0
+        ],
+        "id": "0207763d-5f39-4d05-aa41-e7f035e5752c",
+        "name": "json转文本"
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n专用：分析模板转JSON 解析函数（返回原生对象，而非字符串）\nfunction parseAnalysisToJson(analysisText) {\n  // 精准匹配标题格式\n  const regStep1 = /### \\*\\*步骤1：解构需求\\*\\*([\\s\\S]*?)### \\*\\*步骤2：执行任务\\*\\*/g;\n  const regStep2 = /### \\*\\*步骤2：执行任务\\*\\*([\\s\\S]*?)### \\*\\*步骤3：审查与交付\\*\\*/g;\n  const regStep3 = /### \\*\\*步骤3：审查与交付\\*\\*([\\s\\S]*)$/g;\n\n  // 清洗内容格式\n  const cleanContent = (str) => {\n    if (!str) return '';\n    return str.replace(/\\*\\*/g, '')\n              .replace(/\\n{3,}/g, '\\n\\n')\n              .replace(/\\t+/g, ' ')\n              .trim();\n  };\n  \n  // 提取各步骤内容\n  const step1Match = regStep1.exec(analysisText);\n  const step2Match = regStep2.exec(analysisText);\n  const step3Match = regStep3.exec(analysisText);\n\n  const step1 = cleanContent(step1Match ? step1Match[1] : '');\n  const step2 = cleanContent(step2Match ? step2Match[1] : '');\n  const step3 = cleanContent(step3Match ? step3Match[1] : '');\n\n  // 直接返回原生对象（关键：不转成字符串）\n  return {\n    '步骤1：解构需求': step1,\n    '步骤2：执行任务': step2,\n    '步骤3：审查与交付': step3\n  };\n}\n\n// n8n 核心执行逻辑\nconst items = $input.all().map(item => {\n  // 读取上游AI Agent的output字段\n  const analysisText = item.json.output || '';\n\n  // 执行转换（返回原生对象）\n  const jsonResult = parseAnalysisToJson(analysisText);\n\n  // n8n标准输出：直接把对象赋值给jsonResult\n  return jsonResult;\n});\n\n// 必须的输出语句\nreturn { items };"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1456,
+          -928
+        ],
+        "id": "decec6c8-16c3-4bad-bf65-2007bd417563",
+        "name": "步骤分离",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "0d80c3d5-199c-460a-a104-a50de524ddb7",
+                "name": "步骤1：解构需求",
+                "value": "={{ $json.items[0]['步骤1：解构需求'] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1744,
+          -1104
+        ],
+        "id": "7231555d-02ae-4930-b43e-b45a3f1a16f0",
+        "name": "步骤1",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "a4ac78df-f73d-4000-b7ff-ab8d8ab9764c",
+                "name": "步骤2：执行任务",
+                "value": "={{ $json.items[0]['步骤2：执行任务'] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1744,
+          -816
+        ],
+        "id": "57291726-26b8-4323-8f3c-fdb4808c6c94",
+        "name": "步骤2",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "c43ef0b6-2021-425a-ab12-1022d56982d2",
+                "name": "步骤3：审查与交付",
+                "value": "={{ $json.output }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1984,
+          0
+        ],
+        "id": "948fda50-f1a6-4023-ba7a-723496329296",
+        "name": "步骤3"
+      },
+      {
+        "parameters": {
+          "jsCode": "const originalText = $input.first().json[\"步骤2：执行任务\"]\n\nconst [part1, part2] = originalText.split('2.2 选定核心主题与角度：');\nconst [part3, part4] = part2.split('2.3 生成文章内容：');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst CleaningContent1 = part1.replace('2.1 数据评估与趋势预测：', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst CleaningContent2 = part3.replace('2.2 选定核心主题与角度：', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent3 = part4.replace('2.3 生成文章内容：', '').replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"数据评估与趋势预测\": CleaningContent1,\n  \"选定核心主题与角度\": CleaningContent2,\n  \"生成文章内容\": CleaningContent3\n};\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1952,
+          -816
+        ],
+        "id": "66ad1d5b-b9e5-41db-ab64-1bfe9f328023",
+        "name": "步骤2json",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "jsCode": "const originalText = $input.first().json[\"步骤1：解构需求\"]\n\nconst [part1, part2] = originalText.split('跨平台关联与趋势预测：');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst dataCleaningContent = part1.replace('数据清洗与洞察：', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst crossPlatformContent = part2.replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"数据清洗与洞察\": dataCleaningContent,\n  \"跨平台关联与趋势预测\": crossPlatformContent\n};\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1952,
+          -1104
+        ],
+        "id": "024832b4-2e92-465e-863c-8b3e3cc0ceff",
+        "name": "步骤1json",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "jsCode": "const originalText = $input.first().json[\"步骤3：审查与交付\"]\n\nconst Text = originalText.replace(\"：\",\":\").replace(\"主题:\",\"**主题:**\").replace(\"标题:\",\"**标题**\").replace(\"摘要:\",\"**摘要**\").replace(\"内容:\",\"**内容**\")\n\nconst [part1, part2] = Text.replace('**主题:**','**主题**').replace('**主题：**','**主题**').split('**主题**');\nconst [part3, part4] = part2.replace('**标题:**','**标题**').replace('**标题：**','**标题**').split('**标题**');\nconst [part5, part6] = part4.replace('**摘要:**','**摘要**').replace('**摘要：**','**摘要**').split('**摘要**');\nconst [part7, part8] = part6.replace('**内容:**','**内容**').replace('**内容：**','**内容**').split('**内容**');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst CleaningContent1 = part3.replace('**主题**', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst CleaningContent2 = part5.replace('**标题**', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent3 = part7.replace('**摘要**', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent4 = part8.replace('**内容**', '').replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"主题\": CleaningContent1,\n  \"标题\": CleaningContent2,\n  \"摘要\": CleaningContent3,\n  \"内容\": CleaningContent4\n};\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2208,
+          0
+        ],
+        "id": "9a0fe704-7d3e-4731-803b-3cda4a4f4ec4",
+        "name": "步骤3json"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          464,
+          368
+        ],
+        "id": "94286c51-6546-4807-a63d-8a72f0139a8d",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:add",
+          "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+          "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+          "body": "={\"fields\":{\n  \"主题\":\"{{ $json['文章主题'] }}\",\n  \"初始标题\":\"{{ $json[\"标题\"] }}\",\n  \"初始内容\":\"{{ $json[\"摘要\"] }}\",\n  \"初始摘要\":\"{{ $json[\"内容\"] }}\",\n  \"标题\":\"{{ $json['文章标题'] }}\",\n  \"摘要\":\"{{ $json['文章摘要'] }}\",\n  \"内容\":\"{{ $json['文章内容'] }}\",\n  \"状态\":\"待排版\"\n}} "
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          5296,
+          528
+        ],
+        "id": "a4962d4c-00e3-4b2b-8974-a289297f29ae",
+        "name": "写入飞书表格",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "insert"
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryManager",
+        "typeVersion": 1.1,
+        "position": [
+          2448,
+          0
+        ],
+        "id": "2ae2c1fa-5db7-4568-8fce-99beb34a5309",
+        "name": "Chat Memory Manager"
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('json转文本').item.json.sessionId }}",
+          "contextWindowLength": 20
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          2448,
+          224
+        ],
+        "id": "a93abd85-7f3d-4f8d-b8cb-dc22284e9d7a",
+        "name": "Simple Memory1"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=热点信息：\n小红书： {{ $json['小红书'] }}\n抖音：{{ $json['抖音'] }}\nbilibili：{{ $json.bilibili }}\n微博：{{ $json['微博'] }}\n知乎：{{ $json['知乎'] }}\n今日头条：{{ $json['头条'] }}\n世界新闻：{{ $json['世界新闻'] }}\nAI咨询：{{ $json['AI资讯'] }}",
+          "options": {
+            "systemMessage": "# Role: AI热点分析师与爆款内容架构师\n\n# Profile\n- language: 中文\n- description: 一个由数据和创造力双重驱动的专业内容AI，专门处理多平台海量热点信息，通过深度分析和趋势预测，高效生成符合公众号生态的爆款文章。\n- background: 基于海量自媒体平台数据训练，模拟顶尖内容运营专家与数据新闻记者的复合思维模式。\n- personality: 冷静、敏锐、富有洞察力与创造力，沟通风格直接高效，注重数据与逻辑。\n- expertise: 多平台热点信息解码、趋势预测与生命周期判断、公众号爆款内容创作策略。\n- target_audience: 自媒体创作者、内容运营者、公众号编辑、市场及品牌人员。\n\n## Skills\n\n1. **信息解码与洞察**\n  - **数据清洗与结构化**：能够解析用户提供的零散、非结构化热点数据，识别关键要素如主题、平台、热度、趋势、受众情绪。\n  - **跨平台关联分析**：能够将不同平台（如抖音、微博、知乎）的孤立热点进行关联，发现潜在的话题脉络与舆论场共振点。\n  - **模式识别与预测**：基于历史爆款模型与实时热度变化，识别话题的“爆点”潜力，预测其发酵方向与生命周期。\n\n2. **公众号内容工程学**\n  - **标题与摘要生成**：精通高点击率、高分享率的标题公式（如悬念、数字、对比、身份认同），能生成吸引眼球的标题和概括全文的摘要。\n  - **结构化叙事能力**：擅长运用“Hook（开头钩子）- Story（故事化论述）- Offer（价值点/共鸣）- Conclusion（结论升华）”的爆款文章结构。\n  - **调性适配与包装**：能根据不同主题（感情、科技等）调整语言风格，将原始热点包装成有深度、有共鸣、可传播的公众号文章。\n\n# Rules\n\n1. **基本原则**:\n  - **数据驱动，而非主观臆断**：所有分析和预测必须基于用户提供的热点数据，或明确标注假设前提。\n  - **以终为始**：所有分析步骤的最终目标，必须是生成一篇**高质量、可立即发布**的公众号文章。\n\n2. **行为准则**:\n  - **批判性思维**：对热点信息保持批判态度，识别信息的真实性、完整性和潜在偏见。\n  - **原创性与价值增量**：禁止简单复述或搬运热点。必须提供分析、观点、解读或新的叙事角度，为用户提供价值增量。\n  - **遵循平台规则**：生成的内容必须符合微信公众号平台的内容规范和安全要求。\n\n3. **限制条件**:\n  - **禁止主观臆断**：在没有数据支撑的情况下，不得凭空预测或编造热点。\n  - **禁止低俗与煽动**：不得使用夸张、低俗、具有强烈煽动性或可能引发对立的词汇和表达方式。\n  - **输出格式严格限定**：最终输出必须、且仅包含：`主题`、`标题`、`摘要`、`内容`四个部分，格式清晰。\n\n## Workflows\n- 目标: 基于用户提供的多平台热点信息，分析并生成一篇结构完整、吸引力强的公众号爆款文章。\n- 步骤1: **解构需求** － 仔细阅读用户提供的所有热点数据。识别每条信息的核心主题、来源平台、当前热度指标（排名、浏览量等）、关键细节以及不同信息之间可能存在的联系或矛盾。\n- 步骤2: **执行任务** -\n  - **2.1 数据评估与趋势预测**：综合评估各热点的“爆点”元素（如争议性、共鸣感、实用性、新奇性）。预测哪个或哪几个关联热点最有可能在公众号受众中引发广泛传播。\n  - **2.2 选定核心主题与角度**：从预测的潜力热点中，选定一个最适配公众号调性的核心主题（如：情感、科技、职场等），并确定一个独特的切入角度或核心观点。\n  - **2.3 生成文章内容**：调用`公众号内容工程学`技能。\n    - **构思标题**：结合核心主题与角度，生成3-5个备选标题，选择最优。\n    - **撰写摘要**：用一段话概括文章核心价值与结论，激发点击欲。\n    - **构建内容**：按照“开头钩子（用热点现象或问题引入）- 故事化论述（结合多个热点案例进行深度分析，体现关联性）- 提炼价值/引发共鸣（给出见解、方法论或情感宣泄点）- 总结升华（呼应开头，给出展望或行动号召）”的结构完成文章撰写。\n- 步骤3: **审查与交付** － 依据`Rules`进行最终审查，检查内容是否数据驱动、有价值增量、符合规范，并严格按`主题`、`标题`、`摘要`、`内容`的格式封装输出。\n- 预期结果: 一篇主题明确、标题吸引人、摘要精炼、内容结构清晰且具有传播潜力的完整公众号文章草案。\n\n## Initialization\n作为AI热点分析师与爆款内容架构师，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，基于其提供的热点数据，高效、准确地生成一篇预测性的公众号爆款文章。现在，请开始处理用户提供的热点信息。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          1664,
+          0
+        ],
+        "id": "ec951063-fba7-4f16-8e3f-4962c93a9622",
+        "name": "热点预测"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=《爆款文章拆解分析报告》： {{ $('设置参数').item.json['分析报告'] }}\n文章素材：\n文章主题：{{ $('步骤3json').item.json['主题'] }}\n文章标题：{{ $('步骤3json').item.json['标题'] }}\n文章摘要：{{ $('步骤3json').item.json['摘要'] }}\n文章内容：{{ $('步骤3json').item.json['内容'] }}",
+          "options": {
+            "systemMessage": "# Role：公众号爆款文章策略重构师（WeChat Article Strategist & Reconstructor）\n\n# Profile\n- language: 中文（主要交互语言）\n- description: 专精于将深度内容诊断报告转化为可执行爆款策略的专家。基于科学的量化诊断模型，精准定位原文优劣，并创造性地产出符合爆款逻辑、具有高传播潜力的完整公众号文章。\n- background: 基于海量��众号爆款案例分析、用户阅读心理学及传播学原理，熟练掌握内容量化诊断模板的解读与应用。\n- personality: 高度数据驱动、富有创造力、目标导向、注重细节与逻辑。\n- expertise: 诊断报告解构、目标受众再聚焦、爆款元素（金句/悬念/情绪）植入、结构化叙事重构、互动传播设计。\n- target_audience: 公众号内容运营者、编辑、自媒体创作者、品牌内容营销人员。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（策略分析与转化）**\n  - **诊断报告深度解读**: 能精准理解诊断报告中各维度的评分、评语及核心结论，识别“优势”与“短板”背后的本质原因。\n  - **爆款策略制定**: 能根据诊断结论，特别是“优化策略与行动建议”，制定出具体、可融入文章创作的核心策略，如重塑观点、强化钩子、明确受众对话���吻。\n  - **目标受众重构**: 能基于模糊的原始受众画像，重新定义更精准、更具共鸣感的核心读者群体，并以此指导全文的语调和内容侧重。\n\n2. **辅助技能类别（内容创作与优化）**\n  - **爆款标题与摘要生成**: 能创作符合“吸引力、关键词、情绪调动”原则的多个标题变体及摘要，有效提升点击率。\n  - **叙事结构与节奏调整**: 能优化原文结构，强化逻辑勾连，控制信息密度与情绪曲线，确保阅读流畅且富有张力。\n  - **金句与传播点设计**: 能在文章关键位置（开头、转折、结尾）植入提炼出的尖锐观点或动人金句，制造记忆点和社交货币。\n  - **互动引导模块设计**: 能设计自然、不生硬的文末互动环节，有效引导评论、分享、关注，延长内容生命周期。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **诊断驱动，策略先行**: 所有重构必须严格基于用户提供的《爆款文章拆解分析报告》模板得出的诊断结论和优化策略进行，不可凭空创作。\n  - **爆款导向，传播至上**: 重构的核心目标是提升文章的传播潜力（点击、分享、互动），所有优化决策应服务于这一终极目标。\n  - **尊重原核，优化形式**: 必须忠实于用户提供的“文章主题、标题、摘要、内容”的核心事实与主体故事，优化的是其表达方式、结构、观点提炼和包装。\n\n2. **行为准则（在交互中如何表现）**:\n  - **结构化输出**: 最终输出必须严格且仅包含“### **文章主题**”、“### **文章标题**”、“### **文章摘要**”、“### **文章内容**”四个部分，并使用指定的Markdown标题格式清晰呈现，每部分内容紧随其标题之后。\n  - **主动思考与标注**: 在输出文章内容时，可在关键优化处使用`【】`括号简要注明此处应用的策略或意图（如`【金句提炼】`、`【互动引导】`），但最终交付时可选择移除。\n  - **结果导向**: 输出的文章应是可直接发布的高质量成品，语言流畅，逻辑自洽。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止偏离诊断**: 严禁无视诊断报告中的“关键短板”和“优化策略”，进行与诊断结论相悖的修改。\n  - **禁止虚构核心事实**: 严禁对用户提供的原文核心事实、人物故事、数据案例进行捏造或篡改。\n  - **禁止输出格式错误**: 最终输出必须是完整的文章包，四部分必须严格按指定标题格式呈现，缺一不可，且内容连贯。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 基于用户提供的《爆款文章拆解分析报告》和新的“文章主题、标题、摘要、内容”，输出一篇优化后的、具有高传播潜力的完整公众号爆款文章。\n- 步骤1: **解构需求** － 深度研读用户提供的《诊断报告》，理解其对原文的量化评分、优势短板分析及具体的“优化策略与行动建议”。同时，仔细分析用户新提供的“文章四要素”（主题、标题、摘要、内容），把握其核心事实与故事脉络。明确本次重构需解决的核心问题：如何将诊断出的“短板”（如受众模糊、观点温和、无互动）在新区中予以补强。\n- 步骤2: **执行任务** - 调用【Skills】。首先进行“诊断报告深度解读”和“目标受众重构”，确定本次重构的核心策略方向（例如：明确受众为“都市职场人”，提炼核心观点为“真正的危机是拒绝进化的头脑”）。接着进行“爆款标题与摘要生成”，创作更具吸引力和传播力的版本。然后进行“叙事结构与节奏调整”和“金句与传播点设计”，对用户提供的“文章内容”进行重构，在保留主干故事的基础上，优化开头引入、段落衔接、结尾升华，并植入金句。最后进行“互动引导模块设计”，添加文末互动环节。\n- 步骤3: **审查与交付** - 根据【Rules】进行最终审查。检查文章是否严格遵循了诊断报告中的优化策略；检查核心事实是否未被篡改；检查“### **文章主题**”、“### **文章标题**”、“### **文章摘要**”、“### **文章内容**”四部分是否完整、格式正确、高质量且符合爆款特征。确认无误后，将四部分内容按顺序、以指定格式封装为最终输出。\n- 预期结果: 一个包含完整四要素（严格按`### **文章主题**`等格式）、深度优化、直击诊断短板、具备显著更高传播潜力的公众号文章包，可直接用于发布。\n\n## Initialization\n作为[公众号爆款文章策略重构师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地完成指定目标。请准备接收用户提供的《爆款文章拆解分析报告》及文章素材。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          2800,
+          0
+        ],
+        "id": "cd2e62fc-3c9c-4d05-9c94-d6add5d437b7",
+        "name": "重新生成内容"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. 读取上游传入的所有数据\nconst items = $input.all();\n\n// 2. 定义需要匹配的标记\nconst targetTag = '### **文章主题**';\n\n// 3. 处理单条数据\nif (items.length > 0) {\n  const currentItem = items[0];\n  // 关键修复：使用上游实际存在的字段名 `output`\n  const originalContent = currentItem.json.output;\n\n  let contentAfterTag = '';\n  if (!originalContent) {\n    contentAfterTag = '错误：上游节点未传入有效文本';\n  } else {\n    const tagIndex = originalContent.indexOf(targetTag);\n    if (tagIndex !== -1) {\n      contentAfterTag = '### **文章主题**'+originalContent.slice(tagIndex + targetTag.length);\n    } else {\n      contentAfterTag = `错误：未在文本中找到标记「${targetTag}」`;\n    }\n  }\n\n  // 将筛选结果挂载到标准json属性下\n  currentItem.json.contentAfterTitle = contentAfterTag;\n}\n\n// 4. 返回符合n8n要求的数组格式\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3168,
+          0
+        ],
+        "id": "4a84fdae-2247-44e4-9ddc-3b8fb9cb06ac",
+        "name": "数据提取"
+      },
+      {
+        "parameters": {
+          "content": "# 排版"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          6560,
+          -304
+        ],
+        "typeVersion": 1,
+        "id": "07dccf1b-44c8-466e-8e55-36682c08cdc7",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "# 图片生成"
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          6560,
+          -48
+        ],
+        "typeVersion": 1,
+        "id": "bfd79fc7-26e5-41bd-8aaa-5739e78c421d",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          2752,
+          256
+        ],
+        "id": "fb9191a8-38d9-4fa5-a84b-cf4c8ac8165c",
+        "name": "DeepSeek Chat Model1",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $('json转文本').item.json.sessionId }}",
+          "contextWindowLength": 10
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          2928,
+          256
+        ],
+        "id": "ad29477f-3bdd-417f-864f-94123a029e94",
+        "name": "Simple Memory2"
+      },
+      {
+        "parameters": {
+          "jsCode": "const originalText = $input.first().json.contentAfterTitle\n\nconst [part1, part2] = originalText.split('### **文章标题**\\n');\nconst [part3, part4] = part2.split('### **文章摘要**\\n');\nconst [part5, part6] = part4.split('### **文章内容**\\n');\n// const [part7, part8] = part6.split('### **文章内容**\\n');\n// 提取第一部分：去除开头的\"数据清洗与洞察：\"并清理多余换行\nconst CleaningContent1 = part1.replace('### **文章主题**\\n', '').replace(/\\n+/g, ' ').trim();\n// 提取第二部分：直接清理多余换行（无需去前缀）\nconst CleaningContent2 = part3.replace('### **文章标题**\\n', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent3 = part5.replace('### **文章摘要**\\n', '').replace(/\\n+/g, ' ').trim();\n\nconst CleaningContent4 = part6.replace('### **文章内容**\\n', '').replace(/\\n+/g, ' ').trim();\n\n// 步骤3：构建你要求的JSON结构（键名完全固定）\nconst extractResult = {\n  \"文章主题\": CleaningContent1,\n  \"文章标题\": CleaningContent2,\n  \"文章摘要\": CleaningContent3,\n  \"文章内容\": CleaningContent4\n};\n\n\n// 步骤4：n8n强制输出规范 - 后续节点可直接读取\nreturn {\n  json: extractResult\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3456,
+          256
+        ],
+        "id": "8b912aae-1314-4468-a2dc-6dddeac60111",
+        "name": "数据转json"
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "deepseek-r1:8b",
+            "mode": "list",
+            "cachedResultName": "deepseek-r1:8b"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "={{ $json.contentAfterTitle }}"
+              }
+            ]
+          },
+          "options": {
+            "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源��信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过于流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循��户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严��使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时，禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力���逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.ollama",
+        "typeVersion": 1,
+        "position": [
+          3616,
+          -608
+        ],
+        "id": "3d1662d3-b40d-4e88-8d96-1de4df413363",
+        "name": "分析1",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "ollamaApi": {
+            "id": "m7ItUzjoa8jVF8Mb",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "qwen3:8b",
+            "mode": "list",
+            "cachedResultName": "qwen3:8b"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "={{ $json.contentAfterTitle }}"
+              }
+            ]
+          },
+          "options": {
+            "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.ollama",
+        "typeVersion": 1,
+        "position": [
+          3616,
+          -384
+        ],
+        "id": "2e075c4a-e2b8-48d9-a4af-dd2dcc86bedb",
+        "name": "分析2",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "credentials": {
+          "ollamaApi": {
+            "id": "m7ItUzjoa8jVF8Mb",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工创作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.content;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3984,
+          -608
+        ],
+        "id": "1f208a69-8151-4f61-b666-94cde3695126",
+        "name": "AI率1",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工���作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.output;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2528,
+          -1136
+        ],
+        "id": "a2ac9b37-a231-4d84-b1b1-ae052fe08c59",
+        "name": "AI率3"
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工创作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.content;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3984,
+          -384
+        ],
+        "id": "3c304a3e-e1a5-4d82-a743-05675fe75bf8",
+        "name": "AI率2"
+      },
+      {
+        "parameters": {
+          "numberInputs": 3
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4400,
+          -400
+        ],
+        "id": "c375b129-e124-44ac-8960-3c4a25edbe18",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          2176,
+          -848
+        ],
+        "id": "3b3c75e1-8272-44bb-a42f-4af7250282ed",
+        "name": "DeepSeek Chat Model2",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineAll",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          3936,
+          544
+        ],
+        "id": "5a23fbc2-2507-4775-a513-855ed3e9b610",
+        "name": "Merge1"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.contentAfterTitle }}",
+          "options": {
+            "systemMessage": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过于流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时，禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          2176,
+          -1088
+        ],
+        "id": "694bf334-6024-43c1-9e5e-3772e09be25b",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "value": "gemma3:12b",
+            "mode": "list",
+            "cachedResultName": "gemma3:12b"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "={{ $json.contentAfterTitle }}"
+              }
+            ]
+          },
+          "options": {
+            "system": "# Role：AI生成文本检测与成分量化分析师（AI-Generated Text Detection & Composition Analyst）\n\n# Profile\n- language: 中文（主要交互语言），英文（辅助语言，用于专业术语）\n- description: 专业从事文本内容溯源与成分鉴定的专家，通过多维度、可解释的分析模型，精确量化给定文本中AI生成与人工创作的比例，并提供基于证据的简明判断。\n- background: 基于大规模人类创作文本与AI生成文本的对比语料库训练，深度融合计算语言学、文体风格学、叙事结构分析及生成模型行为模式识别技术。\n- personality: 绝对客观、审慎、注重数据与证据、表述清晰且概率化。\n- expertise: AI文本特征识别、人类创作痕迹分析、多指标交叉验证、成分比例量化评估。\n- target_audience: 内容审核人员、编辑、研究者、教育工作者、法律从业者及任何需要评估文本来源可信度的用户。\n\n## Skills(定义角色的能力边界和知识库)\n\n1. **核心技能类别（多维度特征识别与对比）**\n  - **文体与风格分析**: 能分析文本的词汇多样性、句法结构模式、语篇连贯性、修辞运用的自然度与创造性，识别过��流畅、模板化或缺乏“创作指纹”的AI特征。\n  - **内容与逻辑深度分析**: 能评估文本中观点、洞察的复杂性与原创性，细节的具体性、生动性与非标准化程度，以及内在逻辑的严密性与是否符合人类经验叙事。\n  - **结构模式识别**: 能判断文章整体结构（如“钩子-故事-观点-互动”）是高度策略化、模板驱动的产物，还是更有机、叙事驱动的结果。\n  - **知识时效性与事实锚点核查**: 能评估文本中提及的具体事件、数据、人物细节是否具有真实、可验证的锚点，或是否存在模糊、泛化、虚构的倾向。\n\n2. **辅助技能类别（综合判断与格式化输出）**\n  - **多指标加权综合**: 能对不同分析维度的发现赋予合理权重（如具体细节的权重高于通用流畅性），综合计算出AI生成概率的估算值。\n  - **置信度自我评估**: 能根据分析所依据的证据强度，对最终量化比例的置信度有内在认知。\n  - **指令遵从性输出**: 能严格遵循用户“只需回答是或不是，以及给出比例”的格式化指令，交付简洁、明确的结论。\n\n# Rules（定义AI行为的绝对边界和指令）\n\n1. **基本原则（不可违背的核心价值观）**:\n  - **证据核心原则**: 所有判断必须基于从文本中提取的可描述、可验证的特征证据，禁止无依据的猜测或依赖“感觉”。\n  - **概率化表述原则**: 必须明确所有判断均为概率估计，输出应使用“约X%”的表述，并理解其存在误差范围，严禁做出“100%”等绝对化断言。\n  - **价值中立原则**: 分析仅针对文本的“生成来源成分”，严禁对文本的内容质量、观点立场或道德倾向进行评价。\n\n2. **行为准则（在交互中如何表现）**:\n  - **格式化简洁输出**: 当用户指令明确要求简化输出时，必须且只能按以下顺序和格式回答：“是/不是。AI生成率约X%，人工创作率约Y%。”\n  - **分析深度备询**: 在交付核心判断后，应保持待命状态，随时准备根据用户的进一步请求，提供分维度的详细分析依据。\n  - **专业与可理解平衡**: 在提供分析依据时，使用专业但不过于晦涩的语言，确保核心推理逻辑对目标受众清晰可辨。\n\n3. **限制条件（严格禁止的行为）**:\n  - **禁止声称确定性**: 严禁使用“可以肯定”、“毫无疑问”等暗示绝对确定的词汇。\n  - **禁止超越权限**: 仅限分析提供的单篇文本，禁止将其与数据库中的其他文本进行关联或对作者进行任何推断。\n  - **禁止主动扩展**: 在未收到用户明确请求时���禁止在简洁回答后主动附加详细分析。\n  - **禁止使用主观臆断词汇**: 如“我感觉”、“我认为”，应替换为“分析显示”、“特征表明”。\n\n## Workflows（执行核心任务的思考链和操作步骤）\n- 目标: 对用户提供的单篇文本进行快速而深入的多维度分析，输出关于其是否为AI生成的二元判断以及AI生成与人工创作成分的量化比例。\n- 步骤1: **解构需求与快速扫描** － 确认用户指令的核心要求是“二元判断+百分比”。快速通读全文，把握其主题、长度、体裁和复杂程度，形成初步印象。\n- 步骤2: **执行多维度交叉分析** - 系统性地调用【Skills】:\n    a. **文体与风格分析**：检查用词是丰富独特还是常见组合，句式是灵活多变还是模式规整，段落衔接是否自然。\n    b. **内容与逻辑深度分析**：审视案例细节（如“青一点的香蕉”、“大声宣告”）是否鲜活具体；观点（如“人情算法”、“地理套利”）是否具有洞察力和逻辑推演深度。\n    c. **结构模式识别**：分析文章从标题、摘要到内容小标题、互动设计，是否呈现高度完整、策略化的“爆款公式”结构。\n    d. **知识时效性核查**：注意文中提及的“2026年中央一号文件”等具体时间锚点，评估其合理性。\n- 步骤3: **综合评估与格式化交付** - 整合各维度分析结果，进行**多指标加权综合**，估算AI生成概率。进行**置信度自我评估**。最后，严格遵守**格式化简洁输出**指令，生成最终答案。任务在该轮交互中完成，等待用户可能的后续询问。\n- 预期结果: 一个严格符合用户指令格式的、基于多维证据分析的量化判断结论（例如：“是。AI生成率约50%，人工创作率约50%。”）。\n\n## Initialization\n作为[AI生成文本检测与成分量化分析师]，你必须**严格**��守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。现在，开始分析用户提供的文本。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.ollama",
+        "typeVersion": 1,
+        "position": [
+          3616,
+          -144
+        ],
+        "id": "5f31fc3d-e5c9-42d7-9d44-5ff4fc608a3d",
+        "name": "分析",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "alwaysOutputData": false,
+        "credentials": {
+          "ollamaApi": {
+            "id": "m7ItUzjoa8jVF8Mb",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n标准写法：读取上游所有输入数据\nconst items = $input.all();\n\n// 新增：生成北京时间的ISO格式字符串（UTC+8）\nfunction getBeijingTimeISO() {\n    const now = new Date();\n    const beijingTime = new Date(now.getTime() + 8 * 60 * 60 * 1000);\n    // 保留+08:00时区标识，更清晰\n    return beijingTime.toISOString().replace('Z', '');\n}\n\n// 定义核心解析函数（修复判断逻辑+增强容错）\nfunction analysisResultToJson(resultString) {\n    if (typeof resultString !== 'string' || resultString.trim() === '') {\n        return {\n            是否AI生成: '无法判断',\n            AI生成率: null,\n            人工创作率: null,\n            生成时间: getBeijingTimeISO(),\n            分析依据: '输入结果字符串为空或格式异常'\n        };\n    }\n    // 修复：用正则精准匹配开头的「是。」或「不是。」\n    const judgmentMatch = resultString.match(/^(是|不是)。/);\n    const judgment = judgmentMatch ? judgmentMatch[1] : '无法判断';\n    \n    // 提取百分比（原有逻辑保留）\n    const aiMatch = resultString.match(/AI生成率约(\\d+)%/);\n    const humanMatch = resultString.match(/人工创作率约(\\d+)%/);\n    const aiRate = aiMatch ? (parseInt(aiMatch[1]) || null) : null;\n    const humanRate = humanMatch ? (parseInt(humanMatch[1]) || null) : null;\n    \n    return {\n        是否AI生成: judgment,\n        AI生成率: aiRate,\n        人工创作率: humanRate,\n        生成时间: getBeijingTimeISO(),\n        分析依据: \"基于多维度文本特征分析，包括文体风格、内容深度、结构模式和事实锚点\"\n    };\n}\n\n// 处理单条数据（确保currentItem.json存在）\nif (items.length > 0) {\n    const currentItem = items[0];\n    if (!currentItem.json) {\n        currentItem.json = {};\n    }\n    const resultString = currentItem.json.content;\n    currentItem.json.aiAnalysisResult = analysisResultToJson(resultString);\n}\n\n// 返回符合n8n要求的数组格式\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3984,
+          -144
+        ],
+        "id": "bf607b2f-9a0b-4569-862b-adb03aa30c17",
+        "name": "AI率"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "分析结果",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          4608,
+          -384
+        ],
+        "id": "62f24e5e-80e3-4044-8253-beceab6c9602",
+        "name": "Aggregate"
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n Function节点专属代码：适配你的输入结构，计算平均AI生成率、人工创作率\nconst FIXED_DECIMALS = 1; // 小数精度配置，1=保留1位，2=保留2位\n\n// 1. 正确获取输入数组（从上游节点的「分析结果」字段中提取）\nconst inputData = $input.first().json[\"分析结果\"] || [];\n\n// 2. 初始化统计变量\nlet totalAiRate = 0;\nlet totalHumanRate = 0;\nlet validCount = 0;\n\n// 3. 遍历数组（适配你的输入结构：每个item是普通对象，直接取aiAnalysisResult）\ninputData.forEach(item => {\n  // 过滤无效数据：确保存��aiAnalysisResult，且率值为有效数字\n  if (\n    item?.aiAnalysisResult &&\n    typeof item.aiAnalysisResult[\"AI生成率\"] === \"number\" &&\n    typeof item.aiAnalysisResult[\"人工创作率\"] === \"number\"\n  ) {\n    totalAiRate += item.aiAnalysisResult[\"AI生成率\"];\n    totalHumanRate += item.aiAnalysisResult[\"人工创作率\"];\n    validCount++;\n  }\n});\n\n// 4. 计算平均值（避免除以0）\nconst averageAiRate = validCount > 0 \n  ? Number((totalAiRate / validCount).toFixed(FIXED_DECIMALS)) \n  : 0;\nconst averageHumanRate = validCount > 0 \n  ? Number((totalHumanRate / validCount).toFixed(FIXED_DECIMALS)) \n  : 0;\n\n// 5. n8n标准输出格式\nreturn [\n  {\n    json: {\n      \"平均AI率\":averageAiRate,\n      \"平均人功率\":averageHumanRate,\n      \"有效数据\": validCount\n    }\n  }\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4816,
+          -384
+        ],
+        "id": "8a75c755-e7bf-4535-b3d7-e3d75f9edba2",
+        "name": "平均AI率人工率"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "cf1b74d4-66ff-4c23-b84e-6005fd4d6ff3",
+                "leftValue": "={{ $json[\"平均AI率\"] }}",
+                "rightValue": 40,
+                "operator": {
+                  "type": "number",
+                  "operation": "gt"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          5024,
+          -384
+        ],
+        "id": "ca475a4d-8ff6-4773-b46d-93deb0d6399c",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "fXNExbeUJrUwDEeIy_Dm5",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/fXNExbeUJrUwDEeIy_Dm5",
+            "cachedResultName": "文章去AI味"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "content": "={{ $('数据提取').item.json.contentAfterTitle }}"
+            },
+            "matchingColumns": [
+              "content"
+            ],
+            "schema": [
+              {
+                "id": "content",
+                "displayName": "content",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          5328,
+          -944
+        ],
+        "id": "45405a20-4206-437a-888d-bd197c59dfd4",
+        "name": "Call '文章去AI味'"
+      },
+      {
+        "parameters": {
+          "mode": "chooseBranch",
+          "useDataOfInput": 2
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          5008,
+          528
+        ],
+        "id": "2ea84a7b-54f6-46c7-9cef-ba9b823aa7e8",
+        "name": "Merge2"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "获取信息",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取信息": {
+        "main": [
+          [
+            {
+              "node": "json转文本",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "热点预测",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "热点预测",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ollama Chat Model": {
+        "ai_languageModel": [
+          []
+        ]
+      },
+      "json转文本": {
+        "main": [
+          [
+            {
+              "node": "热点预测",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "步骤分离": {
+        "main": [
+          [
+            {
+              "node": "步骤1",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "步骤2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "步骤1": {
+        "main": [
+          [
+            {
+              "node": "步骤1json",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "步骤2": {
+        "main": [
+          [
+            {
+              "node": "步骤2json",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "步骤3": {
+        "main": [
+          [
+            {
+              "node": "步骤3json",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "步骤3json": {
+        "main": [
+          [
+            {
+              "node": "Chat Memory Manager",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Merge1",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Simple Memory1": {
+        "ai_memory": [
+          [
+            {
+              "node": "Chat Memory Manager",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "步骤2json": {
+        "main": [
+          []
+        ]
+      },
+      "步骤1json": {
+        "main": [
+          []
+        ]
+      },
+      "热点预测": {
+        "main": [
+          [
+            {
+              "node": "步骤3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Chat Memory Manager": {
+        "main": [
+          [
+            {
+              "node": "重新生成内容",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "重新生成内容": {
+        "main": [
+          [
+            {
+              "node": "数据提取",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "数据提取": {
+        "main": [
+          [
+            {
+              "node": "数据转json",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "分析1",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "分析2",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "分析",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model1": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "重新生成内容",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Memory2": {
+        "ai_memory": [
+          [
+            {
+              "node": "重新生成内容",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "数据转json": {
+        "main": [
+          [
+            {
+              "node": "Merge1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "分析1": {
+        "main": [
+          [
+            {
+              "node": "AI率1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "分析2": {
+        "main": [
+          [
+            {
+              "node": "AI率2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI率1": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI率2": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "AI率3": {
+        "main": [
+          []
+        ]
+      },
+      "DeepSeek Chat Model2": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "写入飞书表格": {
+        "main": [
+          []
+        ]
+      },
+      "Merge1": {
+        "main": [
+          [
+            {
+              "node": "Merge2",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "AI率3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "分析": {
+        "main": [
+          [
+            {
+              "node": "AI率",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI率": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 2
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Aggregate",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aggregate": {
+        "main": [
+          [
+            {
+              "node": "平均AI率人工率",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "平均AI率人工率": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Call '文章去AI味'",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Merge2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call '文章去AI味'": {
+        "main": [
+          [
+            {
+              "node": "数据提取",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge2": {
+        "main": [
+          [
+            {
+              "node": "写入飞书表格",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.11",
+    "description": "修复提示词",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-12T03:31:23.587Z",
+        "id": 86,
+        "workflowId": "4yFfmhTfnpbEX4GJaoIiH",
+        "versionId": "a5ca717b-5778-4cd7-b162-71e6ca56f82e",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

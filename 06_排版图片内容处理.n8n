@@ -1,0 +1,1440 @@
+{
+  "updatedAt": "2026-02-02T01:30:33.013Z",
+  "createdAt": "2026-01-19T13:32:22.019Z",
+  "id": "GYz4tMgh7WlybmF3n6zgi",
+  "name": "06_排版图片内容处理",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1584,
+        704
+      ],
+      "id": "55f444e0-8f90-405c-9851-cc4aa5e8bee8",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+              "name": "view_id",
+              "value": "vewSweWW3T",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1360,
+        368
+      ],
+      "id": "e0d81fc6-6b6e-4640-9442-0e8f9da9b844",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        192,
+        0
+      ],
+      "id": "04307fac-2a94-4db1-8f1c-a17b0cf22a28",
+      "name": "获取飞书token",
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "notes": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "[\"待生成记录\"]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -688,
+        368
+      ],
+      "id": "c71dde76-0c32-446a-801b-6fb544f0073c",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -368,
+        368
+      ],
+      "id": "4803e59f-10c2-4037-b3c6-ff1c0dd42452",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        656,
+        368
+      ],
+      "id": "a003f103-d9a8-47f8-b4b1-03f233184ef8"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d0533843-ffc2-4eba-91e9-eb22c387712a",
+              "leftValue": "={{ $json.fields['排版'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        144,
+        384
+      ],
+      "id": "bfcf9c98-9117-44d3-9fc4-3ee58999cb65",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "outputFieldName": "当前时间",
+        "options": {
+          "timezone": "Asia/Shanghai"
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        400,
+        0
+      ],
+      "id": "f945843c-812e-401e-aeb1-2e89a2b57eb9",
+      "name": "获取当前时间"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n 专用时间格式化 - 转成 2026年01月13日 22：59 格式\nconst originalTime = $input.first().json['当前时间'];\n\n// 补零函数：个位数补0，保证月份/日期/时分都是两位数\nfunction addZero(num) {\n    return num < 10 ? '0' + num : num;\n}\n\n// 格式化核心逻辑：强制使用北京时间（Asia/Shanghai）\nconst date = new Date(originalTime);\nconst formatTime = date.toLocaleString('zh-CN', {\n  timeZone: 'Asia/Shanghai', // 关键：指定为北京时间\n  year: 'numeric',\n  month: '2-digit',\n  day: '2-digit',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false\n})\n// 替换成你需要的格式：2026年01月16日 00：51\n.replace(/\\//g, '年')\n.replace(/\\//, '月')\n.replace(/ /, '日 ')\n.replace(/:/, '：');\n\n// n8n 输出格式化后的时间\nreturn [{\n  json: {\n    ...$json, // 保留原节点所有数据\n    formatTime: formatTime // 新增格式化后的时间字段\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        608,
+        0
+      ],
+      "id": "8fd5aaa0-e6ca-4c40-9476-e6e79a02204f",
+      "name": "clean_date"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/im/v1/messages",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "receive_id_type",
+              "value": "chat_id"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('获取飞书token').item.json.tenant_access_token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"receive_id\":\"oc_1a5b1be9283709b969362cc652d12ca7\",\n    \"msg_type\": \"post\",\n    \"content\":\"{\\\"zh_cn\\\":{\\\"title\\\":\\\"公众号文章生成进度\\\",\\\"content\\\":[[{\\\"tag\\\":\\\"at\\\",\\\"user_id\\\":\\\"\\\",\\\"user_name\\\":\\\"所有人\\\"}],[{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**今天的图片图排版已全部生成，请及时审核** \\\"},{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**生成时间：{{ $json['formatTime'] }}** \\\"}],[{\\\"tag\\\":\\\"a\\\",\\\"href\\\":\\\"https://mcn33lfbwjgi.feishu.cn/base/GGgVbo7jEarC8PsFNXFcpPQPnMe?table=tblO9cucSw4r39Ek&view=vewI3sjaI0\\\",\\\"text\\\":\\\"点击查看详情\\\"}]]}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        848,
+        0
+      ],
+      "id": "3859d0b1-cbf3-4cae-9ccf-3fbd7ffa73c3",
+      "name": "向群组发送即时消息",
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "notes": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e836da5c-706c-4513-968b-28c05b3e9286",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8d00bded-ef8b-49c6-99d5-39e4d2afb4cd",
+              "name": "序号",
+              "value": "={{ $json.fields.id }}",
+              "type": "string"
+            },
+            {
+              "id": "a7b64972-9a0f-41c7-9493-eb70a5bcdf5c",
+              "name": "主题",
+              "value": "={{ $json.fields[\"主题\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "16ba546c-0836-4224-978c-600ad8c5693a",
+              "name": "初始标题",
+              "value": "={{ $json.fields[\"初始标题\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "23ebc1b4-75d2-4d27-8731-0c0fcc950599",
+              "name": "初始内容",
+              "value": "={{ $json.fields[\"初始内容\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "ade302a8-a98f-4058-94d5-7572c6cb6684",
+              "name": "叙事锚点",
+              "value": "={{ $json.fields[\"叙事锚点\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "1add9064-d4ae-4ac8-a462-70d55764aac4",
+              "name": "排版依据",
+              "value": "={{ $json.fields[\"排版依据\"].link }}",
+              "type": "string"
+            },
+            {
+              "id": "e07aa505-2dc2-4ab8-bb7f-5dea2224decd",
+              "name": "排版参考",
+              "value": "={{ $json.fields[\"排版参考\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "7c4f2b36-b3e0-47a1-b790-10eb22a35c97",
+              "name": "标题",
+              "value": "={{ $json.fields[\"标题\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "6023d621-37f4-4f5f-98a9-0cae1be11fe5",
+              "name": "内容",
+              "value": "={{ $json.fields[\"内容\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "c1be3715-1600-45c0-af78-4d70e1a108fe",
+              "name": "fields['摘要'][0].text",
+              "value": "={{ $json.fields['摘要'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "fe059a4e-dcc7-4391-966c-8dfc9aa93f61",
+              "name": "fields['排版原始结果'][0].text",
+              "value": "={{ $json.fields['排版原始结果'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "3be8c284-2791-4ac6-afa6-356af55e3e0c",
+              "name": "fields['图片']",
+              "value": "={{ $json.fields['图片'] }}",
+              "type": "array"
+            },
+            {
+              "id": "ae5e8524-507d-456c-9da0-520dcdac72ed",
+              "name": "fields['排版']",
+              "value": "={{ $json.fields['排版'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "9662063b-a962-46fa-99d1-658a1ee5e738",
+              "name": "记录 ID",
+              "value": "={{ $json.fields[\"记录 ID\"].value[0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "27ec9d8e-2adb-4508-92d9-46f95dbd3743",
+              "name": "状态",
+              "value": "={{ $json.fields[\"状态\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -64,
+        384
+      ],
+      "id": "7f55ec6d-f61a-49af-8c71-9cb53211b286",
+      "name": "设置子流程参数"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:search",
+        "app_toke": "={{ $json[\"飞书token\"] }}",
+        "table_id": "={{ $json[\"多维表格ID\"] }}",
+        "body": "={\n  \"view_id\": \"{{ $json.view_id }}\",\n  \"filter\": {\n    \"conjunction\": \"and\",\n    \"conditions\": [\n      {\n        \"field_name\": \"状态\",\n        \"operator\": \"is\",\n        \"value\": [\"待排版\"]\n      }\n    ]\n  }\n}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -1168,
+        368
+      ],
+      "id": "57cd3a3f-c759-414a-bdc4-b439d2f57477",
+      "name": "查询多维表格_待排版",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "058ce08d-0c03-4349-ad3c-40568c824624",
+              "name": "待生成记录",
+              "value": "={{ $json.data.items }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -928,
+        368
+      ],
+      "id": "9b5cf186-4f74-459c-a92c-7510cd012b2a",
+      "name": "待排版记录"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "eBkaKSkToEStSH3fy_3Hd",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/eBkaKSkToEStSH3fy_3Hd",
+          "cachedResultName": "05_排版图片生成"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "主题": "={{ $json['主题'] }}",
+            "标题": "={{ $json['标题'] }}",
+            "内容": "={{ $json['内容'] }}",
+            "记录ID": "={{ $json['记录 ID'] }}",
+            "序号": "={{ $json['序号'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "主题",
+              "displayName": "主题",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "标题",
+              "displayName": "标题",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "内容",
+              "displayName": "内容",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "序号",
+              "displayName": "序号",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "记录ID",
+              "displayName": "记录ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        224
+      ],
+      "id": "01a59516-8782-4e51-b2e3-7b17ef66c3c9",
+      "name": "05_排版图片生成"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 15
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1616,
+        368
+      ],
+      "id": "d508dad4-4606-4a72-85ac-c954dcf15f93",
+      "name": "Schedule Trigger",
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "查询多维表格_待排版",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "设置子流程参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "05_排版图片生成",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取飞书token": {
+      "main": [
+        [
+          {
+            "node": "获取当前时间",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取当前时间": {
+      "main": [
+        [
+          {
+            "node": "clean_date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_date": {
+      "main": [
+        [
+          {
+            "node": "向群组发送即时消息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "获取飞书token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置子流程参数": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查询多维表格_待排版": {
+      "main": [
+        [
+          {
+            "node": "待排版记录",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "待排版记录": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "05_排版图片生成": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "aec2a1c0-1058-4402-8f3f-2e3b13883390",
+  "activeVersionId": "e0c0ac7a-a2cd-4391-9805-3f0a22a812b8",
+  "versionCounter": 27,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:32:22.024Z",
+      "createdAt": "2026-01-19T13:32:22.024Z",
+      "role": "workflow:owner",
+      "workflowId": "GYz4tMgh7WlybmF3n6zgi",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-01-20T09:49:20.000Z",
+    "createdAt": "2026-01-20T09:49:14.843Z",
+    "versionId": "e0c0ac7a-a2cd-4391-9805-3f0a22a812b8",
+    "workflowId": "GYz4tMgh7WlybmF3n6zgi",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -1584,
+          704
+        ],
+        "id": "55f444e0-8f90-405c-9851-cc4aa5e8bee8",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+                "name": "view_id",
+                "value": "vewSweWW3T",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -1360,
+          368
+        ],
+        "id": "e0d81fc6-6b6e-4640-9442-0e8f9da9b844",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+          "sendHeaders": true,
+          "specifyHeaders": "json",
+          "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+          "options": {
+            "timeout": 60000
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          192,
+          0
+        ],
+        "id": "04307fac-2a94-4db1-8f1c-a17b0cf22a28",
+        "name": "获取飞书token",
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "maxTries": 5,
+        "notes": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "[\"待生成记录\"]",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -688,
+          368
+        ],
+        "id": "c71dde76-0c32-446a-801b-6fb544f0073c",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          -368,
+          368
+        ],
+        "id": "4803e59f-10c2-4037-b3c6-ff1c0dd42452",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "name": "Replace Me",
+        "typeVersion": 1,
+        "position": [
+          656,
+          368
+        ],
+        "id": "a003f103-d9a8-47f8-b4b1-03f233184ef8"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "d0533843-ffc2-4eba-91e9-eb22c387712a",
+                "leftValue": "={{ $json.fields['排版'] }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "empty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          144,
+          384
+        ],
+        "id": "bfcf9c98-9117-44d3-9fc4-3ee58999cb65",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "outputFieldName": "当前时间",
+          "options": {
+            "timezone": "Asia/Shanghai"
+          }
+        },
+        "type": "n8n-nodes-base.dateTime",
+        "typeVersion": 2,
+        "position": [
+          400,
+          0
+        ],
+        "id": "f945843c-812e-401e-aeb1-2e89a2b57eb9",
+        "name": "获取当前时间"
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n 专用时间格式化 - 转成 2026年01月13日 22：59 格式\nconst originalTime = $input.first().json['当前时间'];\n\n// 补零函数：个位数补0，保证月份/日期/时分都是两位数\nfunction addZero(num) {\n    return num < 10 ? '0' + num : num;\n}\n\n// 格式化核心逻辑：强制使用北京时间（Asia/Shanghai）\nconst date = new Date(originalTime);\nconst formatTime = date.toLocaleString('zh-CN', {\n  timeZone: 'Asia/Shanghai', // 关键：指定为北京时间\n  year: 'numeric',\n  month: '2-digit',\n  day: '2-digit',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false\n})\n// 替换成你需要的格式：2026年01月16日 00：51\n.replace(/\\//g, '年')\n.replace(/\\//, '月')\n.replace(/ /, '日 ')\n.replace(/:/, '：');\n\n// n8n 输出格式化后的时间\nreturn [{\n  json: {\n    ...$json, // 保留原节点所有数据\n    formatTime: formatTime // 新增格式化后的时间字段\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          608,
+          0
+        ],
+        "id": "8fd5aaa0-e6ca-4c40-9476-e6e79a02204f",
+        "name": "clean_date"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://open.feishu.cn/open-apis/im/v1/messages",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "receive_id_type",
+                "value": "chat_id"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "=Bearer {{ $('获取飞书token').item.json.tenant_access_token }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n    \"receive_id\":\"oc_1a5b1be9283709b969362cc652d12ca7\",\n    \"msg_type\": \"post\",\n    \"content\":\"{\\\"zh_cn\\\":{\\\"title\\\":\\\"公众号文章生成进度\\\",\\\"content\\\":[[{\\\"tag\\\":\\\"at\\\",\\\"user_id\\\":\\\"\\\",\\\"user_name\\\":\\\"所有人\\\"}],[{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**今天的图片图排版已全部生成，请及时审核** \\\"},{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**生成时间：{{ $json['formatTime'] }}** \\\"}],[{\\\"tag\\\":\\\"a\\\",\\\"href\\\":\\\"https://mcn33lfbwjgi.feishu.cn/base/GGgVbo7jEarC8PsFNXFcpPQPnMe?table=tblO9cucSw4r39Ek&view=vewI3sjaI0\\\",\\\"text\\\":\\\"点击查看详情\\\"}]]}}\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          848,
+          0
+        ],
+        "id": "3859d0b1-cbf3-4cae-9ccf-3fbd7ffa73c3",
+        "name": "向群组发送即时消息",
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "notes": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "fieldsToAggregate": {
+            "fieldToAggregate": [
+              {}
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "e836da5c-706c-4513-968b-28c05b3e9286",
+        "name": "Aggregate"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "8d00bded-ef8b-49c6-99d5-39e4d2afb4cd",
+                "name": "序号",
+                "value": "={{ $json.fields.id }}",
+                "type": "string"
+              },
+              {
+                "id": "a7b64972-9a0f-41c7-9493-eb70a5bcdf5c",
+                "name": "主题",
+                "value": "={{ $json.fields[\"主题\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "16ba546c-0836-4224-978c-600ad8c5693a",
+                "name": "初始标题",
+                "value": "={{ $json.fields[\"初始标题\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "23ebc1b4-75d2-4d27-8731-0c0fcc950599",
+                "name": "初始内容",
+                "value": "={{ $json.fields[\"初始内容\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "ade302a8-a98f-4058-94d5-7572c6cb6684",
+                "name": "叙事锚点",
+                "value": "={{ $json.fields[\"叙事锚点\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "1add9064-d4ae-4ac8-a462-70d55764aac4",
+                "name": "排版依据",
+                "value": "={{ $json.fields[\"排版依据\"].link }}",
+                "type": "string"
+              },
+              {
+                "id": "e07aa505-2dc2-4ab8-bb7f-5dea2224decd",
+                "name": "排版参考",
+                "value": "={{ $json.fields[\"排版参考\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "7c4f2b36-b3e0-47a1-b790-10eb22a35c97",
+                "name": "标题",
+                "value": "={{ $json.fields[\"标题\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "6023d621-37f4-4f5f-98a9-0cae1be11fe5",
+                "name": "内容",
+                "value": "={{ $json.fields[\"内容\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "c1be3715-1600-45c0-af78-4d70e1a108fe",
+                "name": "fields['摘要'][0].text",
+                "value": "={{ $json.fields['摘要'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "fe059a4e-dcc7-4391-966c-8dfc9aa93f61",
+                "name": "fields['排版原始结果'][0].text",
+                "value": "={{ $json.fields['排版原始结果'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "3be8c284-2791-4ac6-afa6-356af55e3e0c",
+                "name": "fields['图片']",
+                "value": "={{ $json.fields['图片'] }}",
+                "type": "array"
+              },
+              {
+                "id": "ae5e8524-507d-456c-9da0-520dcdac72ed",
+                "name": "fields['排版']",
+                "value": "={{ $json.fields['排版'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "9662063b-a962-46fa-99d1-658a1ee5e738",
+                "name": "记录 ID",
+                "value": "={{ $json.fields[\"记录 ID\"].value[0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "27ec9d8e-2adb-4508-92d9-46f95dbd3743",
+                "name": "状态",
+                "value": "={{ $json.fields[\"状态\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -64,
+          384
+        ],
+        "id": "7f55ec6d-f61a-49af-8c71-9cb53211b286",
+        "name": "设置子流程参数"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:search",
+          "app_toke": "={{ $json[\"飞书token\"] }}",
+          "table_id": "={{ $json[\"多维表格ID\"] }}",
+          "body": "={\n  \"view_id\": \"{{ $json.view_id }}\",\n  \"filter\": {\n    \"conjunction\": \"and\",\n    \"conditions\": [\n      {\n        \"field_name\": \"状态\",\n        \"operator\": \"is\",\n        \"value\": [\"待排版\"]\n      }\n    ]\n  }\n}"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          -1168,
+          368
+        ],
+        "id": "57cd3a3f-c759-414a-bdc4-b439d2f57477",
+        "name": "查询多维表格_待排版",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "058ce08d-0c03-4349-ad3c-40568c824624",
+                "name": "待生成记录",
+                "value": "={{ $json.data.items }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -928,
+          368
+        ],
+        "id": "9b5cf186-4f74-459c-a92c-7510cd012b2a",
+        "name": "待排版记录"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "eBkaKSkToEStSH3fy_3Hd",
+            "mode": "list",
+            "cachedResultUrl": "/workflow/eBkaKSkToEStSH3fy_3Hd",
+            "cachedResultName": "05_排版图片生成"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "主题": "={{ $json['主题'] }}",
+              "标题": "={{ $json['标题'] }}",
+              "内容": "={{ $json['内容'] }}",
+              "记录ID": "={{ $json['记录 ID'] }}",
+              "序号": "={{ $json['序号'] }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "主题",
+                "displayName": "主题",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "标题",
+                "displayName": "标题",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "内容",
+                "displayName": "内容",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "序号",
+                "displayName": "序号",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              },
+              {
+                "id": "记录ID",
+                "displayName": "记录ID",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          384,
+          224
+        ],
+        "id": "01a59516-8782-4e51-b2e3-7b17ef66c3c9",
+        "name": "05_排版图片生成"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 15
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -1616,
+          368
+        ],
+        "id": "d508dad4-4606-4a72-85ac-c954dcf15f93",
+        "name": "Schedule Trigger"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          []
+        ]
+      },
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "查询多维表格_待排版",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [
+            {
+              "node": "Aggregate",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "设置子流程参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Replace Me": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "05_排版图片生成",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Replace Me",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取飞书token": {
+        "main": [
+          [
+            {
+              "node": "获取当前时间",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取当前时间": {
+        "main": [
+          [
+            {
+              "node": "clean_date",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "clean_date": {
+        "main": [
+          [
+            {
+              "node": "向群组发送即时消息",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aggregate": {
+        "main": [
+          [
+            {
+              "node": "获取飞书token",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置子流程参数": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "查询多维表格_待排版": {
+        "main": [
+          [
+            {
+              "node": "待排版记录",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "待排版记录": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "05_排版图片生成": {
+        "main": [
+          [
+            {
+              "node": "Replace Me",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.2",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-01-20T09:49:20.188Z",
+        "id": 8,
+        "workflowId": "GYz4tMgh7WlybmF3n6zgi",
+        "versionId": "e0c0ac7a-a2cd-4391-9805-3f0a22a812b8",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

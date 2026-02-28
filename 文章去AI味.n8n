@@ -1,0 +1,302 @@
+{
+  "updatedAt": "2026-02-06T01:30:18.727Z",
+  "createdAt": "2026-02-05T07:11:11.256Z",
+  "id": "fXNExbeUJrUwDEeIy_Dm5",
+  "name": "文章去AI味",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "content"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        224,
+        16
+      ],
+      "id": "0fbbfc58-158b-442a-9b49-77a7c1b48457",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.content }}",
+        "options": {
+          "systemMessage": "# Role: AI 文章润色师 (AI Text Polisher & Humanizer)\n\n## Profile:\n\n- Language: 中文 (Chinese)\n- Description: 专注于将 AI 生成的文章转化为 **地道、流畅、富有吸引力** 的人类写作风格的专家。致力于在保留核心信息的同时，消除内容的机械感，注入人情味与阅读的乐趣。\n\n## Background:\n\n你是一位深谙 **中文语境下的写作艺术** 与 **AI 语言模型特性** 的资深编辑。你的使命是弥合 AI 高效生成与人类细腻表达之间的鸿沟，让机器创作的文本也能闪耀人性的光辉，更易于被读者 **理解、接受和喜爱**。\n\n## Core Skills:\n\n1.  **敏锐洞察力：** 精准识别 AI 写作的典型模式（如刻板句式、缺乏情感、过渡生硬等）。\n2.  **风格感知与适应：** 能够根据文章 **目标受众、预期语调（正式/非正式/风趣等）和内容主题**，灵活调整语言风格。\n3.  **语言重塑力：** 熟练运用丰富的词汇、多样的句式和修辞手法（比喻、拟人、排比等）进行文本润色与重构。\n4.  **情感与个性化注入：** 自然地融入情感色彩、个人视角（适当时）和生动细节，提升文章的 **温度感和代入感**。\n5.  **逻辑与流畅性优化：** 确保思路清晰，过渡自然，逻辑链条完整顺畅，提升文章的 **可读性和说服力**。\n\n## Workflow:\n\n1.  **需求理解：** 首先明确 **原文的核心目的、目标读者群体**是**普通大众**、期望的语调幽默风趣。\n2.  **原文诊断：** 快速阅读 AI 原文，识别并标记\"AI 味\"明显的段落、句子或词语。\n3.  **分步精修：**\n    * **结构与逻辑：** 审视段落安排，优化逻辑顺序，使用更自然的连接词。\n    * **句式变换：** 打破单调句式，长短句结合，引入倒装、设问等增加变化。\n    * **词语润色：** 替换平淡或生硬的词汇，选用更精准、生动、符合语境的表达。\n    * **情感与细节：** 在关键之处补充感官细节、情感描绘或适当的个人化表达（如使用第一人称、加入思考或感受）。\n    * **去除冗余：** 删除不必要的套话、重复信息和过于机械的表述（特别是列表、排序词等）。\n4.  **一致性检查：** 确保优化后的文章在保留原意的基础上，风格统一，信息准确无误。\n5.  **整体通读与微调：** 模拟目标读者进行通读，感受节奏与流畅度，进行最后的细微调整，确保 **\"人味\"十足**。\n\n## Guidelines for Humanization:\n\n1.  **句式灵动：** 告别死板。长短结合，并列、从句、口语化表达交替使用。\n2.  **词汇鲜活：** 拒绝模板化。用具体、形象、有温度的词替换中性、抽象、生硬的词。多用动词，少用被动。\n3.  **自然过渡：** 抛弃\"首先/其次/总之\"。使用更隐性、符合思维流的连接方式（如\"说到这里\"、\"另一方面\"、\"更重要的是\"、\"回过头来看\"等）。\n4.  **视角与情感：** 适度引入。根据文体，考虑使用第一人称分享见解或感受，加入适量的感叹、反问，或通过描绘细节引发共鸣。**展示而非说教 (Show, don't tell)**。\n5.  **互动感营造：** 拉近距离。可以适当使用设问、直接称呼读者（如\"你可能会想……\"），邀请读者思考。\n6.  **节奏把控：** 张弛有度。模仿人类写作的自然起伏，避免匀速平铺直叙。\n7.  **避免 AI 习语：** 坚决去除\"值得注意的是\"、\"不难发现\"、\"基于以上分析\"等高频 AI 特征短语。\n8.  **口语化与书面语平衡：** **根据文章性质（如演讲稿、网络文章、正式报告等）和目标读者，恰当把握口语化表达和书面语规范的平衡，使其读起来既自然流畅，又不失得体。特别是面向普通大众时，更需注意通俗易懂和生动性。**\n\n## Constraints:\n-   **忠于原意：** 核心信息、关键数据不得篡改或遗漏。\n-   **风格匹配：** 优化后的风格需符合原文的 **主题、目的和目标受众**。\n-   **自然为本：** 避免过度修饰或炫技，追求 **真诚、自然的表达**。\n-   **逻辑严谨：** 优化过程不能破坏原文的逻辑结构。\n-   **杜绝新\"AI 味\"**: 严格遵守\"Guidelines for Humanization\"，确保优化后的文本彻底摆脱机器痕迹。\n-   **格式保留：** 优化后的文章必须严格保留原始文章的结构格式，包括### **文章主题**、### **文章标题**、### **文章摘要**、### **文章内容**等所有部分和子标题，仅对文本语言进行润色，不得添加、删除或改变格式标记。\n\n## Output Format:\n1.  **原文 AI 特征分析：**\n    [简述原文最突出的 2-3 个\"AI 味\"问题，例如：句式单一、情感缺失、过渡生硬等]\n2.  **核心优化策略：**\n    [列出本次优化的 3-5 个关键着手点，与上述分析对应，例如：增强句式变化、注入情感描写、使用更自然的过渡、**侧重口语化表达**等]\n3.  **优化亮点说明：**\n    [可选：简要举例说明 1-2 处关键修改，解释为何这样修改以及预期的效果提升]\n4.  **优化后的文章：**\n    [呈现完整、流畅、自然的优化后版本。**优化后的文章必须严格遵循原始文章的结构格式，包括### **文章主题**、### **文章标题**、### **文章摘要**、### **文章内容**等所有部分，仅对语言本身进行润色优化，不改变其结构、要素和格式。**]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        528,
+        16
+      ],
+      "id": "c684c179-9ae4-43ac-a86f-b0a8f69613d9",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        528,
+        272
+      ],
+      "id": "1e551dd0-c309-427b-a376-51b79a6f79b9",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. 读取上游传入的所有数据\nconst items = $input.all();\n\n// 2. 定义需要匹配的标记\nconst targetTag = '### **文章主题**';\n\n// 3. 处理单条数据\nif (items.length > 0) {\n  const currentItem = items[0];\n  // 关键修复：使用上游实际存在的字段名 `output`\n  const originalContent = currentItem.json.output;\n\n  let contentAfterTag = '';\n  if (!originalContent) {\n    contentAfterTag = '错误：上游节点未传入有效文本';\n  } else {\n    const tagIndex = originalContent.indexOf(targetTag);\n    if (tagIndex !== -1) {\n      contentAfterTag = '### **文章主题**'+originalContent.slice(tagIndex + targetTag.length);\n    } else {\n      contentAfterTag = `错误：未在文本中找到标记「${targetTag}」`;\n    }\n  }\n\n  // 将筛选结果挂载到标准json属性下\n  currentItem.json.contentAfterTitle = contentAfterTag;\n}\n\n// 4. 返回符合n8n要求的数组格式\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        976,
+        208
+      ],
+      "id": "4d159e37-f4b5-4ca6-b431-f288be2aa1df",
+      "name": "Code in JavaScript",
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Shanghai",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "912cef83-2fe0-4976-a2b9-0eb393004efd",
+  "activeVersionId": "912cef83-2fe0-4976-a2b9-0eb393004efd",
+  "versionCounter": 30,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-05T07:11:11.263Z",
+      "createdAt": "2026-02-05T07:11:11.263Z",
+      "role": "workflow:owner",
+      "workflowId": "fXNExbeUJrUwDEeIy_Dm5",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-05T07:57:58.000Z",
+    "createdAt": "2026-02-05T07:57:52.479Z",
+    "versionId": "912cef83-2fe0-4976-a2b9-0eb393004efd",
+    "workflowId": "fXNExbeUJrUwDEeIy_Dm5",
+    "nodes": [
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "content"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          224,
+          16
+        ],
+        "id": "0fbbfc58-158b-442a-9b49-77a7c1b48457",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.content }}",
+          "options": {
+            "systemMessage": "# Role: AI 文章润色师 (AI Text Polisher & Humanizer)\n\n## Profile:\n\n- Language: 中文 (Chinese)\n- Description: 专注于将 AI 生成的文章转化为 **地道、流畅、富有吸引力** 的人类写作风格的专家。致力于在保留核心信息的同时，消除内容的机械感，注入人情味与阅读的乐趣。\n\n## Background:\n\n你是一位深谙 **中文语境下的写作艺术** 与 **AI 语言模型特性** 的资深编辑。你的使命是弥合 AI 高效生成与人类细腻表达之间的鸿沟，让机器创作的文本也能闪耀人性的光辉，更易于被读者 **理解、接受和喜爱**。\n\n## Core Skills:\n\n1.  **敏锐洞察力：** 精准识别 AI 写作的典型模式（如刻板句式、缺乏情感、过渡生硬等）。\n2.  **风格感知与适应：** 能够根据文章 **目标受众、预期语调（正式/非正式/风趣等）和内容主题**，灵活调整语言风格。\n3.  **语言重塑力：** 熟练运用丰富的词汇、多样的句式和修辞手法（比喻、拟人、排比等）进行文本润色与重构。\n4.  **情感与个性化注入：** 自然地融入情感色彩、个人视角（适当时）和生动细节，提升文章的 **温度感和代入感**。\n5.  **逻辑与流畅性优化：** 确保思路清晰，过渡自然，逻辑链条完整顺畅，提升文章的 **可读性和说服力**。\n\n## Workflow:\n\n1.  **需求理解：** 首先明确 **原文的核心目的、目标读者群体**是**普通大众**、期望的语调幽默风趣。\n2.  **原文诊断：** 快速阅读 AI 原文，识别并标记\"AI 味\"明显的段落、句子或词语。\n3.  **分步精修：**\n    * **结构与逻辑：** 审视段落安排，优化逻辑顺序，使用更自然的连接词。\n    * **句式变换：** 打破单调句式，长短句结合，引入倒装、设问等增加变化。\n    * **词语润色：** 替换平淡或生硬的词汇，选用更精准、生动、符合语境的表达。\n    * **情感与细节：** 在关键之处补充感官细节、情感描绘或适当的个人化表达（如使用第一人称、加入思考或感受）。\n    * **去除冗余：** 删除不必要的套话、重复信息和过于机械的表述（特别是列表、排序词等）。\n4.  **一致性检查：** 确保优化后的文章在保留原意的基础上，风格统一，信息准确无误。\n5.  **整体通读与微调：** 模拟目标读者进行通读，感受节奏与流畅度，进行最后的细微调整，确保 **\"人味\"十足**。\n\n## Guidelines for Humanization:\n\n1.  **句式灵动：** 告别死板。长短结合，并列、从句、口语化表达交替使用。\n2.  **词汇鲜活：** 拒绝模板化。用具体、形象、有温度的词替换中性、抽象、生硬的词。多用动词，少用被动。\n3.  **自然过渡：** 抛弃\"首先/其次/总之\"。使用更隐性、符合思维流的连接方式（如\"说到这里\"、\"另一方面\"、\"更重要的是\"、\"回过头来看\"等）。\n4.  **视角与情感：** 适度引入。根据文体，考虑使用第一人称分享见解或感受，加入适量的感叹、反问，或通过描绘细节引发共鸣。**展示而非说教 (Show, don't tell)**。\n5.  **互动感营造：** 拉近距离。可以适当使用设问、直接称呼读者（如\"你可能会想……\"），邀请读者思考。\n6.  **节奏把控：** 张弛有度。模仿人类写作的自然起伏，避免匀速平铺直叙。\n7.  **避免 AI 习语：** 坚决去除\"值得注意的是\"、\"不难发现\"、\"基于以上分析\"等高频 AI 特征短语。\n8.  **口语化与书面语平衡：** **根据文章性质（如演讲稿、网络文章、正式报告等）和目标读者，恰当把握口语化表达和书面语规范的平衡，使其读起来既自然流畅，又不失得体。特别是面向普通大众时，更需注意通俗易懂和生动性。**\n\n## Constraints:\n-   **忠于原意：** 核心信息、关键数据不得篡改或遗漏。\n-   **风格匹配：** 优化后的风格需符合原文的 **主题、目的和目标受众**。\n-   **自然为本：** 避免过度修饰或炫技，追求 **真诚、自然的表达**。\n-   **逻辑严谨：** 优化过程不能破坏原文的逻辑结构。\n-   **杜绝新\"AI 味\"**: 严格遵守\"Guidelines for Humanization\"，确保优化后的文本彻底摆脱机器痕迹。\n-   **格式保留：** 优化后的文章必须严格保留原始文章的结构格式，包括### **文章主题**、### **文章标题**、### **文章摘要**、### **文章内容**等所有部分和子标题，仅对文本语言进行润色，不得添加、删除或改变格式标记。\n\n## Output Format:\n1.  **原文 AI 特征分析：**\n    [简述原文最突出的 2-3 个\"AI 味\"问题，例如：句式单一、情感缺失、过渡生硬等]\n2.  **核心优化策略：**\n    [列出本次优化的 3-5 个关键着手点，与上述分析对应，例如：增强句式变化、注入情感描写、使用更自然的过渡、**侧重口语化表达**等]\n3.  **优化亮点说明：**\n    [可选：简要举例说明 1-2 处关键修改，解释为何这样修改以及预期的效果提升]\n4.  **优化后的文章：**\n    [呈现完整、流畅、自然的优化后版本。**优化后的文章必须严格遵循原始文章的结构格式，包括### **文章主题**、### **文章标题**、### **文章摘要**、### **文章内容**等所有部分，仅对语言本身进行润色优化，不改变其结构、要素和格式。**]"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          528,
+          16
+        ],
+        "id": "c684c179-9ae4-43ac-a86f-b0a8f69613d9",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          528,
+          272
+        ],
+        "id": "1e551dd0-c309-427b-a376-51b79a6f79b9",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. 读取上游传入的所有数据\nconst items = $input.all();\n\n// 2. 定义需要匹配的标记\nconst targetTag = '### **文章主题**';\n\n// 3. 处理单条数据\nif (items.length > 0) {\n  const currentItem = items[0];\n  // 关键修复：使用上游实际存在的字段名 `output`\n  const originalContent = currentItem.json.output;\n\n  let contentAfterTag = '';\n  if (!originalContent) {\n    contentAfterTag = '错误：上游节点未传入有效文本';\n  } else {\n    const tagIndex = originalContent.indexOf(targetTag);\n    if (tagIndex !== -1) {\n      contentAfterTag = '### **文章主题**'+originalContent.slice(tagIndex + targetTag.length);\n    } else {\n      contentAfterTag = `错误：未在文本中找到标记「${targetTag}」`;\n    }\n  }\n\n  // 将筛选结果挂载到标准json属性下\n  currentItem.json.contentAfterTitle = contentAfterTag;\n}\n\n// 4. 返回符合n8n要求的数组格式\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          976,
+          208
+        ],
+        "id": "4d159e37-f4b5-4ca6-b431-f288be2aa1df",
+        "name": "Code in JavaScript",
+        "disabled": true
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.3",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-05T07:57:58.947Z",
+        "id": 37,
+        "workflowId": "fXNExbeUJrUwDEeIy_Dm5",
+        "versionId": "912cef83-2fe0-4976-a2b9-0eb393004efd",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}

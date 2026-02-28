@@ -1,0 +1,2089 @@
+{
+  "updatedAt": "2026-02-08T04:43:33.875Z",
+  "createdAt": "2026-01-19T13:39:01.849Z",
+  "id": "4W3pftRIStbXlbDUPjEg2",
+  "name": "07_上传至微信草稿",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2048,
+        944
+      ],
+      "id": "872f8837-857c-41a3-9cf7-822201d9eb9a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+              "name": "view_id",
+              "value": "vewSweWW3T",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1568,
+        576
+      ],
+      "id": "ea9c0f24-b5d5-408b-999a-e7c1177a2772",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        0
+      ],
+      "id": "e96b013d-bd28-443b-997c-e0a234f9514b",
+      "name": "获取飞书token",
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "notes": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "[\"待上传数据\"]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        576
+      ],
+      "id": "4a822d5d-6834-4056-bbc2-c7b4d780c20e",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -464,
+        576
+      ],
+      "id": "be7de411-06e1-415c-9674-9c5fd921aae6",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        2272,
+        800
+      ],
+      "id": "d747d514-f252-4e0b-9e45-e8073b530a74"
+    },
+    {
+      "parameters": {
+        "outputFieldName": "当前时间",
+        "options": {
+          "timezone": "Asia/Shanghai"
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        464,
+        0
+      ],
+      "id": "07f7417c-abe3-44e3-868e-a8bdda92ee5d",
+      "name": "获取当前时间"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n 专用时间格式化 - 转成 2026年01月13日 22：59 格式\nconst originalTime = $input.first().json['当前时间'];\n\n// 补零函数：个位数补0，保证月份/日期/时分都是两位数\nfunction addZero(num) {\n    return num < 10 ? '0' + num : num;\n}\n\n// 格式化核心逻辑：强制使用北京时间（Asia/Shanghai）\nconst date = new Date(originalTime);\nconst formatTime = date.toLocaleString('zh-CN', {\n  timeZone: 'Asia/Shanghai', // 关键：指定为北京时间\n  year: 'numeric',\n  month: '2-digit',\n  day: '2-digit',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false\n})\n// 替换成你需要的格式：2026年01月16日 00：51\n.replace(/\\//g, '年')\n.replace(/\\//, '月')\n.replace(/ /, '日 ')\n.replace(/:/, '：');\n\n// n8n 输出格式化后的时间\nreturn [{\n  json: {\n    ...$json, // 保留原节点所有数据\n    formatTime: formatTime // 新增格式化后的时间字段\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "a56af632-be76-4a3d-bed8-6d5fd954bc5c",
+      "name": "clean_date"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/im/v1/messages",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "receive_id_type",
+              "value": "chat_id"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('获取飞书token').item.json.tenant_access_token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"receive_id\":\"oc_1a5b1be9283709b969362cc652d12ca7\",\n    \"msg_type\": \"post\",\n    \"content\":\"{\\\"zh_cn\\\":{\\\"title\\\":\\\"公众号文章生成进度\\\",\\\"content\\\":[[{\\\"tag\\\":\\\"at\\\",\\\"user_id\\\":\\\"\\\",\\\"user_name\\\":\\\"所有人\\\"}],[{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**已上传至微信草稿，请设置发布时间(默认晚上9点)** \\\"},{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**生成时间：{{ $json['formatTime'] }}** \\\"}],[{\\\"tag\\\":\\\"a\\\",\\\"href\\\":\\\"https://mcn33lfbwjgi.feishu.cn/base/GGgVbo7jEarC8PsFNXFcpPQPnMe?table=tblO9cucSw4r39Ek&view=vewI3sjaI0\\\",\\\"text\\\":\\\"点击查看详情\\\"}]]}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        912,
+        0
+      ],
+      "id": "2f896432-73f8-4216-a2f5-ad87464e5674",
+      "name": "向群组发送即时消息",
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "notes": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "672d5cfe-052d-42a0-8e68-d0fb62391755",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8d00bded-ef8b-49c6-99d5-39e4d2afb4cd",
+              "name": "序号",
+              "value": "={{ $json.fields.id }}",
+              "type": "string"
+            },
+            {
+              "id": "d76d2b23-b65f-4081-af51-64989824fc12",
+              "name": "主题",
+              "value": "={{ $json.fields['主题'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "ccbc40ad-74ab-438e-a3e3-255f21f0e6fa",
+              "name": "初始标题",
+              "value": "={{ $json.fields['初始标题'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "f9d8154a-0083-4449-a554-366dfc61973b",
+              "name": "初始内容",
+              "value": "={{ $json.fields['初始内容'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "aeac5a54-5ae5-422a-830b-cbf1cee29e46",
+              "name": "叙事锚点",
+              "value": "={{ $json.fields['叙事锚点'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "8e66a00b-59fb-48a2-ab72-552a54cd4b74",
+              "name": "排版依据",
+              "value": "={{ $json.fields['排版依据'].text }}",
+              "type": "string"
+            },
+            {
+              "id": "1b6a354d-8bd9-48fc-84e7-785801ee75a4",
+              "name": "排版参考",
+              "value": "={{ $json.fields['排版参考'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "ab75f356-545e-4319-b752-ab324365b877",
+              "name": "标题创作详情",
+              "value": "={{ $json.fields['标题创作详情'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "0eff6cc5-6836-4ef3-b843-64377c48d3bd",
+              "name": "标题",
+              "value": "={{ $json.fields['标题'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "b91d2059-8a54-4f33-bf2a-a48a0aae922f",
+              "name": "内容",
+              "value": "={{ $json.fields['内容'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "f2d41d69-0669-443d-b326-530c76b17b22",
+              "name": "排版原始结果",
+              "value": "={{ $json.fields['排版原始结果'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "f24b6ec8-645a-4f89-8bf2-fe7f56d86774",
+              "name": "摘要",
+              "value": "={{ $json.fields['摘要'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "b01a8f65-94c9-4733-9352-63ee1989427b",
+              "name": "排版'",
+              "value": "={{ $json.fields['排版'][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "a71279db-f10c-4acc-94c2-48506fa3db5a",
+              "name": "图片",
+              "value": "={{ $json.fields['图片'] }}",
+              "type": "array"
+            },
+            {
+              "id": "db6777f1-b382-4446-b3ed-5a099851ade2",
+              "name": "fields['创建日期']",
+              "value": "={{ $json.fields['创建日期'] }}",
+              "type": "number"
+            },
+            {
+              "id": "67cedddb-3543-4625-8143-45195af7ee1e",
+              "name": "fields['生成时间']",
+              "value": "={{ $json.fields['生成时间'] }}",
+              "type": "number"
+            },
+            {
+              "id": "773de91a-8fdf-451f-b8ba-6b3b923079ca",
+              "name": "fields['审核时间']",
+              "value": "={{ $json.fields['审核时间'] }}",
+              "type": "number"
+            },
+            {
+              "id": "68af172e-64b6-4b85-b06e-ab95748d8476",
+              "name": "状态",
+              "value": "={{ $json.fields['状态'] }}",
+              "type": "string"
+            },
+            {
+              "id": "92073a66-8e83-4ae7-a467-7827f3a6f688",
+              "name": "记录 ID",
+              "value": "={{ $json.fields['记录 ID'].value[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        592
+      ],
+      "id": "3608ba78-83f2-44ff-b182-c55408a3e415",
+      "name": "设置子流程参数"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:search",
+        "app_toke": "={{ $json[\"飞书token\"] }}",
+        "table_id": "={{ $json[\"多维表格ID\"] }}",
+        "body": "={\n  \"view_id\": \"{{ $json.view_id }}\",\n  \"filter\": {\n    \"conjunction\": \"and\",\n    \"conditions\": [\n      {\n        \"field_name\": \"状态\",\n        \"operator\": \"is\",\n        \"value\": [\"确认完成\"]\n      }\n    ]\n  }\n}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -1328,
+        576
+      ],
+      "id": "a2199507-d27d-4166-a2ce-6d464fa155c7",
+      "name": "查询多维表格_确认完成",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "058ce08d-0c03-4349-ad3c-40568c824624",
+              "name": "待上传数据",
+              "value": "={{ $json.data.items }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1104,
+        576
+      ],
+      "id": "f70ec752-2ca5-4156-8eab-471e0696e8f4",
+      "name": "待上传数据"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=Authorization",
+              "value": "=Bearer {{ $('获取飞书token2').item.json.tenant_access_token }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "file",
+              "outputPropertyName": "=data"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        544,
+        464
+      ],
+      "id": "12257a43-c2f8-4975-8493-f6cf7515c9ed",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1792,
+        576
+      ],
+      "id": "82c659a3-d869-4fce-81ab-63f48931cc61",
+      "name": "获取飞书token2",
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "notes": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "['图片']",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        96,
+        448
+      ],
+      "id": "2311031c-df2f-476d-96a3-2013c0552149",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        304,
+        448
+      ],
+      "id": "68036a8a-4094-4bab-9cd2-18858970c1f2",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me1",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        464
+      ],
+      "id": "7541c63d-ceae-4eab-bb61-2d8054fe6cd2"
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "media:uploadOther"
+      },
+      "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+      "typeVersion": 1,
+      "position": [
+        752,
+        464
+      ],
+      "id": "27ebe328-ca2c-48a4-a23d-28b6767b75be",
+      "name": "上传至素材库",
+      "credentials": {
+        "wechatOfficialAccountCredentialsApi": {
+          "id": "BAd0mnfPzK4DI5b4",
+          "name": "Wechat Official Account Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d19beb58-86d1-4315-8e0e-1d6b6ebde59c",
+              "name": "图片名称",
+              "value": "={{ $('Loop Over Items1').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "dae5765c-cc1a-4be5-82ff-043b1b538450",
+              "name": "media_id",
+              "value": "={{ $json.media_id }}",
+              "type": "string"
+            },
+            {
+              "id": "72950d62-b199-4fdc-bf2d-df53e39f004a",
+              "name": "url",
+              "value": "={{ $json.url }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        960,
+        464
+      ],
+      "id": "df334c11-f1b8-43f1-910c-bdae98ae2704",
+      "name": "素材库对应id"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "微信素材库",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        544,
+        704
+      ],
+      "id": "5e2b1a47-480d-4182-ada4-343c1066c69c",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=文章标题：{{ $json[\"标题\"] }}\n文章摘要：{{ $json[\"摘要\"] }}\n文章内容：{{ $json[\"内容\"] }}\n相关图片：{{ JSON.stringify($json[\"微信素材库\"]) }}",
+        "options": {
+          "systemMessage": "# Role：全栈式公众号自动化排版工程师\n\n# Profile\n- language: 中文（交互与输出），英文（API与代码术语）\n- description: 专为海量公众号内容处理而生的自动化专家，将原始文章、图片素材及排版参考，一站式转化为可直接通过微信公众号API上传的、兼具爆款视觉吸引力与严格合规性的草稿HTML。\n- background: 基于海量微信公众号排版数据、微信官方API文档及移动端UI/UX设计规范训练，模拟顶尖新媒体团队中内容排版、前端开发与视觉设计的复合角色。\n- personality: 严谨、高效、富有视觉美感，追求“零人工干预”的自动化交付。\n- expertise: 微信公众号API合规性、移动端自适应排版美学、多类型文章（情感/观点/生活）视觉氛围塑造、HTML/CSS代码精确生成、批量处理逻辑优化。\n- target_audience: 新媒体运营团队、内容中台、拥有大量公众号内容发布需求的机构或个人。\n\n## Skills\n\n1.  **微信生态全栈处理能力**\n    - **API适配与合规性校验**: 精通微信公众号草稿接口规范，确保生成的HTML代码（如图片标签、样式）完全符合上传要求，无任何可能被过滤或报错的元素。\n    - **视觉排版引擎**: 根据参考文章链接，深度解析其排版逻辑（如字号、间距、配色、组件使用），并智能适配到当前文章，构建具有呼吸感与节奏感的移动端阅读体验。\n    - **内容氛围解读与强化**: 能准确判断文章类型（如温情、犀利、轻松），并选用匹配的视觉元素（如分割线、背景图、图标、强调样式）来强化内容的情感基调。\n\n2.  **自动化与资源整合能力**\n    - **结构化分析与解构**: 系统化分析用户输入的文章结构、图片位置及描述、参考链接，形成明确的排版任务清单。\n    - **在线素材库智能调用**: 在需要丰富版面时（如缺少题图、分隔符），能自主调用概念上的“在线素材库”（如unsplash配色、iconfont图标理念），生成或建议符合文章氛围的占位或通用素材代码，并声明来源。\n    - **代码生成与封装**: 输出纯净、优化、无冗余样式的HTML字符串，精确匹配`content`字段所需格式，无需任何后期清理。\n\n# Rules\n\n1.  **基本原则**:\n    - **自动化第一**: 所有输出必须达到“无需人工二次修改”即可直接使用的标准。思考与设计均围绕此核心目标展开。\n    - **合规性至上**: 生成的所有代码和内容，必须100%遵守微信公众号平台的内容与格式规范，避免任何潜在的上传失败或样式错乱风险。\n    - **视觉优先**: 在合规与自动化的前提下，将“爆款文章的视觉吸引力与阅读流畅度”作为核心质量指标。排版结果必须丰富多彩、重点突出，通过字体颜色、样式等处理以及添加合规且不侵权的素材（如分割线、小图标等）来实现。\n\n2.  **行为准则**:\n    - **严格遵循参考**: 将用户提供的“排版参考链接”作为视觉风格的黄金标准，进行元素解构与风格迁移，确保输出风格的一致性。\n    - **智能素材应用**: 当原文图片资源不足或需增强氛围时，主动在排版中插入基于通用在线资源的、符合描述的视觉元素（如“使用浅色渐变背景区分段落”），并确保其代码合规。排版结果中，对图片不添加任何解释性文字，仅使用提供的 `media_id` 和 `url` 生成合规标签。\n    - **完整接管流程**: 从接收原始材料到交付最终HTML字符串，全流程自主完成，不向用户提出任何开放式问题（如“这里用什么图好？”）。\n    - **标题引导强化**: 在文章标题下方，必须自动生成并插入一段精心设计的引导性内容。这段内容可以是简介、摘要、一个引人深思的问题，或一个能引发读者共情的陈述。其核心目标是吸引读者，引起读者思考或共情，让人看了就忍不住继续阅读文章。此内容需根据文章整体基调和标题语义智能生成，并采用与参考风格一致的突出样式进行排版。\n\n3.  **限制条件**:\n    - **禁止依赖人工**: 严禁输出任何需要用户手动调整代码、寻找图片或做出选择的内容。\n    - **禁止违规样式**: 严禁使用可能被微信过滤的HTML标签、CSS属性（如`position: fixed`）或外链样式表。\n    - **禁止偏离核心**: 输出仅为`content`字段所需的完整HTML字符串。不包含额外的JSON结构、解释说明或代码块标记。\n\n## Workflows\n- 目标: 接收一篇文章的全部元素及参考链接，生成一个可直接作为微信公众号草稿API `content` 字段值的、排版精美、丰富多彩且重点突出的HTML字符串。\n- 步骤1: **解构需求** － 深度分析输入：解析文章标题、摘要、正文结构；明确所有标注图片的`media_id`、`url`及描述文字，并记录其精确插入位置；访问并深度分析“排版参考链接”，提取其核心排版范式（主色调、标题样式、正文间距、引用块样式、图片说明样式、分割线等）。\n- 步骤2: **执行任务** - 调用核心与辅助技能，执行自动化排版：\n    - a. **构建基础框架**: 根据参考范式，生成包裹全文的HTML基础结构，并嵌入经过优化的内联CSS样式，确保移动端自适应。\n    - b. **内容与素材注入**: 将标题置入。**紧接着，在标题下方，智能生成一段旨在吸引读者、引发思考或共情的引导性内容（如简介、摘要或问题），并使用突出样式进行排版。** 随后，将正文段落按解析结构置入。在标注的图片位置，严格使用提供的 `media_id` 生成符合API规范的 `<img>` 标签，**不添加任何图片解释文字**。根据文章氛围，主动在段落间、章节处智能插入从“概念素材库”衍生的、合规且不侵权的视觉元素（如风格统一的节标题装饰、情感化分割线、小图标等），并对关键词句施加强调样式（如加粗、改色、背景高亮），使其丰富多彩、重点突出。\n    - c. **氛围强化与微调**: 检查整个页面的视觉节奏，调整间距，确保阅读流畅，并强化整体视觉吸引力。\n- 步骤3: **审查与交付** - 进行最终校验与封装：\n    - a. **合规性审查**: 逐行检查HTML代码，移除所有不兼容的标签和属性，确保所有图片标签格式正确且无解释文本。\n    - b. **视觉一致性审查**: 对比参考链接，确保风格迁移准确，整体视觉效果和谐统一、丰富多彩。\n    - c. **最终封装**: 将最终确定的、纯净的HTML代码作为一个完整的字符串准备输出。此字符串应可直接复制粘贴至API请求的`content`字段。\n- 预期结果: 一个高质量、符合微信API上传规范、视觉吸引力强、阅读体验流畅、且通过多样化样式与素材实现丰富多彩、重点突出的HTML字符串，用户无需任何修改即可直接用于创建公众号草稿。\n\n## Initialization\n作为全栈式公众号自动化排版工程师，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地接收文章材料与参考，自动化输出可直接使用的、丰富多彩且重点突出的API就绪排版结果。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1232,
+        800
+      ],
+      "id": "c263091d-fe82-4d03-ba57-f2dce8e09864",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        1232,
+        1088
+      ],
+      "id": "695b4902-d795-40e6-9242-3badc32f1d65",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "operation": "draft:add",
+        "articles": "=[\n  {\n    \"title\": \"{{$('合并数据').item.json['标题']}}\",\n    \"content\": {{ JSON.stringify($json.output) }},\n    \"thumb_media_id\": \"{{$('合并数据').item.json['微信素材库'][0].media_id }}\",\n    \"author\": \"慢读杂货铺\",\n    \"digest\": \"{{$('合并数据').item.json['摘要'].slice(0, 119)}}\",\n    \"show_cover_pic\": 1\n  }\n]"
+      },
+      "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+      "typeVersion": 1,
+      "position": [
+        1584,
+        800
+      ],
+      "id": "e0e25c57-90d8-41ce-a6f3-3585e106a68a",
+      "name": "Draft:add draft",
+      "credentials": {
+        "wechatOfficialAccountCredentialsApi": {
+          "id": "BAd0mnfPzK4DI5b4",
+          "name": "Wechat Official Account Credentials account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        832,
+        800
+      ],
+      "id": "e30cfae8-1e2b-4bb4-bda0-117ed2f4c392",
+      "name": "合并数据"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json['飞书token'] }}",
+        "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+        "record_id": "={{ $('设置子流程参数').item.json['记录 ID'] }}",
+        "body": "={\"fields\":{\n  \"微信草稿media_id\":\"{{ $json.media_id }}\",\n  \"状态\":\"待发布\"\n}} "
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        1824,
+        800
+      ],
+      "id": "2df3f8c6-ffe6-4ae4-9b79-59094fe7fe74",
+      "name": "Bitable:table:record:update bitable",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e01591a6-2269-4070-83b3-84280a184400",
+              "name": "media_id",
+              "value": "={{ $('Draft:add draft').item.json.media_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2032,
+        800
+      ],
+      "id": "a09e53bd-44f9-4290-a83b-89e3674582da",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 19,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -2064,
+        576
+      ],
+      "id": "53fec183-3ef1-4cad-8c7b-f7984f420c65",
+      "name": "Schedule Trigger",
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "获取飞书token2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "查询多维表格_确认完成",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "设置子流程参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取飞书token": {
+      "main": [
+        [
+          {
+            "node": "获取当前时间",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取当前时间": {
+      "main": [
+        [
+          {
+            "node": "clean_date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "clean_date": {
+      "main": [
+        [
+          {
+            "node": "向群组发送即时消息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "获取飞书token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置子流程参数": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "合并数据",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "查询多维表格_确认完成": {
+      "main": [
+        [
+          {
+            "node": "待上传数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "待上传数据": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "上传至素材库",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "获取飞书token2": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上传至素材库": {
+      "main": [
+        [
+          {
+            "node": "素材库对应id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "素材库对应id": {
+      "main": [
+        [
+          {
+            "node": "Replace Me1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "合并数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Draft:add draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft:add draft": {
+      "main": [
+        [
+          {
+            "node": "Bitable:table:record:update bitable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "合并数据": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitable:table:record:update bitable": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "获取飞书token2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "442bd112-eda1-4ec3-aa29-f4c093c38c7f",
+  "activeVersionId": "442bd112-eda1-4ec3-aa29-f4c093c38c7f",
+  "versionCounter": 30,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T13:39:01.853Z",
+      "createdAt": "2026-01-19T13:39:01.853Z",
+      "role": "workflow:owner",
+      "workflowId": "4W3pftRIStbXlbDUPjEg2",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-08T04:43:33.878Z",
+    "createdAt": "2026-02-08T04:43:33.878Z",
+    "versionId": "442bd112-eda1-4ec3-aa29-f4c093c38c7f",
+    "workflowId": "4W3pftRIStbXlbDUPjEg2",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -2048,
+          944
+        ],
+        "id": "872f8837-857c-41a3-9cf7-822201d9eb9a",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "192f68ea-54a7-4af3-8d4b-8c76a342e143",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "92757a17-b315-4e4c-9d46-41aa4437228b",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "f24535a8-abff-4370-aab1-3602aab71a51",
+                "name": "view_id",
+                "value": "vewSweWW3T",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -1568,
+          576
+        ],
+        "id": "ea9c0f24-b5d5-408b-999a-e7c1177a2772",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+          "sendHeaders": true,
+          "specifyHeaders": "json",
+          "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+          "options": {
+            "timeout": 60000
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          256,
+          0
+        ],
+        "id": "e96b013d-bd28-443b-997c-e0a234f9514b",
+        "name": "获取飞书token",
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "maxTries": 5,
+        "notes": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "[\"待上传数据\"]",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -880,
+          576
+        ],
+        "id": "4a822d5d-6834-4056-bbc2-c7b4d780c20e",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          -464,
+          576
+        ],
+        "id": "be7de411-06e1-415c-9674-9c5fd921aae6",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "name": "Replace Me",
+        "typeVersion": 1,
+        "position": [
+          2272,
+          800
+        ],
+        "id": "d747d514-f252-4e0b-9e45-e8073b530a74"
+      },
+      {
+        "parameters": {
+          "outputFieldName": "当前时间",
+          "options": {
+            "timezone": "Asia/Shanghai"
+          }
+        },
+        "type": "n8n-nodes-base.dateTime",
+        "typeVersion": 2,
+        "position": [
+          464,
+          0
+        ],
+        "id": "07f7417c-abe3-44e3-868e-a8bdda92ee5d",
+        "name": "获取当前时间"
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n 专用时间格式化 - 转成 2026年01月13日 22：59 格式\nconst originalTime = $input.first().json['当前时间'];\n\n// 补零函数：个位数补0，保证月份/日期/时分都是两位数\nfunction addZero(num) {\n    return num < 10 ? '0' + num : num;\n}\n\n// 格式化核心逻辑：强制使用北京时间（Asia/Shanghai）\nconst date = new Date(originalTime);\nconst formatTime = date.toLocaleString('zh-CN', {\n  timeZone: 'Asia/Shanghai', // 关键：指定为北京时间\n  year: 'numeric',\n  month: '2-digit',\n  day: '2-digit',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false\n})\n// 替换成你需要的格式：2026年01月16日 00：51\n.replace(/\\//g, '年')\n.replace(/\\//, '月')\n.replace(/ /, '日 ')\n.replace(/:/, '：');\n\n// n8n 输出格式化后的时间\nreturn [{\n  json: {\n    ...$json, // 保留原节点所有数据\n    formatTime: formatTime // 新增格式化后的时间字段\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          672,
+          0
+        ],
+        "id": "a56af632-be76-4a3d-bed8-6d5fd954bc5c",
+        "name": "clean_date"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://open.feishu.cn/open-apis/im/v1/messages",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "receive_id_type",
+                "value": "chat_id"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "=Bearer {{ $('获取飞书token').item.json.tenant_access_token }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n    \"receive_id\":\"oc_1a5b1be9283709b969362cc652d12ca7\",\n    \"msg_type\": \"post\",\n    \"content\":\"{\\\"zh_cn\\\":{\\\"title\\\":\\\"公众号文章生成进度\\\",\\\"content\\\":[[{\\\"tag\\\":\\\"at\\\",\\\"user_id\\\":\\\"\\\",\\\"user_name\\\":\\\"所有人\\\"}],[{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**已上传至微信草稿，请设置发布时间(默认晚上9点)** \\\"},{\\\"tag\\\":\\\"md\\\",\\\"text\\\":\\\"**生成时间：{{ $json['formatTime'] }}** \\\"}],[{\\\"tag\\\":\\\"a\\\",\\\"href\\\":\\\"https://mcn33lfbwjgi.feishu.cn/base/GGgVbo7jEarC8PsFNXFcpPQPnMe?table=tblO9cucSw4r39Ek&view=vewI3sjaI0\\\",\\\"text\\\":\\\"点击查看详情\\\"}]]}}\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          912,
+          0
+        ],
+        "id": "2f896432-73f8-4216-a2f5-ad87464e5674",
+        "name": "向群组发送即时消息",
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000,
+        "notes": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "672d5cfe-052d-42a0-8e68-d0fb62391755",
+        "name": "Aggregate"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "8d00bded-ef8b-49c6-99d5-39e4d2afb4cd",
+                "name": "序号",
+                "value": "={{ $json.fields.id }}",
+                "type": "string"
+              },
+              {
+                "id": "d76d2b23-b65f-4081-af51-64989824fc12",
+                "name": "主题",
+                "value": "={{ $json.fields['主题'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "ccbc40ad-74ab-438e-a3e3-255f21f0e6fa",
+                "name": "初始标题",
+                "value": "={{ $json.fields['初始标题'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "f9d8154a-0083-4449-a554-366dfc61973b",
+                "name": "初始内容",
+                "value": "={{ $json.fields['初始内容'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "aeac5a54-5ae5-422a-830b-cbf1cee29e46",
+                "name": "叙事锚点",
+                "value": "={{ $json.fields['叙事锚点'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "8e66a00b-59fb-48a2-ab72-552a54cd4b74",
+                "name": "排版依据",
+                "value": "={{ $json.fields['排版依据'].text }}",
+                "type": "string"
+              },
+              {
+                "id": "1b6a354d-8bd9-48fc-84e7-785801ee75a4",
+                "name": "排版参考",
+                "value": "={{ $json.fields['排版参考'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "ab75f356-545e-4319-b752-ab324365b877",
+                "name": "标题创作详情",
+                "value": "={{ $json.fields['标题创作详情'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "0eff6cc5-6836-4ef3-b843-64377c48d3bd",
+                "name": "标题",
+                "value": "={{ $json.fields['标题'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "b91d2059-8a54-4f33-bf2a-a48a0aae922f",
+                "name": "内容",
+                "value": "={{ $json.fields['内容'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "f2d41d69-0669-443d-b326-530c76b17b22",
+                "name": "排版原始结果",
+                "value": "={{ $json.fields['排版原始结果'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "f24b6ec8-645a-4f89-8bf2-fe7f56d86774",
+                "name": "摘要",
+                "value": "={{ $json.fields['摘要'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "b01a8f65-94c9-4733-9352-63ee1989427b",
+                "name": "排版'",
+                "value": "={{ $json.fields['排版'][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "a71279db-f10c-4acc-94c2-48506fa3db5a",
+                "name": "图片",
+                "value": "={{ $json.fields['图片'] }}",
+                "type": "array"
+              },
+              {
+                "id": "db6777f1-b382-4446-b3ed-5a099851ade2",
+                "name": "fields['创建日期']",
+                "value": "={{ $json.fields['创建日期'] }}",
+                "type": "number"
+              },
+              {
+                "id": "67cedddb-3543-4625-8143-45195af7ee1e",
+                "name": "fields['生成时间']",
+                "value": "={{ $json.fields['生成时间'] }}",
+                "type": "number"
+              },
+              {
+                "id": "773de91a-8fdf-451f-b8ba-6b3b923079ca",
+                "name": "fields['审核时间']",
+                "value": "={{ $json.fields['审核时间'] }}",
+                "type": "number"
+              },
+              {
+                "id": "68af172e-64b6-4b85-b06e-ab95748d8476",
+                "name": "状态",
+                "value": "={{ $json.fields['状态'] }}",
+                "type": "string"
+              },
+              {
+                "id": "92073a66-8e83-4ae7-a467-7827f3a6f688",
+                "name": "记录 ID",
+                "value": "={{ $json.fields['记录 ID'].value[0].text }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -176,
+          592
+        ],
+        "id": "3608ba78-83f2-44ff-b182-c55408a3e415",
+        "name": "设置子流程参数"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:search",
+          "app_toke": "={{ $json[\"飞书token\"] }}",
+          "table_id": "={{ $json[\"多维表格ID\"] }}",
+          "body": "={\n  \"view_id\": \"{{ $json.view_id }}\",\n  \"filter\": {\n    \"conjunction\": \"and\",\n    \"conditions\": [\n      {\n        \"field_name\": \"状态\",\n        \"operator\": \"is\",\n        \"value\": [\"确认完成\"]\n      }\n    ]\n  }\n}"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          -1328,
+          576
+        ],
+        "id": "a2199507-d27d-4166-a2ce-6d464fa155c7",
+        "name": "查询多维表格_确认完成",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "058ce08d-0c03-4349-ad3c-40568c824624",
+                "name": "待上传数据",
+                "value": "={{ $json.data.items }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -1104,
+          576
+        ],
+        "id": "f70ec752-2ca5-4156-8eab-471e0696e8f4",
+        "name": "待上传数据"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.url }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "=Authorization",
+                "value": "=Bearer {{ $('获取飞书token2').item.json.tenant_access_token }}"
+              }
+            ]
+          },
+          "options": {
+            "response": {
+              "response": {
+                "fullResponse": true,
+                "responseFormat": "file",
+                "outputPropertyName": "=data"
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          544,
+          464
+        ],
+        "id": "12257a43-c2f8-4975-8493-f6cf7515c9ed",
+        "name": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal/",
+          "sendHeaders": true,
+          "specifyHeaders": "json",
+          "jsonHeaders": "{\n  \"Content-Type\":\"application/json; charset=utf-8\"\n}",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n    \"app_id\": \"cli_a9d6cb9992b9dbcc\",\n    \"app_secret\": \"lbyr9ZDqVKzeBxmYLqiT6e8J7AOitEqH\"\n}",
+          "options": {
+            "timeout": 60000
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -1792,
+          576
+        ],
+        "id": "82c659a3-d869-4fce-81ab-63f48931cc61",
+        "name": "获取飞书token2",
+        "notesInFlow": true,
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "maxTries": 5,
+        "notes": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "['图片']",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          96,
+          448
+        ],
+        "id": "2311031c-df2f-476d-96a3-2013c0552149",
+        "name": "Split Out1"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          304,
+          448
+        ],
+        "id": "68036a8a-4094-4bab-9cd2-18858970c1f2",
+        "name": "Loop Over Items1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "name": "Replace Me1",
+        "typeVersion": 1,
+        "position": [
+          1200,
+          464
+        ],
+        "id": "7541c63d-ceae-4eab-bb61-2d8054fe6cd2"
+      },
+      {
+        "parameters": {
+          "resource": "media",
+          "operation": "media:uploadOther"
+        },
+        "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+        "typeVersion": 1,
+        "position": [
+          752,
+          464
+        ],
+        "id": "27ebe328-ca2c-48a4-a23d-28b6767b75be",
+        "name": "上传至素材库",
+        "credentials": {
+          "wechatOfficialAccountCredentialsApi": {
+            "id": "BAd0mnfPzK4DI5b4",
+            "name": "Wechat Official Account Credentials account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "d19beb58-86d1-4315-8e0e-1d6b6ebde59c",
+                "name": "图片名称",
+                "value": "={{ $('Loop Over Items1').item.json.name }}",
+                "type": "string"
+              },
+              {
+                "id": "dae5765c-cc1a-4be5-82ff-043b1b538450",
+                "name": "media_id",
+                "value": "={{ $json.media_id }}",
+                "type": "string"
+              },
+              {
+                "id": "72950d62-b199-4fdc-bf2d-df53e39f004a",
+                "name": "url",
+                "value": "={{ $json.url }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          960,
+          464
+        ],
+        "id": "df334c11-f1b8-43f1-910c-bdae98ae2704",
+        "name": "素材库对应id"
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "微信素材库",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          544,
+          704
+        ],
+        "id": "5e2b1a47-480d-4182-ada4-343c1066c69c",
+        "name": "Aggregate1"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=文章标题：{{ $json[\"标题\"] }}\n文章摘要：{{ $json[\"摘要\"] }}\n文章内容：{{ $json[\"内容\"] }}\n相关图片：{{ JSON.stringify($json[\"微信素材库\"]) }}",
+          "options": {
+            "systemMessage": "# Role：全栈式公众号自动化排版工程师\n\n# Profile\n- language: 中文（交互与输出），英文（API与代码术语）\n- description: 专为海量公众号内容处理而生的自动化专家，将原始文章、图片素材及排版参考，一站式转化为可直接通过微信公众号API上传的、兼具爆款视觉吸引力与严格合规性的草稿HTML。\n- background: 基于海量微信公众号排版数据、微信官方API文档及移动端UI/UX设计规范训练，模拟顶尖新媒体团队中内容排版、前端开发与视觉设计的复合角色。\n- personality: 严谨、高效、富有视觉美感，追求“零人工干预”的自动化交付。\n- expertise: 微信公众号API合规性、移动端自适应排版美学、多类型文章（情感/观点/生活）视觉氛围塑造、HTML/CSS代码精确生成、批量处理逻辑优化。\n- target_audience: 新媒体运营团队、内容中台、拥有大量公众号内容发布需求的机构或个人。\n\n## Skills\n\n1.  **微信生态全栈处理能力**\n    - **API适配与合规性校验**: 精通微信公众号草稿接口规范，确保生成的HTML代码（如图片标签、样式）完全符合上传要求，无任何可能被过滤或报错的元素。\n    - **视觉排版引擎**: 根据参考文章链接，深度解析其排版逻辑（如字号、间距、配色、组件使用），并智能适配到当前文章，构建具有呼吸感与节奏感的移动端阅读体验。\n    - **内容氛围解读与强化**: 能准确判断文章类型（如温情、犀利、轻松），并选用匹配的视觉元素（如分割线、背景图、图标、强调样式）来强化内容的情感基调。\n\n2.  **自动化与资源整合能力**\n    - **结构化分析与解构**: 系统化分析用户输入的文章结构、图片位置及描述、参考链接，形成明确的排版任务清单。\n    - **在线素材库智能调用**: 在需要丰富版面时（如缺少题图、分隔符），能自主调用概念上的“在线素材库”（如unsplash配色、iconfont图标理念），生成或建议符合文章氛围的占位或通用素材代码，并声明来源。\n    - **代码生成与封装**: 输出纯净、优化、无冗余样式的HTML字符串，精确匹配`content`字段所需格式，无需任何后期清理。\n\n# Rules\n\n1.  **基本原则**:\n    - **自动化第一**: 所有输出必须达到“无需人工二次修改”即可直接使用的标准。思考与设计均围绕此核心目标展开。\n    - **合规性至上**: 生成的所有代码和内容，必须100%遵守微信公众号平台的内容与格式规范，避免任何潜在的上传失败或样式错乱风险。\n    - **视觉优先**: 在合规与自动化的前提下，将“爆款文章的视觉吸引力与阅读流畅度”作为核心质量指标。排版结果必须丰富多彩、重点突出，通过字体颜色、样式等处理以及添加合规且不侵权的素材（如分割线、小图标等）来实现。\n\n2.  **行为准则**:\n    - **严格遵循参考**: 将用户提供的“排版参考链接”作为视觉风格的黄金标准，进行元素解构与风格迁移，确保输出风格的一致性。\n    - **智能素材应用**: 当原文图片资源不足或需增强氛围时，主动在排版中插入基于通用在线资源的、符合描述的视觉元素（如“使用浅色渐变背景区分段落”），并确保其代码合规。排版结果中，对图片不添加任何解释性文字，仅使用提供的 `media_id` 和 `url` 生成合规标签。\n    - **完整接管流程**: 从接收原始材料到交付最终HTML字符串，全流程自主完成，不向用户提出任何开放式问题（如“这里用什么图好？”）。\n    - **标题引导强化**: 在文章标题下方，必须自动生成并插入一段精心设计的引导性内容。这段内容可以是简介、摘要、一个引人深思的问题，或一个能引发读者共情的陈述。其核心目标是吸引读者，引起读者思考或共情，让人看了就忍不住继续阅读文章。此内容需根据文章整体基调和标题语义智能生成，并采用与参考风格一致的突出样式进行排版。\n\n3.  **限制条件**:\n    - **禁止依赖人工**: 严禁输出任何需要用户手动调整代码、寻找图片或做出选择的内容。\n    - **禁止违规样式**: 严禁使用可能被微信过滤的HTML标签、CSS属性（如`position: fixed`）或外链样式表。\n    - **禁止偏离核心**: 输出仅为`content`字段所需的完整HTML字符串。不包含额外的JSON结构、解释说明或代码块标记。\n\n## Workflows\n- 目标: 接收一篇文章的全部元素及参考链接，生成一个可直接作为微信公众号草稿API `content` 字段值的、排版精美、丰富多彩且重点突出的HTML字符串。\n- 步骤1: **解构需求** － 深度分析输入：解析文章标题、摘要、正文结构；明确所有标注图片的`media_id`、`url`及描述文字，并记录其精确插入位置；访问并深度分析“排版参考链接”，提取其核心排版范式（主色调、标题样式、正文间距、引用块样式、图片说明样式、分割线等）。\n- 步骤2: **执行任务** - 调用核心与辅助技能，执行自动化排版：\n    - a. **构建基础框架**: 根据参考范式，生成包裹全文的HTML基础结构，并嵌入经过优化的内联CSS样式，确保移动端自适应。\n    - b. **内容与素材注入**: 将标题置入。**紧接着，在标题下方，智能生成一段旨在吸引读者、引发思考或共情的引导性内容（如简介、摘要或问题），并使用突出样式进行排版。** 随后，将正文段落按解析结构置入。在标注的图片位置，严格使用提供的 `media_id` 生成符合API规范的 `<img>` 标签，**不添加任何图片解释文字**。根据文章氛围，主动在段落间、章节处智能插入从“概念素材库”衍生的、合规且不侵权的视觉元素（如风格统一的节标题装饰、情感化分割线、小图标等），并对关键词句施加强调样式（如加粗、改色、背景高亮），使其丰富多彩、重点突出。\n    - c. **氛围强化与微调**: 检查整个页面的视觉节奏，调整间距，确保阅读流畅，并强化整体视觉吸引力。\n- 步骤3: **审查与交付** - 进行最终校验与封装：\n    - a. **合规性审查**: 逐行检查HTML代码，移除所有不兼容的标签和属性，确保所有图片标签格式正确且无解释文本。\n    - b. **视觉一致性审查**: 对比参考链接，确保风格迁移准确，整体视觉效果和谐统一、丰富多彩。\n    - c. **最终封装**: 将最终确定的、纯净的HTML代码作为一个完整的字符串准备输出。此字符串应可直接复制粘贴至API请求的`content`字段。\n- 预期结果: 一个高质量、符合微信API上传规范、视觉吸引力强、阅读体验流畅、且通过多样化样式与素材实现丰富多彩、重点突出的HTML字符串，用户无需任何修改即可直接用于创建公众号草稿。\n\n## Initialization\n作为全栈式公众号自动化排版工程师，你必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。你的任务是服务于用户，高效、准确地接收文章材料与参考，自动化输出可直接使用的、丰富多彩且重点突出的API就绪排版结果。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          1232,
+          800
+        ],
+        "id": "c263091d-fe82-4d03-ba57-f2dce8e09864",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          1232,
+          1088
+        ],
+        "id": "695b4902-d795-40e6-9242-3badc32f1d65",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "resource": "draft",
+          "operation": "draft:add",
+          "articles": "=[\n  {\n    \"title\": \"{{$('合并数据').item.json['标题']}}\",\n    \"content\": {{ JSON.stringify($json.output) }},\n    \"thumb_media_id\": \"{{$('合并数据').item.json['微信素材库'][0].media_id }}\",\n    \"author\": \"慢读杂货铺\",\n    \"digest\": \"{{$('合并数据').item.json['摘要'].slice(0, 119)}}\",\n    \"show_cover_pic\": 1\n  }\n]"
+        },
+        "type": "n8n-nodes-wechat-offiaccount.wechatOfficialAccountNode",
+        "typeVersion": 1,
+        "position": [
+          1584,
+          800
+        ],
+        "id": "e0e25c57-90d8-41ce-a6f3-3585e106a68a",
+        "name": "Draft:add draft",
+        "credentials": {
+          "wechatOfficialAccountCredentialsApi": {
+            "id": "BAd0mnfPzK4DI5b4",
+            "name": "Wechat Official Account Credentials account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineByPosition",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          832,
+          800
+        ],
+        "id": "e30cfae8-1e2b-4bb4-bda0-117ed2f4c392",
+        "name": "合并数据"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:update",
+          "app_toke": "={{ $('设置参数').item.json['飞书token'] }}",
+          "table_id": "={{ $('设置参数').item.json['多维表格ID'] }}",
+          "record_id": "={{ $('设置子流程参数').item.json['记录 ID'] }}",
+          "body": "={\"fields\":{\n  \"微信草稿media_id\":\"{{ $json.media_id }}\",\n  \"状态\":\"待发布\"\n}} "
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          1824,
+          800
+        ],
+        "id": "2df3f8c6-ffe6-4ae4-9b79-59094fe7fe74",
+        "name": "Bitable:table:record:update bitable",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e01591a6-2269-4070-83b3-84280a184400",
+                "name": "media_id",
+                "value": "={{ $('Draft:add draft').item.json.media_id }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2032,
+          800
+        ],
+        "id": "a09e53bd-44f9-4290-a83b-89e3674582da",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 19,
+                "triggerAtMinute": 30
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -2064,
+          576
+        ],
+        "id": "53fec183-3ef1-4cad-8c7b-f7984f420c65",
+        "name": "Schedule Trigger",
+        "disabled": true
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "获取飞书token2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "查询多维表格_确认完成",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [
+            {
+              "node": "Aggregate",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "设置子流程参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Replace Me": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取飞书token": {
+        "main": [
+          [
+            {
+              "node": "获取当前时间",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取当前时间": {
+        "main": [
+          [
+            {
+              "node": "clean_date",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "clean_date": {
+        "main": [
+          [
+            {
+              "node": "向群组发送即时消息",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aggregate": {
+        "main": [
+          [
+            {
+              "node": "获取飞书token",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置子流程参数": {
+        "main": [
+          [
+            {
+              "node": "Split Out1",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "合并数据",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "查询多维表格_确认完成": {
+        "main": [
+          [
+            {
+              "node": "待上传数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "待上传数据": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "上传至素材库",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "获取飞书token2": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out1": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items1": {
+        "main": [
+          [
+            {
+              "node": "Aggregate1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Replace Me1": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "上传至素材库": {
+        "main": [
+          [
+            {
+              "node": "素材库对应id",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "素材库对应id": {
+        "main": [
+          [
+            {
+              "node": "Replace Me1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Aggregate1": {
+        "main": [
+          [
+            {
+              "node": "合并数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "Draft:add draft",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Draft:add draft": {
+        "main": [
+          [
+            {
+              "node": "Bitable:table:record:update bitable",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "合并数据": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Bitable:table:record:update bitable": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Replace Me",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "获取飞书token2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "workflowPublishHistory": []
+  }
+}

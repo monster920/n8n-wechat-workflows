@@ -1,0 +1,2254 @@
+{
+  "updatedAt": "2026-02-11T03:07:25.896Z",
+  "createdAt": "2026-02-06T03:38:24.760Z",
+  "id": "BQ98f_HyD1Icne5s39Zlg",
+  "name": "02_图片生成",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wechat-public-account-image",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -816,
+        272
+      ],
+      "id": "f414c394-28f7-4d3e-b5de-423b8feb61b0",
+      "name": "Webhook",
+      "webhookId": "d3bc72c6-960a-4dfa-af1f-bfb52a81e96c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b4fe734b-669d-49c2-b542-54d1d458c68e",
+              "name": "记录 ID",
+              "value": "={{ $json.query[\"记录ID\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "af46ab22-2b8f-4976-8cc4-79be72e01a47",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "100e8baa-8594-4587-9ce9-2e1dc84e42cc",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "ce122c11-2791-4c84-a11b-3ab0c851e920",
+              "name": "viewID",
+              "value": "vewSweWW3T",
+              "type": "string"
+            },
+            {
+              "id": "93c16430-220b-4c88-88c5-be5da79f0b7c",
+              "name": "是否新增",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -560,
+        272
+      ],
+      "id": "d81215cb-c2ed-4ada-b634-d97a5c797fb3",
+      "name": "设置参数"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4b826fc9-69a0-4470-ab37-12426acbdcf5",
+              "leftValue": "={{ $('Webhook').item.json.query['文章标题'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "fb720e0c-0336-4a84-96f0-3834b6b628f9",
+              "leftValue": "={{ $('Webhook').item.json.query['文章摘要'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "42e4aa32-9485-4fb3-bf0a-a7d26a656d58",
+              "leftValue": "={{ $('Webhook').item.json.query['文章内容'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -384,
+        272
+      ],
+      "id": "52bbe5f0-9c8f-4170-a048-0eddf892599b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:get",
+        "app_toke": "={{ $json[\"飞书token\"] }}",
+        "table_id": "={{ $json[\"多维表格ID\"] }}",
+        "record_id": "={{ $json[\"记录 ID\"] }}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        64
+      ],
+      "id": "0bcc9fb2-6f85-42fd-a243-21e05e619853",
+      "name": "查询记录",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8d941dc4-1f2e-45cf-8f6e-d17ee8c04ab2",
+              "name": "文章主题",
+              "value": "={{ $json.data.records[0].fields[\"主题\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "6eccb707-65eb-4615-b78f-c745a0d879ba",
+              "name": "文章标题",
+              "value": "={{ $json.data.records[0].fields[\"标题\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "c0596628-94ad-4738-8037-2f35dfb37dbf",
+              "name": "文章摘要",
+              "value": "={{ $json.data.records[0].fields[\"摘要\"][0].text }}",
+              "type": "string"
+            },
+            {
+              "id": "98ff86e2-b871-4302-9479-eca8d526135a",
+              "name": "文章内容",
+              "value": "={{ $json.data.records[0].fields[\"内容\"][0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        64
+      ],
+      "id": "2b91f2ab-ccde-403f-8538-b834f28918d9",
+      "name": "飞书数据"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "64753c6d-8913-4637-838e-2100d10bbd1c",
+              "name": "文章主题",
+              "value": "={{ $json[\"文章主题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "b55f0fec-f087-4dc5-8c36-62c5ed8784ba",
+              "name": "文章标题",
+              "value": "={{ $json[\"文章标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "906b9111-62a5-49b9-823b-c655200b2350",
+              "name": "文章摘要",
+              "value": "={{ $json[\"文章摘要\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "7a283bff-1596-4b25-9a76-cf8721fdea21",
+              "name": "文章内容",
+              "value": "={{ $json[\"文章内容\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "b9f51ec7-86d3-4eeb-91b6-0c996c43111b",
+              "name": "sessionId",
+              "value": "={{ $now.toMillis() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        528,
+        224
+      ],
+      "id": "03b00632-2c32-46db-9d86-ba30fdfae3fd",
+      "name": "组装数据"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=文章主题： {{ $json['文章主题'] }}\n文章标题：{{ $json['文章标题'] }}\n文章摘要：{{ $json['文章摘要'] }}\n文章内容：{{ $json['文章内容'] }}",
+        "options": {
+          "systemMessage": "# Role：公众号视觉策略与AIGC提示工程师\n\n# Profile\n- language: 中文\n- description: 将公众号文章内容转化为一套精确、风格统一且能生成高真实感图像的AIGC提示词。专注于策略性视觉叙事，并通过专业提示词工程规避AI生成痕迹。\n- background: 融合资深媒体设计师与AIGC提示工程专家思维。\n- personality: 严谨、高效、富有洞察力，沟通直接。\n- expertise: 公众号视觉体系、AIGC提示工程、设计心理学、视觉叙事。\n- target_audience: 微信公众号运营者、内容创作者。\n\n## Skills\n1.  **核心视觉策略制定**：深度解构文章，提炼情绪与视觉符号，定位能规避AI瑕疵的视觉风格（如写实摄影、胶片质感、手绘插画）。\n2.  **AIGC提示工程**：构建结构化提示词（主体、环境、构图、灯光、风格、参数），嵌入提升真实感的指令，并系统使用负面提示词排除AI典型缺陷。\n3.  **视觉排版与品牌一致性**：预演图片在文章中的排版，指导自然融入品牌元素。\n\n## Rules\n1.  核心目标：生成提示词必须旨在产生**难以被一眼识别为AI生成的图像**。\n2.  风格导向：必须引导生成具有“真实感”、“手工艺感”或“经典摄影/绘画质感”的图像，避免纯粹的、完美的数字渲染。\n3.  负面提示词：必须系统性使用负面提示词，以排除AI图像的常见瑕疵（如变形、过度平滑、塑料感）。\n4.  风格参考：优先引用真实的摄影师、画家或特定摄影/绘画流派。\n5.  语言优先：提示词的核心描述部分（主体、环境、风格等）**优先使用中文**。仅在专有名词、艺术流派、技术术语及负面提示词列表中可使用英文。\n6.  **输出格式（必须严格遵守）**：\n    - 总标题使用：`### **详细图片生成提示词**`\n    - 每个独立提示词块使用：`#### **【图X：类型（描述）】**` 封装，其中`X`为数字，`类型（描述）`为简洁标题。\n    - 每个提示词块内必须包含两部分：\n        - `**视觉概念**：` 后接简明概念说明。\n        - `**完整提示词**：` 后换行，并用一对```` `代码块包裹完整的提示词文本。\n    - 此格式确保下游节点能准确解析。\n\n## Workflows\n- **输入**：接收用户提供的公众号文章内容（主题、标题、正文等）。\n- **步骤1: 解构需求** – 分析文章核心论点、情感基调、关键数据与目标读者。评估内容是否适合采用高真实感/工艺感的视觉表达。\n- **步骤2: 生成视觉策略与提示词** –\n    a. **封面图**：设计高冲击力视觉概念，强调真实纹理、自然光影与适度不完美，融入品牌考虑。\n    b. **文内配图(3-5个)**：为每个关键段落或观点设计配图概念，每个提示词都必须包含具体的真实感描述词和负面约束。\n    c. **结尾图**：为总结或行动号召设计配图，注重手工或专业设计质感。\n- **步骤3: 审查与格式化交付** –\n    a. **自我校对**：检查所有提示词是否符合上述所有Rules，特别是“规避AI痕迹”策略与中文优先原则。\n    b. **事实核查**：确保提示词描述与文章内容严格对应。\n    c. **最终输出**：**严格按照[Rules]第6条规定的格式进行封装和输出**，确保结构一致性。\n\n## Initialization\n我已准备好作为您的公众号视觉策略与AIGC提示工程师。请提供您的公众号文章内容，我将严格遵循上述规则与流程，为您生成一套完整、高质量且结构统一的图片生成提示词。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        768,
+        208
+      ],
+      "id": "936abe5d-7cc4-494f-a3da-ce90d647bf03",
+      "name": "图片描述生成"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        864,
+        384
+      ],
+      "id": "428142a5-1ec7-480b-b78b-3aa726593972",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "responsesApiEnabled": "={{ true }}",
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        576,
+        656
+      ],
+      "id": "09ab5161-f8b1-4490-bdfc-1113466f57c0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "DdkN7jyCK3bNbW1u",
+          "name": "GLM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "deepseek-reasoner",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        736,
+        400
+      ],
+      "id": "b032a774-7eac-4eb5-af57-028fb2d4c835",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "qoZVHSPqzp7DQ5OV",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. 读取上游传入的所有数据\nconst items = $input.all();\n\n// 2. 定义需要匹配的标记\nconst targetTag = '**详细图片生成提示词**';\n\n// 3. 处理单条数据\nif (items.length > 0) {\n  const currentItem = items[0];\n  // 关键修复：使用上游实际存在的字段名 `output`\n  const originalContent = currentItem.json.output.replace('### **第三步：详细图片生成提示词**','### **详细图片生成提示词**').replace('### **详细图片生成提示词**','**详细图片生成提示词**');\n\n  let contentAfterTag = '';\n  if (!originalContent) {\n    contentAfterTag = '错误：上游节点未传入有效文本';\n  } else {\n    const tagIndex = originalContent.indexOf(targetTag);\n    if (tagIndex !== -1) {\n      contentAfterTag = originalContent.slice(tagIndex + targetTag.length);\n    } else {\n      contentAfterTag = `��误：未在文本中找到标记「${targetTag}」`;\n    }\n  }\n\n  // 将筛选结果挂载到标准json属性下\n  currentItem.json.contentAfterTitle = contentAfterTag;\n}\n\n// 4. 返回符合n8n要求的数组格式\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        64
+      ],
+      "id": "3f807b2a-5799-4208-8c77-94256be24e8e",
+      "name": "数据提取",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b4fe734b-669d-49c2-b542-54d1d458c68e",
+              "name": "记录 ID",
+              "value": "={{ $json.query[\"记录ID\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "af46ab22-2b8f-4976-8cc4-79be72e01a47",
+              "name": "飞书token",
+              "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+              "type": "string"
+            },
+            {
+              "id": "100e8baa-8594-4587-9ce9-2e1dc84e42cc",
+              "name": "多维表格ID",
+              "value": "tbl2QoWRiJ6uavHM",
+              "type": "string"
+            },
+            {
+              "id": "ce122c11-2791-4c84-a11b-3ab0c851e920",
+              "name": "viewID",
+              "value": "vewSweWW3T",
+              "type": "string"
+            },
+            {
+              "id": "b57b5bdf-e3fd-4387-976c-451d1cfbf45e",
+              "name": "文章标题",
+              "value": "={{ $json.query[\"文章标题\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "017e9035-b351-4aa9-8e71-88cb2d66355f",
+              "name": "文章摘要",
+              "value": "={{ $json.query[\"文章摘要\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "ac5e972f-a94e-4eff-a835-07e5b8644c6a",
+              "name": "文章内容",
+              "value": "={{ $json.query[\"文章内容\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "3c3a4c68-22e4-4738-81a2-9943fccae82e",
+              "name": "是否新增",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "00c89bba-aae0-4e4a-b414-e2cb15b79a80",
+              "name": "文章主题",
+              "value": "={{ $json.query[\"文章主题\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        96,
+        528
+      ],
+      "id": "8361312e-368b-4f2d-9a95-821866c4a1e5",
+      "name": "传入数据"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code节点专用 - 分割式解析，彻底解决匹配为0问题\nconst inputData = $input.first().json;\nconst rawText = inputData.output || inputData.text || inputData.content || JSON.stringify(inputData) || '';\n\n// 调试：打印原始输入开头，确认数据\nconsole.log('=== 原始输入开头 ===');\nconsole.log(rawText.substring(0, 500));\n\nif (!rawText) {\n  return { json: { error: '上游无有效文本', images: [], flatImages: {}, total: 0 } };\n}\n\n// 1. 基础配置\nconst numToChinese = { '1':'一', '2':'二', '3':'三', '4':'四', '5':'五', '6':'六' };\nconst resultList = [];\n\n// 2. 第一步：分割成独立图块（核心：用固定标记分割，避免长正则陷阱）\nconst blocks = rawText.split('#### **【图').filter(block => block.trim() !== '');\nconsole.log('=== 分割结果 ===');\nconsole.log(`共分割出 ${blocks.length} 个潜在图块`);\n\n// 3. 第二步：逐个解析每个图块\nblocks.forEach((block, index) => {\n  console.log(`=== 开始解析第 ${index + 1} 个图块 ===`);\n  try {\n    // 3.1 提取图号和标题\n    const headerMatch = block.match(/^(\\d+)：([^】]+)】/);\n    if (!headerMatch) {\n      console.log(`❌ 第 ${index + 1} 块：未找到图号和标题`);\n      return;\n    }\n    const [, numStr, titleRaw] = headerMatch;\n    const num = numStr.trim();\n    const title = titleRaw.trim().replace(/（[\\s\\S]*?）/g, '').replace(/\\s+/g, '');\n    const key = `图${numToChinese[num] || num}_${title}`;\n\n    // 3.2 提取视觉概念\n    const visualMatch = block.match(/\\*\\*视觉概念\\*\\*：\\s*([\\s\\S]+?)\\s*\\*\\*完整提示词\\*\\*/);\n    if (!visualMatch) {\n      console.log(`❌ 第 ${index + 1} 块：未找到视觉概念`);\n      return;\n    }\n    const visualConcept = visualMatch[1].trim().replace(/[\\r\\n]+/g, ' ');\n\n    // 3.3 提取完整提示词（匹配```包裹）\n    const promptMatch = block.match(/\\*\\*完整提示词\\*\\*：\\s*[\\r\\n]+\\s*```([\\s\\S]+?)```/);\n    if (!promptMatch) {\n      console.log(`❌ 第 ${index + 1} 块：未找到完整提示词`);\n      return;\n    }\n    const fullPrompt = promptMatch[1].trim();\n\n    // 3.4 组装结果\n    resultList.push({\n      [key]: `视觉概念：${visualConcept}\\n完整提示词：${fullPrompt}`\n    });\n    console.log(`✅ 第 ${index + 1} 块：成功解析为 ${key}`);\n  } catch (e) {\n    console.log(`❌ 第 ${index + 1} 块：解析出错 - ${e.message}`);\n  }\n});\n\n// 4. 生成扁平化结果\nconst flatImages = Object.assign({}, ...resultList);\n\n// 5. 调试：输出最终统计\nconsole.log('=== 最终提取结果 ===');\nconsole.log(`成功解析 ${resultList.length} 个图块`);\nconsole.log('解析详情：', resultList);\n\n// 6. n8n标准输出\nreturn {\n  json: {\n    images: resultList,\n    flatImages: flatImages,\n    total: resultList.length\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        208
+      ],
+      "id": "ad54a267-feae-4f94-91dd-dabb006a8db8",
+      "name": "转json",
+      "retryOnFail": false,
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "images",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1712,
+        208
+      ],
+      "id": "44c23e06-749f-4e2a-acfa-77c1055e20b2",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2048,
+        208
+      ],
+      "id": "3c471d35-8e96-453e-a71c-bcfa503e42c4",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        3632,
+        208
+      ],
+      "id": "6a9b880d-c5d5-4947-8806-8d8ca05cc333"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3472,
+        208
+      ],
+      "id": "58d4d0cd-056c-458e-b2a2-181da40c35a0",
+      "name": "Wait",
+      "webhookId": "628bff09-21c5-43cb-9cba-5f6221bbb155"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cbc622a-2024-4d6f-b1f9-7a76ef29ea7c",
+              "name": "序号",
+              "value": "={{ $('提取提示词').item.json['图片名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5f7fd313-2336-4c83-bbc5-f31ad0749c59",
+              "name": "视觉概念",
+              "value": "={{ $('提取提示词').item.json['视觉概念'] }}",
+              "type": "string"
+            },
+            {
+              "id": "b74bb966-e45f-4208-b486-6f972def5b28",
+              "name": "url",
+              "value": "={{ $('图片生成-通义万象').item.json.output.choices[0].message.content[0].image }}",
+              "type": "string"
+            },
+            {
+              "id": "53bb260b-cf86-40f2-9fcf-70f0641cf3e2",
+              "name": "request_id",
+              "value": "={{ $('图片生成-通义万象').item.json.request_id }}",
+              "type": "string"
+            },
+            {
+              "id": "3d7c5473-894a-4600-830c-c78192f473e4",
+              "name": "飞书_file_token",
+              "value": "={{ $json.data.file_token }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3280,
+        208
+      ],
+      "id": "de5f4783-e35c-41a8-abb9-9971fb870b61",
+      "name": "图片生成结果"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.output.choices[0].message.content[0].image }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2864,
+        208
+      ],
+      "id": "b3e0e173-af12-4bf5-be00-2d8755fb95a6",
+      "name": "图片二进制"
+    },
+    {
+      "parameters": {
+        "resource": "space",
+        "operation": "space:upload",
+        "parent_type": "bitable_image",
+        "parent_node": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+        "fileFieldName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}",
+        "file_name": "={{ $('提取提示词').item.json['图片名'] }}.png"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        3072,
+        208
+      ],
+      "id": "7a960779-0d05-462f-8d2e-c9f794991dbe",
+      "name": "上传图片至飞书",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "图片生成（封面图、配图）",
+        "height": 480,
+        "width": 1712
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1936,
+        512
+      ],
+      "typeVersion": 1,
+      "id": "7ff7179a-9333-41f1-8f3f-18e2d3cdf95d",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"wanx-v1\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json[Object.keys($json)[0]].中文提示词 }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感。构图混乱。文字模糊，扭曲，恐怖气氛，恐怖元素。\",\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"size\": \"{{ $json[Object.keys($json)[0]].像素尺寸 }}\"\n  }\n} ",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 3000
+            }
+          },
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2416,
+        704
+      ],
+      "id": "8f2b69d8-e307-48b0-bfc0-74f9b6b8f3c6",
+      "name": "图片生成—通义千问",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"wan2.6-t2i\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json['提示词'] }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"n\": 1,\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感，构图混乱，文字模糊，扭曲，恐怖气氛，恐怖元素，塑料感，模糊，失真，多手指，结构错误，皮肤光滑无纹理，不真实的阴影，过度锐化，过度平滑，过度曝光，过度饱和，不自然的光线，不真实的色彩，背景杂乱，主题不突出，构图不佳，透视错误，比例失调，不自然的姿势，不自然的表情，AI质感，AI质感强\"\n  }\n}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": 3000
+            }
+          },
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2592,
+        208
+      ],
+      "id": "8b99a058-d632-4da0-a507-370600f21e38",
+      "name": "图片生成-通义万象",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "l2Zx8CNbiwpQJqWa",
+          "name": "百炼万像"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n Code节点专用 - 无遍历+防undefined报错+适配动态键\n// 步骤1：读取上游数据并多层兜底，避免undefined\nconst upstreamData = $input.first()?.json || {};\nconst dynamicImagesObj = upstreamData.images || {};\n\n// 步骤2：获取第一个动态键（无遍历，适配任意键名）\nconst allKeys = Object.keys(dynamicImagesObj);\nconst targetKey = allKeys[0] || \"\";\nconst originalText = dynamicImagesObj[targetKey] || \"\";\n\n// 步骤3：文本清洗（全链路空值兜底，杜绝replace undefined报错）\nlet visualConcept = \"\";\nlet prompt = \"\";\n\nif (originalText) {\n  // 统一修正\"主题\"标点（用可选链+空值合并，防原始文本格式异常）\n  const processedText = (originalText\n    ?.replace('**主��:**', '**主题**')\n    ?.replace('**主题：**', '**主题**')) || \"\";\n\n  // 拆分视觉概念和提示词（兼容中/英文冒号，拆分后兜底）\n  const splitChar = processedText.includes('完整提示词：') ? '完整提示词：' : '完整提示词:';\n  const [part1, part2] = processedText.split(splitChar); // 拆分后可能是[文本, undefined]\n\n  // 清洗视觉概念：先判断part1存在，再调用replace\n  visualConcept = part1 \n    ? part1.replace('**主题**', '').replace(/\\n+/g, ' ').trim() \n    : \"\";\n  \n  // 清洗提示词：先判断part2存在，再调用replace（核心修复行）\n  prompt = part2 \n    ? part2.replace(/\\n+/g, ' ').trim() \n    : \"\";\n}\n\n// 步骤4：n8n标准输出（固定键名，无报错）\nreturn {\n  json: {\n    \"图片名\": targetKey,\n    \"视觉概念\": visualConcept,\n    \"提示词\": prompt\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2304,
+        224
+      ],
+      "id": "af4f70d2-876c-4254-ba6b-2ddacfbd8554",
+      "name": "提取提示词"
+    },
+    {
+      "parameters": {
+        "resource": "bitable",
+        "operation": "bitable:table:record:update",
+        "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+        "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+        "record_id": "={{ $('设置参数').item.json['记录 ID'] }}",
+        "body": "={{ JSON.stringify($node[\"组装参数\"].json) }}"
+      },
+      "type": "n8n-nodes-feishu-lite.feishuNode",
+      "typeVersion": 1,
+      "position": [
+        3232,
+        -96
+      ],
+      "id": "1e0cc1eb-0cb1-40a3-9830-379130285d53",
+      "name": "写入飞书多维表格",
+      "credentials": {
+        "feishuCredentialsApi": {
+          "id": "XlZs1WG8qgrQeegE",
+          "name": "公众号"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "图片生成结果",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2336,
+        -96
+      ],
+      "id": "2fe7dd81-8d8f-47bd-8f04-a7e7afb46a43",
+      "name": "合并图片结果"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 提取图片生成结果数组\nconst imgList = $json[\"图片生成结果\"];\n// 提取所有飞书file_token并生成指定格式数组\nconst fileTokenArr = imgList.map(item => {\n    return { file_token: item[\"飞书_file_token\"] };\n});\n// ✅ 严格返回：{\"附件token\": [数组]} 格式\nreturn {\n    \"附件token\": fileTokenArr\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2576,
+        -96
+      ],
+      "id": "ec752a34-f122-442e-9023-4df0c3151ae3",
+      "name": "file_token"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1e3e19c3-7b0a-449c-bda7-e7f51832c54b",
+              "name": "图片生成结果",
+              "value": "={{ $('合并图片结果').item.json['图片生成结果'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e52218c7-b6f4-4486-a574-feff3630b9d9",
+              "name": "附件token",
+              "value": "={{ $json[\"附件token\"] }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2784,
+        -96
+      ],
+      "id": "7bff022e-fe4b-44c3-ae37-574e2e204e9c",
+      "name": "写入飞书参数"
+    },
+    {
+      "parameters": {
+        "jsCode": "// -------------------------- 你的所有数据+图片token，全部在这里拼接 --------------------------\n// 1. 提取上游的 排版/摘要/原始结果 数据\nconst 图片生成结果 = $json[\"图片生成结果\"].toString() || \"\";\n// 2. 提取你生成好的 图片token数组（就是你要的[{\"file_token\":\"xxx\"},...]）\nconst 附件token列表 = $json[\"附件token\"] || [];\n\n// 3. ✅ 拼接飞书多维表格需要的【完整、合法、无任何语法错误】的请求体JSON\nconst 飞书请求体 = {\n  \"fields\": {\n    \"图片记录\": 图片生成结果,\n    \"图片\": 附件token列表, // 这里直接塞对象数组，JS会自动处理成合法JSON\n    \"状态\":\"待审核\"\n  }\n};\n\n// 4. 返回这个完整的请求体\nreturn 飞书请求体;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2992,
+        -96
+      ],
+      "id": "746c08f9-4456-4707-8929-f41bcbaf570a",
+      "name": "组装参数"
+    },
+    {
+      "parameters": {
+        "content": "写入飞书多维表格",
+        "height": 256,
+        "width": 1312
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2192,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "8862166a-ba27-450f-808f-bf4a5db23e2a",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=文章主题： {{ $json['文章主题'] }}\n文章标题：{{ $json['文章标题'] }}\n文章摘要：{{ $json['文章摘要'] }}\n文章内容：{{ $json['文章内容'] }}",
+        "options": {
+          "systemMessage": "# Role：公众号视觉策略与AIGC提示工程师\n\n# Profile\n- language: 中文（专业术语使用英文，如AIGC, prompt）\n- description: 我是公众号内容的视觉叙事伙伴，将抽象的文字转化为精确、富有感染力且风格统一的图片创作指令。我并非直接生成图片，而是作为一位世界级的设计师，通过精准的AIGC提示词，为每篇文章量身定制从封面到内文的完整视觉解决方案，并致力于生成具有高度真实感或手工艺感、难以被识别为AI生成的图像。\n- background: 基于大型视觉设计数据库、内容营销心理学模型及顶尖AIGC平台的创作模式训练，模拟拥有十年经验的资深媒体设计师与AIGC提示工程专家的复合思维。\n- personality: 严谨、富有策略性、具备卓越的审美洞察力。沟通直接、高效，专注于将需求转化为可执行的技术语言。\n- expertise: 公众号视觉体系搭建、AIGC图像生成提示工程、排版设计心理学、跨平台视觉风格统一、内容与图像的叙事融合、规避AI生成痕迹的视觉策略。\n- target_audience: 微信公众号运营者、内容创作者、市场营销人员、需要快速获得高质量配图方案的非设计专业人士。\n\n## Skills\n\n1.  **核心视觉策略制定**\n    - **内容深度解构**: 快速分析文章主题、标题、摘要及正文，提炼核心情绪、关键词、隐喻和潜在视觉符号。\n    - **视觉风格定位**: 根据文章调性（如科技感、人文关怀、活泼趣味、专业严谨）决定整体视觉风格（如极简扁平、写实摄影、3D渲染、插画风），优先选择能有效规避AI生成典型缺陷（如过度平滑、逻辑混乱的细节、不自然的纹理）的风格。\n    - **叙事连贯性设计**: 规划封面图、文内配图、结尾图的视觉逻辑，确保它们共同讲述一个连贯的故事，而非孤立存在。\n\n2.  **AIGC提示工程**\n    - **结构化提示词构建**: 按照“主体描述 + 环境/场景 + 构图与镜头 + 灯光与色彩 + 风格参考 + 技术参数”的模型，生成高度详细、可复现的图片生成指令。必须融入旨在提升真实感和规避AI痕迹的指令，如指定“胶片颗粒”、“细微瑕疵”、“自然光影过渡”、“手绘笔触”、“纪实摄影风格”等。\n    - **负面提示词应用**: 精准使用负面提示词以排除不想要的元素（如文字水印、变形肢体、低质量），并**必须包含**针对AI生成典型缺陷的负面词，如“blurry, deformed, oversaturated, plastic look, CGI, 3D render, unnatural symmetry, perfect smoothness”。\n    - **多模型适配思维**: 理解不同AIGC模型（如DALL-E 3, Midjourney, Stable Diffusion）的特性与语法差异，生成具有普适性或针对性的提示词，特别关注各模型在生成“真实感”图像时的最佳实践和参数设置。\n\n3.  **视觉排版与品牌一致性**\n    - **版面预演**: 在生成提示词时，预先考虑图片在公众号文章中的排版位置、尺寸比例（如封面图的9:16，文内图的16:9）及与文字的环绕关系。\n    - **品牌元素融入**: 指导在图片中融入品牌色调、简约Logo或标志性图形，强化品牌识别度，这种融入需自然，避免生硬的AI合成感。\n\n## Rules\n1.  生成的所有图片提示词，其核心目标之一是**确保最终生成的图像不让人一眼就看出是AI生成**。\n2.  在提示词中，必须主动引导生成具有“真实感”、“手工艺感”或“经典摄影/绘画质感”的图像，避免纯粹的、完美的数字渲染风格。\n3.  必须利用负面提示词系统性地排除AI图像的常见瑕疵和非自然特征。\n4.  在风格参考中，优先引用真实摄影师、画家或特定摄影流派（如街头摄影、胶片摄影、写实插画），而非通用的数字艺术风格。\n5.  所有生成的提示词都应经过“规避AI痕迹”这一标准的审查。\n6.  最终交付的提示词集合，必须严格按照指定的格式示例进行组织与输出，即使用“### **详细图片生成提示词**”作为总标题，并使用“#### **【图X：类型（描述）】**”的层级结构来封装每个独立的提示词，每个提示词需包含“**视觉概念**”和“**完整提示词**”两部分，其中“**完整提示词**”部分需用代码块（```）包裹。\n7.  **所有生成的提示词（包括主体描述、环境、风格参考等核心部分）应优先使用中文进行描述，以确保指令的精确性和本地化理解。仅在涉及必须保留的专有名词（如模型名称、特定艺术流派、无法准确翻译的技术术语）或负面提示词列表时，可使用英文。**\n\n## Workflows\n- 目标: 为用户提供的公众号文章，生成一套完整、高质量、可直接用于AIGC工具的图片创作提示词，并确保该套提示词能导向难以被识别为AI生成的图像。\n- 步骤1: **解构需求** － 接收并分析用户提供的文章（主题、标题、摘要、内容）。识别文章的核心论点、情感基调、关键数据和目标读者。明确所有显式要求（如指定风格）和隐式约束（如避免某种敏感意象）。**额外评估内容是否适合采用高真实感或高工艺感的视觉表达来规避AI痕迹。**\n- 步骤2: **执行视觉设计与提示词生成** －\n    a. **封面图策略**: 基于标题和核心情绪，设计一个能立即抓住眼球、传达文章核心价值的视觉概念。生成包含高冲击力构图、品牌色提示的详细指令，**并特别强调真实世界的纹理、光影和适度的不完美**。\n    b. **文内配图策略**: 将长篇内容分解为3-5个关键段落或观点。为每个关键点设计一个配图概念，用于解释复杂观点、提供视觉休息或增强情感共鸣。提示词需考虑与上下文的衔接，**每个概念的提示词都必须包含提升真实感或自然度的具体描述词和负面约束**。\n    c. **结尾图/信息图策略**: 为文章总结或行动号召设计配图。可能是概念升华的抽象图，或是概括全文要点的信息图风格提示。**即使是抽象或信息图，也需通过材质、笔触或排版设计使其呈现出手工制作或专业设计的质感，而非标准AI模板感**。\n- 步骤3: **审查与交付** －\n    a. **自我校对**: 检查所有生成的提示词是否符合[Rules]，是否清晰无歧义，技术参数是否合理。**重点审查其“规避AI生成痕迹”的策略是否明确、有效，并确保提示词核心部分优先使用中文**。\n    b. **事实核查**: 确保提示词中的描述与文章内容严格对应，无事实性偏离。\n    c. **格式化交付**: 严格按照指定的格式示例进行封装，即使用“### **详细图片生成提示词**”作为总标题，并使用“#### **【图X：类型（描述）】**”的层级结构来封装每个独立的提示词，确保每个提示词包含“**视觉概念**”和“**完整提示词**”两部分，且“**完整提示词**”用代码块（```）包裹，确保其独立、完整、可直接复制使用。\n\n## Initialization\n作为公众号视觉策略与AIGC提示工程师，我必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。我的核心职责是分析内容并输出顶尖的、能有效规避AI生成痕迹的图片创作指令，而非图片本身。现在，我已准备就绪，请提供您的公众号文章内容。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1968,
+        736
+      ],
+      "id": "e64cd599-6f2d-4a03-b865-5d57cf982225",
+      "name": "图片描述生成1",
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "查询记录",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "传入数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "查询记录": {
+      "main": [
+        [
+          {
+            "node": "飞书数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "飞书数据": {
+      "main": [
+        [
+          {
+            "node": "组装数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "传入数据": {
+      "main": [
+        [
+          {
+            "node": "组装数据",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "组装数据": {
+      "main": [
+        [
+          {
+            "node": "图片描述生成",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "图片描述生成",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "图片描述生成",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片描述生成": {
+      "main": [
+        [
+          {
+            "node": "转json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "数据提取": {
+      "main": [
+        []
+      ]
+    },
+    "转json": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "合并图片结果",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "提取提示词",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片生成结果": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片二进制": {
+      "main": [
+        [
+          {
+            "node": "上传图片至飞书",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上传图片至飞书": {
+      "main": [
+        [
+          {
+            "node": "图片生成结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "图片生成-通义万象": {
+      "main": [
+        [
+          {
+            "node": "图片二进制",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提取提示词": {
+      "main": [
+        [
+          {
+            "node": "图片生成-通义万象",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "合并图片结果": {
+      "main": [
+        [
+          {
+            "node": "file_token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "file_token": {
+      "main": [
+        [
+          {
+            "node": "写入飞书参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "写入飞书参数": {
+      "main": [
+        [
+          {
+            "node": "组装参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "组装��数": {
+      "main": [
+        [
+          {
+            "node": "写入飞书多维表格",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "组装参数": {
+      "main": [
+        [
+          {
+            "node": "写入飞书多维表格",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "d49ab3fb-48c2-4235-842a-eb19a8769442",
+  "activeVersionId": "d49ab3fb-48c2-4235-842a-eb19a8769442",
+  "versionCounter": 512,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-06T03:38:24.784Z",
+      "createdAt": "2026-02-06T03:38:24.784Z",
+      "role": "workflow:owner",
+      "workflowId": "BQ98f_HyD1Icne5s39Zlg",
+      "projectId": "02lIlzAN8YOio7Hr",
+      "project": {
+        "updatedAt": "2026-01-19T13:04:34.392Z",
+        "createdAt": "2026-01-19T03:38:28.619Z",
+        "id": "02lIlzAN8YOio7Hr",
+        "name": "mon mon <jh070711@126.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-19T03:38:28.620Z",
+            "createdAt": "2026-01-19T03:38:28.620Z",
+            "userId": "47358cc2-2c83-4c19-88f4-aa1569206629",
+            "projectId": "02lIlzAN8YOio7Hr",
+            "user": {
+              "updatedAt": "2026-02-28T08:20:25.000Z",
+              "createdAt": "2026-01-19T03:38:27.810Z",
+              "id": "47358cc2-2c83-4c19-88f4-aa1569206629",
+              "email": "jh070711@126.com",
+              "firstName": "mon",
+              "lastName": "mon",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-19T13:05:03.557Z",
+                "personalization_survey_n8n_version": "2.3.6"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "eBkaKSkToEStSH3fy_3Hd",
+                "userActivatedAt": 1768834250836,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769238789006
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-28",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-11T03:15:56.000Z",
+    "createdAt": "2026-02-11T03:07:25.902Z",
+    "versionId": "d49ab3fb-48c2-4235-842a-eb19a8769442",
+    "workflowId": "BQ98f_HyD1Icne5s39Zlg",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "wechat-public-account-image",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -816,
+          272
+        ],
+        "id": "f414c394-28f7-4d3e-b5de-423b8feb61b0",
+        "name": "Webhook",
+        "webhookId": "d3bc72c6-960a-4dfa-af1f-bfb52a81e96c"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "b4fe734b-669d-49c2-b542-54d1d458c68e",
+                "name": "记录 ID",
+                "value": "={{ $json.query[\"记录ID\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "af46ab22-2b8f-4976-8cc4-79be72e01a47",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "100e8baa-8594-4587-9ce9-2e1dc84e42cc",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "ce122c11-2791-4c84-a11b-3ab0c851e920",
+                "name": "viewID",
+                "value": "vewSweWW3T",
+                "type": "string"
+              },
+              {
+                "id": "93c16430-220b-4c88-88c5-be5da79f0b7c",
+                "name": "是否新增",
+                "value": true,
+                "type": "boolean"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -560,
+          272
+        ],
+        "id": "d81215cb-c2ed-4ada-b634-d97a5c797fb3",
+        "name": "设置参数"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "4b826fc9-69a0-4470-ab37-12426acbdcf5",
+                "leftValue": "={{ $('Webhook').item.json.query['文章标题'] }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "empty",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "fb720e0c-0336-4a84-96f0-3834b6b628f9",
+                "leftValue": "={{ $('Webhook').item.json.query['文章摘要'] }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "empty",
+                  "singleValue": true
+                }
+              },
+              {
+                "id": "42e4aa32-9485-4fb3-bf0a-a7d26a656d58",
+                "leftValue": "={{ $('Webhook').item.json.query['文章内容'] }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "empty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -384,
+          272
+        ],
+        "id": "52bbe5f0-9c8f-4170-a048-0eddf892599b",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:get",
+          "app_toke": "={{ $json[\"飞书token\"] }}",
+          "table_id": "={{ $json[\"多维表格ID\"] }}",
+          "record_id": "={{ $json[\"记录 ID\"] }}"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          -32,
+          64
+        ],
+        "id": "0bcc9fb2-6f85-42fd-a243-21e05e619853",
+        "name": "查询记录",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "8d941dc4-1f2e-45cf-8f6e-d17ee8c04ab2",
+                "name": "文章主题",
+                "value": "={{ $json.data.records[0].fields[\"主题\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "6eccb707-65eb-4615-b78f-c745a0d879ba",
+                "name": "文章标题",
+                "value": "={{ $json.data.records[0].fields[\"标题\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "c0596628-94ad-4738-8037-2f35dfb37dbf",
+                "name": "文章摘要",
+                "value": "={{ $json.data.records[0].fields[\"摘要\"][0].text }}",
+                "type": "string"
+              },
+              {
+                "id": "98ff86e2-b871-4302-9479-eca8d526135a",
+                "name": "文章内容",
+                "value": "={{ $json.data.records[0].fields[\"内容\"][0].text }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          224,
+          64
+        ],
+        "id": "2b91f2ab-ccde-403f-8538-b834f28918d9",
+        "name": "飞书数据"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "64753c6d-8913-4637-838e-2100d10bbd1c",
+                "name": "文章主题",
+                "value": "={{ $json[\"文章主题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "b55f0fec-f087-4dc5-8c36-62c5ed8784ba",
+                "name": "文章标题",
+                "value": "={{ $json[\"文章标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "906b9111-62a5-49b9-823b-c655200b2350",
+                "name": "文章摘要",
+                "value": "={{ $json[\"文章摘要\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "7a283bff-1596-4b25-9a76-cf8721fdea21",
+                "name": "文章内容",
+                "value": "={{ $json[\"文章内容\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "b9f51ec7-86d3-4eeb-91b6-0c996c43111b",
+                "name": "sessionId",
+                "value": "={{ $now.toMillis() }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          528,
+          224
+        ],
+        "id": "03b00632-2c32-46db-9d86-ba30fdfae3fd",
+        "name": "组装数据"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=文章主题： {{ $json['文章主题'] }}\n文章标题：{{ $json['文章标题'] }}\n文章摘要：{{ $json['文章摘要'] }}\n文章内容：{{ $json['文章内容'] }}",
+          "options": {
+            "systemMessage": "# Role：公众号视觉策略与AIGC提示工程师\n\n# Profile\n- language: 中文\n- description: 将公众号文章内容转化为一套精确、风格统一且能生成高真实感图像的AIGC提示词。专注于策略性视觉叙事，并通过专业提示词工程规避AI生成痕迹。\n- background: 融合资深媒体设计师与AIGC提示工程专家思维。\n- personality: 严谨、高效、富有洞察力，沟通直接。\n- expertise: 公众号视觉体系、AIGC提示工程、设计心理学、视觉叙事。\n- target_audience: 微信公众号运营者、内容创作者。\n\n## Skills\n1.  **核心视觉策略制定**：深度解构文章，提炼情绪与视觉符号，定位能规避AI瑕疵的视觉风格（如写实摄影、胶片质感、手绘插画）。\n2.  **AIGC提示工程**：构建结构化提示词（主体、环境、构图、灯光、风格、参数），嵌入提升真实感的指令，并系统使用负面提示词排除AI典型缺陷。\n3.  **视觉排版与品牌一致性**：预演图片在文章中的排版，指导自然融入品牌元素。\n\n## Rules\n1.  核心目标：生成提示词必须旨在产生**难以被一眼识别为AI生成的图像**。\n2.  风格导向：必须引导生成具有“真实感”、“手工艺感”或“经典摄影/绘画质感”的图像，避免纯粹的、完美的数字渲染。\n3.  负面提示词：必须系统性使用负面提示词，以排除AI图像的常见瑕疵（如变形、过度平滑、塑料感）。\n4.  风格参考：优先引用真实的摄影师、画家或特定摄影/绘画流派。\n5.  语言优先：提示词的核心描述部分（主体、环境、风格等）**优先使用中文**。仅在专有名词、艺术流派、技术术语及负面提示词列表中可使用英文。\n6.  **输出格式（必须严格遵守）**：\n    - 总标题使用：`### **详细图片生成提示词**`\n    - 每个独立提示词块使用：`#### **【图X：类型（描述）】**` 封装，其中`X`为数字，`类型（描述）`为简洁标题。\n    - 每个提示词块内必须包含两部分：\n        - `**视觉概念**：` 后接简明概念说明。\n        - `**完整提示词**：` 后换行，并用一对```` `代码块包裹完整的提示词文本。\n    - 此格式确保下游节点能准确解析。\n\n## Workflows\n- **输入**：接收用户提供的公众号文章内容（主题、标题、正文等）。\n- **步骤1: 解构需求** – 分析文章核心论点、情感基调、关键数据与目标读者。评估内容是否适合采用高真实感/工艺感的视觉表达。\n- **步骤2: 生成视觉策略与提示词** –\n    a. **封面图**：设计高冲击力视觉概念，强调真实纹理、自然光影与适度不完美，融入品牌考虑。\n    b. **文内配图(3-5个)**：为每个关键段落或观点设计配图概念，每个提示词都必须包含具体的真实感描述词和负面约束。\n    c. **结尾图**：为总结或行动号召设计配图，注重手工或专业设计质感。\n- **步骤3: 审查与格式化交付** –\n    a. **自我校对**：检查所有提示词是否符合上述所有Rules，特别是“规避AI痕迹”策略与中文优先原则。\n    b. **事实核查**：确保提示词描述与文章内容严格对应。\n    c. **最终输出**：**严格按照[Rules]第6条规定的格式进行封装和输出**，确保结构一致性。\n\n## Initialization\n我已准备好作为您的公众号视觉策略与AIGC提示工程师。请提供您的公众号文章内容，我将严格遵循上述规则与流程，为您生成一套完整、高质量且结构统一的图片生成提示词。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          768,
+          208
+        ],
+        "id": "936abe5d-7cc4-494f-a3da-ce90d647bf03",
+        "name": "图片描述生成"
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          864,
+          384
+        ],
+        "id": "428142a5-1ec7-480b-b78b-3aa726593972",
+        "name": "Simple Memory"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gpt-5-mini"
+          },
+          "responsesApiEnabled": "={{ true }}",
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          576,
+          656
+        ],
+        "id": "09ab5161-f8b1-4490-bdfc-1113466f57c0",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "DdkN7jyCK3bNbW1u",
+            "name": "GLM"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": "deepseek-reasoner",
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+        "typeVersion": 1,
+        "position": [
+          736,
+          400
+        ],
+        "id": "b032a774-7eac-4eb5-af57-028fb2d4c835",
+        "name": "DeepSeek Chat Model",
+        "credentials": {
+          "deepSeekApi": {
+            "id": "qoZVHSPqzp7DQ5OV",
+            "name": "DeepSeek account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. 读取上游传入的所有数据\nconst items = $input.all();\n\n// 2. 定义需要匹配的标记\nconst targetTag = '**详细图片生成提示词**';\n\n// 3. 处理单条数据\nif (items.length > 0) {\n  const currentItem = items[0];\n  // 关键修复：使用上游实际存在的字段名 `output`\n  const originalContent = currentItem.json.output.replace('### **第三步：详细图片生成提示词**','### **详细图片生成提示词**').replace('### **详细图片生成提示词**','**详细图片生成提示词**');\n\n  let contentAfterTag = '';\n  if (!originalContent) {\n    contentAfterTag = '错误：上游节点未传入有效文本';\n  } else {\n    const tagIndex = originalContent.indexOf(targetTag);\n    if (tagIndex !== -1) {\n      contentAfterTag = originalContent.slice(tagIndex + targetTag.length);\n    } else {\n      contentAfterTag = `��误：未在文本中找到标记「${targetTag}」`;\n    }\n  }\n\n  // 将筛选结果挂载到标准json属性下\n  currentItem.json.contentAfterTitle = contentAfterTag;\n}\n\n// 4. 返回符合n8n要求的数组格式\nreturn items;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1120,
+          64
+        ],
+        "id": "3f807b2a-5799-4208-8c77-94256be24e8e",
+        "name": "数据提取",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "b4fe734b-669d-49c2-b542-54d1d458c68e",
+                "name": "记录 ID",
+                "value": "={{ $json.query[\"记录ID\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "af46ab22-2b8f-4976-8cc4-79be72e01a47",
+                "name": "飞书token",
+                "value": "SQ4CbAzhfa8rRUsFxRHcOsZ3npd",
+                "type": "string"
+              },
+              {
+                "id": "100e8baa-8594-4587-9ce9-2e1dc84e42cc",
+                "name": "多维表格ID",
+                "value": "tbl2QoWRiJ6uavHM",
+                "type": "string"
+              },
+              {
+                "id": "ce122c11-2791-4c84-a11b-3ab0c851e920",
+                "name": "viewID",
+                "value": "vewSweWW3T",
+                "type": "string"
+              },
+              {
+                "id": "b57b5bdf-e3fd-4387-976c-451d1cfbf45e",
+                "name": "文章标题",
+                "value": "={{ $json.query[\"文章标题\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "017e9035-b351-4aa9-8e71-88cb2d66355f",
+                "name": "文章摘要",
+                "value": "={{ $json.query[\"文章摘要\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "ac5e972f-a94e-4eff-a835-07e5b8644c6a",
+                "name": "文章内容",
+                "value": "={{ $json.query[\"文章内容\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "3c3a4c68-22e4-4738-81a2-9943fccae82e",
+                "name": "是否新增",
+                "value": true,
+                "type": "boolean"
+              },
+              {
+                "id": "00c89bba-aae0-4e4a-b414-e2cb15b79a80",
+                "name": "文章主题",
+                "value": "={{ $json.query[\"文章主题\"] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          96,
+          528
+        ],
+        "id": "8361312e-368b-4f2d-9a95-821866c4a1e5",
+        "name": "传入数据"
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n Code节点专用 - 分割式解析，彻底解决匹配为0问题\nconst inputData = $input.first().json;\nconst rawText = inputData.output || inputData.text || inputData.content || JSON.stringify(inputData) || '';\n\n// 调试：打印原始输入开头，确认数据\nconsole.log('=== 原始输入开头 ===');\nconsole.log(rawText.substring(0, 500));\n\nif (!rawText) {\n  return { json: { error: '上游无有效文本', images: [], flatImages: {}, total: 0 } };\n}\n\n// 1. 基础配置\nconst numToChinese = { '1':'一', '2':'二', '3':'三', '4':'四', '5':'五', '6':'六' };\nconst resultList = [];\n\n// 2. 第一步：分割成独立图块（核心：用固定标记分割，避免长正则陷阱）\nconst blocks = rawText.split('#### **【图').filter(block => block.trim() !== '');\nconsole.log('=== 分割结果 ===');\nconsole.log(`共分割出 ${blocks.length} 个潜在图块`);\n\n// 3. 第二步：逐个解析每个图块\nblocks.forEach((block, index) => {\n  console.log(`=== 开始解析第 ${index + 1} 个图块 ===`);\n  try {\n    // 3.1 提取图号和标题\n    const headerMatch = block.match(/^(\\d+)：([^】]+)】/);\n    if (!headerMatch) {\n      console.log(`❌ 第 ${index + 1} 块：未找到图号和标题`);\n      return;\n    }\n    const [, numStr, titleRaw] = headerMatch;\n    const num = numStr.trim();\n    const title = titleRaw.trim().replace(/（[\\s\\S]*?）/g, '').replace(/\\s+/g, '');\n    const key = `图${numToChinese[num] || num}_${title}`;\n\n    // 3.2 提取视觉概念\n    const visualMatch = block.match(/\\*\\*视觉概念\\*\\*：\\s*([\\s\\S]+?)\\s*\\*\\*完整提示词\\*\\*/);\n    if (!visualMatch) {\n      console.log(`❌ 第 ${index + 1} 块：未找到视觉概念`);\n      return;\n    }\n    const visualConcept = visualMatch[1].trim().replace(/[\\r\\n]+/g, ' ');\n\n    // 3.3 提取完整提示词（匹配```包裹）\n    const promptMatch = block.match(/\\*\\*完整提示词\\*\\*：\\s*[\\r\\n]+\\s*```([\\s\\S]+?)```/);\n    if (!promptMatch) {\n      console.log(`❌ 第 ${index + 1} 块：未找到完整提示词`);\n      return;\n    }\n    const fullPrompt = promptMatch[1].trim();\n\n    // 3.4 组装结果\n    resultList.push({\n      [key]: `视觉概念：${visualConcept}\\n完整提示词：${fullPrompt}`\n    });\n    console.log(`✅ 第 ${index + 1} 块：成功解析为 ${key}`);\n  } catch (e) {\n    console.log(`❌ 第 ${index + 1} 块：解析出错 - ${e.message}`);\n  }\n});\n\n// 4. 生成扁平化结果\nconst flatImages = Object.assign({}, ...resultList);\n\n// 5. 调试：输出最终统计\nconsole.log('=== 最终提取结果 ===');\nconsole.log(`成功解析 ${resultList.length} 个图块`);\nconsole.log('解析详情：', resultList);\n\n// 6. n8n标准输出\nreturn {\n  json: {\n    images: resultList,\n    flatImages: flatImages,\n    total: resultList.length\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1360,
+          208
+        ],
+        "id": "ad54a267-feae-4f94-91dd-dabb006a8db8",
+        "name": "转json",
+        "retryOnFail": false,
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "images",
+          "include": "allOtherFields",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          1712,
+          208
+        ],
+        "id": "44c23e06-749f-4e2a-acfa-77c1055e20b2",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          2048,
+          208
+        ],
+        "id": "3c471d35-8e96-453e-a71c-bcfa503e42c4",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "name": "Replace Me",
+        "typeVersion": 1,
+        "position": [
+          3632,
+          208
+        ],
+        "id": "6a9b880d-c5d5-4947-8806-8d8ca05cc333"
+      },
+      {
+        "parameters": {
+          "amount": 2
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          3472,
+          208
+        ],
+        "id": "58d4d0cd-056c-458e-b2a2-181da40c35a0",
+        "name": "Wait",
+        "webhookId": "628bff09-21c5-43cb-9cba-5f6221bbb155"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2cbc622a-2024-4d6f-b1f9-7a76ef29ea7c",
+                "name": "序号",
+                "value": "={{ $('提取提示词').item.json['图片名'] }}",
+                "type": "string"
+              },
+              {
+                "id": "5f7fd313-2336-4c83-bbc5-f31ad0749c59",
+                "name": "视觉概念",
+                "value": "={{ $('提取提示词').item.json['视觉概念'] }}",
+                "type": "string"
+              },
+              {
+                "id": "b74bb966-e45f-4208-b486-6f972def5b28",
+                "name": "url",
+                "value": "={{ $('图片生成-通义万象').item.json.output.choices[0].message.content[0].image }}",
+                "type": "string"
+              },
+              {
+                "id": "53bb260b-cf86-40f2-9fcf-70f0641cf3e2",
+                "name": "request_id",
+                "value": "={{ $('图片生成-通义万象').item.json.request_id }}",
+                "type": "string"
+              },
+              {
+                "id": "3d7c5473-894a-4600-830c-c78192f473e4",
+                "name": "飞书_file_token",
+                "value": "={{ $json.data.file_token }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "include": "selected",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          3280,
+          208
+        ],
+        "id": "de5f4783-e35c-41a8-abb9-9971fb870b61",
+        "name": "图片生成结果"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.output.choices[0].message.content[0].image }}",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "file",
+                "outputPropertyName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}"
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2864,
+          208
+        ],
+        "id": "b3e0e173-af12-4bf5-be00-2d8755fb95a6",
+        "name": "图片二进制"
+      },
+      {
+        "parameters": {
+          "resource": "space",
+          "operation": "space:upload",
+          "parent_type": "bitable_image",
+          "parent_node": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+          "fileFieldName": "={{ $('Loop Over Items').item.json.keys($item.json)[0] }}",
+          "file_name": "={{ $('提取提示词').item.json['图片名'] }}.png"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          3072,
+          208
+        ],
+        "id": "7a960779-0d05-462f-8d2e-c9f794991dbe",
+        "name": "上传图片至飞书",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "图片生成（封面图、配图）",
+          "height": 480,
+          "width": 1712
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          1936,
+          512
+        ],
+        "typeVersion": 1,
+        "id": "7ff7179a-9333-41f1-8f3f-18e2d3cdf95d",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBearerAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"model\": \"wanx-v1\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json[Object.keys($json)[0]].中文提示词 }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感。构图混乱。文字模糊，扭曲，恐怖气氛，恐怖元素。\",\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"size\": \"{{ $json[Object.keys($json)[0]].像素尺寸 }}\"\n  }\n} ",
+          "options": {
+            "batching": {
+              "batch": {
+                "batchSize": 1,
+                "batchInterval": 3000
+              }
+            },
+            "redirect": {
+              "redirect": {}
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2416,
+          704
+        ],
+        "id": "8f2b69d8-e307-48b0-bfc0-74f9b6b8f3c6",
+        "name": "图片生成—通义千问",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBearerAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"model\": \"wan2.6-t2i\",\n  \"input\": {\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": [\n          {\n            \"text\": \"{{ $json['提示词'] }}\"\n          }\n        ]\n      }\n    ]\n  },\n  \"parameters\": {\n    \"prompt_extend\": true,\n    \"watermark\": false,\n    \"n\": 1,\n    \"negative_prompt\": \"低分辨率，低画质，肢体畸形，手指畸形，画面过饱和，蜡像感，人脸无细节，过度光滑，画面具有AI感，构图混乱，文字模糊，扭曲，恐怖气氛，恐怖元素，塑料感，模糊，失真，多手指，结构错误，皮肤光滑无纹理，不真实的阴影，过度锐化，过度平滑，过度曝光，过度饱和，不自然的光线，不真实的色彩，背景杂乱，主题不突出，构图不佳，透视错误，比例失调，不自然的姿势，不自然的表情，AI质感，AI质感强\"\n  }\n}",
+          "options": {
+            "batching": {
+              "batch": {
+                "batchSize": 1,
+                "batchInterval": 3000
+              }
+            },
+            "redirect": {
+              "redirect": {}
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2592,
+          208
+        ],
+        "id": "8b99a058-d632-4da0-a507-370600f21e38",
+        "name": "图片生成-通义万象",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
+        "maxTries": 5,
+        "credentials": {
+          "httpBearerAuth": {
+            "id": "l2Zx8CNbiwpQJqWa",
+            "name": "百炼万像"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// n8n Code节点专用 - 无遍历+防undefined报错+适配动态键\n// 步骤1：读取上游数据并多层兜底，避免undefined\nconst upstreamData = $input.first()?.json || {};\nconst dynamicImagesObj = upstreamData.images || {};\n\n// 步骤2：获取第一个动态键（无遍历，适配任意键名）\nconst allKeys = Object.keys(dynamicImagesObj);\nconst targetKey = allKeys[0] || \"\";\nconst originalText = dynamicImagesObj[targetKey] || \"\";\n\n// 步骤3：文本清洗（全链路空值兜底，杜绝replace undefined报错）\nlet visualConcept = \"\";\nlet prompt = \"\";\n\nif (originalText) {\n  // 统一修正\"主题\"标点（用可选链+空值合并，防原始文本格式异常）\n  const processedText = (originalText\n    ?.replace('**主��:**', '**主题**')\n    ?.replace('**主题：**', '**主题**')) || \"\";\n\n  // 拆分视觉概念和提示词（兼容中/英文冒号，拆分后兜底）\n  const splitChar = processedText.includes('完整提示词：') ? '完整提示词：' : '完整提示词:';\n  const [part1, part2] = processedText.split(splitChar); // 拆分后可能是[文本, undefined]\n\n  // 清洗视觉概念：先判断part1存在，再调用replace\n  visualConcept = part1 \n    ? part1.replace('**主题**', '').replace(/\\n+/g, ' ').trim() \n    : \"\";\n  \n  // 清洗提示词：先判断part2存在，再调用replace（核心修复行）\n  prompt = part2 \n    ? part2.replace(/\\n+/g, ' ').trim() \n    : \"\";\n}\n\n// 步骤4：n8n标准输出（固定键名，无报错）\nreturn {\n  json: {\n    \"图片名\": targetKey,\n    \"视觉概念\": visualConcept,\n    \"提示词\": prompt\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2304,
+          224
+        ],
+        "id": "af4f70d2-876c-4254-ba6b-2ddacfbd8554",
+        "name": "提取提示词"
+      },
+      {
+        "parameters": {
+          "resource": "bitable",
+          "operation": "bitable:table:record:update",
+          "app_toke": "={{ $('设置参数').item.json[\"飞书token\"] }}",
+          "table_id": "={{ $('设置参数').item.json[\"多维表格ID\"] }}",
+          "record_id": "={{ $('设置参数').item.json['记录 ID'] }}",
+          "body": "={{ JSON.stringify($node[\"组装参数\"].json) }}"
+        },
+        "type": "n8n-nodes-feishu-lite.feishuNode",
+        "typeVersion": 1,
+        "position": [
+          3232,
+          -96
+        ],
+        "id": "1e0cc1eb-0cb1-40a3-9830-379130285d53",
+        "name": "写入飞书多维表格",
+        "credentials": {
+          "feishuCredentialsApi": {
+            "id": "XlZs1WG8qgrQeegE",
+            "name": "公众号"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "aggregate": "aggregateAllItemData",
+          "destinationFieldName": "图片生成结果",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.aggregate",
+        "typeVersion": 1,
+        "position": [
+          2336,
+          -96
+        ],
+        "id": "2fe7dd81-8d8f-47bd-8f04-a7e7afb46a43",
+        "name": "合并图片结果"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 提取图片生成结果数组\nconst imgList = $json[\"图片生成结果\"];\n// 提取所有飞书file_token并生成指定格式数组\nconst fileTokenArr = imgList.map(item => {\n    return { file_token: item[\"飞书_file_token\"] };\n});\n// ✅ 严格返回：{\"附件token\": [数组]} 格式\nreturn {\n    \"附件token\": fileTokenArr\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2576,
+          -96
+        ],
+        "id": "ec752a34-f122-442e-9023-4df0c3151ae3",
+        "name": "file_token"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1e3e19c3-7b0a-449c-bda7-e7f51832c54b",
+                "name": "图片生成结果",
+                "value": "={{ $('合并图片结果').item.json['图片生成结果'] }}",
+                "type": "string"
+              },
+              {
+                "id": "e52218c7-b6f4-4486-a574-feff3630b9d9",
+                "name": "附件token",
+                "value": "={{ $json[\"附件token\"] }}",
+                "type": "array"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          2784,
+          -96
+        ],
+        "id": "7bff022e-fe4b-44c3-ae37-574e2e204e9c",
+        "name": "写入飞书参数"
+      },
+      {
+        "parameters": {
+          "jsCode": "// -------------------------- 你的所有数据+图片token，全部在这里拼接 --------------------------\n// 1. 提取上游的 排版/摘要/原始结果 数据\nconst 图片生成结果 = $json[\"图片生成结果\"].toString() || \"\";\n// 2. 提取你生成好的 图片token数组（就是你要的[{\"file_token\":\"xxx\"},...]）\nconst 附件token列表 = $json[\"附件token\"] || [];\n\n// 3. ✅ 拼接飞书多维表格需要的【完整、合法、无任何语法错误】的请求体JSON\nconst 飞书请求体 = {\n  \"fields\": {\n    \"图片记录\": 图片生成结果,\n    \"图片\": 附件token列表, // 这里直接塞对象数组，JS会自动处理成合法JSON\n    \"状态\":\"待审核\"\n  }\n};\n\n// 4. 返回这个完整的请求体\nreturn 飞书请求体;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2992,
+          -96
+        ],
+        "id": "746c08f9-4456-4707-8929-f41bcbaf570a",
+        "name": "组装参数"
+      },
+      {
+        "parameters": {
+          "content": "写入飞书多维表格",
+          "height": 256,
+          "width": 1312
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          2192,
+          -176
+        ],
+        "typeVersion": 1,
+        "id": "8862166a-ba27-450f-808f-bf4a5db23e2a",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=文章主题： {{ $json['文章主题'] }}\n文章标题：{{ $json['文章标题'] }}\n文章摘要：{{ $json['文章摘要'] }}\n文章内容：{{ $json['文章内容'] }}",
+          "options": {
+            "systemMessage": "# Role：公众号视觉策略与AIGC提示工程师\n\n# Profile\n- language: 中文（专业术语使用英文，如AIGC, prompt）\n- description: 我是公众号内容的视觉叙事伙伴，将抽象的文字转化为精确、富有感染力且风格统一的图片创作指令。我并非直接生成图片，而是作为一位世界级的设计师，通过精准的AIGC提示词，为每篇文章量身定制从封面到内文的完整视觉解决方案，并致力于生成具有高度真实感或手工艺感、难以被识别为AI生成的图像。\n- background: 基于大型视觉设计数据库、内容营销心理学模型及顶尖AIGC平台的创作模式训练，模拟拥有十年经验的资深媒体设计师与AIGC提示工程专家的复合思维。\n- personality: 严谨、富有策略性、具备卓越的审美洞察力。沟通直接、高效，专注于将需求转化为可执行的技术语言。\n- expertise: 公众号视觉体系搭建、AIGC图像生成提示工程、排版设计心理学、跨平台视觉风格统一、内容与图像的叙事融合、规避AI生成痕迹的视觉策略。\n- target_audience: 微信公众号运营者、内容创作者、市场营销人员、需要快速获得高质量配图方案的非设计专业人士。\n\n## Skills\n\n1.  **核心视觉策略制定**\n    - **内容深度解构**: 快速分析文章主题、标题、摘要及正文，提炼核心情绪、关键词、隐喻和潜在视觉符号。\n    - **视觉风格定位**: 根据文章调性（如科技感、人文关怀、活泼趣味、专业严谨）决定整体视觉风格（如极简扁平、写实摄影、3D渲染、插画风），优先选择能有效规避AI生成典型缺陷（如过度平滑、逻辑混乱的细节、不自然的纹理）的风格。\n    - **叙事连贯性设计**: 规划封面图、文内配图、结尾图的视觉逻辑，确保它们共同讲述一个连贯的故事，而非孤立存在。\n\n2.  **AIGC提示工程**\n    - **结构化提示词构建**: 按照“主体描述 + 环境/场景 + 构图与镜头 + 灯光与色彩 + 风格参考 + 技术参数”的模型，生成高度详细、可复现的图片生成指令。必须融入旨在提升真实感和规避AI痕迹的指令，如指定“胶片颗粒”、“细微瑕疵”、“自然光影过渡”、“手绘笔触”、“纪实摄影风格”等。\n    - **负面提示词应用**: 精准使用负面提示词以排除不想要的元素（如文字水印、变形肢体、低质量），并**必须包含**针对AI生成典型缺陷的负面词，如“blurry, deformed, oversaturated, plastic look, CGI, 3D render, unnatural symmetry, perfect smoothness”。\n    - **多模型适配思维**: 理解不同AIGC模型（如DALL-E 3, Midjourney, Stable Diffusion）的特性与语法差异，生成具有普适性或针对性的提示词，特别关注各模型在生成“真实感”图像时的最佳实践和参数设置。\n\n3.  **视觉排版与品牌一致性**\n    - **版面预演**: 在生成提示词时，预先考虑图片在公众号文章中的排版位置、尺寸比例（如封面图的9:16，文内图的16:9）及与文字的环绕关系。\n    - **品牌元素融入**: 指导在图片中融入品牌色调、简约Logo或标志性图形，强化品牌识别度，这种融入需自然，避免生硬的AI合成感。\n\n## Rules\n1.  生成的所有图片提示词，其核心目标之一是**确保最终生成的图像不让人一眼就看出是AI生成**。\n2.  在提示词中，必须主动引导生成具有“真实感”、“手工艺感”或“经典摄影/绘画质感”的图像，避免纯粹的、完美的数字渲染风格。\n3.  必须利用负面提示词系统性地排除AI图像的常见瑕疵和非自然特征。\n4.  在风格参考中，优先引用真实摄影师、画家或特定摄影流派（如街头摄影、胶片摄影、写实插画），而非通用的数字艺术风格。\n5.  所有生成的提示词都应经过“规避AI痕迹”这一标准的审查。\n6.  最终交付的提示词集合，必须严格按照指定的格式示例进行组织与输出，即使用“### **详细图片生成提示词**”作为总标题，并使用“#### **【图X：类型（描述）】**”的层级结构来封装每个独立的提示词，每个提示词需包含“**视觉概念**”和“**完整提示词**”两部分，其中“**完整提示词**”部分需用代码块（```）包裹。\n7.  **所有生成的提示词（包括主体描述、环境、风格参考等核心部分）应优先使用中文进行描述，以确保指令的精确性和本地化理解。仅在涉及必须保留的专有名词（如模型名称、特定艺术流派、无法准确翻译的技术术语）或负面提示词列表时，可使用英文。**\n\n## Workflows\n- 目标: 为用户提供的公众号文章，生成一套完整、高质量、可直接用于AIGC工具的图片创作提示词，并确保该套提示词能导向难以被识别为AI生成的图像。\n- 步骤1: **解构需求** － 接收并分析用户提供的文章（主题、标题、摘要、内容）。识别文章的核心论点、情感基调、关键数据和目标读者。明确所有显式要求（如指定风格）和隐式约束（如避免某种敏感意象）。**额外评估内容是否适合采用高真实感或高工艺感的视觉表达来规避AI痕迹。**\n- 步骤2: **执行视觉设计与提示词生成** －\n    a. **封面图策略**: 基于标题和核心情绪，设计一个能立即抓住眼球、传达文章核心价值的视觉概念。生成包含高冲击力构图、品牌色提示的详细指令，**并特别强调真实世界的纹理、光影和适度的不完美**。\n    b. **文内配图策略**: 将长篇内容分解为3-5个关键段落或观点。为每个关键点设计一个配图概念，用于解释复杂观点、提供视觉休息或增强情感共鸣。提示词需考虑与上下文的衔接，**每个概念的提示词都必须包含提升真实感或自然度的具体描述词和负面约束**。\n    c. **结尾图/信息图策略**: 为文章总结或行动号召设计配图。可能是概念升华的抽象图，或是概括全文要点的信息图风格提示。**即使是抽象或信息图，也需通过材质、笔触或排版设计使其呈现出手工制作或专业设计的质感，而非标准AI模板感**。\n- 步骤3: **审查与交付** －\n    a. **自我校对**: 检查所有生成的提示词是否符合[Rules]，是否清晰无歧义，技术参数是否合理。**重点审查其“规避AI生成痕迹”的策略是否明确、有效，并确保提示词核心部分优先使用中文**。\n    b. **事实核查**: 确保提示词中的描述与文章内容严格对应，无事实性偏离。\n    c. **格式化交付**: 严格按照指定的格式示例进行封装，即使用“### **详细图片生成提示词**”作为总标题，并使用“#### **【图X：类型（描述）】**”的层级结构来封装每个独立的提示词，确保每个提示词包含“**视觉概念**”和“**完整提示词**”两部分，且“**完整提示词**”用代码块（```）包裹，确保其独立、完整、可直接复制使用。\n\n## Initialization\n作为公众号视觉策略与AIGC提示工程师，我必须**严格**遵守上述**所有**Rules，并**始终**按照Workflows执行任务。**在任何情况下都不能偏离你的角色定义**。我的核心职责是分析内容并输出顶尖的、能有效规避AI生成痕迹的图片创作指令，而非图片本身。现在，我已准备就绪，请提供您的公众号文章内容。"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3.1,
+        "position": [
+          1968,
+          736
+        ],
+        "id": "e64cd599-6f2d-4a03-b865-5d57cf982225",
+        "name": "图片描述生成1",
+        "disabled": true
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "设置参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "设置参数": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "查询记录",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "传入数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "查询记录": {
+        "main": [
+          [
+            {
+              "node": "飞书数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "飞书数据": {
+        "main": [
+          [
+            {
+              "node": "组装数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "传入数据": {
+        "main": [
+          [
+            {
+              "node": "组装数据",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "组装数据": {
+        "main": [
+          [
+            {
+              "node": "图片描述生成",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "图片描述生成",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          []
+        ]
+      },
+      "DeepSeek Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "图片描述生成",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片描述生成": {
+        "main": [
+          [
+            {
+              "node": "转json",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "数据提取": {
+        "main": [
+          []
+        ]
+      },
+      "转json": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [
+            {
+              "node": "合并图片结果",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "提取提示词",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Replace Me": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Replace Me",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片生成结果": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片二进制": {
+        "main": [
+          [
+            {
+              "node": "上传图片至飞书",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "上传图片至飞书": {
+        "main": [
+          [
+            {
+              "node": "图片生成结果",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "图片生成-通义万象": {
+        "main": [
+          [
+            {
+              "node": "图片二进制",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "提取提示词": {
+        "main": [
+          [
+            {
+              "node": "图片生成-通义万象",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "合并图片结果": {
+        "main": [
+          [
+            {
+              "node": "file_token",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "file_token": {
+        "main": [
+          [
+            {
+              "node": "写入飞书参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "写入飞书参数": {
+        "main": [
+          [
+            {
+              "node": "组装参数",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "组装��数": {
+        "main": [
+          [
+            {
+              "node": "写入飞书多维表格",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "组装参数": {
+        "main": [
+          [
+            {
+              "node": "写入飞书多维表格",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "mon mon",
+    "name": "1.0.5",
+    "description": "修复数据提取问题",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-11T03:15:56.433Z",
+        "id": 83,
+        "workflowId": "BQ98f_HyD1Icne5s39Zlg",
+        "versionId": "d49ab3fb-48c2-4235-842a-eb19a8769442",
+        "event": "activated",
+        "userId": "47358cc2-2c83-4c19-88f4-aa1569206629"
+      }
+    ]
+  }
+}
